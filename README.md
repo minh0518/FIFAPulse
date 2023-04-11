@@ -99,20 +99,51 @@
     
 </details>
 
-<summary><h3>4️⃣ Commit 컨벤션</h3></summary>
+<details><summary><h3>4️⃣ Commit 컨벤션</h3></summary>
 <div markdown="1">
 
--   Gitmoji 사용
+<br>
+
+✔️ Gitmoji 사용
+
+<br>
 
 -   FEAT : 새로운 기능을 추가할 경우
+
+<br>
+
 -   FIX: 버그를 고친 경우
+
+<br>
+
 -   DOCS: 문서 수정 (README.md 작성)
+
+<br>
+
 -   DESIGN : CSS 등 사용자 UI 디자인 변경
+
+<br>
+
 -   STYLE: 코드 포맷 변경( 오타 수정 , 탭 사이즈 변경 , 변수명 변경 등… )
+
+<br>
+
 -   REFACTOR: 코드 리펙토링
+
+<br>
+
 -   TEST: 테스트 코트, 테스트 코드 리팩토링
+
+<br>
+
 -   CHORE: 빌드 업무 수정, 패키지 매니저 수정( package.json 수정 , .gitignore 수정 , 모듈 변경)
+
+<br>
+
 -  (폴더 구조 변경에 대한 사항은 기록하지 않습니다)
+
+<br>
+
 
 </details>
 
