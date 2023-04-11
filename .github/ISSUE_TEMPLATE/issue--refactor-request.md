@@ -1,7 +1,7 @@
 ---
-name: "[Refactor] : #"
-about: Describe this issue template's purpose here.
-title: "[Refactor]"
+name: 'Issue: Refactor request'
+about: code refactoring
+title: "[Refactor] : #"
 labels: refactor
 assignees: ''
 
