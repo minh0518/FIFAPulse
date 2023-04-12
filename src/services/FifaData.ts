@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserInfo } from '../types/type';
+import { UserInfo } from '../types/test';
 
 export default class FIFAData {
   instance;
