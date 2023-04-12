@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FIFAData from '../services/FifaData';
+import FIFAData from '../Services/FifaData';
 import { UserInfo } from '../types/type';
 
 const Test = () => {
