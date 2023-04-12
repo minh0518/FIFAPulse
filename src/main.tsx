@@ -5,8 +5,12 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ChooseMode from './Pages/ChooseMode';
 import Login from './Pages/Login/Login';
-import Main from './Pages/Main/Main';
+import MainSelect from './Pages/MainSelect';
 import Guest from './Pages/Guest/Guest';
+import MyRecord from './Pages/MyRecord';
+import PositionGuide from './Pages/PositionGuide';
+import UserRecord from './Pages/UserRecord';
+import Challenge from './Pages/Challenge';
 
 const router = createBrowserRouter([
   {
@@ -14,9 +18,14 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: '',
     children: [
+      //상대 경로로 바꿔보자
       { index: true, element: <ChooseMode /> },
       { path: '/login', element: <Login /> },
-      { path: '/main', element: <Main /> },
+      { path: '/main-select', element: <MainSelect /> },
+      { path: '/main-select/my-record', element: <MyRecord /> },
+      { path: '/main-select/position-guide', element: <PositionGuide /> },
+      { path: '/main-select/user-record', element: <UserRecord /> },
+      { path: '/main-select/challenge', element: <Challenge /> },
     ],
   },
   {

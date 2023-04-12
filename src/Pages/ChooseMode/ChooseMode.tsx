@@ -7,7 +7,7 @@ import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 
 const ChooseMode = () => {
   const [init, setInit] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useLoginAPI();
+  const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
@@ -30,7 +30,7 @@ const ChooseMode = () => {
         isLoggedIn ? (
           <>
             <Link to={'/guest'}>게스트 모드</Link>
-            <Link to={'/main'}>회원 모드로 진행하기</Link>
+            <Link to={'/main-select'}>00님 안녕하세요!</Link>
             {/* 로그인 페이지에서 피파 온라인 닉네임 등록하는거 추가하고 여기다가 00님 안녕하세요! 추가하기 */}
           </>
         ) : (

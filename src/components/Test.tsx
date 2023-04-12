@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import FIFAData from '../Services/FifaData';
-import { UserInfo } from '../types/type';
+import { UserInfo } from '../types/test';
+import FIFAData from '../Services/fifaData';
 
 const Test = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
