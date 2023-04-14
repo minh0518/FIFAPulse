@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ChooseMode from './Pages/ChooseMode';
-import Login from './Pages/Login/Login';
+import ChooseModeAndLogin from './Pages/ChooseModeAndLogin';
 import MainSelect from './Pages/MainSelect';
 import Guest from './Pages/Guest/Guest';
 import MyRecord from './Pages/MyRecord';
 import PositionGuide from './Pages/PositionGuide';
 import UserRecord from './Pages/UserRecord';
 import Challenge from './Pages/Challenge';
+import AskNickName from './Components/AskNickName/AskNickName';
 
 const router = createBrowserRouter([
   {
@@ -18,9 +18,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: '',
     children: [
-      //상대 경로로 바꿔보자
-      { index: true, element: <ChooseMode /> },
-      { path: '/login', element: <Login /> },
+      { index: true, element: <ChooseModeAndLogin /> },
       { path: '/main-select', element: <MainSelect /> },
       { path: '/main-select/my-record', element: <MyRecord /> },
       { path: '/main-select/position-guide', element: <PositionGuide /> },
