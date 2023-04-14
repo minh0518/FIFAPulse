@@ -1,7 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { authService } from '../../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const MainSelect = () => {
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    signOut(authService);
+    navigate('/');
+  };
   return (
     <div>
       <div>
@@ -16,6 +25,7 @@ const MainSelect = () => {
       <div>
         <Link to="challenge">챌린지</Link>
       </div>
+      <button onClick={onLogoutClick}>Log out</button>
     </div>
   );
 };
