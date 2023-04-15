@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
+import { ModalContextValue } from '../../types/context';
 
 // 우선 임시로 any
-export const ModalContext = createContext<any>(null);
+export const ModalContext = createContext<ModalContextValue | null>(null);
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
