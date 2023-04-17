@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { NickNameInputProps } from '../../types/props';
+import { authService } from '../../../firebase';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { dbService } from '../../../firebase';
 import FIFAData from '../../Services/FifaData';
@@ -9,7 +10,7 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 const AskNickNameModal = () => {
   const [nickNameInput, setNickNameInput] = useState('');
   const { closeModal } = useModalAPI()!;
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { setUserObj } = useUserObjAPI()!;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,7 +18,8 @@ const AskNickNameModal = () => {
   };
 
   const closeModalAndGotoHome = (e: React.FormEvent<HTMLFormElement>) => {
-    //실제 피파온라인 api로 해당 닉넴이 있는지 확인후 에러메세지만 띄우는 로직 추가 해야 함
+    //실제 피파온라인 api로 해당 닉넴이 있는지 확인후 에러메세지만 띄우는 로직 추가
+
     e.preventDefault();
 
     const enrollData = async () => {
@@ -25,7 +27,7 @@ const AskNickNameModal = () => {
       const result = await fifa.getUserId(nickNameInput);
 
       let obj = {
-        googleUID: userObj!.googleUID,
+        googleUID: String(authService.currentUser?.uid),
         accessId: result.accessId,
         level: result.level as unknown as number,
         nickname: result.nickname,

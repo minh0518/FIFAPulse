@@ -13,22 +13,23 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
 
-  // 로그아웃 됐을 때 다시 이 페이지가 렌더링 되면서 진행될때는 기본적으로 true값이어야
-  // 모달창이 안 뜸(안 뜨는게 맞는거임 로그아웃했는데 모달창이 뜨면 안 되니까)
+  // 새로고침 됐을 때 기본적으로 true값이어야 모달창이 안 뜸
+  // (최초 상태로는 안 뜨는게 맞는것이다)
   const [isNickNameExist, setIsNickNameExist] = useState(true);
   const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
   const { isModalOpen, openModal } = useModalAPI()!;
   const { userObj, setUserObj } = useUserObjAPI()!;
 
+  console.log(authService.currentUser);
   const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
       if (user) {
-        console.log('로그인');
+        console.log('logged in');
         setIsLoggedIn(true);
         // DB에 입력한 닉네임으로 된 정보가 있는지 확인
-        let flag: boolean = false;
+        let existOnDB: boolean = false;
         let documentIDForUpdate: string;
         let existUserDBInfo: any;
 
@@ -36,20 +37,20 @@ const ChooseModeAndLogin = () => {
           const dbInfo = await getDocs(collection(dbService, 'userInfo'));
           dbInfo.forEach((i) => {
             if (i.data().googleUID == user.uid) {
-              flag = true; // 존재한다면 true
+              existOnDB = true; // 존재한다면 true
               documentIDForUpdate = i.id;
               existUserDBInfo = i.data();
             }
           });
 
-          if (flag && authService.currentUser) {
-            //이미 존재하지만 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
+          if (existOnDB && authService.currentUser) {
+            //이미 존재하더라도 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
             const fifa = new FIFAData();
             const result = await fifa.getUserId(existUserDBInfo.nickname);
 
             const updateResult = doc(dbService, 'userInfo', `${documentIDForUpdate}`);
             await updateDoc(updateResult, {
-              //googleUID와 nickname은 굳이 업데이트 안 해도 됨
+              //googleUID와 nickname은 굳이 업데이트 x
               accessId: result.accessId,
               level: result.level,
             });
@@ -62,18 +63,9 @@ const ChooseModeAndLogin = () => {
             });
             setIsNickNameExist(true);
           }
-          if (!flag && authService.currentUser) {
+          if (!existOnDB && authService.currentUser) {
             // 없으므로 모달창 띄워서 닉네임 입력받아야 함
 
-            // 모달창에서 userObj를 사용해야 하는데
-            // 이때 user.uid를 사용해야 하므로 최소한 이 부분만 업데이트를 해 놓아야 함
-            // user.uid는 여기서만 참조 가능하므로
-            setUserObj({
-              googleUID: user.uid,
-              accessId: '',
-              level: 0,
-              nickname: '',
-            });
             setIsNickNameExist(false);
           }
         };
@@ -81,7 +73,7 @@ const ChooseModeAndLogin = () => {
         getDataAndUpdateInfo();
       }
       if (!user) {
-        console.log('로그아웃');
+        console.log('logged out');
         setIsLoggedIn(false);
         setUserObj(null);
       }
@@ -90,14 +82,7 @@ const ChooseModeAndLogin = () => {
   }, []);
 
   useEffect(() => {
-    console.log('3번으로 실행');
-
     isNickNameExist ? '' : openModal(<AskNickNameModal />);
-
-    // isNickNameExist가 false여서 (=DB에 없다면)
-    // 여기서 모달창 띄우고
-    // 해당 값을 바탕으로 API호출 후
-    // useObj 만들고 프로필 업뎃
   }, [isNickNameExist]);
 
   console.log(userObj);
@@ -111,10 +96,6 @@ const ChooseModeAndLogin = () => {
     }
 
     const data = await signInWithPopup(authService, provider as GoogleAuthProvider);
-    console.log('2번으로 실행');
-
-    //차선책으로 , 여기서
-    // DB확인 , API 호출 , 프로필 저장 다 때려박으면?
   };
 
   return (
