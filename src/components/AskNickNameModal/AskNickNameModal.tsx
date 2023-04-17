@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { NickNameInputProps } from '../../types/props';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
@@ -6,7 +6,8 @@ import { dbService } from '../../../firebase';
 import FIFAData from '../../Services/FifaData';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 
-const AskNickNameModal = ({ nickNameInput, setNickNameInput, setIsNickNameExist }: NickNameInputProps) => {
+const AskNickNameModal = () => {
+  const [nickNameInput, setNickNameInput] = useState('');
   const { closeModal } = useModalAPI()!;
   const { userObj, setUserObj } = useUserObjAPI()!;
 
@@ -34,7 +35,6 @@ const AskNickNameModal = ({ nickNameInput, setNickNameInput, setIsNickNameExist 
         ...obj,
       });
       setUserObj(obj);
-      setIsNickNameExist(true);
       closeModal();
     };
 

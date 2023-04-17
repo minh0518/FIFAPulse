@@ -16,9 +16,6 @@ const ChooseModeAndLogin = () => {
   // 로그아웃 됐을 때 다시 이 페이지가 렌더링 되면서 진행될때는 기본적으로 true값이어야
   // 모달창이 안 뜸(안 뜨는게 맞는거임 로그아웃했는데 모달창이 뜨면 안 되니까)
   const [isNickNameExist, setIsNickNameExist] = useState(true);
-
-  const [nickNameInput, setNickNameInput] = useState('');
-
   const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
   const { isModalOpen, openModal } = useModalAPI()!;
   const { userObj, setUserObj } = useUserObjAPI()!;
@@ -96,15 +93,13 @@ const ChooseModeAndLogin = () => {
   useEffect(() => {
     console.log('3번으로 실행');
 
-    isNickNameExist
-      ? ''
-      : openModal(<AskNickNameModal nickNameInput={nickNameInput} setNickNameInput={setNickNameInput} setIsNickNameExist={setIsNickNameExist} />);
+    isNickNameExist ? '' : openModal(<AskNickNameModal />);
 
     // isNickNameExist가 false여서 (=DB에 없다면)
     // 여기서 모달창 띄우고
     // 해당 값을 바탕으로 API호출 후
     // useObj 만들고 프로필 업뎃
-  }, [isNickNameExist, nickNameInput, isModalOpen]);
+  }, [isNickNameExist]);
 
   console.log(userObj);
   const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
