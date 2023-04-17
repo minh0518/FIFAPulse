@@ -24,7 +24,6 @@ const ChooseModeAndLogin = () => {
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
-      console.log('1번으로 실행');
       if (user) {
         console.log('로그인');
         setIsLoggedIn(true);
@@ -43,7 +42,7 @@ const ChooseModeAndLogin = () => {
             }
           });
 
-          if (flag) {
+          if (flag && authService.currentUser) {
             //이미 존재하지만 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
             const fifa = new FIFAData();
             const result = await fifa.getUserId(existUserDBInfo.nickname);
@@ -63,7 +62,7 @@ const ChooseModeAndLogin = () => {
             });
             setIsNickNameExist(true);
           }
-          if (!flag) {
+          if (!flag && authService.currentUser) {
             // 없으므로 모달창 띄워서 닉네임 입력받아야 함
 
             // 모달창에서 userObj를 사용해야 하는데
@@ -118,7 +117,6 @@ const ChooseModeAndLogin = () => {
     // DB확인 , API 호출 , 프로필 저장 다 때려박으면?
   };
 
-  // console.log('2번과 3번 사이?')
   return (
     <div>
       <h1>모드를 선택하세요</h1>
@@ -129,7 +127,7 @@ const ChooseModeAndLogin = () => {
           ) : (
             <>
               <button onClick={() => navigate('/guest')}>게스트 모드</button>
-              <button onClick={() => navigate('/main-select')}>00님 안녕하세요!</button>
+              <button onClick={() => navigate('/main-select')}>{userObj?.nickname} 님 안녕하세요!</button>
             </>
           )
         ) : (
