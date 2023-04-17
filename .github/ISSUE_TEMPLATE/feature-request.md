@@ -1,7 +1,7 @@
 ---
-name: 'Issue: Feature request'
+name: Feature request
 about: Feature request
-title: "[Feat] : #"
+title: "[Feat] :"
 labels: enhancement
 assignees: ''
 

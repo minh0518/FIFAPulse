@@ -1,7 +1,7 @@
 ---
-name: 'Issue: Docs files'
+name: Docs files
 about: Docs file change
-title: "[DOCS] : #"
+title: "[DOCS] :"
 labels: documentation
 assignees: ''
 

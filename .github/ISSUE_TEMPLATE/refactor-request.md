@@ -1,7 +1,7 @@
 ---
-name: 'Issue: Refactor request'
+name: Refactor request
 about: code refactoring
-title: "[Refactor] : #"
+title: "[Refactor] :"
 labels: refactor
 assignees: ''
 
