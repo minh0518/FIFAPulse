@@ -1,35 +1,112 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Router } from 'react-router-dom';
 import { authService } from '../../../firebase';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { useModal } from '../../Context/ModalContext/ModalContext';
-import AskNickName from '../../Components/AskNickName/AskNickName';
+import { useModalAPI } from '../../Context/Modal/ModalContext';
+import AskNickNameModal from '../../Components/AskNickNameModal';
+import FIFAData from '../../Services/FifaData';
+import { dbService } from '../../../firebase';
+import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
 
-  const { isModalOpen, openModal, closeModal } = useModal();
+  // 로그아웃 됐을 때 다시 이 페이지가 렌더링 되면서 진행될때는 기본적으로 true값이어야
+  // 모달창이 안 뜸(안 뜨는게 맞는거임 로그아웃했는데 모달창이 뜨면 안 되니까)
+  const [isNickNameExist, setIsNickNameExist] = useState(true);
+
+  const [nickNameInput, setNickNameInput] = useState('');
+
+  const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
+  const { isModalOpen, openModal } = useModalAPI()!;
+  const { userObj, setUserObj } = useUserObjAPI()!;
 
   const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
-      //추가로 , 여기에 이제 로그인하면 contextapi로 userObj등록하는 로직 추가해야 함
+      console.log('1번으로 실행');
       if (user) {
+        console.log('로그인');
         setIsLoggedIn(true);
+        // DB에 입력한 닉네임으로 된 정보가 있는지 확인
+        let flag: boolean = false;
+        let documentIDForUpdate: string;
+        let existUserDBInfo: any;
+
+        const getDataAndUpdateInfo = async () => {
+          const dbInfo = await getDocs(collection(dbService, 'userInfo'));
+          dbInfo.forEach((i) => {
+            if (i.data().googleUID == user.uid) {
+              flag = true; // 존재한다면 true
+              documentIDForUpdate = i.id;
+              existUserDBInfo = i.data();
+            }
+          });
+
+          if (flag) {
+            //이미 존재하지만 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
+            const fifa = new FIFAData();
+            const result = await fifa.getUserId(existUserDBInfo.nickname);
+
+            const updateResult = doc(dbService, 'userInfo', `${documentIDForUpdate}`);
+            await updateDoc(updateResult, {
+              //googleUID와 nickname은 굳이 업데이트 안 해도 됨
+              accessId: result.accessId,
+              level: result.level,
+            });
+
+            setUserObj({
+              googleUID: user.uid,
+              accessId: result.accessId,
+              level: result.level as unknown as number,
+              nickname: result.nickname,
+            });
+            setIsNickNameExist(true);
+          }
+          if (!flag) {
+            // 없으므로 모달창 띄워서 닉네임 입력받아야 함
+
+            // 모달창에서 userObj를 사용해야 하는데
+            // 이때 user.uid를 사용해야 하므로 최소한 이 부분만 업데이트를 해 놓아야 함
+            // user.uid는 여기서만 참조 가능하므로
+            setUserObj({
+              googleUID: user.uid,
+              accessId: '',
+              level: 0,
+              nickname: '',
+            });
+            setIsNickNameExist(false);
+          }
+        };
+
+        getDataAndUpdateInfo();
       }
       if (!user) {
+        console.log('로그아웃');
         setIsLoggedIn(false);
+        setUserObj(null);
       }
-
       setInit(true);
     });
   }, []);
 
+  useEffect(() => {
+    console.log('3번으로 실행');
+
+    isNickNameExist
+      ? ''
+      : openModal(<AskNickNameModal nickNameInput={nickNameInput} setNickNameInput={setNickNameInput} setIsNickNameExist={setIsNickNameExist} />);
+
+    // isNickNameExist가 false여서 (=DB에 없다면)
+    // 여기서 모달창 띄우고
+    // 해당 값을 바탕으로 API호출 후
+    // useObj 만들고 프로필 업뎃
+  }, [isNickNameExist, nickNameInput, isModalOpen]);
+
+  console.log(userObj);
   const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.currentTarget;
 
@@ -40,11 +117,13 @@ const ChooseModeAndLogin = () => {
     }
 
     const data = await signInWithPopup(authService, provider as GoogleAuthProvider);
+    console.log('2번으로 실행');
 
-    // 조건에 따라 모달의 띄울지 안 띄울지 진행
-    openModal(<AskNickName />);
+    //차선책으로 , 여기서
+    // DB확인 , API 호출 , 프로필 저장 다 때려박으면?
   };
 
+  // console.log('2번과 3번 사이?')
   return (
     <div>
       <h1>모드를 선택하세요</h1>

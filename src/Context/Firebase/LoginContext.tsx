@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import { LoginContextValue } from '../../types/loginContext';
+import { LoginContextValue } from '../../types/context';
 
 export const LoginContext = createContext<LoginContextValue | null>(null);
 

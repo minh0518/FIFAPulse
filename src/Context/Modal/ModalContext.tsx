@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { ModalContextValue } from '../../types/context';
 
-// 우선 임시로 any
 export const ModalContext = createContext<ModalContextValue | null>(null);
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
@@ -29,6 +28,6 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export function useModal() {
+export function useModalAPI() {
   return useContext(ModalContext);
 }
