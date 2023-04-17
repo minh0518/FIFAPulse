@@ -9,7 +9,7 @@ const MainSelect = () => {
 
   const onLogoutClick = () => {
     signOut(authService);
-    navigate('/');
+    navigate('/', { replace: true });
   };
   return (
     <div>

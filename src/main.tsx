@@ -10,7 +10,6 @@ import MyRecord from './Pages/MyRecord';
 import PositionGuide from './Pages/PositionGuide';
 import UserRecord from './Pages/UserRecord';
 import Challenge from './Pages/Challenge';
-import AskNickName from './Components/AskNickName/AskNickName';
 
 const router = createBrowserRouter([
   {

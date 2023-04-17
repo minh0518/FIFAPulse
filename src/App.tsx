@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { LoginProvider } from './Context/Firebase/LoginContext';
-import { ModalProvider } from './Context/ModalContext/ModalContext';
+import { ModalProvider } from './Context/Modal/ModalContext';
+import { UserObjProvider } from './Context/UserObj/UserObjContext';
 
 function App() {
   return (
     <>
-      <ModalProvider>
-        <LoginProvider>
-          <Outlet />
-        </LoginProvider>
-      </ModalProvider>
+      <UserObjProvider>
+        <ModalProvider>
+          <LoginProvider>
+            <Outlet />
+          </LoginProvider>
+        </ModalProvider>
+      </UserObjProvider>
     </>
   );
 }

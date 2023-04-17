@@ -3,8 +3,19 @@ export interface LoginContextValue {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface ModalContextValue {
+export interface ModalContextValue {
   isModalOpen: boolean;
   openModal: (children: React.ReactNode) => void;
   closeModal: () => void;
+}
+
+export interface userObjType {
+  googleUID: string;
+  accessId: string;
+  level: number;
+  nickname: string;
+}
+export interface UserObjContextValue {
+  userObj: userObjType | null;
+  setUserObj: React.Dispatch<React.SetStateAction<userObjType | null>>;
 }
