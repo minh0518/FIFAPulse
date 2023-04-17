@@ -1,7 +1,7 @@
 ---
-name: 'Issue: Bug report'
+name: Bug report
 about: Bug report
-title: "[BUG] : #"
+title: "[BUG] :"
 labels: bug
 assignees: ''
 
