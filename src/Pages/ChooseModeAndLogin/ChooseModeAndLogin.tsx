@@ -85,7 +85,8 @@ const ChooseModeAndLogin = () => {
     isNickNameExist ? '' : openModal(<AskNickNameModal />);
   }, [isNickNameExist]);
 
-  console.log(userObj);
+  // console.log(userObj);
+
   const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.currentTarget;
 
