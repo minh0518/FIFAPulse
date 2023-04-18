@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
-import { NickNameInputProps } from '../../types/props';
 import { authService } from '../../../firebase';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { dbService } from '../../../firebase';
@@ -9,7 +8,6 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 
 const AskNickNameModal = () => {
   const [nickNameInput, setNickNameInput] = useState('');
-  const [data, setData] = useState({});
   const { closeModal } = useModalAPI()!;
   const { setUserObj } = useUserObjAPI()!;
 
@@ -28,7 +26,7 @@ const AskNickNameModal = () => {
         console.log(result);
         let obj = {
           googleUID: String(authService.currentUser?.uid),
-          accessId: result.accessId,
+          FIFAOnlineAccessId: result.accessId,
           level: result.level as unknown as number,
           nickname: result.nickname,
         };

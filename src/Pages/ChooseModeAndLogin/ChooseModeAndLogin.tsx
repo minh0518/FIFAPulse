@@ -51,13 +51,13 @@ const ChooseModeAndLogin = () => {
             const updateResult = doc(dbService, 'userInfo', `${documentIDForUpdate}`);
             await updateDoc(updateResult, {
               //googleUID와 nickname은 굳이 업데이트 x
-              accessId: result.accessId,
+              FIFAOnlineAccessId: result.accessId,
               level: result.level,
             });
 
             setUserObj({
               googleUID: user.uid,
-              accessId: result.accessId,
+              FIFAOnlineAccessId: result.accessId,
               level: result.level as unknown as number,
               nickname: result.nickname,
             });
