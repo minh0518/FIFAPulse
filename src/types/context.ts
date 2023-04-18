@@ -11,7 +11,7 @@ export interface ModalContextValue {
 
 export interface userObjType {
   googleUID: string;
-  accessId: string;
+  FIFAOnlineAccessId: string;
   level: number;
   nickname: string;
 }
