@@ -36,7 +36,7 @@ const ChooseModeAndLogin = () => {
         const getDataAndUpdateInfo = async () => {
           const dbInfo = await getDocs(collection(dbService, 'userInfo'));
           dbInfo.forEach((i) => {
-            if (i.data().googleUID == user.uid) {
+            if (i.data().googleUID === user.uid) {
               existOnDB = true; // 존재한다면 true
               documentIDForUpdate = i.id;
               existUserDBInfo = i.data();
