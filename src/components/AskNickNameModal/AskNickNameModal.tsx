@@ -5,6 +5,7 @@ import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { dbService } from '../../../firebase';
 import FIFAData from '../../Services/FifaData';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
+import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskNickNameModal = () => {
   const [nickNameInput, setNickNameInput] = useState('');
@@ -21,9 +22,16 @@ const AskNickNameModal = () => {
 
     const getData = async () => {
       try {
+        const dbInfo = await getDocs(collection(dbService, 'userInfo'));
+        dbInfo.forEach((i) => {
+          if (i.data().nickname === nickNameInput) {
+            throw new SyntaxError('이미 존재하는 계정입니다');
+          }
+        });
+
         const fifa = new FIFAData();
         const result = await fifa.getUserId(nickNameInput);
-        console.log(result);
+
         let obj = {
           googleUID: String(authService.currentUser?.uid),
           FIFAOnlineAccessId: result.accessId,
@@ -37,8 +45,18 @@ const AskNickNameModal = () => {
         setUserObj(obj);
         closeModal();
         alert('등록이 완료되었습니다!');
-      } catch {
-        alert('해당 계정이 존재하지 않습니다. 다시 한번 입력 해 주세요!');
+      } catch (error) {
+        const message = getErrorMessage(error);
+        const errorName = getErrorName(error);
+
+        if (errorName === 'AxiosError') {
+          alert('해당 계정이 존재하지 않습니다. 다시 한번 입력 해 주세요!');
+        }
+        if (errorName === 'SyntaxError') {
+          console.log(errorName);
+          alert(message);
+        }
+
         setNickNameInput('');
       }
     };
