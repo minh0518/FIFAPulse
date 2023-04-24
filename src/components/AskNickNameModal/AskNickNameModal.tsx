@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { authService, dbService } from '../../../firebase';
+import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
@@ -8,6 +10,7 @@ import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskNickNameModal = () => {
   const [nickNameInput, setNickNameInput] = useState('');
+  const { setIsLoggedIn } = useLoginAPI()!;
   const { closeModal } = useModalAPI()!;
   const { setUserObj } = useUserObjAPI()!;
 
@@ -62,13 +65,21 @@ const AskNickNameModal = () => {
 
     getData();
   };
+
+  const onClose = () => {
+    signOut(authService);
+    closeModal();
+  };
   return (
     <div>
-      안녕하세요! 처음 접속하셨을 경우, 실제 피파온라인 계정과 연동이 필요합니다 피파온라인에서 사용하고 계시는 닉네임을 입력 해 주세요!
+      피파온라인 계정과 연동을 위해 피파온라인에서 사용하고 계시는 닉네임을 입력 해 주세요!
       <form onSubmit={closeModalAndGotoHome}>
         <input onChange={onChange} value={nickNameInput} />
-        <input type="submit" value="확인 후 닫기" />
+        <input type="submit" value="확인" />
       </form>
+      <button type="button" onClick={onClose}>
+        뒤로가기
+      </button>
     </div>
   );
 };

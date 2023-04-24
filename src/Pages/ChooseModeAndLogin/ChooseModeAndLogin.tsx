@@ -73,6 +73,8 @@ const ChooseModeAndLogin = () => {
       }
       if (!user) {
         console.log('logged out');
+        setIsNickNameExist(true); // 모달 창에서 뒤로가기 선택시
+        // 바뀐 isNickNameExist로 인한 useEffect를 실행하기 위해 의도적으로 isNickNameExist를 초기값으로 세팅
         setIsLoggedIn(false);
         setUserObj(null);
       }
@@ -83,6 +85,7 @@ const ChooseModeAndLogin = () => {
   useEffect(() => {
     isNickNameExist ? '' : openModal(<AskNickNameModal />);
   }, [isNickNameExist]);
+  console.log(isNickNameExist);
 
   // console.log(userObj);
 

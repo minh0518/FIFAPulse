@@ -6,15 +6,13 @@ import { UserObjProvider } from './Context/UserObj/UserObjContext';
 
 function App() {
   return (
-    <>
-      <UserObjProvider>
+    <UserObjProvider>
+      <LoginProvider>
         <ModalProvider>
-          <LoginProvider>
-            <Outlet />
-          </LoginProvider>
+          <Outlet />
         </ModalProvider>
-      </UserObjProvider>
-    </>
+      </LoginProvider>
+    </UserObjProvider>
   );
 }
 
