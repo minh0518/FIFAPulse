@@ -22,7 +22,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
-    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "off", //parser는 @typescript-eslint 를 사용하고 있으므로 해당 옵션을 제거해야 함
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/naming-convention": "off",

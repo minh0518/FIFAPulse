@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { ModalContextValue } from '../../types/context';
 
 export const ModalContext = createContext<ModalContextValue | null>(null);
@@ -20,8 +20,11 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
     closeModal();
   };
 
+  const memoValue = useMemo(() => {
+    return { isModalOpen, openModal, closeModal };
+  }, [isModalOpen]);
   return (
-    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+    <ModalContext.Provider value={memoValue}>
       {children}
       {isModalOpen && <div>{modalContents}</div>}
     </ModalContext.Provider>
