@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { authService } from '../../../firebase';
-import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import { useModalAPI } from '../../Context/Modal/ModalContext';
-import AskNickNameModal from '../../Components/AskNickNameModal';
-import FIFAData from '../../Services/FifaData';
-import { dbService } from '../../../firebase';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { authService, dbService } from '../../../firebase';
+import AskNickNameModal from '../../Components/AskNickNameModal';
+import { useLoginAPI } from '../../Context/Firebase/LoginContext';
+import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
+import FIFAData from '../../Services/FifaData';
 
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
@@ -29,7 +28,7 @@ const ChooseModeAndLogin = () => {
         console.log('logged in');
         setIsLoggedIn(true);
         // DB에 입력한 닉네임으로 된 정보가 있는지 확인
-        let existOnDB: boolean = false;
+        let existOnDB = false;
         let documentIDForUpdate: string;
         let existUserDBInfo: any;
 
@@ -44,13 +43,13 @@ const ChooseModeAndLogin = () => {
           });
 
           if (existOnDB && authService.currentUser) {
-            //이미 존재하더라도 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
+            // 이미 존재하더라도 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
             const fifa = new FIFAData();
             const result = await fifa.getUserId(existUserDBInfo.nickname);
 
             const updateResult = doc(dbService, 'userInfo', `${documentIDForUpdate}`);
             await updateDoc(updateResult, {
-              //googleUID와 nickname은 굳이 업데이트 x
+              // googleUID와 nickname은 굳이 업데이트 x
               FIFAOnlineAccessId: result.accessId,
               level: result.level,
             });
@@ -102,22 +101,28 @@ const ChooseModeAndLogin = () => {
   return (
     <div>
       <h1>모드를 선택하세요</h1>
-      {init ? ( //화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
+      {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
         isLoggedIn ? ( // 로그인이 됐을때의 조건부 렌더링
           isModalOpen ? ( // 로그인이 되고 만약 ID를 입력받아야 해서 모달창이 띄워진 것에 대한 조건부 렌더링
             <>닉네임을 입력 할 때까지 기다리는 중...</>
           ) : (
             <>
-              <button onClick={() => navigate('/guest')}>게스트 모드</button>
-              <button onClick={() => navigate('/main-select')}>{userObj?.nickname} 님 안녕하세요!</button>
+              <button type="button" onClick={() => navigate('/guest')}>
+                게스트 모드
+              </button>
+              <button type="button" onClick={() => navigate('/main-select')}>
+                {userObj?.nickname} 님 안녕하세요!
+              </button>
             </>
           )
         ) : (
           <>
-            <button onClick={() => navigate('/guest')}>게스트 모드</button>
+            <button type="button" onClick={() => navigate('/guest')}>
+              게스트 모드
+            </button>
 
-            {/* 추후 로그인 경로가 다양해지면 로그인 하기 버튼 전체를 컴포넌트로 분리 <LogIn />*/}
-            <button name="google" onClick={onSocialClick}>
+            {/* 추후 로그인 경로가 다양해지면 로그인 하기 버튼 전체를 컴포넌트로 분리 <LogIn /> */}
+            <button type="button" name="google" onClick={onSocialClick}>
               로그인 하기(Google)
             </button>
           </>

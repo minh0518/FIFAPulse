@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useModalAPI } from '../../Context/Modal/ModalContext';
-import { authService } from '../../../firebase';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
-import { dbService } from '../../../firebase';
-import FIFAData from '../../Services/FifaData';
+import { authService, dbService } from '../../../firebase';
+import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
+import FIFAData from '../../Services/FifaData';
 import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskNickNameModal = () => {
@@ -32,7 +31,7 @@ const AskNickNameModal = () => {
         const fifa = new FIFAData();
         const result = await fifa.getUserId(nickNameInput);
 
-        let obj = {
+        const obj = {
           googleUID: String(authService.currentUser?.uid),
           FIFAOnlineAccessId: result.accessId,
           level: result.level as unknown as number,
