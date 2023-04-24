@@ -23,7 +23,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
       {children}
-      {isModalOpen && <div onClick={onDimmerClick}>{modalContents}</div>}
+      {isModalOpen && <div>{modalContents}</div>}
     </ModalContext.Provider>
   );
 };

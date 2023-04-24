@@ -6,9 +6,7 @@ export const LoginContext = createContext<LoginContextValue | null>(null);
 export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return (
-    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>{children}</LoginContext.Provider>
-  );
+  return <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>{children}</LoginContext.Provider>;
 };
 
 export function useLoginAPI() {
