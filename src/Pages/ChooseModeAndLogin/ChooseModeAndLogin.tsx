@@ -20,7 +20,7 @@ const ChooseModeAndLogin = () => {
   const { isModalOpen, openModal } = useModalAPI()!; // context로 관리하는 현재 모달이 열렸는지 알려주는 상태
   const { userObj, setUserObj } = useUserObjAPI()!; // context로 관리하는 현재 로그인 중인 유저의 정보
 
-  console.log(authService.currentUser);
+  // console.log(authService.currentUser);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,13 +59,18 @@ const ChooseModeAndLogin = () => {
               level: result.level,
             });
 
-            // 유저 객체 업데이트
-            setUserObj({
+            const obj = {
               googleUID: user.uid,
               FIFAOnlineAccessId: result.accessId,
               level: result.level as unknown as number,
               nickname: result.nickname,
-            });
+            };
+
+            // 유저 객체 업데이트
+            setUserObj(obj);
+            // 새로고침 시 , context값 유지를 위해 로컬스토리지 저장
+            localStorage.setItem('userObj', JSON.stringify(obj));
+            localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
             // 기존에 존재했으므로 true
             setIsNickNameExist(true);
@@ -89,10 +94,14 @@ const ChooseModeAndLogin = () => {
 
         setIsLoggedIn(false);
         setUserObj(null);
+        // 새로고침 시 , context값 유지를 위해 로컬스토리지 저장
+        localStorage.setItem('userObj', JSON.stringify(null));
+        localStorage.setItem('isLoggedIn', JSON.stringify(false));
       }
       setInit(true);
     });
   }, []);
+  console.log(userObj);
 
   // isNickNameExist의 여부에 따라 모달창을 띄움
   useEffect(() => {
