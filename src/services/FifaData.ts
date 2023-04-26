@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserInfo } from '../types/test';
+import { MetaDataDivision, MetaDataMatchtype, MetaDataSeasonId, MetaDataSpid, MetaDataSpposition, NexonUserInfo } from '../types/api';
 
 export default class FIFAData {
   instance;
@@ -13,12 +13,101 @@ export default class FIFAData {
     });
   }
 
-  getUserId = async <T extends UserInfo>(userNickName: string): Promise<T> => {
+  getUserId = async <T extends NexonUserInfo>(userNickName: string): Promise<T> => {
     const result = await this.instance.get<T>('users', {
       params: {
         nickname: userNickName,
       },
     });
+    return result.data;
+  };
+
+  getInfoMetaData = async () => {
+    return Promise.all([this.#getMatchtype(), this.#getSeasonId(), this.#getSpid(), this.#getDivision(), this.#getSpposition()]);
+  };
+
+  // 상반신 미페
+  getActionImg = async (spid: number): Promise<String> => {
+    // (spid)가 "0"으로 시작하는 경우, 시작 부분의 0을 모두 제외해야 정상적으로 조회가 가능합니다.
+    // (e.g. "000401"일경우, "401"로 조회)
+    const result = await axios.get(`live/externalAssets/common/playersAction/p${spid}.png`, {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+      responseType: 'blob',
+    });
+
+    const imgUrl = URL.createObjectURL(result.data);
+    return imgUrl;
+  };
+
+  // (상반신 미페가 없으면) 대갈 미페
+  getHeadImg = async (pid: number): Promise<String> => {
+    // (pid)가 "0"으로 시작하는 경우, 시작 부분의 0을 모두 제외해야 정상적으로 조회가 가능합니다.
+    // (e.g. "000401"일경우, "401"로 조회)
+    const result = await axios.get(`live/externalAssets/common/players/p${pid}.png`, {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+      responseType: 'blob',
+    });
+
+    const imgUrl = URL.createObjectURL(result.data);
+    return imgUrl;
+  };
+
+  // 선수 spid
+  #getSpid = async <T extends MetaDataSpid>(): Promise<T[]> => {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/spid.json', {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+    });
+
+    return result.data;
+  };
+
+  // 시즌아이디
+  #getSeasonId = async <T extends MetaDataSeasonId>(): Promise<T[]> => {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/seasonid.json', {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+    });
+
+    return result.data;
+  };
+
+  // 선수 포지션
+  #getSpposition = async <T extends MetaDataSpposition>(): Promise<T[]> => {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/spposition.json', {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+    });
+
+    return result.data;
+  };
+
+  // 공식경기 등급 식별자
+  #getDivision = async <T extends MetaDataDivision>(): Promise<T[]> => {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/division.json', {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+    });
+
+    return result.data;
+  };
+
+  // 매치 종류
+  #getMatchtype = async <T extends MetaDataMatchtype>(): Promise<T[]> => {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/matchtype.json', {
+      headers: {
+        Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+    });
+
     return result.data;
   };
 }

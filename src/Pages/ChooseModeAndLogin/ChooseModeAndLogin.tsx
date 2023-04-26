@@ -12,12 +12,13 @@ import FIFAData from '../../Services/FifaData';
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
 
+  // 모달창에서 입력한 닉네임과 연동된 계정 정보가, DB에 존재하는지에 대한 플래그
   // 새로고침 됐을 때 기본적으로 true값이어야 모달창이 안 뜸
   // (최초 상태로는 안 뜨는게 맞는것이다)
   const [isNickNameExist, setIsNickNameExist] = useState(true);
-  const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
-  const { isModalOpen, openModal } = useModalAPI()!;
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!; // context로 관리하는 로그인이 되어 있는지 알려주는 상태
+  const { isModalOpen, openModal } = useModalAPI()!; // context로 관리하는 현재 모달이 열렸는지 알려주는 상태
+  const { userObj, setUserObj } = useUserObjAPI()!; // context로 관리하는 현재 로그인 중인 유저의 정보
 
   console.log(authService.currentUser);
   const navigate = useNavigate();
@@ -25,9 +26,13 @@ const ChooseModeAndLogin = () => {
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
       if (user) {
+        // 로그인 됐을 때
+
         console.log('logged in');
         setIsLoggedIn(true);
-        // DB에 입력한 닉네임으로 된 정보가 있는지 확인
+
+        // DB에 입력한 닉네임으로 저장된 정보가 있는지 확인
+
         let existOnDB = false;
         let documentIDForUpdate: string;
         let existUserDBInfo: any;
@@ -37,7 +42,7 @@ const ChooseModeAndLogin = () => {
           dbInfo.forEach((i) => {
             if (i.data().googleUID === user.uid) {
               existOnDB = true; // 존재한다면 true
-              documentIDForUpdate = i.id;
+              documentIDForUpdate = i.id; // 해당 firestore의 documentId를 가져옴
               existUserDBInfo = i.data();
             }
           });
@@ -54,17 +59,19 @@ const ChooseModeAndLogin = () => {
               level: result.level,
             });
 
+            // 유저 객체 업데이트
             setUserObj({
               googleUID: user.uid,
               FIFAOnlineAccessId: result.accessId,
               level: result.level as unknown as number,
               nickname: result.nickname,
             });
+
+            // 기존에 존재했으므로 true
             setIsNickNameExist(true);
           }
           if (!existOnDB && authService.currentUser) {
-            // 없으므로 모달창 띄워서 닉네임 입력받아야 함
-
+            // 없다면 모달창 띄워서 닉네임 입력받아야 함
             setIsNickNameExist(false);
           }
         };
@@ -72,9 +79,14 @@ const ChooseModeAndLogin = () => {
         getDataAndUpdateInfo();
       }
       if (!user) {
+        // 로그아웃 됐을 때
+
         console.log('logged out');
-        setIsNickNameExist(true); // 모달 창에서 뒤로가기 선택시
-        // 바뀐 isNickNameExist로 인한 useEffect를 실행하기 위해 의도적으로 isNickNameExist를 초기값으로 세팅
+        setIsNickNameExist(true); // 모달 창에서 뒤로가기 선택하고 재 로그인시
+        // 모달창 띄우는 useEffect를 실행하기 위해서 의존성 배열을 변경해야 하므로
+        // 의도적으로 isNickNameExist를 초기값으로 세팅
+        // (로그아웃 됐을 때true -> 재로그인시 false로 변경돼서 useEffect 실행)
+
         setIsLoggedIn(false);
         setUserObj(null);
       }
@@ -82,13 +94,12 @@ const ChooseModeAndLogin = () => {
     });
   }, []);
 
+  // isNickNameExist의 여부에 따라 모달창을 띄움
   useEffect(() => {
     isNickNameExist ? '' : openModal(<AskNickNameModal />);
   }, [isNickNameExist]);
-  console.log(isNickNameExist);
 
-  // console.log(userObj);
-
+  // 로그인하기 버튼 시 작동하는 이벤트
   const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.currentTarget;
 
@@ -106,7 +117,7 @@ const ChooseModeAndLogin = () => {
       <h1>모드를 선택하세요</h1>
       {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
         isLoggedIn ? ( // 로그인이 됐을때의 조건부 렌더링
-          isModalOpen ? ( // 로그인이 되고 만약 ID를 입력받아야 해서 모달창이 띄워진 것에 대한 조건부 렌더링
+          isModalOpen ? ( // 로그인이 되고 만약 닉네임을 입력받아야 해서 모달창이 띄워진 것에 대한 조건부 렌더링
             <>닉네임을 입력 할 때까지 기다리는 중...</>
           ) : (
             <>

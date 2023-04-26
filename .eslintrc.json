@@ -13,6 +13,7 @@
     "plugin:prettier/recommended"
     // "plugin:@typescript-eslint/recommended" >> "airbnb-typescript" 와 겹침
   ],
+  "ignorePatterns": ["vite.config.ts"],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -44,6 +45,7 @@
     ],
     "no-alert": "off",
     "no-console": "off",
+    "class-methods-use-this": "off",
     // "import/no-extraneous-dependencies": "off",
     // "import/no-unresolved": "off",
     // "import/prefer-default-export": "off",
