@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Challenge from './Pages/Challenge';
 import ChooseModeAndLogin from './Pages/ChooseModeAndLogin';
-import MainSelect from './Pages/MainSelect';
 import Guest from './Pages/Guest/Guest';
+import MainSelect from './Pages/MainSelect';
 import MyRecord from './Pages/MyRecord';
 import PositionGuide from './Pages/PositionGuide';
 import UserRecord from './Pages/UserRecord';
-import Challenge from './Pages/Challenge';
 
 const router = createBrowserRouter([
   {

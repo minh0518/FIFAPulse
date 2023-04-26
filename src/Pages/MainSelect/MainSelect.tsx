@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { signOut } from 'firebase/auth';
+import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate, Link } from 'react-router-dom';
-import { authService } from '../../../firebase';
+import { authService, dbService } from '../../../firebase';
+import FIFAData from '../../Services/FifaData';
 
 const MainSelect = () => {
   const navigate = useNavigate();
@@ -10,6 +12,22 @@ const MainSelect = () => {
     signOut(authService);
     navigate('/', { replace: true });
   };
+
+  useEffect(() => {
+    const getMeataData = async () => {
+      const fifa = new FIFAData();
+
+      const [matchType, seasonId, spid, division, spPosition] = await fifa.getInfoMetaData();
+      localStorage.setItem('MetaData_spid', JSON.stringify(spid));
+      localStorage.setItem('MetaData_matchType', JSON.stringify(matchType));
+      localStorage.setItem('MetaData_seasonId', JSON.stringify(seasonId));
+      localStorage.setItem('MetaData_division', JSON.stringify(division));
+      localStorage.setItem('MetaData_spPosition', JSON.stringify(spPosition));
+    };
+
+    getMeataData();
+  }, []);
+
   return (
     <div>
       <div>

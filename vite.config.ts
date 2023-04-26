@@ -9,5 +9,12 @@ export default defineConfig({
   server: {
     // localhost 포트 설정
     port: 3000,
+    proxy: {
+      '/live': {
+        target: 'https://fo4.dn.nexoncdn.co.kr/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });
