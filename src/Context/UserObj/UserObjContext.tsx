@@ -4,7 +4,8 @@ import { userObjType, UserObjContextValue } from '../../types/context';
 export const UserObjContext = createContext<UserObjContextValue | null>(null);
 
 export const UserObjProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userObj, setUserObj] = useState<userObjType | null>(null);
+  const localStorageUserObj = JSON.parse(localStorage.getItem('userObj')!);
+  const [userObj, setUserObj] = useState<userObjType | null>(localStorageUserObj);
 
   const memoValue = useMemo(() => {
     return { userObj, setUserObj };
