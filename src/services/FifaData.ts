@@ -1,5 +1,14 @@
 import axios from 'axios';
-import { MetaDataDivision, MetaDataMatchtype, MetaDataSeasonId, MetaDataSpid, MetaDataSpposition, NexonUserInfo } from '../types/api';
+import {
+  MatchDetail,
+  Maxdivision,
+  MetaDataDivision,
+  MetaDataMatchtype,
+  MetaDataSeasonId,
+  MetaDataSpid,
+  MetaDataSpposition,
+  NexonUserInfo,
+} from '../types/api';
 
 export default class FIFAData {
   instance;
@@ -58,8 +67,24 @@ export default class FIFAData {
     return imgUrl;
   };
 
-  getMaxdivision = async (accessId: string) => {
-    const result = await this.instance.get(`users/${accessId}/maxdivision`);
+  getMaxdivision = async <T extends Maxdivision>(accessId: string): Promise<T[]> => {
+    const result = await this.instance.get<T[]>(`users/${accessId}/maxdivision`);
+    return result.data;
+  };
+
+  getMatchId = async (accessid: string, matchtype: number, offset = 0, limit = 10): Promise<string[]> => {
+    const result = await this.instance.get(`users/${accessid}/matches`, {
+      params: {
+        matchtype,
+        offset,
+        limit,
+      },
+    });
+    return result.data;
+  };
+
+  getMatchDetail = async <T extends MatchDetail>(matchId: string): Promise<T> => {
+    const result = await this.instance.get<T>(`matches/${matchId}`);
     return result.data;
   };
 
