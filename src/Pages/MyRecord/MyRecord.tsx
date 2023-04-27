@@ -3,7 +3,7 @@ import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail, Maxdivision } from '../../types/api';
-import { convetDivisionNumberToDivisionName, showMyNickNameFirst } from '../../utils/MyRecord';
+import { convertDate, convertDivisionNumberToDivisionName, showMyNickNameFirst, convertDateAndTime } from '../../utils/MyRecord';
 
 const MyRecord = () => {
   const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!;
@@ -58,6 +58,8 @@ const MyRecord = () => {
     setSelectedValue(Number(value));
   };
 
+  console.log(matchDetail);
+
   return (
     <div>
       <div>
@@ -65,13 +67,15 @@ const MyRecord = () => {
           <b>{userObj?.nickname}</b> 구단주님
         </div>
         <div>
-          역대 최고 등급 (공식경기) :
-          {maxdivision
-            ?.filter((i) => {
-              return i.matchType === 50;
-            })
-            .map((i, index) => {
-              return <span key={index}> {convetDivisionNumberToDivisionName(i.division)}</span>;
+          {maxdivision &&
+            maxdivision.map((i, index) => {
+              return i.matchType === 50 ? (
+                <div key={index}>
+                  공식경기 최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
+                </div>
+              ) : (
+                ''
+              );
             })}
         </div>
       </div>
@@ -90,13 +94,31 @@ const MyRecord = () => {
               return (
                 <div key={index}>
                   <div>
-                    <span>{showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[0]}</span>
-                    <span>{showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]}</span>
                     <span>
-                      {i.matchInfo[0].nickname === userObj!.nickname
-                        ? i.matchInfo[0].matchDetail.matchResult
-                        : i.matchInfo[1].matchDetail.matchResult}
+                      {/* 스타일 적용시 분리해서 사용할 시 대비 */}
+                      {/* {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[0]} VS
+                      {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]} */}
+                      {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname).join(' vs ')}
                     </span>
+
+                    <span>
+                      {i.matchInfo[0].nickname === userObj!.nickname ? (
+                        i.matchInfo[0].matchDetail.matchEndType === 0 ? (
+                          <> 결과 : {i.matchInfo[0].matchDetail.matchResult}</>
+                        ) : i.matchInfo[0].matchDetail.matchEndType === 1 ? (
+                          '결과 : 몰수 승'
+                        ) : (
+                          '결과 : 몰수 패'
+                        )
+                      ) : i.matchInfo[1].matchDetail.matchEndType === 0 ? (
+                        <> 결과 : {i.matchInfo[1].matchDetail.matchResult}</>
+                      ) : i.matchInfo[1].matchDetail.matchEndType === 1 ? (
+                        '결과 : 몰수 승'
+                      ) : (
+                        '결과 : 몰수 패'
+                      )}
+                    </span>
+                    <span> {convertDateAndTime(i.matchDate)}</span>
                   </div>
                 </div>
               );
