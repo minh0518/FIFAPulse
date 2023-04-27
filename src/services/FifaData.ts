@@ -37,26 +37,29 @@ export default class FIFAData {
 
   // <이미지 관련한 api는 필요할 때 직접 호출해서 사용합니다>
   // 상반신 미페
-  getActionImg = async (spid: number): Promise<String> => {
+  getActionImg = async (spid: number): Promise<string> => {
     // (spid)가 "0"으로 시작하는 경우, 시작 부분의 0을 모두 제외해야 정상적으로 조회가 가능합니다.
     // (e.g. "000401"일경우, "401"로 조회)
-    const result = await axios.get(`live/externalAssets/common/playersAction/p${spid}.png`, {
+    console.log(spid);
+    const result = await axios.get(`/live/externalAssets/common/playersAction/p${spid}.png`, {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
       responseType: 'blob',
     });
+    console.log(result);
 
     const imgUrl = URL.createObjectURL(result.data);
+    console.log(imgUrl);
     return imgUrl;
   };
 
   // <이미지 관련한 api는 필요할 때 직접 호출해서 사용합니다>
   // (상반신 미페가 없으면) 대갈 미페
-  getHeadImg = async (pid: number): Promise<String> => {
+  getHeadImg = async (pid: number): Promise<string> => {
     // (pid)가 "0"으로 시작하는 경우, 시작 부분의 0을 모두 제외해야 정상적으로 조회가 가능합니다.
     // (e.g. "000401"일경우, "401"로 조회)
-    const result = await axios.get(`live/externalAssets/common/players/p${pid}.png`, {
+    const result = await axios.get(`/live/externalAssets/common/players/p${pid}.png`, {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },

@@ -40,10 +40,10 @@ const MyRecord = () => {
     const getMatchDetail = async () => {
       if (matchId.length) {
         const fifa = new FIFAData();
-        const tmp: Promise<MatchDetail>[] = matchId.map((i) => {
+        const matchDetailArr: Promise<MatchDetail>[] = matchId.map((i) => {
           return fifa.getMatchDetail(i);
         });
-        const matchDetailsPromises: MatchDetail[] = await Promise.all(tmp);
+        const matchDetailsPromises: MatchDetail[] = await Promise.all(matchDetailArr);
         setMatchDetail(matchDetailsPromises);
       }
       if (!matchId.length) {
