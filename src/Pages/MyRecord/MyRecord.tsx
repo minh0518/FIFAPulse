@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
@@ -12,8 +13,8 @@ const MyRecord = () => {
   const [selectedValue, setSelectedValue] = useState(50);
   const [matchId, setMatchId] = useState<string[]>([]);
   const [matchDetail, setMatchDetail] = useState<MatchDetail[]>([]);
-
   const [maxdivision, setMaxdivision] = useState<Maxdivision[] | null>(null);
+
   useEffect(() => {
     const updateMaxdivision = async () => {
       const fifa = new FIFAData();
@@ -93,9 +94,9 @@ const MyRecord = () => {
             matchDetail.map((i, index) => {
               return (
                 <div key={index}>
-                  <div>
+                  <Link to={`/main-select/my-record/${i.matchId}`}>
                     <span>
-                      {/* 스타일 적용시 분리해서 사용할 시 대비 */}
+                      {/* 스타일 적용시 요소를 분리해서 적용할 시 대비 */}
                       {/* {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[0]} VS
                       {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]} */}
                       {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname).join(' vs ')}
@@ -119,7 +120,7 @@ const MyRecord = () => {
                       )}
                     </span>
                     <span> {convertDateAndTime(i.matchDate)}</span>
-                  </div>
+                  </Link>
                 </div>
               );
             })
