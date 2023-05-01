@@ -48,8 +48,7 @@ type matchInfoType = {
   accessId: string;
   // 유저 닉네임
   nickname: string;
-  // 수비 기록
-  defence: { blockTry: number; blockSuccess: number; tackleTry: number; tackleSuccess: number };
+  // 경기 전체 정보
   matchDetail: {
     averageRating: number; // 경기 평균 평점
     controller: string; // 사용한 컨트롤러 (keyboard / pad / etc 중 1)
@@ -66,6 +65,7 @@ type matchInfoType = {
     seasonId: number; // 시즌ID ??
     systemPause: number; // 게임 일시정지 수
   };
+  defence: { blockTry: number; blockSuccess: number; tackleTry: number; tackleSuccess: number };
   pass: {
     passSuccess: number; // 전체 패스 성공 수
     passTry: number; // 전체 패스 시도 수
