@@ -35,3 +35,30 @@ export const calculateGoalTime = (num: number): string => {
   sec = sec.length === 1 ? `0${sec}` : sec;
   return `${min}:${sec}`;
 };
+
+export const getSeasonImg = (spid: number) => {
+  const seasonId = Number(String(spid).slice(0, 3));
+  let result = JSON.parse(localStorage.getItem('MetaData_seasonId')!);
+  result = result.filter((i: any) => {
+    return i.seasonId === seasonId;
+  });
+
+  return result[0].seasonImg;
+};
+
+export const convertPosition = (spPosition: number) => {
+  let spPositionInfo = JSON.parse(localStorage.getItem('MetaData_spPosition')!);
+  spPositionInfo = spPositionInfo.filter((i: any) => {
+    return i.spposition === spPosition;
+  });
+
+  return spPositionInfo[0].desc;
+};
+
+export const convertPlayerName = (spid: number) => {
+  let spidInfo = JSON.parse(localStorage.getItem('MetaData_spid')!);
+  spidInfo = spidInfo.filter((i: any) => {
+    return i.id === spid;
+  });
+  return spidInfo[0].name;
+};
