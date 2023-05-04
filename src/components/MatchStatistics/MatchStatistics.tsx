@@ -73,7 +73,7 @@ const MatchStatistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: 
           슈팅
         </button>
         <button type="button" name="player" onClick={onModeClick} value="player">
-          선수 기록
+          선수
         </button>
       </div>
 

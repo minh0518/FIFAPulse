@@ -91,9 +91,11 @@ export type matchInfoType = {
     status: {
       // 선수 경기 스탯
 
+      spRating: number; // 선수 평점
       aerialSuccess: number; // 공중볼 경합 성공 수
       aerialTry: number; // 공중볼 경합 시도 수
       assist: number; // 어시스트 수
+      goal: number; // 득점 수
       ballPossesionSuccess: number; // 볼 소유 성공 수
       ballPossesionTry: number; // 볼 소유 시도 수
       block: number; // 블락 성공 수
@@ -102,15 +104,13 @@ export type matchInfoType = {
       dribble: number; // 드리블 거리 (야드) >> 0으로 잡히는 경우가 종종 있는건가?
       dribbleSuccess: number; // 드리블 성공 수
       dribbleTry: number; // 드리블 시도 수
+      shoot: number; // 슛 시도 수
       effectiveShoot: number; // 유효 슛 수
-      goal: number; // 득점 수
       intercept: number; // 인터셉트 수
       passSuccess: number; // 패스 성공 수
       passTry: number; // 패스 시도 수
       yellowCards: number;
       redCards: number;
-      shoot: number; // 슛 시도 수
-      spRating: number; // 선수 평점
       tackle: number; // 태클 성공 수
       tackleTry: number; // 태글 시도 수
     };

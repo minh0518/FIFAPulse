@@ -12,7 +12,8 @@ const PlayerImg = ({ spId }: any) => {
       try {
         result = await fifa.getActionImg(spId);
       } catch {
-        const pid = Number(String(spId).split('').slice(2).join(''));
+        const pid = Number(String(spId).split('').slice(3).join(''));
+
         result = await fifa.getHeadImg(pid);
       } finally {
         setImgUrl(result);
