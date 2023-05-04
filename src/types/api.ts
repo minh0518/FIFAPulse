@@ -43,7 +43,7 @@ export interface Maxdivision {
 }
 
 // 1vs1 매치에서의 각 유저 통계
-type matchInfoType = {
+export type matchInfoType = {
   // 유저 accessId
   accessId: string;
   // 유저 닉네임

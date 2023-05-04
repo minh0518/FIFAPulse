@@ -30,6 +30,7 @@
     "react/jsx-no-useless-fragment": "warn",
     "no-nested-ternary": "off",
     "react/no-array-index-key": "off",
+    "no-param-reassign": "off",
     "import/order": [
       "error",
       {
