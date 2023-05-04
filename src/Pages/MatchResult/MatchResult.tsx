@@ -41,6 +41,17 @@ const MatchResult = () => {
     setSelectedUsertStatistics(index);
   };
 
+  const showResultWithScore = (index: 0 | 1): React.ReactNode => {
+    if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 1) {
+      return <h2>몰수 승</h2>;
+    }
+
+    if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 2) {
+      return <h2>몰수 패</h2>;
+    }
+    return <h2>{matchDetail?.matchInfo[index].shoot.goalTotalDisplay}</h2>;
+  };
+
   return (
     <div>
       <div style={{ display: 'flex' }}>
@@ -53,29 +64,30 @@ const MatchResult = () => {
         </button>
       </div>
       <div style={{ display: 'flex' }}>
-        {matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 0 ? (
+        {/* {matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 0 ? (
           <h2>{matchDetail?.matchInfo[myDataIndex!.mine].shoot.goalTotalDisplay}</h2>
         ) : matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 1 ? (
           <h2>몰수 승</h2>
         ) : (
           <h2>몰수 패</h2>
-        )}
+        )} */}
+        {myDataIndex && showResultWithScore(myDataIndex.mine)}
 
         <h2> : </h2>
 
-        {matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 0 ? (
+        {/* {matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 0 ? (
           <h2>{matchDetail?.matchInfo[myDataIndex!.other].shoot.goalTotalDisplay}</h2>
         ) : matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 1 ? (
           <h2>몰수 승</h2>
         ) : (
           <h2>몰수 패</h2>
-        )}
+        )} */}
+        {myDataIndex && showResultWithScore(myDataIndex.other)}
       </div>
 
       {matchDetail && myDataIndex && (
         <MatchStatistics matchDetail={matchDetail} myDataIndex={myDataIndex} selectedUsertStatistics={selectedUsertStatistics} />
       )}
-      {/* <MatchStatistics matchDetail={matchDetail!} myDataIndex={myDataIndex!} selectedUsertStatistics={selectedUsertStatistics!} /> */}
     </div>
   );
 };

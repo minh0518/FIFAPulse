@@ -40,17 +40,16 @@ export default class FIFAData {
   getActionImg = async (spid: number): Promise<string> => {
     // (spid)가 "0"으로 시작하는 경우, 시작 부분의 0을 모두 제외해야 정상적으로 조회가 가능합니다.
     // (e.g. "000401"일경우, "401"로 조회)
-    console.log(spid);
+
     const result = await axios.get(`/live/externalAssets/common/playersAction/p${spid}.png`, {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
       responseType: 'blob',
     });
-    console.log(result);
 
     const imgUrl = URL.createObjectURL(result.data);
-    console.log(imgUrl);
+
     return imgUrl;
   };
 
