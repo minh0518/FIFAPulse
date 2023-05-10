@@ -22,3 +22,7 @@ export interface ShootProps {
   shortCutShoot: () => MatchDetail['matchInfo'][0]['shoot'];
   shortCutShootDetail: () => MatchDetail['matchInfo'][0]['shootDetail'];
 }
+
+export interface PlayerImgProps {
+  spId: number;
+}
