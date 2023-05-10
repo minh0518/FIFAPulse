@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { ContainerDiv, GuestModeButton, LoginModeButton, SelectModeHeading, ButtonGroupDiv } from './ChooseModeAndLogin.styled';
 import { authService, dbService } from '../../../firebase';
 import AskNickNameModal from '../../Components/AskNickNameModal';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
@@ -122,38 +123,38 @@ const ChooseModeAndLogin = () => {
   };
 
   return (
-    <div>
-      <h1>모드를 선택하세요</h1>
+    <ContainerDiv>
+      <SelectModeHeading>모드를 선택하세요</SelectModeHeading>
       {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
         isLoggedIn ? ( // 로그인이 됐을때의 조건부 렌더링
           isModalOpen ? ( // 로그인이 되고 만약 닉네임을 입력받아야 해서 모달창이 띄워진 것에 대한 조건부 렌더링
             <>닉네임을 입력 할 때까지 기다리는 중...</>
           ) : (
-            <>
-              <button type="button" onClick={() => navigate('/guest')}>
+            <div>
+              <GuestModeButton type="button" onClick={() => navigate('/guest')}>
                 게스트 모드
-              </button>
-              <button type="button" onClick={() => navigate('/main-select')}>
-                {userObj?.nickname} 님 안녕하세요!
-              </button>
-            </>
+              </GuestModeButton>
+              <LoginModeButton type="button" onClick={() => navigate('/main-select')}>
+                {userObj?.nickname} <span>님 안녕하세요!</span>
+              </LoginModeButton>
+            </div>
           )
         ) : (
-          <>
-            <button type="button" onClick={() => navigate('/guest')}>
+          <div>
+            <GuestModeButton type="button" onClick={() => navigate('/guest')}>
               게스트 모드
-            </button>
+            </GuestModeButton>
 
             {/* 추후 로그인 경로가 다양해지면 로그인 하기 버튼 전체를 컴포넌트로 분리 <LogIn /> */}
-            <button type="button" name="google" onClick={onSocialClick}>
+            <LoginModeButton type="button" name="google" onClick={onSocialClick}>
               로그인 하기(Google)
-            </button>
-          </>
+            </LoginModeButton>
+          </div>
         )
       ) : (
         'Loading...'
       )}
-    </div>
+    </ContainerDiv>
   );
 };
 

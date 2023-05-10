@@ -62,3 +62,8 @@ export const convertPlayerName = (spid: number) => {
   });
   return spidInfo[0].name;
 };
+
+export const changeSpidToPid = (spid: number): number => {
+  const pid = Number(String(spid).split('').slice(3).join(''));
+  return pid;
+};
