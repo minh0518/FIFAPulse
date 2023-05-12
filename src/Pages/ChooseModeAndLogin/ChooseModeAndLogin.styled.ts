@@ -1,5 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
+type ContainerProps = {
+  isModalOpen: boolean;
+};
+
 const underline = keyframes`
   from {
     width: 0;
@@ -9,12 +13,24 @@ const underline = keyframes`
   }
 `;
 
-export const ContainerDiv = styled.div`
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9) translate(-50%, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+`;
+
+export const ContainerDiv = styled.div<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   flex-direction: column;
+  background-color: ${({ isModalOpen }) => (isModalOpen ? '#a9a9a9' : '#eee')};
 `;
 
 export const SelectModeHeading = styled.h1`
@@ -23,12 +39,6 @@ export const SelectModeHeading = styled.h1`
   margin: 60px;
 `;
 
-export const ButtonGroupDiv = styled.div`
-  width: 500px;
-  height: 500px;
-  background-color: #808080;
-  border-radius: 5px;
-`;
 export const GuestModeButton = styled.button`
   width: 300px;
   height: 250px;
@@ -61,6 +71,7 @@ export const GuestModeButton = styled.button`
   }
 `;
 export const LoginModeButton = styled.button`
+  width: 300px;
   height: 250px;
   font-size: 2rem;
   border-radius: 20px;
@@ -90,4 +101,19 @@ export const LoginModeButton = styled.button`
   &:hover:after {
     animation: ${underline} 0.3s forwards;
   }
+`;
+
+export const ModalDiv = styled.div`
+  position: absolute;
+  top: 45%;
+  height: 30%;
+  left: 50%;
+  padding: 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: #eee;
+  transform: translate(-50%, -50%);
+
+  // 애니메이션을 추가합니다.
+  animation: ${fadeIn} 0.3s ease-out;
 `;
