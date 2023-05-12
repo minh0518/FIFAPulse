@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import {
+  DiscriptionHeading,
+  ModalContentDiv,
+  FormContainer,
+  GoBackButton,
+  SubmitInput,
+  NickNameInputDiv,
+  NickNameInput,
+} from './AskNickNameModal.styled';
 import { authService, dbService } from '../../../firebase';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
@@ -71,16 +80,22 @@ const AskNickNameModal = () => {
     closeModal();
   };
   return (
-    <div>
-      피파온라인 계정과 연동을 위해 피파온라인에서 사용하고 계시는 닉네임을 입력 해 주세요!
-      <form onSubmit={closeModalAndGotoHome}>
-        <input onChange={onChange} value={nickNameInput} />
-        <input type="submit" value="확인" />
-      </form>
-      <button type="button" onClick={onClose}>
-        뒤로가기
-      </button>
-    </div>
+    <ModalContentDiv>
+      <div>
+        <DiscriptionHeading>계정 연동을 위해 피파온라인 닉네임을 입력 해 주세요!</DiscriptionHeading>
+        <form onSubmit={closeModalAndGotoHome}>
+          <NickNameInputDiv>
+            <NickNameInput onChange={onChange} value={nickNameInput} />
+          </NickNameInputDiv>
+          <FormContainer>
+            <GoBackButton type="button" onClick={onClose}>
+              뒤로가기
+            </GoBackButton>
+            <SubmitInput type="submit" value="확인" />
+          </FormContainer>
+        </form>
+      </div>
+    </ModalContentDiv>
   );
 };
 
