@@ -1,7 +1,11 @@
 import styled, { keyframes } from 'styled-components';
 
-type ContainerProps = {
+type IsModalOpen = {
   isModalOpen: boolean;
+};
+
+type IsLoggedIn = {
+  isLoggedIn: boolean;
 };
 
 const underline = keyframes`
@@ -24,7 +28,7 @@ const fadeIn = keyframes`
   }
 `;
 
-export const ContainerDiv = styled.div<ContainerProps>`
+export const ContainerDiv = styled.div<IsModalOpen>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,8 +74,8 @@ export const GuestModeButton = styled.button`
     animation: ${underline} 0.3s forwards;
   }
 `;
-export const LoginModeButton = styled.button`
-  width: 300px;
+export const LoginModeButton = styled.button<IsLoggedIn>`
+  width: ${({ isLoggedIn }) => (isLoggedIn ? '' : '300px')};
   height: 250px;
   font-size: 2rem;
   border-radius: 20px;
@@ -109,7 +113,8 @@ export const ModalDiv = styled.div`
   height: 30%;
   left: 50%;
   padding: 20px;
-  border: none;
+  /* border: none; */
+  border: 2px solid forestgreen;
   border-radius: 15px;
   background-color: #eee;
   transform: translate(-50%, -50%);

@@ -80,22 +80,18 @@ const AskNickNameModal = () => {
     closeModal();
   };
   return (
-    <ModalContentDiv>
-      <div>
+    <div>
+      <ModalContentDiv onSubmit={closeModalAndGotoHome}>
         <DiscriptionHeading>계정 연동을 위해 피파온라인 닉네임을 입력 해 주세요!</DiscriptionHeading>
-        <form onSubmit={closeModalAndGotoHome}>
-          <NickNameInputDiv>
-            <NickNameInput onChange={onChange} value={nickNameInput} />
-          </NickNameInputDiv>
-          <FormContainer>
-            <GoBackButton type="button" onClick={onClose}>
-              뒤로가기
-            </GoBackButton>
-            <SubmitInput type="submit" value="확인" />
-          </FormContainer>
-        </form>
-      </div>
-    </ModalContentDiv>
+        <NickNameInput onChange={onChange} value={nickNameInput} />
+        <FormContainer>
+          <GoBackButton type="button" onClick={onClose}>
+            뒤로가기
+          </GoBackButton>
+          <SubmitInput type="submit" value="확인" />
+        </FormContainer>
+      </ModalContentDiv>
+    </div>
   );
 };
 
