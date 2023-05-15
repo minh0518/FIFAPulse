@@ -75,7 +75,7 @@ export const GuestModeButton = styled.button`
   }
 `;
 export const LoginModeButton = styled.button<IsLoggedIn>`
-  width: ${({ isLoggedIn }) => (isLoggedIn ? '' : '300px')};
+  min-width: 300px;
   height: 250px;
   font-size: 2rem;
   border-radius: 20px;
