@@ -2,7 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { Fade, Slide } from 'react-awesome-reveal';
 import { useNavigate, Link } from 'react-router-dom';
-import { ChallengeDiv, MainHeading, MyRecordDiv, PositionGuideDiv, UserRecordDiv } from './MainSelect.styled';
+import {
+  ChallengeDiv,
+  MainMenuDescriptionDiv,
+  MainSelectContainerDiv,
+  MyRecordDiv,
+  PositionGuideDiv,
+  UserRecordDiv,
+  MyRecordLink,
+  PositionGuideLink,
+  UserRecordLink,
+  ChallengeLink,
+  MyRecordParagraph,
+} from './MainSelect.styled';
 import { authService, dbService } from '../../../firebase';
 import FIFAData from '../../Services/FifaData';
 
@@ -16,9 +28,17 @@ const MainSelect = () => {
   });
 
   const checkScroll = () => {
+    const elementHeight = 3500;
+    const scrollPosition = window.pageYOffset;
+    const animationPoint = Number((scrollPosition / elementHeight).toFixed(2));
+    console.log(animationPoint);
     console.log(window.pageYOffset);
 
-    if (window.pageYOffset < 200) {
+    // 스크롤을 내릴때만 애니메이션을 적용하기 위해
+    // triggerOnce을 적용하고(=1회성 slide), 상위로 올라왔을 때 상태값을 false로 초기화
+    // 다시 true로 변경되면 display가 none에서 block이되는 것이므로 1회성 slide가 다시 재생성
+    // if (window.pageYOffset < 200)
+    if (animationPoint < 0.01) {
       setSlideInfo({
         heading: true,
         myRecord: false,
@@ -27,23 +47,26 @@ const MainSelect = () => {
         gameChallenge: false,
       });
     }
-    if (window.pageYOffset >= 200) {
+
+    if (animationPoint >= 0.01) {
       setSlideInfo((prev) => {
         return { ...prev, myRecord: true };
       });
     }
-    if (window.pageYOffset >= 700) {
+
+    if (animationPoint >= 0.23) {
+      setSlideInfo((prev) => {
+        return { ...prev, userRecord: true };
+      });
+    }
+
+    if (animationPoint >= 0.41) {
       setSlideInfo((prev) => {
         return { ...prev, positionGuide: true };
       });
     }
 
-    if (window.pageYOffset >= 1200) {
-      setSlideInfo((prev) => {
-        return { ...prev, userRecord: true };
-      });
-    }
-    if (window.pageYOffset >= 1400) {
+    if (animationPoint >= 0.59) {
       setSlideInfo((prev) => {
         return { ...prev, gameChallenge: true };
       });
@@ -72,40 +95,56 @@ const MainSelect = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('scroll', checkScroll);
-    return () => window.removeEventListener('scroll', checkScroll);
-  }, [slideInfo]);
-
-  console.log(slideInfo);
+    window.addEventListener('scroll', checkScroll); // 컴포넌트 최초 렌더링 후 작동
+    return () => window.removeEventListener('scroll', checkScroll); // 컴포넌트가 언마운트 될 때 작동
+  }, []);
 
   return (
-    <div style={{ height: '3000px' }}>
-      <MainHeading> 메인 문구 </MainHeading>
+    <MainSelectContainerDiv>
+      <MainMenuDescriptionDiv>
+        <Fade delay={100}>
+          <Slide direction="down" delay={200}>
+            <h1>직접 분석하고 , 변화를 추구해 보세요</h1>
+            <h2>피파온라인에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
+          </Slide>
+        </Fade>
+      </MainMenuDescriptionDiv>
 
       <MyRecordDiv myRecord={slideInfo.myRecord}>
-        <Slide triggerOnce>
-          <Link to="my-record">내 기록</Link>
-        </Slide>
+        <Fade triggerOnce style={{ height: '100%' }}>
+          {/* MyRecordLink의 height를 MyRecordDiv의 height로 사용하기 위해 애니메이션 적용 요소들에 height:100%을 적용 */}
+          <Slide triggerOnce direction="left" style={{ height: '100%' }}>
+            <MyRecordLink to="my-record">
+              <MyRecordParagraph>내 기록</MyRecordParagraph>
+            </MyRecordLink>
+          </Slide>
+        </Fade>
       </MyRecordDiv>
-      <PositionGuideDiv positionGuide={slideInfo.positionGuide}>
-        <Slide triggerOnce>
-          <Link to="position-guide">선수 포지션 추천 가이드</Link>
-        </Slide>
-      </PositionGuideDiv>
       <UserRecordDiv userRecord={slideInfo.userRecord}>
-        <Slide triggerOnce>
-          <Link to="user-record">다른 유저 검색하기</Link>
-        </Slide>
+        <Fade triggerOnce style={{ height: '100%' }}>
+          <Slide triggerOnce direction="left" style={{ height: '100%' }}>
+            <UserRecordLink to="user-record">다른 유저 검색하기</UserRecordLink>
+          </Slide>
+        </Fade>
       </UserRecordDiv>
+      <PositionGuideDiv positionGuide={slideInfo.positionGuide}>
+        <Fade triggerOnce style={{ height: '100%' }}>
+          <Slide triggerOnce direction="right" style={{ height: '100%' }}>
+            <PositionGuideLink to="position-guide">선수 포지션 추천 가이드</PositionGuideLink>
+          </Slide>
+        </Fade>
+      </PositionGuideDiv>
       <ChallengeDiv gameChallenge={slideInfo.gameChallenge}>
-        <Slide triggerOnce>
-          <Link to="challenge">챌린지</Link>
-        </Slide>
+        <Fade triggerOnce style={{ height: '100%' }}>
+          <Slide triggerOnce direction="right" style={{ height: '100%' }}>
+            <ChallengeLink to="challenge">챌린지</ChallengeLink>
+          </Slide>
+        </Fade>
       </ChallengeDiv>
       <button type="button" onClick={onLogoutClick}>
         Log out
       </button>
-    </div>
+    </MainSelectContainerDiv>
   );
 };
 

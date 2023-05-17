@@ -9,7 +9,7 @@ export const ModalContentDiv = styled.form`
   border-radius: 10px;
 `;
 
-export const DiscriptionHeading = styled.h3`
+export const DiscriptionHeading = styled.h2`
   font-weight: bold;
 `;
 
@@ -17,7 +17,7 @@ export const FormContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  height: 50px;
+  height: 60px;
   width: 100%;
 `;
 

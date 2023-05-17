@@ -26,6 +26,7 @@ const ChooseModeAndLogin = () => {
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
+      console.log(user);
       if (user) {
         // 로그인 됐을 때
 
