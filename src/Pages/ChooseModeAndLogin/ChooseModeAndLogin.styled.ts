@@ -17,17 +17,20 @@ const underline = keyframes`
   }
 `;
 
-const fadeIn = keyframes`
-  from {
+const modalAnimation = keyframes`
+  0% {
+    transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    transform: scale(0.9) translate(-50%, -50%);
   }
-  to {
+  50% { //살짝 커졌다 작아져야 보다 생동감 있는 애니메이션이 구현된다
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
-    transform: scale(1) translate(-50%, -50%);
   }
 `;
-
 export const ContainerDiv = styled.div<IsModalOpen>`
   display: flex;
   justify-content: center;
@@ -110,15 +113,12 @@ export const LoginModeButton = styled.button<IsLoggedIn>`
 export const ModalDiv = styled.div`
   position: absolute;
   top: 45%;
-  height: 30%;
+  height: 35%;
   left: 50%;
   padding: 20px;
-  /* border: none; */
-  border: 2px solid forestgreen;
+  border: 2px solid lightgray;
   border-radius: 15px;
   background-color: #eee;
-  transform: translate(-50%, -50%);
-
-  // 애니메이션을 추가합니다.
-  animation: ${fadeIn} 0.3s ease-out;
+  transform: translate(-50%, -50%) scale(1);
+  animation: ${modalAnimation} 0.2s ease-out;
 `;
