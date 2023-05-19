@@ -1,4 +1,3 @@
-import { link } from 'fs';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,8 +10,11 @@ export const MainMenuDescriptionDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 20%;
-  border: 1px solid black;
+  height: 21%;
+  color: black;
+  background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url('src/images/championsLeague.jpg');
+  background-size: cover;
+  background-attachment: fixed;
 
   h1 {
     text-align: center;
@@ -28,10 +30,14 @@ export const MainMenuDescriptionDiv = styled.div`
 type MyRecordSlideProps = {
   myRecord: boolean;
 };
+
 export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   display: ${(props) => (props.myRecord ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 20%;
+  box-sizing: border-box;
+  padding: 7% 10% 3.5% 0%;
+  border-radius: 20px;
 `;
 export const MyRecordLink = styled(Link)`
   display: flex;
@@ -39,8 +45,10 @@ export const MyRecordLink = styled(Link)`
   align-items: center;
   width: 100%;
   height: 100%;
-  // font-size: 4rem;
   text-decoration: none;
+
+  // 따로 MyRecordParagraph 만들어서 적용
+  // font-size: 4rem;
   /* color: black;
   font-weight: bolder; */
 
@@ -64,7 +72,52 @@ export const MyRecordParagraph = styled.p`
   font-size: 4rem;
   color: black;
   font-weight: bolder;
-  margin-left: 300px; // 이렇게 직접 뚫어야 하나...
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.4rem;
+
+  // margin-left: 300px; // 이렇게 직접 뚫어야 하나...
+`;
+
+// 다른 유저 검색하기
+type UserRecordSlideProps = {
+  userRecord: boolean;
+};
+export const UserRecordDiv = styled.div<UserRecordSlideProps>`
+  display: ${(props) => (props.userRecord ? 'block' : 'none')};
+  width: 100%;
+  height: 20%;
+  box-sizing: border-box;
+  padding: 3.5% 0% 3.5% 10%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 위해
+  // padding-top을 3.5로
+`;
+export const UserRecordLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+
+  background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0) 10%,
+      rgba(255, 255, 255, 0) 25%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.7) 75%,
+      rgba(255, 255, 255, 1) 100%
+    ),
+    url('src/images/userRecord.jpg');
+  background-size: cover;
+  background-position: center;
+`;
+
+export const UserRecordParagraph = styled.p`
+  font-size: 4rem;
+  color: black;
+  font-weight: bolder;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.4rem;
 `;
 
 // 선수 포지션 추천 가이드
@@ -74,7 +127,9 @@ type PositionGuideSlideProps = {
 export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   display: ${(props) => (props.positionGuide ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 20%;
+  box-sizing: border-box;
+  padding: 3.5% 10% 3.5% 0%;
 `;
 export const PositionGuideLink = styled(Link)`
   display: flex;
@@ -82,6 +137,7 @@ export const PositionGuideLink = styled(Link)`
   align-items: center;
   width: 100%;
   height: 100%;
+  text-decoration: none;
 
   background: linear-gradient(
       to right,
@@ -97,34 +153,12 @@ export const PositionGuideLink = styled(Link)`
   background-position: center;
 `;
 
-// 다른 유저 검색하기
-type UserRecordSlideProps = {
-  userRecord: boolean;
-};
-export const UserRecordDiv = styled.div<UserRecordSlideProps>`
-  display: ${(props) => (props.userRecord ? 'block' : 'none')};
-  width: 100%;
-  height: 18%;
-`;
-export const UserRecordLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-
-  background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 10%,
-      rgba(255, 255, 255, 0) 25%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.7) 75%,
-      rgba(255, 255, 255, 1) 100%
-    ),
-    url('src/images/userRecord.jpg');
-  background-size: cover;
-  background-position: center;
+export const PositionGuideParagraph = styled.p`
+  font-size: 4rem;
+  color: black;
+  font-weight: bolder;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.4rem;
 `;
 
 // 챌린지
@@ -134,7 +168,9 @@ type ChallengeSliceProps = {
 export const ChallengeDiv = styled.div<ChallengeSliceProps>`
   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 20%;
+  box-sizing: border-box;
+  padding: 3.5% 0% 3.5% 10%;
 `;
 export const ChallengeLink = styled(Link)`
   display: flex;
@@ -142,9 +178,10 @@ export const ChallengeLink = styled(Link)`
   align-items: center;
   width: 100%;
   height: 100%;
+  text-decoration: none;
 
   background: linear-gradient(
-      to right,
+      to left,
       rgba(255, 255, 255, 0) 10%,
       rgba(255, 255, 255, 0) 25%,
       rgba(255, 255, 255, 0) 40%,
@@ -155,4 +192,29 @@ export const ChallengeLink = styled(Link)`
     url('src/images/challengeImg.png');
   background-size: cover;
   background-position: center;
+`;
+export const ChallengeParagraph = styled.p`
+  font-size: 4rem;
+  color: black;
+  font-weight: bolder;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1rem;
+`;
+
+export const LinkAndDescriptionDiv = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
+
+export const RightDescriptionHeading = styled.h1`
+  padding-top: 10%;
+  padding-left: 5%;
+  max-width: 20%;
+`;
+
+export const LeftDescriptionHeading = styled.h1`
+  padding-top: 10%;
+  padding-right: 5%;
+  max-width: 20%;
 `;
