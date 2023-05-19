@@ -14,6 +14,12 @@ import {
   UserRecordLink,
   ChallengeLink,
   MyRecordParagraph,
+  UserRecordParagraph,
+  PositionGuideParagraph,
+  ChallengeParagraph,
+  RightDescriptionHeading,
+  LinkAndDescriptionDiv,
+  LeftDescriptionHeading,
 } from './MainSelect.styled';
 import { authService, dbService } from '../../../firebase';
 import FIFAData from '../../Services/FifaData';
@@ -114,30 +120,52 @@ const MainSelect = () => {
         <Fade triggerOnce style={{ height: '100%' }}>
           {/* MyRecordLink의 height를 MyRecordDiv의 height로 사용하기 위해 애니메이션 적용 요소들에 height:100%을 적용 */}
           <Slide triggerOnce direction="left" style={{ height: '100%' }}>
-            <MyRecordLink to="my-record">
-              <MyRecordParagraph>내 기록</MyRecordParagraph>
-            </MyRecordLink>
+            <LinkAndDescriptionDiv>
+              <MyRecordLink to="my-record">
+                <MyRecordParagraph>내 기록</MyRecordParagraph>
+              </MyRecordLink>
+              <RightDescriptionHeading>
+                매치 종류별 통계와 <br /> 이적시장 기록을 확인 해 보세요!
+              </RightDescriptionHeading>
+            </LinkAndDescriptionDiv>
           </Slide>
         </Fade>
       </MyRecordDiv>
       <UserRecordDiv userRecord={slideInfo.userRecord}>
         <Fade triggerOnce style={{ height: '100%' }}>
-          <Slide triggerOnce direction="left" style={{ height: '100%' }}>
-            <UserRecordLink to="user-record">다른 유저 검색하기</UserRecordLink>
+          <Slide triggerOnce direction="right" style={{ height: '100%' }}>
+            <LinkAndDescriptionDiv>
+              <LeftDescriptionHeading>파파온라인4의 유저들을 검색해 보세요!</LeftDescriptionHeading>
+              <UserRecordLink to="user-record">
+                <UserRecordParagraph>다른 유저 검색</UserRecordParagraph>
+              </UserRecordLink>
+            </LinkAndDescriptionDiv>
           </Slide>
         </Fade>
       </UserRecordDiv>
       <PositionGuideDiv positionGuide={slideInfo.positionGuide}>
         <Fade triggerOnce style={{ height: '100%' }}>
-          <Slide triggerOnce direction="right" style={{ height: '100%' }}>
-            <PositionGuideLink to="position-guide">선수 포지션 추천 가이드</PositionGuideLink>
+          <Slide triggerOnce direction="left" style={{ height: '100%' }}>
+            <LinkAndDescriptionDiv>
+              <PositionGuideLink to="position-guide">
+                <PositionGuideParagraph>선수 포지션 추천 가이드</PositionGuideParagraph>
+              </PositionGuideLink>
+              <RightDescriptionHeading>
+                TOP 1000 랭커들의 데이터를 바탕으로 <br /> 선수들의 최적 포지션을 찾아보세요!
+              </RightDescriptionHeading>
+            </LinkAndDescriptionDiv>
           </Slide>
         </Fade>
       </PositionGuideDiv>
       <ChallengeDiv gameChallenge={slideInfo.gameChallenge}>
         <Fade triggerOnce style={{ height: '100%' }}>
           <Slide triggerOnce direction="right" style={{ height: '100%' }}>
-            <ChallengeLink to="challenge">챌린지</ChallengeLink>
+            <LinkAndDescriptionDiv>
+              <LeftDescriptionHeading>매치 데이터를 기반으로 한 챌린지에 도전해 보세요!</LeftDescriptionHeading>
+              <ChallengeLink to="challenge">
+                <ChallengeParagraph>챌린지</ChallengeParagraph>
+              </ChallengeLink>
+            </LinkAndDescriptionDiv>
           </Slide>
         </Fade>
       </ChallengeDiv>
