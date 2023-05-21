@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import challenge from '../../images/challenge.png';
+import myRecord from '../../images/myRecord.png';
+import positionGuide from '../../images/positionGuide.jpg';
+import userRecord from '../../images/userRecord.jpg';
 
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
@@ -63,7 +67,7 @@ export const MyRecordLink = styled(Link)`
       rgba(255, 255, 255, 0.7) 75%,
       rgba(255, 255, 255, 1) 100%
     ),
-    url('src/images/myRecord.png');
+    url(${myRecord});
   background-size: cover;
   background-position: center;
 `;
@@ -107,7 +111,7 @@ export const UserRecordLink = styled(Link)`
       rgba(255, 255, 255, 0.7) 75%,
       rgba(255, 255, 255, 1) 100%
     ),
-    url('src/images/userRecord.jpg');
+    url(${userRecord});
   background-size: cover;
   background-position: center;
 `;
@@ -148,7 +152,7 @@ export const PositionGuideLink = styled(Link)`
       rgba(255, 255, 255, 0.7) 75%,
       rgba(255, 255, 255, 1) 100%
     ),
-    url('src/images/positionGuide.jpg');
+    url(${positionGuide});
   background-size: cover;
   background-position: center;
 `;
@@ -189,7 +193,7 @@ export const ChallengeLink = styled(Link)`
       rgba(255, 255, 255, 0.7) 75%,
       rgba(255, 255, 255, 1) 100%
     ),
-    url('src/images/challengeImg.png');
+    url(${challenge});
   background-size: cover;
   background-position: center;
 `;
