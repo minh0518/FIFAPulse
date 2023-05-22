@@ -1,22 +1,25 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import challenge from '../../images/challenge.png';
+import championsLeague from '../../images/championsLeague.jpg';
 import myRecord from '../../images/myRecord.png';
 import positionGuide from '../../images/positionGuide.jpg';
 import userRecord from '../../images/userRecord.jpg';
 
+const ELEMENT_HEIGHT: number = 3500;
+
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
-  height: 3500px;
+  height: ${ELEMENT_HEIGHT}px;
 `;
 export const MainMenuDescriptionDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 21%;
+  height: 25%;
   color: black;
-  background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url('src/images/championsLeague.jpg');
+  background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url(${championsLeague});
   background-size: cover;
   background-attachment: fixed;
 

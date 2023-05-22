@@ -1,17 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { signOut } from 'firebase/auth';
+import { useNavigate, Link } from 'react-router-dom';
+import { LogoButton, LogoutButton, Nav, NavIconsList, NavIconsUl, NavMenuLink, NavMenuList, NavMenuUl, NavbarLogo } from './Navbar.styled';
+import { authService } from '../../../firebase';
 
-const Navbar = () => {
+const Navbar = ({ scrollPoint }: any) => {
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    signOut(authService);
+    navigate('/', { replace: true });
+  };
+
   return (
-    <div>
-      <h3>FIFAPulse</h3>
-      <button type="button">HOME</button>
-      <button type="button">LOGOUT</button>
-      <button type="button">MAIN MENU</button>
-      <button type="button">CHALLENGE</button>
-      <button type="button">SOCIAL</button>
-      <br />
-      <br />
-    </div>
+    <Nav scrollPoint={scrollPoint}>
+      <NavbarLogo>
+        <LogoButton type="button">FIFAPulse</LogoButton>
+      </NavbarLogo>
+
+      <NavMenuUl>
+        <NavMenuList>
+          <NavMenuLink to="/">HOME</NavMenuLink>
+          {/* <NavMenuBuuton type="button">HOME</NavMenuBuuton> */}
+        </NavMenuList>
+        <NavMenuList>
+          <NavMenuLink to="/main-select">MAIN MENU</NavMenuLink>
+          {/* <NavMenuBuuton type="button">MAIN MENU</NavMenuBuuton> */}
+        </NavMenuList>
+        <NavMenuList>
+          <NavMenuLink to="/">NOTICE</NavMenuLink>
+          {/* <NavMenuBuuton type="button">NOTICE</NavMenuBuuton> */}
+        </NavMenuList>
+        <NavMenuList>
+          <LogoutButton type="button" onClick={onLogoutClick} style={{ color: 'tomato' }}>
+            LOGOUT
+          </LogoutButton>
+        </NavMenuList>
+      </NavMenuUl>
+
+      <NavIconsUl>
+        <NavIconsList>SNS</NavIconsList>
+      </NavIconsUl>
+    </Nav>
   );
 };
 

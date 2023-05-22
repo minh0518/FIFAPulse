@@ -11,13 +11,13 @@ const OutLetContainerDiv = styled.div`
 `;
 
 function App() {
-  const location = useLocation();
+  // const location = useLocation();
   return (
     <UserObjProvider>
       <LoginProvider>
         <ModalProvider>
           <OutLetContainerDiv>
-            {location.pathname.startsWith('/main-select') && <Navbar />}
+            {/* {location.pathname.startsWith('/main-select') && <Navbar />} */}
             <Outlet />
           </OutLetContainerDiv>
         </ModalProvider>
