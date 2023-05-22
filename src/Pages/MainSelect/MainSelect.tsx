@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { signOut } from 'firebase/auth';
 import { Fade, Slide } from 'react-awesome-reveal';
-import { useNavigate, Link } from 'react-router-dom';
 import {
   ChallengeDiv,
   MainMenuDescriptionDiv,
@@ -21,10 +19,12 @@ import {
   LinkAndDescriptionDiv,
   LeftDescriptionHeading,
 } from './MainSelect.styled';
-import { authService, dbService } from '../../../firebase';
+import Navbar from '../../Components/Navbar';
 import FIFAData from '../../Services/FifaData';
 
 const MainSelect = () => {
+  const ELEMENT_HEIGHT: number = 3500;
+
   const [slideInfo, setSlideInfo] = useState({
     heading: true,
     myRecord: false,
@@ -34,9 +34,8 @@ const MainSelect = () => {
   });
 
   const checkScroll = () => {
-    const elementHeight = 3500;
     const scrollPosition = window.pageYOffset;
-    const animationPoint = Number((scrollPosition / elementHeight).toFixed(2));
+    const animationPoint = Number((scrollPosition / ELEMENT_HEIGHT).toFixed(2));
     console.log(animationPoint);
     console.log(window.pageYOffset);
 
@@ -79,13 +78,6 @@ const MainSelect = () => {
     }
   };
 
-  const navigate = useNavigate();
-
-  const onLogoutClick = () => {
-    signOut(authService);
-    navigate('/', { replace: true });
-  };
-
   useEffect(() => {
     const getMeataData = async () => {
       const fifa = new FIFAData();
@@ -106,73 +98,73 @@ const MainSelect = () => {
   }, []);
 
   return (
-    <MainSelectContainerDiv>
-      <MainMenuDescriptionDiv>
-        <Fade delay={100}>
-          <Slide direction="down" delay={200}>
-            <h1>직접 분석하고 , 변화를 추구해 보세요</h1>
-            <h2>피파온라인에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
-          </Slide>
-        </Fade>
-      </MainMenuDescriptionDiv>
+    <>
+      <Navbar scrollPoint={Number(window.pageYOffset / ELEMENT_HEIGHT).toFixed(2)} />
+      <MainSelectContainerDiv>
+        <MainMenuDescriptionDiv>
+          <Fade delay={100}>
+            <Slide direction="down" delay={200}>
+              <h1>직접 분석하고 , 변화를 추구해 보세요</h1>
+              <h2>피파온라인에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
+            </Slide>
+          </Fade>
+        </MainMenuDescriptionDiv>
 
-      <MyRecordDiv myRecord={slideInfo.myRecord}>
-        <Fade triggerOnce style={{ height: '100%' }}>
-          {/* MyRecordLink의 height를 MyRecordDiv의 height로 사용하기 위해 애니메이션 적용 요소들에 height:100%을 적용 */}
-          <Slide triggerOnce direction="left" style={{ height: '100%' }}>
-            <LinkAndDescriptionDiv>
-              <MyRecordLink to="my-record">
-                <MyRecordParagraph>내 기록</MyRecordParagraph>
-              </MyRecordLink>
-              <RightDescriptionHeading>
-                매치 종류별 통계와 <br /> 이적시장 기록을 확인 해 보세요!
-              </RightDescriptionHeading>
-            </LinkAndDescriptionDiv>
-          </Slide>
-        </Fade>
-      </MyRecordDiv>
-      <UserRecordDiv userRecord={slideInfo.userRecord}>
-        <Fade triggerOnce style={{ height: '100%' }}>
-          <Slide triggerOnce direction="right" style={{ height: '100%' }}>
-            <LinkAndDescriptionDiv>
-              <LeftDescriptionHeading>파파온라인4의 유저들을 검색해 보세요!</LeftDescriptionHeading>
-              <UserRecordLink to="user-record">
-                <UserRecordParagraph>다른 유저 검색</UserRecordParagraph>
-              </UserRecordLink>
-            </LinkAndDescriptionDiv>
-          </Slide>
-        </Fade>
-      </UserRecordDiv>
-      <PositionGuideDiv positionGuide={slideInfo.positionGuide}>
-        <Fade triggerOnce style={{ height: '100%' }}>
-          <Slide triggerOnce direction="left" style={{ height: '100%' }}>
-            <LinkAndDescriptionDiv>
-              <PositionGuideLink to="position-guide">
-                <PositionGuideParagraph>선수 포지션 추천 가이드</PositionGuideParagraph>
-              </PositionGuideLink>
-              <RightDescriptionHeading>
-                TOP 1000 랭커들의 데이터를 바탕으로 <br /> 선수들의 최적 포지션을 찾아보세요!
-              </RightDescriptionHeading>
-            </LinkAndDescriptionDiv>
-          </Slide>
-        </Fade>
-      </PositionGuideDiv>
-      <ChallengeDiv gameChallenge={slideInfo.gameChallenge}>
-        <Fade triggerOnce style={{ height: '100%' }}>
-          <Slide triggerOnce direction="right" style={{ height: '100%' }}>
-            <LinkAndDescriptionDiv>
-              <LeftDescriptionHeading>매치 데이터를 기반으로 한 챌린지에 도전해 보세요!</LeftDescriptionHeading>
-              <ChallengeLink to="challenge">
-                <ChallengeParagraph>챌린지</ChallengeParagraph>
-              </ChallengeLink>
-            </LinkAndDescriptionDiv>
-          </Slide>
-        </Fade>
-      </ChallengeDiv>
-      <button type="button" onClick={onLogoutClick}>
-        Log out
-      </button>
-    </MainSelectContainerDiv>
+        <MyRecordDiv myRecord={slideInfo.myRecord}>
+          <Fade triggerOnce style={{ height: '100%' }}>
+            {/* MyRecordLink의 height를 MyRecordDiv의 height로 사용하기 위해 애니메이션 적용 요소들에 height:100%을 적용 */}
+            <Slide triggerOnce direction="left" style={{ height: '100%' }}>
+              <LinkAndDescriptionDiv>
+                <MyRecordLink to="my-record">
+                  <MyRecordParagraph>내 기록</MyRecordParagraph>
+                </MyRecordLink>
+                <RightDescriptionHeading>
+                  매치 종류별 통계와 <br /> 이적시장 기록을 확인 해 보세요!
+                </RightDescriptionHeading>
+              </LinkAndDescriptionDiv>
+            </Slide>
+          </Fade>
+        </MyRecordDiv>
+        <UserRecordDiv userRecord={slideInfo.userRecord}>
+          <Fade triggerOnce style={{ height: '100%' }}>
+            <Slide triggerOnce direction="right" style={{ height: '100%' }}>
+              <LinkAndDescriptionDiv>
+                <LeftDescriptionHeading>파파온라인4의 유저들을 검색해 보세요!</LeftDescriptionHeading>
+                <UserRecordLink to="user-record">
+                  <UserRecordParagraph>다른 유저 검색</UserRecordParagraph>
+                </UserRecordLink>
+              </LinkAndDescriptionDiv>
+            </Slide>
+          </Fade>
+        </UserRecordDiv>
+        <PositionGuideDiv positionGuide={slideInfo.positionGuide}>
+          <Fade triggerOnce style={{ height: '100%' }}>
+            <Slide triggerOnce direction="left" style={{ height: '100%' }}>
+              <LinkAndDescriptionDiv>
+                <PositionGuideLink to="position-guide">
+                  <PositionGuideParagraph>선수 포지션 추천 가이드</PositionGuideParagraph>
+                </PositionGuideLink>
+                <RightDescriptionHeading>
+                  TOP 1000 랭커들의 데이터를 바탕으로 <br /> 선수들의 최적 포지션을 찾아보세요!
+                </RightDescriptionHeading>
+              </LinkAndDescriptionDiv>
+            </Slide>
+          </Fade>
+        </PositionGuideDiv>
+        <ChallengeDiv gameChallenge={slideInfo.gameChallenge}>
+          <Fade triggerOnce style={{ height: '100%' }}>
+            <Slide triggerOnce direction="right" style={{ height: '100%' }}>
+              <LinkAndDescriptionDiv>
+                <LeftDescriptionHeading>매치 데이터를 기반으로 한 챌린지에 도전해 보세요!</LeftDescriptionHeading>
+                <ChallengeLink to="challenge">
+                  <ChallengeParagraph>챌린지</ChallengeParagraph>
+                </ChallengeLink>
+              </LinkAndDescriptionDiv>
+            </Slide>
+          </Fade>
+        </ChallengeDiv>
+      </MainSelectContainerDiv>
+    </>
   );
 };
 
