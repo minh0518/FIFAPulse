@@ -3,6 +3,7 @@
     {
       "source": "/live/:path*",
       "destination": "https://fo4.dn.nexoncdn.co.kr/live/:path*"
-    }
+    },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
