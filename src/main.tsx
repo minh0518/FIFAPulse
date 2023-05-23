@@ -25,6 +25,7 @@ const router = createBrowserRouter([
       { path: '/main-select/position-guide', element: <PositionGuide /> },
       { path: '/main-select/user-record', element: <UserRecord /> },
       { path: '/main-select/challenge', element: <Challenge /> },
+      { path: '/*', element: <App /> },
     ],
   },
   {
