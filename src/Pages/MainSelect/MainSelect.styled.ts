@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import challenge from '../../images/challenge.png';
 import championsLeague from '../../images/championsLeague.jpg';
 import myRecord from '../../images/myRecord.png';
@@ -224,4 +224,27 @@ export const LeftDescriptionHeading = styled.h1`
   padding-top: 10%;
   padding-right: 5%;
   max-width: 20%;
+`;
+
+const fadeout = keyframes`
+  from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+`;
+type scrollPointProps = {
+  scrollPoint: any;
+};
+export const ScrollNoticeDiv = styled.div<scrollPointProps>`
+  width: 100%;
+  display: ${(props) => (props.scrollPoint > 0.01 ? 'none' : 'flex')};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ScrollNoticeParagraph = styled.p`
+  font-size: 2rem;
+  font-weight: 600;
 `;

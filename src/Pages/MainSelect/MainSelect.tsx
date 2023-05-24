@@ -18,6 +18,8 @@ import {
   RightDescriptionHeading,
   LinkAndDescriptionDiv,
   LeftDescriptionHeading,
+  ScrollNoticeDiv,
+  ScrollNoticeParagraph,
 } from './MainSelect.styled';
 import Navbar from '../../Components/Navbar';
 import FIFAData from '../../Services/FifaData';
@@ -109,6 +111,10 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </MainMenuDescriptionDiv>
+
+        <ScrollNoticeDiv scrollPoint={Number(window.pageYOffset / ELEMENT_HEIGHT).toFixed(2)}>
+          <ScrollNoticeParagraph>스크롤 해서 확인!</ScrollNoticeParagraph>
+        </ScrollNoticeDiv>
 
         <MyRecordDiv myRecord={slideInfo.myRecord}>
           <Fade triggerOnce style={{ height: '100%' }}>
