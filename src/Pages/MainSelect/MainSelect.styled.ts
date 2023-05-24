@@ -41,10 +41,9 @@ type MyRecordSlideProps = {
 export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   display: ${(props) => (props.myRecord ? 'block' : 'none')};
   width: 100%;
-  height: 20%;
+  height: 18%;
   box-sizing: border-box;
   padding: 7% 10% 3.5% 0%;
-  border-radius: 20px;
 `;
 export const MyRecordLink = styled(Link)`
   display: flex;
@@ -71,8 +70,11 @@ export const MyRecordLink = styled(Link)`
       rgba(255, 255, 255, 1) 100%
     ),
     url(${myRecord});
-  background-size: cover;
-  background-position: center;
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  /* background-size: cover;
+  background-position: center; */
 `;
 
 export const MyRecordParagraph = styled.p`
@@ -92,10 +94,11 @@ type UserRecordSlideProps = {
 export const UserRecordDiv = styled.div<UserRecordSlideProps>`
   display: ${(props) => (props.userRecord ? 'block' : 'none')};
   width: 100%;
-  height: 20%;
+  height: 18%;
   box-sizing: border-box;
   padding: 3.5% 0% 3.5% 10%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 위해
   // padding-top을 3.5로
+  // background-color: #f1f1f1;
 `;
 export const UserRecordLink = styled(Link)`
   display: flex;
@@ -115,8 +118,9 @@ export const UserRecordLink = styled(Link)`
       rgba(255, 255, 255, 1) 100%
     ),
     url(${userRecord});
-  background-size: cover;
-  background-position: center;
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
 `;
 
 export const UserRecordParagraph = styled.p`
@@ -134,7 +138,7 @@ type PositionGuideSlideProps = {
 export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   display: ${(props) => (props.positionGuide ? 'block' : 'none')};
   width: 100%;
-  height: 20%;
+  height: 18%;
   box-sizing: border-box;
   padding: 3.5% 10% 3.5% 0%;
 `;
@@ -156,8 +160,9 @@ export const PositionGuideLink = styled(Link)`
       rgba(255, 255, 255, 1) 100%
     ),
     url(${positionGuide});
-  background-size: cover;
-  background-position: center;
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
 `;
 
 export const PositionGuideParagraph = styled.p`
@@ -175,9 +180,10 @@ type ChallengeSliceProps = {
 export const ChallengeDiv = styled.div<ChallengeSliceProps>`
   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
   width: 100%;
-  height: 20%;
+  height: 18%;
   box-sizing: border-box;
   padding: 3.5% 0% 3.5% 10%;
+  // background-color: #f1f1f1;
 `;
 export const ChallengeLink = styled(Link)`
   display: flex;
@@ -197,8 +203,9 @@ export const ChallengeLink = styled(Link)`
       rgba(255, 255, 255, 1) 100%
     ),
     url(${challenge});
-  background-size: cover;
-  background-position: center;
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
 `;
 export const ChallengeParagraph = styled.p`
   font-size: 4rem;
@@ -226,16 +233,8 @@ export const LeftDescriptionHeading = styled.h1`
   max-width: 20%;
 `;
 
-const fadeout = keyframes`
-  from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-`;
 type scrollPointProps = {
-  scrollPoint: any;
+  scrollPoint: number;
 };
 export const ScrollNoticeDiv = styled.div<scrollPointProps>`
   width: 100%;

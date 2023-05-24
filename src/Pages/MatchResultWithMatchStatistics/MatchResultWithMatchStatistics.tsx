@@ -6,7 +6,7 @@ import FIFAData from '../../Services/FifaData';
 import { MatchDetail } from '../../types/api';
 import { myDataIndex, selectedUsertStatistics } from '../../types/states';
 
-const MatchResult = () => {
+const MatchResultWithMatchStatistics = () => {
   const { matchId } = useParams();
   const [matchDetail, setMatchDetail] = useState<MatchDetail | null>(null); // 한 매치의 전체 데이터
   const [myDataIndex, setMyDataIndex] = useState<myDataIndex | null>(null); // 로그인 한 유저의 데이터 인덱스 (1대1 이므로 matchDetail.matchInfo[0] 아니면 matchDetail.matchInfo[1])
@@ -92,4 +92,4 @@ const MatchResult = () => {
   );
 };
 
-export default MatchResult;
+export default MatchResultWithMatchStatistics;

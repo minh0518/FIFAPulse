@@ -31,7 +31,7 @@ const modalAnimation = keyframes`
     opacity: 1;
   }
 `;
-export const ContainerDiv = styled.div<IsModalOpen>`
+export const ChooseModeAndLoginContainerDiv = styled.div<IsModalOpen>`
   display: flex;
   justify-content: center;
   align-items: center;
