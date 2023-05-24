@@ -26,3 +26,8 @@ export interface ShootProps {
 export interface PlayerImgProps {
   spId: number;
 }
+
+export interface NavBarProps {
+  scrollPoint?: number;
+  page: string;
+}

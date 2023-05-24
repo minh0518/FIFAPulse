@@ -3,17 +3,19 @@ import { signOut } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { LogoButton, LogoutButton, Nav, NavIconsList, NavIconsUl, NavMenuLink, NavMenuList, NavMenuUl, NavbarLogo } from './Navbar.styled';
 import { authService } from '../../../firebase';
+import { NavBarProps } from '../../types/props';
 
-const Navbar = ({ scrollPoint }: any) => {
+const Navbar = ({ scrollPoint, page }: NavBarProps) => {
   const navigate = useNavigate();
 
+  console.log(scrollPoint, page);
   const onLogoutClick = () => {
     signOut(authService);
     navigate('/', { replace: true });
   };
 
   return (
-    <Nav scrollPoint={scrollPoint}>
+    <Nav scrollPoint={scrollPoint} page={page}>
       <NavbarLogo>
         <LogoButton type="button">FIFAPulse</LogoButton>
       </NavbarLogo>

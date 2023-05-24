@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { NavBarProps } from '../../types/props';
 
-type scrollPointProps = {
-  scrollPoint: number;
-};
-export const Nav = styled.nav<scrollPointProps>`
+export const Nav = styled.nav<NavBarProps>`
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: fixed;
-  z-index: 600;
-  background-color: ${(props) => (props.scrollPoint < 0.25 ? '' : 'white')};
-  color: ${(props) => (props.scrollPoint < 0.25 ? 'white' : 'black')};
-  box-shadow: ${(props) => (props.scrollPoint < 0.25 ? '' : '0px 5px 15px rgba(0,0,0,0.2)')};
+
+  //position: fixed;
+  //z-index: 600;
+  position: ${(props) => (props.page === 'MainSelect' ? 'fixed' : '')};
+  z-index: ${(props) => (props.page === 'MainSelect' ? 600 : '')};
+  background-color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? '' : 'white')};
+  color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? 'white' : 'black')};
+  box-shadow: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? '' : '0px 5px 15px rgba(0,0,0,0.2)')};
 `;
 
 export const NavbarLogo = styled.div`

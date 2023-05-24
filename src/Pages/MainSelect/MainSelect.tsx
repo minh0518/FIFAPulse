@@ -101,7 +101,7 @@ const MainSelect = () => {
 
   return (
     <>
-      <Navbar scrollPoint={Number(window.pageYOffset / ELEMENT_HEIGHT).toFixed(2)} />
+      <Navbar scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
       <MainSelectContainerDiv>
         <MainMenuDescriptionDiv>
           <Fade delay={100}>
@@ -111,11 +111,9 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </MainMenuDescriptionDiv>
-
-        <ScrollNoticeDiv scrollPoint={Number(window.pageYOffset / ELEMENT_HEIGHT).toFixed(2)}>
+        <ScrollNoticeDiv scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))}>
           <ScrollNoticeParagraph>스크롤 해서 확인!</ScrollNoticeParagraph>
         </ScrollNoticeDiv>
-
         <MyRecordDiv myRecord={slideInfo.myRecord}>
           <Fade triggerOnce style={{ height: '100%' }}>
             {/* MyRecordLink의 height를 MyRecordDiv의 height로 사용하기 위해 애니메이션 적용 요소들에 height:100%을 적용 */}
@@ -169,6 +167,7 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </ChallengeDiv>
+        footer
       </MainSelectContainerDiv>
     </>
   );
