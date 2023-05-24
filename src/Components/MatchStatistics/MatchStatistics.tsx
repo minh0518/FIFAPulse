@@ -50,7 +50,7 @@ const MatchStatistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: 
       <div>전체 정보</div>
 
       <ul>
-        <li>선수 평균 평점 : {shortCutMathchDetail().averageRating.toFixed(1)}</li>
+        {/* <li>선수 평균 평점 : {shortCutMathchDetail().averageRating.toFixed(1)}</li> */}
         <li>사용 컨트롤러 : {shortCutMathchDetail().controller}</li>
         <li>점유율 : {shortCutMathchDetail().possession}%</li>
         <li>코너킥 수 : {shortCutMathchDetail().cornerKick}</li>

@@ -11,6 +11,9 @@ const ELEMENT_HEIGHT: number = 3500;
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
   height: ${ELEMENT_HEIGHT}px;
+  background-color: #f1f1f1; //최상위 App에서는 높이가 100vh이므로 이 높이까지만
+  //적용이 됨. 그러므로 이 페이는 3500px이니까 나머지 부분까지 채우기 위해서
+  //여기에 추가로 동일한 색상 적용
 `;
 export const MainMenuDescriptionDiv = styled.div`
   display: flex;
@@ -62,12 +65,12 @@ export const MyRecordLink = styled(Link)`
   // 투명도가 1일때는 rgb로 설정한 색상으로 되는 것이다
   background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0) 10%,
-      rgba(255, 255, 255, 0) 25%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.7) 75%,
-      rgba(255, 255, 255, 1) 100%
+      rgba(241, 241, 241, 0) 10%,
+      rgba(241, 241, 241, 0) 25%,
+      rgba(241, 241, 241, 0) 40%,
+      rgba(241, 241, 241, 0.2) 50%,
+      rgba(241, 241, 241, 0.7) 75%,
+      rgba(241, 241, 241, 1) 100%
     ),
     url(${myRecord});
   background-size: 60% 100%;
@@ -110,12 +113,12 @@ export const UserRecordLink = styled(Link)`
 
   background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 0) 10%,
-      rgba(255, 255, 255, 0) 25%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.7) 75%,
-      rgba(255, 255, 255, 1) 100%
+      rgba(241, 241, 241, 0) 10%,
+      rgba(241, 241, 241, 0) 25%,
+      rgba(241, 241, 241, 0) 40%,
+      rgba(241, 241, 241, 0.2) 50%,
+      rgba(241, 241, 241, 0.7) 75%,
+      rgba(241, 241, 241, 1) 100%
     ),
     url(${userRecord});
   background-size: 60% 100%;
@@ -152,12 +155,12 @@ export const PositionGuideLink = styled(Link)`
 
   background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0) 10%,
-      rgba(255, 255, 255, 0) 25%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.7) 75%,
-      rgba(255, 255, 255, 1) 100%
+      rgba(241, 241, 241, 0) 10%,
+      rgba(241, 241, 241, 0) 25%,
+      rgba(241, 241, 241, 0) 40%,
+      rgba(241, 241, 241, 0.2) 50%,
+      rgba(241, 241, 241, 0.7) 75%,
+      rgba(241, 241, 241, 1) 100%
     ),
     url(${positionGuide});
   background-size: 60% 100%;
@@ -195,12 +198,12 @@ export const ChallengeLink = styled(Link)`
 
   background: linear-gradient(
       to left,
-      rgba(255, 255, 255, 0) 10%,
-      rgba(255, 255, 255, 0) 25%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.7) 75%,
-      rgba(255, 255, 255, 1) 100%
+      rgba(241, 241, 241, 0) 10%,
+      rgba(241, 241, 241, 0) 25%,
+      rgba(241, 241, 241, 0) 40%,
+      rgba(241, 241, 241, 0.2) 50%,
+      rgba(241, 241, 241, 0.7) 75%,
+      rgba(241, 241, 241, 1) 100%
     ),
     url(${challenge});
   background-size: 60% 100%;
