@@ -21,6 +21,7 @@ import {
   ScrollNoticeDiv,
   ScrollNoticeParagraph,
 } from './MainSelect.styled';
+import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import FIFAData from '../../Services/FifaData';
 
@@ -107,7 +108,7 @@ const MainSelect = () => {
           <Fade delay={100}>
             <Slide direction="down" delay={200}>
               <h1>직접 분석하고 , 변화를 추구해 보세요</h1>
-              <h2>피파온라인에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
+              <h2>피파온라인4 에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
             </Slide>
           </Fade>
         </MainMenuDescriptionDiv>
@@ -167,7 +168,7 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </ChallengeDiv>
-        footer
+        <Footer />
       </MainSelectContainerDiv>
     </>
   );

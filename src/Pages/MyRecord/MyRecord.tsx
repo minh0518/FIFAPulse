@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MyRecordContainerDiv } from './MyRecord.styled';
+import { MyRecordContainerDiv, TopRankDiv, UserNameAndTopRankDiv, UserNameParagraph } from './MyRecord.styled';
 import MatchResultsByMatchTypes from '../../Components/MatchResultsByMatchTypes';
 import Navbar from '../../Components/Navbar';
 import TradeLog from '../../Components/TradeLog';
@@ -67,21 +67,21 @@ const MyRecord = () => {
       <Navbar page="MyRecord" />
       <MyRecordContainerDiv>
         <div>
-          <div>
-            <b>{userObj?.nickname}</b> 구단주님
-          </div>
-          <div>
-            {maxdivision &&
-              maxdivision.map((i, index) => {
-                return i.matchType === 50 ? (
-                  <div key={index}>
-                    공식경기 최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
-                  </div>
-                ) : (
-                  ''
-                );
-              })}
-          </div>
+          <UserNameAndTopRankDiv>
+            <UserNameParagraph>{userObj?.nickname} 구단주님</UserNameParagraph>
+            <TopRankDiv>
+              {maxdivision &&
+                maxdivision.map((i, index) => {
+                  return i.matchType === 50 ? (
+                    <div key={index}>
+                      최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
+                    </div>
+                  ) : (
+                    ''
+                  );
+                })}
+            </TopRankDiv>
+          </UserNameAndTopRankDiv>
         </div>
         <MatchResultsByMatchTypes />
         <hr />
