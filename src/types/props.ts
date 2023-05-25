@@ -31,3 +31,8 @@ export interface NavBarProps {
   scrollPoint?: number;
   page: string;
 }
+
+export interface FooterProps {
+  scrollPoint?: number;
+  page: string;
+}

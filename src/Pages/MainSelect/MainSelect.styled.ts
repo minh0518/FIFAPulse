@@ -11,7 +11,7 @@ const ELEMENT_HEIGHT: number = 3500;
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
   height: ${ELEMENT_HEIGHT}px;
-  background-color: #f1f1f1; //최상위 App에서는 높이가 100vh이므로 이 높이까지만
+  background-color: #e9ebee; //최상위 App에서는 높이가 100vh이므로 이 높이까지만
   //적용이 됨. 그러므로 이 페이는 3500px이니까 나머지 부분까지 채우기 위해서
   //여기에 추가로 동일한 색상 적용
 `;
@@ -36,6 +36,24 @@ export const MainMenuDescriptionDiv = styled.div`
   }
 `;
 
+// 스크롤 안내 문구
+// 스크롤해서 메뉴가 뜨게 되면 어차피 display:none이 되므로
+// 아래 메뉴들에 연관된 padding이나 margin을 고려 할 필요 없음
+type scrollPointProps = {
+  scrollPoint: number;
+};
+export const ScrollNoticeDiv = styled.div<scrollPointProps>`
+  width: 100%;
+  display: ${(props) => (props.scrollPoint > 0.01 ? 'none' : 'flex')};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ScrollNoticeParagraph = styled.p`
+  font-size: 2rem;
+  font-weight: 600;
+`;
+
 // 내 기록
 type MyRecordSlideProps = {
   myRecord: boolean;
@@ -44,9 +62,9 @@ type MyRecordSlideProps = {
 export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   display: ${(props) => (props.myRecord ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 17%;
   box-sizing: border-box;
-  padding: 7% 10% 3.5% 0%;
+  padding: 3.5% 10% 3.5% 0%; // 나머지 메뉴들과 비율 통일
 `;
 export const MyRecordLink = styled(Link)`
   display: flex;
@@ -65,12 +83,12 @@ export const MyRecordLink = styled(Link)`
   // 투명도가 1일때는 rgb로 설정한 색상으로 되는 것이다
   background: linear-gradient(
       to right,
-      rgba(241, 241, 241, 0) 10%,
-      rgba(241, 241, 241, 0) 25%,
-      rgba(241, 241, 241, 0) 40%,
-      rgba(241, 241, 241, 0.2) 50%,
-      rgba(241, 241, 241, 0.7) 75%,
-      rgba(241, 241, 241, 1) 100%
+      rgba(233, 235, 238, 0) 10%,
+      rgba(233, 235, 238, 0) 25%,
+      rgba(233, 235, 238, 0) 40%,
+      rgba(233, 235, 238, 0.2) 50%,
+      rgba(233, 235, 238, 0.7) 75%,
+      rgba(233, 235, 238, 1) 100%
     ),
     url(${myRecord});
   background-size: 60% 100%;
@@ -97,7 +115,7 @@ type UserRecordSlideProps = {
 export const UserRecordDiv = styled.div<UserRecordSlideProps>`
   display: ${(props) => (props.userRecord ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 17%;
   box-sizing: border-box;
   padding: 3.5% 0% 3.5% 10%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 위해
   // padding-top을 3.5로
@@ -113,12 +131,12 @@ export const UserRecordLink = styled(Link)`
 
   background: linear-gradient(
       to left,
-      rgba(241, 241, 241, 0) 10%,
-      rgba(241, 241, 241, 0) 25%,
-      rgba(241, 241, 241, 0) 40%,
-      rgba(241, 241, 241, 0.2) 50%,
-      rgba(241, 241, 241, 0.7) 75%,
-      rgba(241, 241, 241, 1) 100%
+      rgba(233, 235, 238, 0) 10%,
+      rgba(233, 235, 238, 0) 25%,
+      rgba(233, 235, 238, 0) 40%,
+      rgba(233, 235, 238, 0.2) 50%,
+      rgba(233, 235, 238, 0.7) 75%,
+      rgba(233, 235, 238, 1) 100%
     ),
     url(${userRecord});
   background-size: 60% 100%;
@@ -141,7 +159,7 @@ type PositionGuideSlideProps = {
 export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   display: ${(props) => (props.positionGuide ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 17%;
   box-sizing: border-box;
   padding: 3.5% 10% 3.5% 0%;
 `;
@@ -155,12 +173,12 @@ export const PositionGuideLink = styled(Link)`
 
   background: linear-gradient(
       to right,
-      rgba(241, 241, 241, 0) 10%,
-      rgba(241, 241, 241, 0) 25%,
-      rgba(241, 241, 241, 0) 40%,
-      rgba(241, 241, 241, 0.2) 50%,
-      rgba(241, 241, 241, 0.7) 75%,
-      rgba(241, 241, 241, 1) 100%
+      rgba(233, 235, 238, 0) 10%,
+      rgba(233, 235, 238, 0) 25%,
+      rgba(233, 235, 238, 0) 40%,
+      rgba(233, 235, 238, 0.2) 50%,
+      rgba(233, 235, 238, 0.7) 75%,
+      rgba(233, 235, 238, 1) 100%
     ),
     url(${positionGuide});
   background-size: 60% 100%;
@@ -183,7 +201,7 @@ type ChallengeSliceProps = {
 export const ChallengeDiv = styled.div<ChallengeSliceProps>`
   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
   width: 100%;
-  height: 18%;
+  height: 17%;
   box-sizing: border-box;
   padding: 3.5% 0% 3.5% 10%;
   // background-color: #f1f1f1;
@@ -198,12 +216,12 @@ export const ChallengeLink = styled(Link)`
 
   background: linear-gradient(
       to left,
-      rgba(241, 241, 241, 0) 10%,
-      rgba(241, 241, 241, 0) 25%,
-      rgba(241, 241, 241, 0) 40%,
-      rgba(241, 241, 241, 0.2) 50%,
-      rgba(241, 241, 241, 0.7) 75%,
-      rgba(241, 241, 241, 1) 100%
+      rgba(233, 235, 238, 0) 10%,
+      rgba(233, 235, 238, 0) 25%,
+      rgba(233, 235, 238, 0) 40%,
+      rgba(233, 235, 238, 0.2) 50%,
+      rgba(233, 235, 238, 0.7) 75%,
+      rgba(233, 235, 238, 1) 100%
     ),
     url(${challenge});
   background-size: 60% 100%;
@@ -234,19 +252,4 @@ export const LeftDescriptionHeading = styled.h1`
   padding-top: 10%;
   padding-right: 5%;
   max-width: 20%;
-`;
-
-type scrollPointProps = {
-  scrollPoint: number;
-};
-export const ScrollNoticeDiv = styled.div<scrollPointProps>`
-  width: 100%;
-  display: ${(props) => (props.scrollPoint > 0.01 ? 'none' : 'flex')};
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ScrollNoticeParagraph = styled.p`
-  font-size: 2rem;
-  font-weight: 600;
 `;
