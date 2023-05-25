@@ -168,7 +168,7 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </ChallengeDiv>
-        <Footer />
+        <Footer scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
       </MainSelectContainerDiv>
     </>
   );

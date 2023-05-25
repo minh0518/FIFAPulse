@@ -7,7 +7,7 @@ import { ModalProvider } from './Context/Modal/ModalContext';
 import { UserObjProvider } from './Context/UserObj/UserObjContext';
 
 const OutLetContainerDiv = styled.div`
-  background-color: #f1f1f1;
+  background-color: #e9ebee;
   height: 100vh;
 `;
 
