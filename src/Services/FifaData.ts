@@ -71,7 +71,7 @@ export default class FIFAData {
     return result.data;
   };
 
-  getMatchId = async (accessid: string, matchtype: number, offset = 0, limit = 10): Promise<string[]> => {
+  getMatchId = async (accessid: string, matchtype: number, offset = 0, limit = 20): Promise<string[]> => {
     const result = await this.instance.get(`users/${accessid}/matches`, {
       params: {
         matchtype,
