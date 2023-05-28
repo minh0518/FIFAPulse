@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MyRecordContainerDiv, TopRankDiv, UserNameAndTopRankDiv, UserNameParagraph } from './MyRecord.styled';
+import {
+  ChooseStatisticsUl,
+  MatchResultsByMatchTypesList,
+  MyRecordContainerDiv,
+  StatisticsSelectionButton,
+  Test,
+  TopRankDiv,
+  UserNameAndTopRankDiv,
+  UserNameParagraph,
+} from './MyRecord.styled';
 import MatchResultsByMatchTypes from '../../Components/MatchResultsByMatchTypes';
 import Navbar from '../../Components/Navbar';
 import TradeLog from '../../Components/TradeLog';
@@ -55,9 +64,10 @@ const MyRecord = () => {
     getMatchDetail();
   }, [matchId]);
 
-  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const { name, value } = e.target;
-    setSelectedValue(Number(value));
+  const onChooseStatisticsClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { name, value } = e.currentTarget;
+    if (name === 'MatchResultsByMatchTypes') setMode(0);
+    if (name === 'TradeLog') setMode(1);
   };
 
   console.log(matchDetail);
@@ -72,20 +82,34 @@ const MyRecord = () => {
             <TopRankDiv>
               {maxdivision &&
                 maxdivision.map((i, index) => {
-                  return i.matchType === 50 ? (
-                    <div key={index}>
-                      최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
-                    </div>
-                  ) : (
-                    ''
+                  return (
+                    i.matchType === 50 && (
+                      <div key={index}>
+                        최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
+                      </div>
+                    )
                   );
                 })}
             </TopRankDiv>
           </UserNameAndTopRankDiv>
         </div>
-        <MatchResultsByMatchTypes />
+        <ChooseStatisticsUl>
+          <MatchResultsByMatchTypesList>
+            <StatisticsSelectionButton type="button" name="MatchResultsByMatchTypes" onClick={onChooseStatisticsClick}>
+              매치 기록
+            </StatisticsSelectionButton>
+          </MatchResultsByMatchTypesList>
+          <MatchResultsByMatchTypesList>
+            <StatisticsSelectionButton type="button" name="TradeLog" onClick={onChooseStatisticsClick}>
+              이적시장 거래 목록
+            </StatisticsSelectionButton>
+          </MatchResultsByMatchTypesList>
+        </ChooseStatisticsUl>
+
+        {mode === 0 ? <MatchResultsByMatchTypes /> : <TradeLog />}
+        {/* <MatchResultsByMatchTypes />
         <hr />
-        <TradeLog />
+        <TradeLog /> */}
       </MyRecordContainerDiv>
     </>
   );

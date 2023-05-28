@@ -27,6 +27,7 @@ export interface PlayerImgProps {
   spId: number;
 }
 
+// styled-components
 export interface NavBarProps {
   scrollPoint?: number;
   page: string;
@@ -35,4 +36,8 @@ export interface NavBarProps {
 export interface FooterProps {
   scrollPoint?: number;
   page: string;
+}
+
+export interface GameResultProps {
+  result: string;
 }

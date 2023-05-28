@@ -29,6 +29,7 @@
     "@typescript-eslint/naming-convention": "off",
     "react/jsx-no-useless-fragment": "warn",
     "no-nested-ternary": "off",
+    "no-plusplus": "off",
     "react/no-array-index-key": "off",
     "no-param-reassign": "off",
     "import/order": [
