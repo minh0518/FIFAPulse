@@ -11,9 +11,9 @@ const ELEMENT_HEIGHT: number = 3500;
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
   height: ${ELEMENT_HEIGHT}px;
-  background-color: #e9ebee; //최상위 App에서는 높이가 100vh이므로 이 높이까지만
-  //적용이 됨. 그러므로 이 페이는 3500px이니까 나머지 부분까지 채우기 위해서
-  //여기에 추가로 동일한 색상 적용
+  // background-color: #e9ebee;
+  // App의 높이를 min-height로 지정함으로써 그걸 넘는 3500px이 되면
+  // 자연스레 App의 높이도 늘어나므로 굳이 지정할 필요가 없다
 `;
 export const MainMenuDescriptionDiv = styled.div`
   display: flex;

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { GameResultProps } from '../../types/props';
 
+export const MatchResultsByMatchTypesContainer = styled.div``;
+
 export const Table = styled.table`
   width: 100%;
   table-layout: fixed;
@@ -17,7 +19,9 @@ export const TableHeaderDiv = styled.div`
 `;
 
 export const TableContentDiv = styled.div`
-  height: 300px;
+  // height: 500px;
+  height: 35em;
+
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -63,7 +67,6 @@ export const TableTd = styled.td`
   border-bottom: solid 1px rgba(255, 255, 255, 0.1);
 `;
 
-// display: ${(props) => (props.scrollPoint > 0.01 ? 'none' : 'flex')};
 export const GameResultSpan = styled.span<GameResultProps>`
   // color: ${(props) => (props.result === '승' ? 'blue' : props.result === '패' ? 'red' : 'black')};
   color: ${(props) => ({ 승: 'blue', 무: 'black', 패: 'red' }[props.result])};

@@ -8,7 +8,7 @@ import { UserObjProvider } from './Context/UserObj/UserObjContext';
 
 const OutLetContainerDiv = styled.div`
   background-color: #e9ebee;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 function App() {

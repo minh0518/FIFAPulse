@@ -4,6 +4,7 @@ import {
   GameResultForfeitLose,
   GameResultForfeitWin,
   GameResultSpan,
+  MatchResultsByMatchTypesContainer,
   Table,
   TableContentDiv,
   TableHeaderDiv,
@@ -74,7 +75,7 @@ const MatchResultsByMatchTypes = () => {
   };
 
   return (
-    <div>
+    <MatchResultsByMatchTypesContainer>
       <h2>매치 기록</h2>
       <select value={selectedValue} onChange={onSelectChange}>
         <option value={30}>리그 친선 경기</option>
@@ -147,7 +148,7 @@ const MatchResultsByMatchTypes = () => {
       ) : (
         <div>해당 매치 기록이 존재하지 않습니다</div>
       )}
-    </div>
+    </MatchResultsByMatchTypesContainer>
   );
 };
 
