@@ -10,6 +10,7 @@ import {
   UserNameAndTopRankDiv,
   UserNameParagraph,
 } from './MyRecord.styled';
+import Footer from '../../Components/Footer';
 import MatchResultsByMatchTypes from '../../Components/MatchResultsByMatchTypes';
 import Navbar from '../../Components/Navbar';
 import TradeLog from '../../Components/TradeLog';
@@ -76,23 +77,22 @@ const MyRecord = () => {
     <>
       <Navbar page="MyRecord" />
       <MyRecordContainerDiv>
-        <div>
-          <UserNameAndTopRankDiv>
-            <UserNameParagraph>{userObj?.nickname} 구단주님</UserNameParagraph>
-            <TopRankDiv>
-              {maxdivision &&
-                maxdivision.map((i, index) => {
-                  return (
-                    i.matchType === 50 && (
-                      <div key={index}>
-                        최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
-                      </div>
-                    )
-                  );
-                })}
-            </TopRankDiv>
-          </UserNameAndTopRankDiv>
-        </div>
+        <UserNameAndTopRankDiv>
+          <UserNameParagraph>{userObj?.nickname} 구단주님</UserNameParagraph>
+          <TopRankDiv>
+            {maxdivision &&
+              maxdivision.map((i, index) => {
+                return (
+                  i.matchType === 50 && (
+                    <div key={index}>
+                      최고 기록 : {convertDivisionNumberToDivisionName(i.division)} ({convertDate(i.achievementDate)})
+                    </div>
+                  )
+                );
+              })}
+          </TopRankDiv>
+        </UserNameAndTopRankDiv>
+
         <ChooseStatisticsUl>
           <MatchResultsByMatchTypesList>
             <StatisticsSelectionButton type="button" name="MatchResultsByMatchTypes" onClick={onChooseStatisticsClick}>
@@ -111,6 +111,7 @@ const MyRecord = () => {
         <hr />
         <TradeLog /> */}
       </MyRecordContainerDiv>
+      <Footer page="MyRecord" />
     </>
   );
 };

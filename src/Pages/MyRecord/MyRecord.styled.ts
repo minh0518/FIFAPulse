@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MyRecordContainerDiv = styled.div`
   width: 70%;
-  margin: 0 auto;
+  margin: 0 auto 10% auto;
 `;
 
 export const UserNameAndTopRankDiv = styled.div`
@@ -27,7 +27,7 @@ export const ChooseStatisticsUl = styled.ul`
   display: flex;
   justify-content: space-around;
   padding-left: 0;
-  margin-bottom: 3%;
+  margin-bottom: 7%;
 `;
 
 export const MatchResultsByMatchTypesList = styled.li`
