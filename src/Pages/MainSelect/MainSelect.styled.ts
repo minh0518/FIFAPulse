@@ -13,7 +13,7 @@ export const MainSelectContainerDiv = styled.div`
   height: ${ELEMENT_HEIGHT}px;
   // background-color: #e9ebee;
   // App의 높이를 min-height로 지정함으로써 그걸 넘는 3500px이 되면
-  // 자연스레 App의 높이도 늘어나므로 굳이 지정할 필요가 없다
+  // 자연스레 App의 높이도 늘어나므로 굳이 배경색을 여기서 추가로 지정할 필요가 없다
 `;
 export const MainMenuDescriptionDiv = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const MainMenuDescriptionDiv = styled.div`
   align-items: center;
   width: 100%;
   height: 25%;
-  color: black;
+  color: black; // 추후 폰트 교체 필요
   background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url(${championsLeague});
   background-size: cover;
   background-attachment: fixed;
@@ -67,41 +67,83 @@ export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   width: 80%; // 한 메뉴 전체의 폭을 80%해서 양 옆 여백을 줌
   padding: 3.5% 0% 3.5% 0%; // 나머지 메뉴들과 비율 통일
   margin: 0 auto;
+
+  // 1420px 이하 일 때는 메뉴의 너비가 전체 90% 차지
+  @media (max-width: 1420px) {
+    width: 90%;
+  }
+  // 1024px 이하 일 때는 메뉴의 너비가 전체를 차지
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const MyRecordLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center; // 내 기록이라 적힌 MyRecordParagraph을 Link 영역 정중앙 배치
-  width: 70%; // Link버튼 영역을 100%->70%으로 줄여서 옆에 RightDescriptionHeading의 구역을 확보
   height: 100%;
   text-decoration: none;
 
-  // 투명도가 0일때는 rgb로 설정한 색상적용 안 되며
-  // 투명도가 1일때는 rgb로 설정한 색상으로 되는 것이다
-  background: linear-gradient(
-      to right,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0.2) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    linear-gradient(
-      to left,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0.2) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    url(${myRecord});
-  background-size: 60% 100%;
-  background-repeat: no-repeat;
-  background-position: left; // MyRecordLink 영역에서 살짝 왼쪽에 배치
-  /* background-size: cover;
+  // 1024px 보다 커지면(전체 화면) 사진을 보여줌
+  @media (min-width: 1024px) {
+    width: 70%; // Link버튼 영역을 70%로 해서 옆에 RightDescriptionHeading의 구역을 확보
+    // 투명도가 0일때는 rgb로 설정한 색상적용 안 되며
+    // 투명도가 1일때는 rgb로 설정한 색상으로 되는 것이다
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${myRecord});
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-position: left; // MyRecordLink 영역에서 살짝 왼쪽에 배치
+    /* background-size: cover;
   background-position: center; */
+  }
+
+  // 1024px 보다 작아지면 사진을 가운데에 배치하며
+  // 메뉴 옆 설명글(RightDescriptionHeading)을 제거
+  @media (max-width: 1024px) {
+    width: 100%; // 어차피 옆에 RightDescriptionHeading 없으므로 사진이 전체 너비 차지
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${myRecord});
+
+    // 사진 가운데에 배치
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 `;
 
 export const MyRecordParagraph = styled.p`
@@ -120,12 +162,19 @@ type UserRecordSlideProps = {
 };
 export const UserRecordDiv = styled.div<UserRecordSlideProps>`
   display: ${(props) => (props.userRecord ? 'block' : 'none')};
-
   height: 17%;
   box-sizing: border-box;
   width: 80%;
   padding: 3.5% 0% 3.5% 0%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 3.5를 사용
   margin: 0 auto;
+
+  @media (max-width: 1420px) {
+    width: 90%;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const UserRecordLink = styled(Link)`
   display: flex;
@@ -135,28 +184,58 @@ export const UserRecordLink = styled(Link)`
   height: 100%;
   text-decoration: none;
 
-  background: linear-gradient(
-      to right,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    linear-gradient(
-      to left,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    url(${userRecord});
-  background-size: 60% 100%;
-  background-repeat: no-repeat;
-  background-position: right;
+  @media (min-width: 1024px) {
+    width: 70%;
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${userRecord});
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${userRecord});
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 `;
 
 export const UserRecordParagraph = styled.p`
@@ -173,12 +252,19 @@ type PositionGuideSlideProps = {
 };
 export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   display: ${(props) => (props.positionGuide ? 'block' : 'none')};
-
   height: 17%;
   box-sizing: border-box;
   width: 80%;
   margin: 0 auto;
   padding: 3.5% 0% 3.5% 0%;
+
+  @media (max-width: 1420px) {
+    width: 90%;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const PositionGuideLink = styled(Link)`
   display: flex;
@@ -188,28 +274,58 @@ export const PositionGuideLink = styled(Link)`
   height: 100%;
   text-decoration: none;
 
-  background: linear-gradient(
-      to right,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0.2) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    linear-gradient(
-      to left,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0.2) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    url(${positionGuide});
-  background-size: 60% 100%;
-  background-repeat: no-repeat;
-  background-position: left;
+  @media (min-width: 1024px) {
+    width: 70%;
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${positionGuide});
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${positionGuide});
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 `;
 
 export const PositionGuideParagraph = styled.p`
@@ -226,12 +342,19 @@ type ChallengeSliceProps = {
 };
 export const ChallengeDiv = styled.div<ChallengeSliceProps>`
   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
-
   height: 17%;
   box-sizing: border-box;
   width: 80%;
   margin: 0 auto;
   padding: 3.5% 0% 3.5% 0%;
+
+  @media (max-width: 1420px) {
+    width: 90%;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const ChallengeLink = styled(Link)`
   display: flex;
@@ -241,28 +364,58 @@ export const ChallengeLink = styled(Link)`
   height: 100%;
   text-decoration: none;
 
-  background: linear-gradient(
-      to right,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0.2) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    linear-gradient(
-      to left,
-      rgba(233, 235, 238, 0) 10%,
-      rgba(233, 235, 238, 0) 25%,
-      rgba(233, 235, 238, 0) 40%,
-      rgba(233, 235, 238, 0.2) 50%,
-      rgba(233, 235, 238, 0.4) 75%,
-      rgba(233, 235, 238, 1) 100%
-    ),
-    url(${challenge});
-  background-size: 60% 100%;
-  background-repeat: no-repeat;
-  background-position: right;
+  @media (min-width: 1024px) {
+    width: 70%;
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${challenge});
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      linear-gradient(
+        to left,
+        rgba(233, 235, 238, 0) 10%,
+        rgba(233, 235, 238, 0) 25%,
+        rgba(233, 235, 238, 0) 40%,
+        rgba(233, 235, 238, 0.2) 50%,
+        rgba(233, 235, 238, 0.4) 75%,
+        rgba(233, 235, 238, 1) 100%
+      ),
+      url(${challenge});
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 `;
 export const ChallengeParagraph = styled.p`
   font-size: 4rem;
@@ -278,15 +431,33 @@ export const LinkAndDescriptionDiv = styled.div`
   height: 100%;
 `;
 
+// 각 메뉴의 오른쪽 설명글
 export const RightDescriptionHeading = styled.h1`
-  padding-top: 10%;
-  padding-left: 5%;
-  max-width: 20%;
-  //width: 50%;
+  // 1024px 보다 작아지면 이걸 안 보여주고
+  // 사진과 메뉴 이름으로만 가득차게
+  @media (max-width: 1024px) {
+    display: none;
+  }
+
+  // 1024px보다 커지면 보여줌
+  @media (min-width: 1024px) {
+    display: block;
+    padding-top: 10%;
+    padding-left: 5%;
+    max-width: 20%;
+  }
 `;
 
+// 각 메뉴의 왼쪽 설명글
 export const LeftDescriptionHeading = styled.h1`
-  padding-top: 10%;
-  padding-right: 5%;
-  max-width: 20%;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    display: block;
+    padding-top: 10%;
+    padding-right: 5%;
+    max-width: 20%;
+  }
 `;
