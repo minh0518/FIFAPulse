@@ -16,6 +16,7 @@ export const Table = styled.table`
 export const TableHeaderDiv = styled.div`
   margin-top: 3%;
   background-color: lightgray;
+  border-radius: 10px;
 `;
 
 export const TableContentDiv = styled.div`
@@ -62,9 +63,10 @@ export const TableTd = styled.td`
   text-align: center;
   vertical-align: middle;
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: black;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+  /* border-bottom: solid 1px rgba(255, 255, 255, 1); */
+  border-bottom: 1px solid white;
 `;
 
 export const GameResultSpan = styled.span<GameResultProps>`
