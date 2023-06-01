@@ -1,5 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { GameResultProps } from '../../types/props';
+
+const paintTr = keyframes`
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+`;
 
 export const MatchResultsByMatchTypesContainer = styled.div``;
 
@@ -51,14 +60,35 @@ export const TableTh = styled.th`
 `;
 
 export const TableTr = styled.tr`
+  overflow: hidden;
   cursor: pointer;
   &:hover {
     transform: translateY(-5px);
   }
   transition: transform 0.3s ease;
+
+  &:after {
+    content: '';
+    position: absolute;
+
+    // 맨 아래, 맨 왼쪽에서부터
+    // 높이는 아예없는 상태에서 너비를 가득 채운 상태로 올라오기
+    bottom: 0;
+    left: 0; // 맨 왼쪽도 지정해 줘야 함
+    height: 0;
+    width: 100%;
+    background: lightgray;
+    transition: width 0.3s;
+    z-index: -1;
+  }
+
+  &:hover:after {
+    animation: ${paintTr} 0.3s forwards;
+  }
 `;
 
 export const TableTd = styled.td`
+  width: 100%; // 이렇게 해줘야 가상 요소를 쓰더라도 빈 공간이 안 생기게 됨
   padding: 2%;
   text-align: center;
   vertical-align: middle;

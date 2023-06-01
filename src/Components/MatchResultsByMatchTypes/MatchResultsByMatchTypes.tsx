@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Select } from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   GameResultForfeitLose,
@@ -19,7 +20,8 @@ import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
 
 const MatchResultsByMatchTypes = () => {
   const { userObj, setUserObj } = useUserObjAPI()!;
-  const [selectedValue, setSelectedValue] = useState(50);
+  const [selectedValue, setSelectedValue] = useState<string | null>('50');
+  // @mantine 은 value를 string으로만 받으므로 문자열로 사용하고 api호출할때 캐스팅해서 사용
   const [matchId, setMatchId] = useState<string[]>([]);
   const [matchDetail, setMatchDetail] = useState<MatchDetail[]>([]);
   const [maxdivision, setMaxdivision] = useState<Maxdivision[] | null>(null);
@@ -40,7 +42,7 @@ const MatchResultsByMatchTypes = () => {
   useEffect(() => {
     const getMatchId = async () => {
       const fifa = new FIFAData();
-      const matchIdPromise = await fifa.getMatchId(userObj!.FIFAOnlineAccessId, selectedValue);
+      const matchIdPromise = await fifa.getMatchId(userObj!.FIFAOnlineAccessId, Number(selectedValue));
       setMatchId(matchIdPromise);
     };
     getMatchId();
@@ -63,10 +65,11 @@ const MatchResultsByMatchTypes = () => {
     getMatchDetail();
   }, [matchId]);
 
-  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const { name, value } = e.target;
-    setSelectedValue(Number(value));
-  };
+  // const onSelectChange = (e: any): void => {
+  //   const { name, value } = e.target;
+  //   console.log(e);
+  //   setSelectedValue(value);
+  // };
 
   console.log(matchDetail);
 
@@ -77,13 +80,27 @@ const MatchResultsByMatchTypes = () => {
   return (
     <MatchResultsByMatchTypesContainer>
       <h2>매치 기록</h2>
-      <select value={selectedValue} onChange={onSelectChange}>
+      <Select
+        value={selectedValue}
+        onChange={setSelectedValue}
+        transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+        radius="md"
+        style={{ width: '20%' }}
+        data={[
+          { value: '30', label: '리그 친선 경기' },
+          { value: '40', label: '클래식 1on1' },
+          { value: '50', label: '공식경기' },
+          { value: '52', label: '감독모드' },
+          { value: '60', label: '공식경기(친선)' },
+        ]}
+      />
+      {/* <select value={selectedValue} onChange={onSelectChange}>
         <option value={30}>리그 친선 경기</option>
         <option value={40}>클래식 1on1</option>
         <option value={50}>공식경기</option>
         <option value={52}>감독모드</option>
         <option value={60}>공식경기(친선)</option>
-      </select>
+      </select> */}
 
       <TableHeaderDiv>
         <Table cellPadding="0" cellSpacing="0">

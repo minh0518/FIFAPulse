@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const underline = keyframes`
+const paintButton = keyframes`
   from {
     width: 0;
   }
@@ -66,7 +66,7 @@ export const MatchResultsByMatchTypesList = styled.li`
   }
 
   &:hover:after {
-    animation: ${underline} 0.3s forwards;
+    animation: ${paintButton} 0.3s forwards;
   }
 `;
 
