@@ -67,15 +67,6 @@ export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   width: 80%; // 한 메뉴 전체의 폭을 80%해서 양 옆 여백을 줌
   padding: 3.5% 0% 3.5% 0%; // 나머지 메뉴들과 비율 통일
   margin: 0 auto;
-
-  // 1420px 이하 일 때는 메뉴의 너비가 전체 90% 차지
-  @media (max-width: 1420px) {
-    width: 90%;
-  }
-  // 1024px 이하 일 때는 메뉴의 너비가 전체를 차지
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
 `;
 export const MyRecordLink = styled(Link)`
   display: flex;
@@ -85,7 +76,7 @@ export const MyRecordLink = styled(Link)`
   text-decoration: none;
 
   // 1024px 보다 커지면(전체 화면) 사진을 보여줌
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     width: 70%; // Link버튼 영역을 70%로 해서 옆에 RightDescriptionHeading의 구역을 확보
     // 투명도가 0일때는 rgb로 설정한 색상적용 안 되며
     // 투명도가 1일때는 rgb로 설정한 색상으로 되는 것이다
@@ -108,7 +99,10 @@ export const MyRecordLink = styled(Link)`
         rgba(233, 235, 238, 1) 100%
       ),
       url(${myRecord});
-    background-size: 60% 100%;
+
+    // background-size: 70% 100%; >> 원래는 높이값을 100%로 고정했는데
+    // 이렇게 되면 화면이 줄어들때 사진이 가로만 줄어들어서 이상함
+    background-size: 70%;
     background-repeat: no-repeat;
     background-position: left; // MyRecordLink 영역에서 살짝 왼쪽에 배치
     /* background-size: cover;
@@ -118,7 +112,10 @@ export const MyRecordLink = styled(Link)`
   // 1024px 보다 작아지면 사진을 가운데에 배치하며
   // 메뉴 옆 설명글(RightDescriptionHeading)을 제거
   @media (max-width: 1024px) {
-    width: 100%; // 어차피 옆에 RightDescriptionHeading 없으므로 사진이 전체 너비 차지
+    width: 100%;
+    // 화면이 1024px보다 작아지게 되면
+    // Link버튼 영역(사진부분)이 차지하는 부분이 늘어나게 되고
+    // 여기서 RightDescriptionHeading가 none이 되면 사진만이 메뉴 너비 전체를 차지
     background: linear-gradient(
         to right,
         rgba(233, 235, 238, 0) 10%,
@@ -167,24 +164,15 @@ export const UserRecordDiv = styled.div<UserRecordSlideProps>`
   width: 80%;
   padding: 3.5% 0% 3.5% 0%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 3.5를 사용
   margin: 0 auto;
-
-  @media (max-width: 1420px) {
-    width: 90%;
-  }
-
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
 `;
 export const UserRecordLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
   height: 100%;
   text-decoration: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     width: 70%;
     background: linear-gradient(
         to right,
@@ -205,9 +193,9 @@ export const UserRecordLink = styled(Link)`
         rgba(233, 235, 238, 1) 100%
       ),
       url(${userRecord});
-    background-size: 60% 100%;
+    background-size: 70%;
     background-repeat: no-repeat;
-    background-position: left;
+    background-position: right;
   }
 
   @media (max-width: 1024px) {
@@ -257,24 +245,15 @@ export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   width: 80%;
   margin: 0 auto;
   padding: 3.5% 0% 3.5% 0%;
-
-  @media (max-width: 1420px) {
-    width: 90%;
-  }
-
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
 `;
 export const PositionGuideLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
   height: 100%;
   text-decoration: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     width: 70%;
     background: linear-gradient(
         to right,
@@ -295,7 +274,7 @@ export const PositionGuideLink = styled(Link)`
         rgba(233, 235, 238, 1) 100%
       ),
       url(${positionGuide});
-    background-size: 60% 100%;
+    background-size: 70%;
     background-repeat: no-repeat;
     background-position: left;
   }
@@ -347,24 +326,15 @@ export const ChallengeDiv = styled.div<ChallengeSliceProps>`
   width: 80%;
   margin: 0 auto;
   padding: 3.5% 0% 3.5% 0%;
-
-  @media (max-width: 1420px) {
-    width: 90%;
-  }
-
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
 `;
 export const ChallengeLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
   height: 100%;
   text-decoration: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     width: 70%;
     background: linear-gradient(
         to right,
@@ -385,9 +355,9 @@ export const ChallengeLink = styled(Link)`
         rgba(233, 235, 238, 1) 100%
       ),
       url(${challenge});
-    background-size: 60% 100%;
+    background-size: 70%;
     background-repeat: no-repeat;
-    background-position: left;
+    background-position: right;
   }
 
   @media (max-width: 1024px) {
@@ -440,7 +410,7 @@ export const RightDescriptionHeading = styled.h1`
   }
 
   // 1024px보다 커지면 보여줌
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     display: block;
     padding-top: 10%;
     padding-left: 5%;
@@ -454,7 +424,7 @@ export const LeftDescriptionHeading = styled.h1`
     display: none;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     display: block;
     padding-top: 10%;
     padding-right: 5%;
