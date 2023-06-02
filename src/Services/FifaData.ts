@@ -8,6 +8,7 @@ import {
   MetaDataSpid,
   MetaDataSpposition,
   NexonUserInfo,
+  TradeLogInfo,
 } from '../types/api';
 
 export default class FIFAData {
@@ -38,6 +39,7 @@ export default class FIFAData {
   // <이미지 관련한 api는 필요할 때 직접 호출해서 사용합니다>
   // 상반신 미페
   getActionImg = async (spid: number): Promise<string> => {
+    // 프록시 사용
     const result = await axios.get(`/live/externalAssets/common/playersAction/p${spid}.png`, {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
@@ -85,6 +87,16 @@ export default class FIFAData {
   getMatchDetail = async <T extends MatchDetail>(matchId: string): Promise<T> => {
     const result = await this.instance.get<T>(`matches/${matchId}`);
     return result.data;
+  };
+
+  // 이적시장 거래 목록
+  getTradeLog = async (accessid: string) => {
+    // return Promise.all([this.#getBuyTrageLog(accessid, 20), this.#getSellTrageLog(accessid, 20)]);
+    const tradeLog = {
+      buy: await this.#getBuyTrageLog(accessid, 20),
+      sell: await this.#getSellTrageLog(accessid, 20),
+    };
+    return tradeLog;
   };
 
   // 선수 spid
@@ -136,6 +148,29 @@ export default class FIFAData {
     const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/matchtype.json', {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
+      },
+    });
+
+    return result.data;
+  };
+
+  // /users/{accessid}/markets?tradetype={tradetype}&offset={offset}&limit={limit}
+  #getBuyTrageLog = async <T extends TradeLogInfo>(accessid: string, limit: number): Promise<T[]> => {
+    const result = await this.instance.get<T[]>(`/users/${accessid}/markets`, {
+      params: {
+        tradetype: 'buy',
+        limit,
+      },
+    });
+
+    return result.data;
+  };
+
+  #getSellTrageLog = async <T extends TradeLogInfo>(accessid: string, limit: number): Promise<T[]> => {
+    const result = await this.instance.get<T[]>(`/users/${accessid}/markets`, {
+      params: {
+        tradetype: 'sell',
+        limit,
       },
     });
 

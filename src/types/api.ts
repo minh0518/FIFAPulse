@@ -168,3 +168,16 @@ export interface MatchDetail {
   matchType: number;
   matchInfo: [matchInfoType, matchInfoType]; // 길이가 고정적이므로 튜플 사용
 }
+
+// { "tradeDate": "2023-05-31T01:07:25",
+// "saleSn": "64761f3cad134d6873034f84",
+// "spid": 265204024,
+// "grade": 1,
+// "value": 499000000 }
+export interface TradeLogInfo {
+  tradeDate: string;
+  saleSn: string;
+  spid: number;
+  grade: number;
+  value: number;
+}
