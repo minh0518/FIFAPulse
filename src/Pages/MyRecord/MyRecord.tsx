@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ChooseStatisticsUl,
-  MatchResultsByMatchTypesList,
+  ContentDiv,
+  DescriptionDiv,
+  DescriptionParagraph,
   MyRecordContainerDiv,
-  StatisticsSelectionButton,
-  Test,
   TopRankDiv,
   UserNameAndTopRankDiv,
   UserNameParagraph,
@@ -26,7 +25,6 @@ const MyRecord = () => {
   const [matchId, setMatchId] = useState<string[]>([]);
   const [matchDetail, setMatchDetail] = useState<MatchDetail[]>([]);
   const [maxdivision, setMaxdivision] = useState<Maxdivision[] | null>(null);
-  const [mode, setMode] = useState(0);
 
   useEffect(() => {
     const updateMaxdivision = async () => {
@@ -65,12 +63,6 @@ const MyRecord = () => {
     getMatchDetail();
   }, [matchId]);
 
-  const onChooseStatisticsClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = e.currentTarget;
-    if (name === 'MatchResultsByMatchTypes') setMode(0);
-    if (name === 'TradeLog') setMode(1);
-  };
-
   console.log(matchDetail);
 
   return (
@@ -93,23 +85,14 @@ const MyRecord = () => {
           </TopRankDiv>
         </UserNameAndTopRankDiv>
 
-        <ChooseStatisticsUl>
-          <MatchResultsByMatchTypesList>
-            <StatisticsSelectionButton type="button" name="MatchResultsByMatchTypes" onClick={onChooseStatisticsClick}>
-              매치 기록
-            </StatisticsSelectionButton>
-          </MatchResultsByMatchTypesList>
-          <MatchResultsByMatchTypesList>
-            <StatisticsSelectionButton type="button" name="TradeLog" onClick={onChooseStatisticsClick}>
-              이적시장 거래 목록
-            </StatisticsSelectionButton>
-          </MatchResultsByMatchTypesList>
-        </ChooseStatisticsUl>
+        <DescriptionDiv>
+          <DescriptionParagraph>매치 타입별 경기 데이터와 이적시장 기록 조회를 해 보세요.</DescriptionParagraph>
+        </DescriptionDiv>
 
-        {mode === 0 ? <MatchResultsByMatchTypes /> : <TradeLog />}
-        {/* <MatchResultsByMatchTypes />
-        <hr />
-        <TradeLog /> */}
+        <ContentDiv>
+          <MatchResultsByMatchTypes />
+          <TradeLog />
+        </ContentDiv>
       </MyRecordContainerDiv>
       <Footer page="MyRecord" />
     </>

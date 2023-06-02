@@ -25,11 +25,7 @@ const PlayerImg = ({ spId }: PlayerImgProps) => {
     getImage();
   }, [spId]);
 
-  return (
-    <div>
-      <img src={imgUrl!} alt="선수 이미지" />
-    </div>
-  );
+  return <img src={imgUrl!} alt="선수 이미지" />;
 };
 
 export default PlayerImg;
