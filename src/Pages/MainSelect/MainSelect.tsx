@@ -113,7 +113,7 @@ const MainSelect = () => {
           </Fade>
         </MainMenuDescriptionDiv>
         <ScrollNoticeDiv scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))}>
-          <ScrollNoticeParagraph>스크롤 해서 확인!</ScrollNoticeParagraph>
+          <ScrollNoticeParagraph>스크롤 해서 확인</ScrollNoticeParagraph>
         </ScrollNoticeDiv>
 
         <MyRecordDiv myRecord={slideInfo.myRecord}>

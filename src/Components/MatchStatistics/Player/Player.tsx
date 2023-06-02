@@ -14,7 +14,6 @@ const Player = ({ shortCutPlayer }: PlayerProps) => {
           .filter((i) => {
             return i.spPosition !== 28;
           })
-
           .map((i, index) => {
             return (
               <li key={index}>

@@ -11,6 +11,7 @@ import {
   TableHeaderDiv,
   TableTd,
   TableTh,
+  TableThParagraph,
   TableTr,
 } from './MatchResultsByMatchTypes.styled';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
@@ -106,9 +107,15 @@ const MatchResultsByMatchTypes = () => {
         <Table cellPadding="0" cellSpacing="0">
           <thead>
             <tr>
-              <TableTh>상대</TableTh>
-              <TableTh>결과</TableTh>
-              <TableTh>매치 시간</TableTh>
+              <TableTh>
+                <TableThParagraph>상대</TableThParagraph>
+              </TableTh>
+              <TableTh>
+                <TableThParagraph>결과</TableThParagraph>
+              </TableTh>
+              <TableTh>
+                <TableThParagraph>매치 시간</TableThParagraph>
+              </TableTh>
             </tr>
           </thead>
         </Table>
