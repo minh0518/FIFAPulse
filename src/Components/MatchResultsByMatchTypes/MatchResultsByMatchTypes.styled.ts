@@ -10,7 +10,10 @@ const paintTr = keyframes`
   }
 `;
 
-export const MatchResultsByMatchTypesContainer = styled.div``;
+export const MatchResultsByMatchTypesContainer = styled.div`
+  width: 50%;
+  margin-right: 2%;
+`;
 
 export const Table = styled.table`
   width: 100%;
@@ -24,8 +27,7 @@ export const Table = styled.table`
 
 export const TableHeaderDiv = styled.div`
   margin-top: 3%;
-  background-color: lightgray;
-  border-radius: 10px;
+  border-top: 5px solid black;
 `;
 
 export const TableContentDiv = styled.div`
@@ -51,12 +53,17 @@ export const TableContentDiv = styled.div`
 `;
 
 export const TableTh = styled.th`
-  padding: 20px 15px;
+  // padding: 20px 15px;
   text-align: center;
   font-weight: 500;
   font-size: 1.2rem;
-  color: black;
+  color: gray;
   text-transform: uppercase;
+`;
+export const TableThParagraph = styled.p`
+  margin: 0 20px;
+  padding: 15px 0;
+  border-bottom: 2px solid black;
 `;
 
 export const TableTr = styled.tr`
