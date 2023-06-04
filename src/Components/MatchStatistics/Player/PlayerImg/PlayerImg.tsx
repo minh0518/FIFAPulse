@@ -3,7 +3,7 @@ import FIFAData from '../../../../Services/FifaData';
 import { PlayerImgProps } from '../../../../types/props';
 import { changeSpidToPid } from '../../../../utils/MatchStatistics';
 
-const PlayerImg = ({ spId }: PlayerImgProps) => {
+const PlayerImg = ({ spId, width, height }: PlayerImgProps) => {
   const [imgUrl, setImgUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const PlayerImg = ({ spId }: PlayerImgProps) => {
     getImage();
   }, [spId]);
 
-  return <img src={imgUrl!} alt="선수 이미지" />;
+  return <img src={imgUrl!} alt="선수 이미지" width={width} height={height} />;
 };
 
 export default PlayerImg;

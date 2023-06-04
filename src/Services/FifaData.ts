@@ -93,8 +93,8 @@ export default class FIFAData {
   getTradeLog = async (accessid: string) => {
     // return Promise.all([this.#getBuyTrageLog(accessid, 20), this.#getSellTrageLog(accessid, 20)]);
     const tradeLog = {
-      buy: await this.#getBuyTrageLog(accessid, 20),
-      sell: await this.#getSellTrageLog(accessid, 20),
+      buy: await this.#getBuyTrageLog(accessid, 50),
+      sell: await this.#getSellTrageLog(accessid, 50),
     };
     return tradeLog;
   };

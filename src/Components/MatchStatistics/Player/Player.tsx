@@ -18,7 +18,7 @@ const Player = ({ shortCutPlayer }: PlayerProps) => {
             return (
               <li key={index}>
                 <div>
-                  <PlayerImg spId={i.spId} />
+                  <PlayerImg spId={i.spId} width={100} height={100} />
                   {convertPosition(i.spPosition)}
                   <img src={getSeasonImg(i.spId)} alt="시즌 이미지" />
                   {convertPlayerName(i.spId)}
