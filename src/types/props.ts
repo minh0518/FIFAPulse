@@ -25,6 +25,8 @@ export interface ShootProps {
 
 export interface PlayerImgProps {
   spId: number;
+  width: number;
+  height: number;
 }
 
 // styled-components

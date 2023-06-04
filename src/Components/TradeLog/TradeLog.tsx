@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TradeLogContainerDiv } from './TradeLog.styled';
+import { Table, TableContentDiv, TableHeaderDiv, TableTd, TableTr, TradeLogContainerDiv } from './TradeLog.styled';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { TradeLogInfo } from '../../types/api';
@@ -24,39 +24,55 @@ const TradeLog = () => {
     test();
   }, []);
 
+  const onBuySellClick = (value: 'buy' | 'sell') => {
+    setTradeType(value);
+  };
+
   return (
     <TradeLogContainerDiv>
-      <h2>이적 시장 목록</h2>
+      <h2 style={{ display: 'inline-block' }}>이적 시장 목록</h2>
+      <ul style={{ display: 'inline-block' }}>
+        <li>
+          <button type="button" onClick={(e) => onBuySellClick('buy')}>
+            BUY
+          </button>
+          <button type="button" onClick={(e) => onBuySellClick('sell')}>
+            SELL
+          </button>
+        </li>
+      </ul>
 
-      <div>
-        <table>
+      <TableHeaderDiv>
+        <Table>
           <thead>
-            <tr>
-              <th>BUY</th>
-              <th>SELL</th>
-            </tr>
+            {/* <tr>
+              <th>표로 보기</th>
+              <th>차트로 보기</th>
+            </tr> */}
           </thead>
-        </table>
-      </div>
+        </Table>
+      </TableHeaderDiv>
 
       {tradeInfo && (
-        <div>
-          <table>
+        <TableContentDiv>
+          <Table>
             <tbody>
               {tradeInfo[tradeType].map((i) => {
                 return (
-                  <tr key={i.saleSn}>
+                  <TableTr key={i.saleSn}>
                     {/* PlayerImg 폴더 위치 변경해야 할듯 */}
-                    <PlayerImg spId={i.spid} />
-                    <td>+{i.grade}</td>
-                    <td>{convertDateAndTime(i.tradeDate)}</td>
-                    <td>{addCommaonMoney(i.value)}</td>
-                  </tr>
+                    <TableTd>
+                      <PlayerImg spId={i.spid} width={100} height={100} />
+                    </TableTd>
+                    <TableTd>+{i.grade}</TableTd>
+                    <TableTd>{addCommaonMoney(i.value)}</TableTd>
+                    <TableTd>{convertDateAndTime(i.tradeDate)}</TableTd>
+                  </TableTr>
                 );
               })}
             </tbody>
-          </table>
-        </div>
+          </Table>
+        </TableContentDiv>
       )}
     </TradeLogContainerDiv>
   );

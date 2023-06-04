@@ -96,11 +96,11 @@ export const TableTr = styled.tr`
 
 export const TableTd = styled.td`
   width: 100%; // 이렇게 해줘야 가상 요소를 쓰더라도 빈 공간이 안 생기게 됨
-  padding: 2%;
+  padding: 4% 2%;
   text-align: center;
   vertical-align: middle;
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: black;
   /* border-bottom: solid 1px rgba(255, 255, 255, 1); */
   border-bottom: 1px solid white;
