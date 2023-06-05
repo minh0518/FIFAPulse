@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableContentDiv, TableHeaderDiv, TableTd, TableTr, TradeLogContainerDiv } from './TradeLog.styled';
+import {
+  PlayerInfo,
+  PlayerSeasonAndName,
+  Table,
+  TableContentDiv,
+  TableHeaderDiv,
+  TablePlayerTd,
+  TableTd,
+  TableTh,
+  TableThParagraph,
+  TableTr,
+  TradeLogContainerDiv,
+} from './TradeLog.styled';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import BronzeCard from '../../images/EnforceImg/BronzeCard';
 import { TradeLogInfo } from '../../types/api';
+import { convertPlayerName, getSeasonImg } from '../../utils/MatchStatistics';
 import { addCommaonMoney, convertDateAndTime } from '../../utils/MyRecord';
-import MatchResultsByMatchTypes from '../MatchResultsByMatchTypes';
-import PlayerImg from '../MatchStatistics/Player/PlayerImg';
+import PlayerImg from '../PlayerImg';
 
 const TradeLog = () => {
   const { userObj, setUserObj } = useUserObjAPI()!;
@@ -24,10 +37,11 @@ const TradeLog = () => {
     test();
   }, []);
 
-  const onBuySellClick = (value: 'buy' | 'sell') => {
-    setTradeType(value);
+  const onBuySellClick = (tradeType: 'buy' | 'sell') => {
+    setTradeType(tradeType);
   };
 
+  console.log(tradeInfo);
   return (
     <TradeLogContainerDiv>
       <h2 style={{ display: 'inline-block' }}>이적 시장 목록</h2>
@@ -61,11 +75,24 @@ const TradeLog = () => {
                 return (
                   <TableTr key={i.saleSn}>
                     {/* PlayerImg 폴더 위치 변경해야 할듯 */}
+                    <TablePlayerTd>
+                      <PlayerImg spId={i.spid} width={85} height={85} />
+                      <PlayerInfo>
+                        <PlayerSeasonAndName>
+                          <img src={getSeasonImg(i.spid)} alt="시즌 이미지" width={22} height={18} />
+                          {convertPlayerName(i.spid)}
+                        </PlayerSeasonAndName>
+                        <img
+                          src={`https://upxowbgcgsnlbdqafwlg.supabase.co/storage/v1/object/public/assets/strong/${i.grade}.png`}
+                          alt={`+${i.grade}`}
+                          width={30}
+                          height={18}
+                        />
+                      </PlayerInfo>
+                    </TablePlayerTd>
                     <TableTd>
-                      <PlayerImg spId={i.spid} width={100} height={100} />
+                      <b>{addCommaonMoney(i.value)} BP</b>
                     </TableTd>
-                    <TableTd>+{i.grade}</TableTd>
-                    <TableTd>{addCommaonMoney(i.value)}</TableTd>
                     <TableTd>{convertDateAndTime(i.tradeDate)}</TableTd>
                   </TableTr>
                 );
