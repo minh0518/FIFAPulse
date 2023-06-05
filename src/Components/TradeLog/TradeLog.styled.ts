@@ -12,7 +12,7 @@ export const TradeLogContainerDiv = styled.div`
 
 export const Table = styled.table`
   width: 100%;
-  table-layout: fixed;
+  // table-layout: fixed;
   border: 0;
   padding: 0;
   border-spacing: 0;
@@ -22,7 +22,7 @@ export const Table = styled.table`
 
 export const TableContentDiv = styled.div`
   // height: 500px;
-  height: 35em;
+  height: 37em;
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -59,8 +59,8 @@ export const TableThParagraph = styled.p`
   border-bottom: 2px solid black;
 `;
 
-export const TableTd = styled.td`
-  width: 100%; // 이렇게 해줘야 가상 요소를 쓰더라도 빈 공간이 안 생기게 됨
+export const TablePlayerTd = styled.td`
+  display: flex;
   padding: 4% 2%;
   text-align: center;
   vertical-align: middle;
@@ -69,4 +69,32 @@ export const TableTd = styled.td`
   color: black;
   /* border-bottom: solid 1px rgba(255, 255, 255, 1); */
   border-bottom: 1px solid white;
+`;
+
+export const TableTd = styled.td`
+  padding: 4% 2%;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 1rem;
+  color: black;
+  /* border-bottom: solid 1px rgba(255, 255, 255, 1); */
+  border-bottom: 1px solid white;
+`;
+
+export const PlayerInfo = styled.div`
+  margin-left: 5%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // 선수 이미지와 나머지 정보들을 가로로 중앙선 정렬 (같은 중앙선 라인에 있도록)
+`;
+
+// 시즌 이미지와 선수 이름을 가로로 중앙선 정렬 (같은 중앙선 라인에 있도록)
+export const PlayerSeasonAndName = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 7%;
 `;

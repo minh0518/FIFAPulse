@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PlayerImg from './PlayerImg';
 import FIFAData from '../../../Services/FifaData';
 import { PlayerProps } from '../../../types/props';
 import { convertPlayerName, convertPosition, convertYardtoMeter, getSeasonImg } from '../../../utils/MatchStatistics';
+import PlayerImg from '../../PlayerImg';
 
 // 후스코어처럼 선수 포메이션 형태 구현하고 거기에 hover하면 각종 정보들 보여주는 식으로?
 const Player = ({ shortCutPlayer }: PlayerProps) => {
