@@ -10,6 +10,36 @@ export const TradeLogContainerDiv = styled.div`
   margin-left: 2%;
 `;
 
+export const HeadingAndButtonDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const TradeLogHeading = styled.h2``;
+
+export const ChooseBuyOrSellUl = styled.ul`
+  display: flex;
+  list-style: none;
+  padding-left: 10%;
+`;
+
+export const BuyButton = styled.button`
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-size: 1.3rem;
+  font-weight: bolder;
+`;
+
+export const SellButton = styled.button`
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-size: 1.3rem;
+  font-weight: bolder;
+`;
+
 export const Table = styled.table`
   width: 100%;
   // table-layout: fixed;
@@ -22,7 +52,7 @@ export const Table = styled.table`
 
 export const TableContentDiv = styled.div`
   // height: 500px;
-  height: 37em;
+  height: 38.6em;
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);

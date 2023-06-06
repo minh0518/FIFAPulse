@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Select } from '@mantine/core';
 import {
+  BuyButton,
+  ChooseBuyOrSellUl,
+  HeadingAndButtonDiv,
   PlayerInfo,
   PlayerSeasonAndName,
+  SellButton,
   Table,
   TableContentDiv,
   TableHeaderDiv,
@@ -11,10 +16,11 @@ import {
   TableThParagraph,
   TableTr,
   TradeLogContainerDiv,
+  TradeLogHeading,
 } from './TradeLog.styled';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
-import BronzeCard from '../../images/EnforceImg/BronzeCard';
+
 import { TradeLogInfo } from '../../types/api';
 import { convertPlayerName, getSeasonImg } from '../../utils/MatchStatistics';
 import { addCommaonMoney, convertDateAndTime } from '../../utils/MyRecord';
@@ -22,9 +28,11 @@ import PlayerImg from '../PlayerImg';
 
 const TradeLog = () => {
   const { userObj, setUserObj } = useUserObjAPI()!;
-
+  const [selectedValue, setSelectedValue] = useState<string | null>('latest');
   const [tradeInfo, setTradeInfo] = useState<{ buy: TradeLogInfo[]; sell: TradeLogInfo[] } | null>(null);
   const [tradeType, setTradeType] = useState<'buy' | 'sell'>('buy');
+
+  // 1. 타입은 최소한 작은 단위로 TradeLogInfo >> useState의 객체배열 ,  아래 sortFunctions의 a,b의 타입
 
   // console.log(tradeInfo && tradeInfo[tradeType]);
 
@@ -37,6 +45,29 @@ const TradeLog = () => {
     test();
   }, []);
 
+  useEffect(() => {
+    if (!tradeInfo) return;
+    const copyTradeInfo = JSON.parse(JSON.stringify(tradeInfo));
+
+    type SelectedValue = 'priceDown' | 'priceUp' | 'latest' | 'oldest';
+
+    const sortFunctions: { [K in SelectedValue]: (a: TradeLogInfo, b: TradeLogInfo) => number } = {
+      priceDown: (a, b) => b.value - a.value,
+      priceUp: (a, b) => a.value - b.value,
+      latest: (a, b) => new Date(b.tradeDate).getTime() - new Date(a.tradeDate).getTime(),
+      oldest: (a, b) => new Date(a.tradeDate).getTime() - new Date(b.tradeDate).getTime(),
+    };
+
+    ['buy', 'sell'].forEach((i) => {
+      // selectedValue가 null인 경우를 체크하고 type assertion을 사용
+      if (selectedValue && sortFunctions[selectedValue as SelectedValue]) {
+        copyTradeInfo[i].sort(sortFunctions[selectedValue as SelectedValue]);
+      }
+    });
+
+    setTradeInfo(copyTradeInfo);
+  }, [selectedValue]);
+
   const onBuySellClick = (tradeType: 'buy' | 'sell') => {
     setTradeType(tradeType);
   };
@@ -44,17 +75,34 @@ const TradeLog = () => {
   console.log(tradeInfo);
   return (
     <TradeLogContainerDiv>
-      <h2 style={{ display: 'inline-block' }}>이적 시장 목록</h2>
-      <ul style={{ display: 'inline-block' }}>
-        <li>
-          <button type="button" onClick={(e) => onBuySellClick('buy')}>
-            BUY
-          </button>
-          <button type="button" onClick={(e) => onBuySellClick('sell')}>
-            SELL
-          </button>
-        </li>
-      </ul>
+      <HeadingAndButtonDiv>
+        <TradeLogHeading>이적 시장 목록</TradeLogHeading>
+        <ChooseBuyOrSellUl>
+          <li>
+            <BuyButton type="button" onClick={(e) => onBuySellClick('buy')}>
+              BUY
+            </BuyButton>
+          </li>
+          <li>
+            <SellButton type="button" onClick={(e) => onBuySellClick('sell')}>
+              SELL
+            </SellButton>
+          </li>
+        </ChooseBuyOrSellUl>
+      </HeadingAndButtonDiv>
+      <Select
+        value={selectedValue}
+        onChange={setSelectedValue}
+        transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+        radius="md"
+        style={{ width: '25%' }}
+        data={[
+          { value: 'priceDown', label: '가격 내림차순' },
+          { value: 'priceUp', label: '가격 오름차순' },
+          { value: 'latest', label: '최신순' },
+          { value: 'oldest', label: '오래 된 순' },
+        ]}
+      />
 
       <TableHeaderDiv>
         <Table>
@@ -74,13 +122,13 @@ const TradeLog = () => {
               {tradeInfo[tradeType].map((i) => {
                 return (
                   <TableTr key={i.saleSn}>
-                    {/* PlayerImg 폴더 위치 변경해야 할듯 */}
                     <TablePlayerTd>
                       <PlayerImg spId={i.spid} width={85} height={85} />
                       <PlayerInfo>
                         <PlayerSeasonAndName>
                           <img src={getSeasonImg(i.spid)} alt="시즌 이미지" width={22} height={18} />
-                          {convertPlayerName(i.spid)}
+                          &nbsp;
+                          <b>{convertPlayerName(i.spid)}</b>
                         </PlayerSeasonAndName>
                         <img
                           src={`https://upxowbgcgsnlbdqafwlg.supabase.co/storage/v1/object/public/assets/strong/${i.grade}.png`}
