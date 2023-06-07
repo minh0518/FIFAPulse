@@ -26,7 +26,7 @@ import Navbar from '../../Components/Navbar';
 import FIFAData from '../../Services/FifaData';
 
 const MainSelect = () => {
-  const ELEMENT_HEIGHT: number = 3500;
+  const ELEMENT_HEIGHT: number = 3000;
 
   const [slideInfo, setSlideInfo] = useState({
     heading: true,
@@ -169,8 +169,8 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </ChallengeDiv>
-        <Footer scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
       </MainSelectContainerDiv>
+      <Footer scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
     </>
   );
 };
