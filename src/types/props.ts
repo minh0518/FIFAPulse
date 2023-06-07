@@ -43,3 +43,12 @@ export interface FooterProps {
 export interface GameResultProps {
   result: string;
 }
+
+export interface tradeTypeProps {
+  tradeType: string;
+}
+
+export interface MatchLengthProps {
+  matchLength: number;
+  variant: number;
+}

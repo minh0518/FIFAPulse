@@ -5,6 +5,7 @@ import {
   GameResultForfeitLose,
   GameResultForfeitWin,
   GameResultSpan,
+  MatchLengthBuuton,
   MatchResultsByMatchTypesContainer,
   Table,
   TableContentDiv,
@@ -13,10 +14,12 @@ import {
   TableTh,
   TableThParagraph,
   TableTr,
+  WinningpercentageDiv,
 } from './MatchResultsByMatchTypes.styled';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail, Maxdivision } from '../../types/api';
+import { showWinningpercentage } from '../../utils/MatchStatistics';
 import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
 
 const MatchResultsByMatchTypes = () => {
@@ -26,7 +29,9 @@ const MatchResultsByMatchTypes = () => {
   const [matchId, setMatchId] = useState<string[]>([]);
   const [matchDetail, setMatchDetail] = useState<MatchDetail[]>([]);
   const [maxdivision, setMaxdivision] = useState<Maxdivision[] | null>(null);
+  const [matchLength, setMatchLength] = useState(20);
 
+  console.log(matchLength);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,11 +48,11 @@ const MatchResultsByMatchTypes = () => {
   useEffect(() => {
     const getMatchId = async () => {
       const fifa = new FIFAData();
-      const matchIdPromise = await fifa.getMatchId(userObj!.FIFAOnlineAccessId, Number(selectedValue));
+      const matchIdPromise = await fifa.getMatchId(userObj!.FIFAOnlineAccessId, Number(selectedValue), 0, matchLength);
       setMatchId(matchIdPromise);
     };
     getMatchId();
-  }, [selectedValue]);
+  }, [selectedValue, matchLength]);
 
   useEffect(() => {
     const getMatchDetail = async () => {
@@ -78,15 +83,50 @@ const MatchResultsByMatchTypes = () => {
     navigate(`/main-select/my-record/${matchId}`);
   };
 
+  const onMatchLengthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { value, name } = e.currentTarget;
+
+    setMatchLength(Number(value));
+  };
+
   return (
     <MatchResultsByMatchTypesContainer>
-      <h2>매치 기록</h2>
+      <WinningpercentageDiv>
+        <div>
+          <h2>매치 기록</h2>
+          {matchDetail.length ? (
+            <span>
+              &nbsp; 최근 {matchLength}경기 승률 : {showWinningpercentage(matchDetail, userObj!.FIFAOnlineAccessId)}
+            </span>
+          ) : (
+            ''
+          )}
+        </div>
+
+        <ul>
+          <li>
+            <MatchLengthBuuton type="button" value={20} onClick={onMatchLengthClick} variant={20} matchLength={matchLength}>
+              20
+            </MatchLengthBuuton>
+          </li>
+          <li>
+            <MatchLengthBuuton type="button" value={30} onClick={onMatchLengthClick} variant={30} matchLength={matchLength}>
+              30
+            </MatchLengthBuuton>
+          </li>
+          <li>
+            <MatchLengthBuuton type="button" value={40} onClick={onMatchLengthClick} variant={40} matchLength={matchLength}>
+              40
+            </MatchLengthBuuton>
+          </li>
+        </ul>
+      </WinningpercentageDiv>
       <Select
         value={selectedValue}
         onChange={setSelectedValue}
         transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
         radius="md"
-        style={{ width: '20%' }}
+        style={{ width: '20%', marginTop: '19.92px' }}
         data={[
           { value: '30', label: '리그 친선 경기' },
           { value: '40', label: '클래식 1on1' },
@@ -102,7 +142,6 @@ const MatchResultsByMatchTypes = () => {
         <option value={52}>감독모드</option>
         <option value={60}>공식경기(친선)</option>
       </select> */}
-
       <TableHeaderDiv>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
@@ -120,7 +159,6 @@ const MatchResultsByMatchTypes = () => {
           </thead>
         </Table>
       </TableHeaderDiv>
-
       {matchDetail.length ? (
         <TableContentDiv>
           <Table cellPadding="0" cellSpacing="0">

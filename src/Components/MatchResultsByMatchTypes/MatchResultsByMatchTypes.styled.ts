@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { GameResultProps } from '../../types/props';
+import { GameResultProps, MatchLengthProps } from '../../types/props';
 
 const paintTr = keyframes`
   from {
@@ -13,6 +13,35 @@ const paintTr = keyframes`
 export const MatchResultsByMatchTypesContainer = styled.div`
   width: 50%;
   margin-right: 2%;
+`;
+
+export const WinningpercentageDiv = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  h2 {
+    display: inline-block;
+    margin-bottom: 0; // h2기본 margin 제거
+  }
+  span {
+    color: gray;
+    white-space: nowrap;
+  }
+  ul {
+    padding-left: 0; // justify-content: space-between 상태에서 최근 경기 승률 문구를 왼쪽으로 밀어냄
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+  }
+`;
+
+export const MatchLengthBuuton = styled.button<MatchLengthProps>`
+  background-color: transparent;
+  border: none;
+  border-bottom: ${(props) => (props.matchLength === props.variant ? '1px solid black' : 'none')};
+  font-weight: 1000;
+  font-size: 1rem;
 `;
 
 export const Table = styled.table`
