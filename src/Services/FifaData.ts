@@ -73,6 +73,7 @@ export default class FIFAData {
     return result.data;
   };
 
+  // offset , limit 를 인자로 넘겨주지 않으면 디폴트로 0~20
   getMatchId = async (accessid: string, matchtype: number, offset = 0, limit = 20): Promise<string[]> => {
     const result = await this.instance.get(`users/${accessid}/matches`, {
       params: {

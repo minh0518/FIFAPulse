@@ -79,12 +79,12 @@ const TradeLog = () => {
         <TradeLogHeading>이적 시장 목록</TradeLogHeading>
         <ChooseBuyOrSellUl>
           <li>
-            <BuyButton type="button" onClick={(e) => onBuySellClick('buy')}>
+            <BuyButton type="button" onClick={(e) => onBuySellClick('buy')} tradeType={tradeType}>
               BUY
             </BuyButton>
           </li>
           <li>
-            <SellButton type="button" onClick={(e) => onBuySellClick('sell')}>
+            <SellButton type="button" onClick={(e) => onBuySellClick('sell')} tradeType={tradeType}>
               SELL
             </SellButton>
           </li>
