@@ -13,6 +13,13 @@ const paintTr = keyframes`
 export const MatchResultsByMatchTypesContainer = styled.div`
   width: 50%;
   margin-right: 2%;
+
+  // 1024px이하가 되면 MyRecord 너비가 1024px의 70%가 되는데
+  // 이땐 MyRecord 너비의 50%는 너무 좁으므로 80%정도로 사용
+  @media (max-width: 1024px) {
+    margin-right: 0%;
+    width: 80%;
+  }
 `;
 
 export const WinningpercentageDiv = styled.div`
