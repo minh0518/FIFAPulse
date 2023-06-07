@@ -6,7 +6,7 @@ import myRecord from '../../images/myRecord.png';
 import positionGuide from '../../images/positionGuide.jpg';
 import userRecord from '../../images/userRecord.jpg';
 
-const ELEMENT_HEIGHT: number = 3500;
+const ELEMENT_HEIGHT: number = 3000;
 
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
@@ -20,7 +20,7 @@ export const MainMenuDescriptionDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 25%;
+  height: 28%;
   color: black; // 추후 폰트 교체 필요
   background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url(${championsLeague});
   background-size: cover;
@@ -62,7 +62,7 @@ type MyRecordSlideProps = {
 export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   display: ${(props) => (props.myRecord ? 'block' : 'none')};
 
-  height: 17%;
+  height: 17.5%;
   box-sizing: border-box;
   width: 80%; // 한 메뉴 전체의 폭을 80%해서 양 옆 여백을 줌
   padding: 3.5% 0% 3.5% 0%; // 나머지 메뉴들과 비율 통일
@@ -159,7 +159,7 @@ type UserRecordSlideProps = {
 };
 export const UserRecordDiv = styled.div<UserRecordSlideProps>`
   display: ${(props) => (props.userRecord ? 'block' : 'none')};
-  height: 17%;
+  height: 17.5%;
   box-sizing: border-box;
   width: 80%;
   padding: 3.5% 0% 3.5% 0%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 3.5를 사용
@@ -240,7 +240,7 @@ type PositionGuideSlideProps = {
 };
 export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   display: ${(props) => (props.positionGuide ? 'block' : 'none')};
-  height: 17%;
+  height: 17.5%;
   box-sizing: border-box;
   width: 80%;
   margin: 0 auto;
@@ -321,7 +321,7 @@ type ChallengeSliceProps = {
 };
 export const ChallengeDiv = styled.div<ChallengeSliceProps>`
   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
-  height: 17%;
+  height: 17.5%;
   box-sizing: border-box;
   width: 80%;
   margin: 0 auto;
