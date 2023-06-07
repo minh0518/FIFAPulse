@@ -9,6 +9,14 @@ export const TableHeaderDiv = styled.div`
 export const TradeLogContainerDiv = styled.div`
   width: 50%;
   margin-left: 2%;
+
+  // 1024px이하가 되면 MyRecord 너비가 1024px의 70%가 되는데
+  // 이땐 MyRecord 너비의 50%는 너무 좁으므로 80%정도로 사용
+  @media (max-width: 1024px) {
+    margin-top: 8%;
+    margin-left: 0%;
+    width: 80%;
+  }
 `;
 
 export const HeadingAndButtonDiv = styled.div`
