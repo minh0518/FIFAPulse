@@ -21,13 +21,13 @@ export const ContactAndGitHubDiv = styled.div`
   display: flex;
 `;
 export const ContactDiv = styled.div`
-  padding-right: 15%;
+  padding-right: 3em;
   font-size: 1rem;
   color: gray;
 `;
 
 export const GitHubDiv = styled.div`
-  padding-left: 15%;
+  padding-left: 3em;
   font-size: 1rem;
   color: gray;
 `;
