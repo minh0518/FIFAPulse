@@ -63,7 +63,7 @@ export const Table = styled.table`
 
 export const TableContentDiv = styled.div`
   // height: 500px;
-  height: 38.6em;
+  height: 38.6em; // 여긴 매치 결과처럼 th부분(상대 , 결과 , 매치 시간)이 없으므로
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -138,4 +138,11 @@ export const PlayerSeasonAndName = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 7%;
+`;
+
+export const LoadingDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38.6em; // 기존 테이블과 높이 통일
 `;
