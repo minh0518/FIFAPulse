@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Img } from './PlayerImg.styled';
 import FIFAData from '../../Services/FifaData';
+import DummyProfile from '../../images/dummyProfile.jpg';
 import { PlayerImgProps } from '../../types/props';
 import { changeSpidToPid } from '../../utils/MatchStatistics';
 
@@ -26,7 +27,11 @@ const PlayerImg = ({ spId, width, height }: PlayerImgProps) => {
     getImage();
   }, [spId]);
 
-  return <Img src={imgUrl!} alt="선수 이미지" width={width} height={height} />;
+  return imgUrl === null ? (
+    <Img src={DummyProfile} alt="더미 이미지" width={width} height={height} />
+  ) : (
+    <Img src={imgUrl} alt="선수 이미지" width={width} height={height} />
+  );
 };
 
 export default PlayerImg;

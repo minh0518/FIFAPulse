@@ -158,3 +158,10 @@ export const GameResultForfeitLose = styled.span`
   color: red;
   font-weight: 1000;
 `;
+
+export const LoadingDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35em; // 기존 테이블과 높이 통일
+`;

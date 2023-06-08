@@ -4,6 +4,7 @@ import {
   BuyButton,
   ChooseBuyOrSellUl,
   HeadingAndButtonDiv,
+  LoadingDiv,
   PlayerInfo,
   PlayerSeasonAndName,
   SellButton,
@@ -12,8 +13,6 @@ import {
   TableHeaderDiv,
   TablePlayerTd,
   TableTd,
-  TableTh,
-  TableThParagraph,
   TableTr,
   TradeLogContainerDiv,
   TradeLogHeading,
@@ -24,6 +23,7 @@ import FIFAData from '../../Services/FifaData';
 import { TradeLogInfo } from '../../types/api';
 import { convertPlayerName, getSeasonImg } from '../../utils/MatchStatistics';
 import { addCommaonMoney, convertDateAndTime } from '../../utils/MyRecord';
+import Loading from '../Loading';
 import PlayerImg from '../PlayerImg';
 
 const TradeLog = () => {
@@ -115,7 +115,7 @@ const TradeLog = () => {
         </Table>
       </TableHeaderDiv>
 
-      {tradeInfo && (
+      {tradeInfo ? (
         <TableContentDiv>
           <Table>
             <tbody>
@@ -148,6 +148,10 @@ const TradeLog = () => {
             </tbody>
           </Table>
         </TableContentDiv>
+      ) : (
+        <LoadingDiv>
+          <Loading />
+        </LoadingDiv>
       )}
     </TradeLogContainerDiv>
   );

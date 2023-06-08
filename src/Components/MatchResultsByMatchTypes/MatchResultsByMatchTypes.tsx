@@ -5,6 +5,7 @@ import {
   GameResultForfeitLose,
   GameResultForfeitWin,
   GameResultSpan,
+  LoadingDiv,
   MatchLengthBuuton,
   MatchResultsByMatchTypesContainer,
   Table,
@@ -21,6 +22,7 @@ import FIFAData from '../../Services/FifaData';
 import { MatchDetail, Maxdivision } from '../../types/api';
 import { showWinningpercentage } from '../../utils/MatchStatistics';
 import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
+import Loading from '../Loading';
 
 const MatchResultsByMatchTypes = () => {
   const { userObj, setUserObj } = useUserObjAPI()!;
@@ -34,16 +36,16 @@ const MatchResultsByMatchTypes = () => {
   console.log(matchLength);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const updateMaxdivision = async () => {
-      const fifa = new FIFAData();
-      const maxdivisionResult = await fifa.getMaxdivision(userObj!.FIFAOnlineAccessId);
+  // useEffect(() => {
+  //   const updateMaxdivision = async () => {
+  //     const fifa = new FIFAData();
+  //     const maxdivisionResult = await fifa.getMaxdivision(userObj!.FIFAOnlineAccessId);
 
-      setMaxdivision(maxdivisionResult);
-    };
+  //     setMaxdivision(maxdivisionResult);
+  //   };
 
-    updateMaxdivision();
-  }, []);
+  //   updateMaxdivision();
+  // }, []);
 
   useEffect(() => {
     const getMatchId = async () => {
@@ -207,8 +209,13 @@ const MatchResultsByMatchTypes = () => {
             </tbody>
           </Table>
         </TableContentDiv>
-      ) : (
+      ) : // matchDetail가 빈 배열이라면 로딩중 이거나 matchId값이 없어서(=기록 자체가 없음) useEffect에서 빈 배열로 처리된 것이다
+      matchId.length === 0 ? (
         <div>해당 매치 기록이 존재하지 않습니다</div>
+      ) : (
+        <LoadingDiv>
+          <Loading />
+        </LoadingDiv>
       )}
     </MatchResultsByMatchTypesContainer>
   );
