@@ -74,7 +74,7 @@ export const TableContentDiv = styled.div`
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -164,4 +164,13 @@ export const LoadingDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 35em; // 기존 테이블과 높이 통일
+`;
+
+export const NotFoundMatchDataDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35em; // 기존 테이블과 높이 통일
+  font-size: 1.2rem;
+  font-weight: bolder;
 `;
