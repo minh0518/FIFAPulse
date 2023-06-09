@@ -8,6 +8,7 @@ import {
   LoadingDiv,
   MatchLengthBuuton,
   MatchResultsByMatchTypesContainer,
+  NotFoundMatchDataDiv,
   Table,
   TableContentDiv,
   TableHeaderDiv,
@@ -211,7 +212,7 @@ const MatchResultsByMatchTypes = () => {
         </TableContentDiv>
       ) : // matchDetail가 빈 배열이라면 로딩중 이거나 matchId값이 없어서(=기록 자체가 없음) useEffect에서 빈 배열로 처리된 것이다
       matchId.length === 0 ? (
-        <div>해당 매치 기록이 존재하지 않습니다</div>
+        <NotFoundMatchDataDiv>해당 매치 기록이 존재하지 않습니다</NotFoundMatchDataDiv>
       ) : (
         <LoadingDiv>
           <Loading />

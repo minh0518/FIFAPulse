@@ -41,7 +41,7 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
       </NavMenuUl>
 
       <NavIconsUl>
-        <NavIconsList>SNS</NavIconsList>
+        <NavIconsList>src</NavIconsList>
       </NavIconsUl>
     </Nav>
   );
