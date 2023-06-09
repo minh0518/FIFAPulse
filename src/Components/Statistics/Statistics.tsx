@@ -6,7 +6,7 @@ import Shoot from './Shoot';
 import { MatchStatisticsProps } from '../../types/props';
 import { convertYardtoMeter } from '../../utils/MatchStatistics';
 
-const MatchStatistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: MatchStatisticsProps) => {
+const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: MatchStatisticsProps) => {
   const [statisticsMode, setStatisticsMode] = useState('defence');
 
   console.log(matchDetail.matchInfo[selectedUsertStatistics]);
@@ -85,4 +85,4 @@ const MatchStatistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: 
   );
 };
 
-export default MatchStatistics;
+export default Statistics;

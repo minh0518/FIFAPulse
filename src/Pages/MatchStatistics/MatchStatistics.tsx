@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import MatchStatistics from '../../Components/MatchStatistics';
+import Footer from '../../Components/Footer';
+import Loading from '../../Components/Loading';
+import Navbar from '../../Components/Navbar';
+import Statistics from '../../Components/Statistics';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail } from '../../types/api';
 import { myDataIndex, selectedUsertStatistics } from '../../types/states';
 
-const MatchResultWithMatchStatistics = () => {
+const MatchStatistics = () => {
   const { matchId } = useParams();
   const [matchDetail, setMatchDetail] = useState<MatchDetail | null>(null); // 한 매치의 전체 데이터
   const [myDataIndex, setMyDataIndex] = useState<myDataIndex | null>(null); // 로그인 한 유저의 데이터 인덱스 (1대1 이므로 matchDetail.matchInfo[0] 아니면 matchDetail.matchInfo[1])
@@ -52,44 +55,49 @@ const MatchResultWithMatchStatistics = () => {
     return <h2>{matchDetail?.matchInfo[index].shoot.goalTotalDisplay}</h2>;
   };
 
+  if (!(matchDetail && myDataIndex)) {
+    return <Loading />;
+  }
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <button type="button" onClick={() => onUserNicknameClick('mine')}>
-          {matchDetail?.matchInfo[myDataIndex!.mine].nickname}
-        </button>
-        <h1>vs</h1>
-        <button type="button" onClick={() => onUserNicknameClick('other')}>
-          {matchDetail?.matchInfo[myDataIndex!.other].nickname}
-        </button>
-      </div>
-      <div style={{ display: 'flex' }}>
-        {/* {matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 0 ? (
+    <>
+      <Navbar page="MatchResultWithMatchStatistics" />
+      <div>
+        <div style={{ display: 'flex' }}>
+          <button type="button" onClick={() => onUserNicknameClick('mine')}>
+            {matchDetail.matchInfo[myDataIndex!.mine].nickname}
+          </button>
+          <h1>vs</h1>
+          <button type="button" onClick={() => onUserNicknameClick('other')}>
+            {matchDetail.matchInfo[myDataIndex!.other].nickname}
+          </button>
+        </div>
+        <div style={{ display: 'flex' }}>
+          {/* {matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 0 ? (
           <h2>{matchDetail?.matchInfo[myDataIndex!.mine].shoot.goalTotalDisplay}</h2>
         ) : matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 1 ? (
           <h2>몰수 승</h2>
         ) : (
           <h2>몰수 패</h2>
         )} */}
-        {myDataIndex && showResultWithScore(myDataIndex.mine)}
+          {showResultWithScore(myDataIndex.mine)}
 
-        <h2> : </h2>
+          <h2> : </h2>
 
-        {/* {matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 0 ? (
+          {/* {matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 0 ? (
           <h2>{matchDetail?.matchInfo[myDataIndex!.other].shoot.goalTotalDisplay}</h2>
         ) : matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 1 ? (
           <h2>몰수 승</h2>
         ) : (
           <h2>몰수 패</h2>
         )} */}
-        {myDataIndex && showResultWithScore(myDataIndex.other)}
-      </div>
+          {showResultWithScore(myDataIndex.other)}
+        </div>
 
-      {matchDetail && myDataIndex && (
-        <MatchStatistics matchDetail={matchDetail} myDataIndex={myDataIndex} selectedUsertStatistics={selectedUsertStatistics} />
-      )}
-    </div>
+        <Statistics matchDetail={matchDetail} myDataIndex={myDataIndex} selectedUsertStatistics={selectedUsertStatistics} />
+      </div>
+      <Footer page="MatchResultWithMatchStatistics" />
+    </>
   );
 };
 
-export default MatchResultWithMatchStatistics;
+export default MatchStatistics;

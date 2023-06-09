@@ -7,7 +7,7 @@ import Challenge from './Pages/Challenge';
 import ChooseModeAndLogin from './Pages/ChooseModeAndLogin';
 import Guest from './Pages/Guest/Guest';
 import MainSelect from './Pages/MainSelect';
-import MatchResultWithMatchStatistics from './Pages/MatchResultWithMatchStatistics';
+import MatchStatistics from './Pages/MatchStatistics';
 import MyRecord from './Pages/MyRecord';
 import PositionGuide from './Pages/PositionGuide';
 import UserRecord from './Pages/UserRecord';
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       { index: true, element: <ChooseModeAndLogin /> },
       { path: '/main-select', element: <MainSelect /> },
       { path: '/main-select/my-record', element: <MyRecord /> },
-      { path: '/main-select/my-record/:matchId', element: <MatchResultWithMatchStatistics /> },
+      { path: '/main-select/my-record/:matchId', element: <MatchStatistics /> },
       { path: '/main-select/position-guide', element: <PositionGuide /> },
       { path: '/main-select/user-record', element: <UserRecord /> },
       { path: '/main-select/challenge', element: <Challenge /> },
