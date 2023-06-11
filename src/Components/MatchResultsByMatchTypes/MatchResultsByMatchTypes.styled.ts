@@ -57,6 +57,7 @@ export const Table = styled.table`
   border: 0;
   padding: 0;
   border-spacing: 0;
+
   /* cellpadding : "0"; 
   cellspacing : "0" ; */
 `;
@@ -64,15 +65,16 @@ export const Table = styled.table`
 export const TableHeaderDiv = styled.div`
   margin-top: 3%;
   border-top: 5px solid black;
+  box-shadow: 10px 0 5px -2px rgba(0, 0, 0, 0.2), -10px 0 5px -2px rgba(0, 0, 0, 0.2);
 `;
 
 export const TableContentDiv = styled.div`
   // height: 500px;
   height: 35em;
-
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 0 5px -2px rgba(0, 0, 0, 0.2), -10px 0 5px -2px rgba(0, 0, 0, 0.2);
   ::-webkit-scrollbar {
     width: 5px;
   }

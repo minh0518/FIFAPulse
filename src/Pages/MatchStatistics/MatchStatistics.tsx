@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  LoadingDiv,
+  MatchStatisticsContainerDiv,
+  NickNameSpan,
+  PlayerNickNames,
+  ScoresAndTimeDiv,
+  ScoresDiv,
+  TimeDiv,
+} from './MatchStatistics.styled';
 import Footer from '../../Components/Footer';
 import Loading from '../../Components/Loading';
 import Navbar from '../../Components/Navbar';
@@ -8,6 +17,7 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail } from '../../types/api';
 import { myDataIndex, selectedUsertStatistics } from '../../types/states';
+import { convertDateAndTime } from '../../utils/MyRecord';
 
 const MatchStatistics = () => {
   const { matchId } = useParams();
@@ -43,58 +53,57 @@ const MatchStatistics = () => {
     }
     setSelectedUsertStatistics(index);
   };
+  console.log(selectedUsertStatistics);
 
   const showResultWithScore = (index: 0 | 1): React.ReactNode => {
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 1) {
-      return <h2>몰수 승</h2>;
+      return <h2>몰수 승 ({matchDetail?.matchInfo[index].shoot.goalTotal}) </h2>;
     }
 
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 2) {
-      return <h2>몰수 패</h2>;
+      return <h2>({matchDetail?.matchInfo[index].shoot.goalTotal}) 몰수 패 </h2>;
     }
     return <h2>{matchDetail?.matchInfo[index].shoot.goalTotalDisplay}</h2>;
   };
 
   if (!(matchDetail && myDataIndex)) {
-    return <Loading />;
+    return (
+      <LoadingDiv>
+        <Loading />
+      </LoadingDiv>
+    );
   }
+  console.log(matchDetail);
   return (
     <>
       <Navbar page="MatchResultWithMatchStatistics" />
-      <div>
-        <div style={{ display: 'flex' }}>
+      <MatchStatisticsContainerDiv>
+        <PlayerNickNames>
           <button type="button" onClick={() => onUserNicknameClick('mine')}>
-            {matchDetail.matchInfo[myDataIndex!.mine].nickname}
+            <NickNameSpan myDataIndex={myDataIndex.mine} selectedUsertStatistics={selectedUsertStatistics}>
+              {matchDetail.matchInfo[myDataIndex!.mine].nickname}
+            </NickNameSpan>
           </button>
-          <h1>vs</h1>
+          <h2>vs</h2>
           <button type="button" onClick={() => onUserNicknameClick('other')}>
-            {matchDetail.matchInfo[myDataIndex!.other].nickname}
+            <NickNameSpan myDataIndex={myDataIndex.other} selectedUsertStatistics={selectedUsertStatistics}>
+              {matchDetail.matchInfo[myDataIndex!.other].nickname}
+            </NickNameSpan>
           </button>
-        </div>
-        <div style={{ display: 'flex' }}>
-          {/* {matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 0 ? (
-          <h2>{matchDetail?.matchInfo[myDataIndex!.mine].shoot.goalTotalDisplay}</h2>
-        ) : matchDetail?.matchInfo[myDataIndex!.mine].matchDetail.matchEndType === 1 ? (
-          <h2>몰수 승</h2>
-        ) : (
-          <h2>몰수 패</h2>
-        )} */}
-          {showResultWithScore(myDataIndex.mine)}
-
-          <h2> : </h2>
-
-          {/* {matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 0 ? (
-          <h2>{matchDetail?.matchInfo[myDataIndex!.other].shoot.goalTotalDisplay}</h2>
-        ) : matchDetail?.matchInfo[myDataIndex!.other].matchDetail.matchEndType === 1 ? (
-          <h2>몰수 승</h2>
-        ) : (
-          <h2>몰수 패</h2>
-        )} */}
-          {showResultWithScore(myDataIndex.other)}
-        </div>
+        </PlayerNickNames>
+        <ScoresAndTimeDiv>
+          <ScoresDiv>
+            {showResultWithScore(myDataIndex.mine)}
+            &nbsp;&nbsp;<h2>:</h2>&nbsp;&nbsp;
+            {showResultWithScore(myDataIndex.other)}
+          </ScoresDiv>
+          <TimeDiv>
+            <p>{convertDateAndTime(matchDetail.matchDate)}</p>
+          </TimeDiv>
+        </ScoresAndTimeDiv>
 
         <Statistics matchDetail={matchDetail} myDataIndex={myDataIndex} selectedUsertStatistics={selectedUsertStatistics} />
-      </div>
+      </MatchStatisticsContainerDiv>
       <Footer page="MatchResultWithMatchStatistics" />
     </>
   );

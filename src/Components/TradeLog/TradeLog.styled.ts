@@ -67,6 +67,7 @@ export const TableContentDiv = styled.div`
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 0 5px -2px rgba(0, 0, 0, 0.2), -10px 0 5px -2px rgba(0, 0, 0, 0.2);
   ::-webkit-scrollbar {
     width: 5px;
   }
