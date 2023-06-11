@@ -52,3 +52,8 @@ export interface MatchLengthProps {
   matchLength: number;
   variant: number;
 }
+
+export interface NickNameProps {
+  myDataIndex: number;
+  selectedUsertStatistics: number;
+}
