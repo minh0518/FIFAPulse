@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   LoadingDiv,
+  MatchScoreAndTimes,
   MatchStatisticsContainerDiv,
+  MatchTimeDiv,
+  MyGoalTime,
   NickNameSpan,
+  OtherGoalTime,
   PlayerNickNames,
-  ScoresAndTimeDiv,
-  ScoresDiv,
-  TimeDiv,
+  Scores,
+  ScoresAndGoalTime,
 } from './MatchStatistics.styled';
 import Footer from '../../Components/Footer';
 import Loading from '../../Components/Loading';
@@ -15,8 +18,10 @@ import Navbar from '../../Components/Navbar';
 import Statistics from '../../Components/Statistics';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import goalImg from '../../images/goalImg.jpg';
 import { MatchDetail } from '../../types/api';
 import { myDataIndex, selectedUsertStatistics } from '../../types/states';
+import { convertPlayerName, extractGoalInfo } from '../../utils/MatchStatistics';
 import { convertDateAndTime } from '../../utils/MyRecord';
 
 const MatchStatistics = () => {
@@ -57,13 +62,21 @@ const MatchStatistics = () => {
 
   const showResultWithScore = (index: 0 | 1): React.ReactNode => {
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 1) {
-      return <h2>몰수 승 ({matchDetail?.matchInfo[index].shoot.goalTotal}) </h2>;
+      return (
+        <p>
+          몰수 승 <span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span>
+        </p>
+      );
     }
 
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 2) {
-      return <h2>({matchDetail?.matchInfo[index].shoot.goalTotal}) 몰수 패 </h2>;
+      return (
+        <p>
+          <span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span> 몰수 패{' '}
+        </p>
+      );
     }
-    return <h2>{matchDetail?.matchInfo[index].shoot.goalTotalDisplay}</h2>;
+    return <p>{matchDetail?.matchInfo[index].shoot.goalTotalDisplay}</p>;
   };
 
   if (!(matchDetail && myDataIndex)) {
@@ -73,7 +86,9 @@ const MatchStatistics = () => {
       </LoadingDiv>
     );
   }
-  console.log(matchDetail);
+  // console.log(matchDetail);
+
+  console.log(extractGoalInfo(matchDetail.matchInfo[myDataIndex.mine].shootDetail));
   return (
     <>
       <Navbar page="MatchResultWithMatchStatistics" />
@@ -91,16 +106,38 @@ const MatchStatistics = () => {
             </NickNameSpan>
           </button>
         </PlayerNickNames>
-        <ScoresAndTimeDiv>
-          <ScoresDiv>
-            {showResultWithScore(myDataIndex.mine)}
-            &nbsp;&nbsp;<h2>:</h2>&nbsp;&nbsp;
-            {showResultWithScore(myDataIndex.other)}
-          </ScoresDiv>
-          <TimeDiv>
+        <MatchScoreAndTimes>
+          <ScoresAndGoalTime>
+            <MyGoalTime>
+              {extractGoalInfo(matchDetail.matchInfo[myDataIndex.mine].shootDetail).map((i, index) => {
+                return (
+                  <li key={index}>
+                    <img src={goalImg} alt="goalImg" width="18" />
+                    {i.goalTime} {convertPlayerName(i.spId)}
+                  </li>
+                );
+              })}
+            </MyGoalTime>
+            <Scores>
+              <span>{showResultWithScore(myDataIndex.mine)}</span>
+              &nbsp;&nbsp;<h2>:</h2>&nbsp;&nbsp;
+              <span>{showResultWithScore(myDataIndex.other)}</span>
+            </Scores>
+            <OtherGoalTime>
+              {extractGoalInfo(matchDetail.matchInfo[myDataIndex.other].shootDetail).map((i, index) => {
+                return (
+                  <li key={index}>
+                    <img src={goalImg} alt="goalImg" width="18" />
+                    {i.goalTime} {convertPlayerName(i.spId)}
+                  </li>
+                );
+              })}
+            </OtherGoalTime>
+          </ScoresAndGoalTime>
+          <MatchTimeDiv>
             <p>{convertDateAndTime(matchDetail.matchDate)}</p>
-          </TimeDiv>
-        </ScoresAndTimeDiv>
+          </MatchTimeDiv>
+        </MatchScoreAndTimes>
 
         <Statistics matchDetail={matchDetail} myDataIndex={myDataIndex} selectedUsertStatistics={selectedUsertStatistics} />
       </MatchStatisticsContainerDiv>

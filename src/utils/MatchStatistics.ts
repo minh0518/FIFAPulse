@@ -93,3 +93,17 @@ export const showWinningpercentage = (matchDetail: MatchDetail[], userAccessId: 
   // return result;
   return `${result.winningpercentage}% ( ${result.winCount}/${result.totalMatchCount} )`;
 };
+
+export const extractGoalInfo = (shootDetail: MatchDetail['matchInfo'][0]['shootDetail']) => {
+  const goalDetails = shootDetail.filter((i) => {
+    return i.result === 3;
+  });
+
+  return goalDetails
+    .sort((a, b) => {
+      return a.goalTime - b.goalTime;
+    })
+    .map((i) => {
+      return { ...i, goalTime: calculateGoalTime(i.goalTime) };
+    });
+};
