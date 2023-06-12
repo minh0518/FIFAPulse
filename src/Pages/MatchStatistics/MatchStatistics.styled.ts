@@ -50,24 +50,59 @@ export const NickNameSpan = styled.span<NickNameProps>`
   font-weight: bolder;
 `;
 
-export const ScoresAndTimeDiv = styled.div`
+export const MatchScoreAndTimes = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid lightgray;
 `;
 
-export const ScoresDiv = styled.div`
+export const ScoresAndGoalTime = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: space-around; // 이 상태에서 반응형으로 width조절해가며 변경해야 할듯
+  align-items: flex-start;
   margin-top: 40px;
   padding-bottom: 2.7em;
-  font-size: 2rem;
-  h2 {
-    margin: 0;
+  letter-spacing: 2px;
+  position: relative; // 추가된 부분
+`;
+
+export const MyGoalTime = styled.ul`
+  padding-left: 0;
+  list-style: none;
+  padding-right: 10em;
+  li {
+    padding-top: 4px;
   }
 `;
 
-export const TimeDiv = styled.div`
+export const OtherGoalTime = styled.ul`
+  padding-left: 0;
+  list-style: none;
+  padding-left: 10em;
+  li {
+    padding-top: 4px;
+  }
+`;
+
+export const Scores = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute; // 추가된 부분
+  left: 50%; // 추가된 부분
+  transform: translate(-50%, 0); // 추가된 부분
+  font-size: 1.5rem;
+  font-weight: bolder;
+  h2 {
+    margin: 0;
+  }
+  span {
+    font-size: 2rem;
+  }
+`;
+
+export const MatchTimeDiv = styled.div`
   font-size: 1.2rem;
   color: gray;
 `;

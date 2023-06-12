@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Fade, Slide } from 'react-awesome-reveal';
 import Defence from './Defence';
 import Pass from './Pass';
 import Player from './Player';
@@ -55,43 +56,46 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
   const shortCutShootDetail = () => {
     return matchDetail.matchInfo[selectedUsertStatistics].shootDetail;
   };
+
   return (
     <StatisticsContainerDiv>
       <OutlineHeading>기본 정보</OutlineHeading>
-
-      {matchDetail.matchInfo[selectedUsertStatistics].matchDetail.matchEndType === 2 ? (
-        <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv>
-      ) : (
-        <OutlineUl>
-          <li>
-            <span>사용 컨트롤러 &nbsp; : </span>
-            {shortCutMathchDetail().controller}
-          </li>
-          <li>
-            <span>점유율 &nbsp; :</span> {shortCutMathchDetail().possession}%
-          </li>
-          <li>
-            <span>코너킥 수 &nbsp; :</span> {shortCutMathchDetail().cornerKick}
-          </li>
-          <li>
-            <span>평균 드리블 거리 &nbsp; :</span> {convertYardtoMeter(shortCutMathchDetail().dribble)}m
-          </li>
-          <li>
-            <span>파울 &nbsp; : </span>
-            {shortCutMathchDetail().foul}
-          </li>
-          <li>
-            <span>카드 ( 옐로 / 레드 ) &nbsp; :</span> ( {shortCutMathchDetail().yellowCards} / {shortCutMathchDetail().redCards} )
-          </li>
-          <li>
-            <span>부상 &nbsp; : </span>
-            {shortCutMathchDetail().injury}
-          </li>
-          <li>
-            <span>오프사이드 &nbsp; :</span> {shortCutMathchDetail().offsideCount}
-          </li>
-        </OutlineUl>
-      )}
+      {/* key값을 지정해 줘서 이 값이 바뀔 때마다 Slide도 리렌더링(=재동작) */}
+      <Fade duration={700} key={matchDetail.matchInfo[selectedUsertStatistics].accessId}>
+        {matchDetail.matchInfo[selectedUsertStatistics].matchDetail.matchEndType === 2 ? (
+          <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv>
+        ) : (
+          <OutlineUl>
+            <li>
+              <span>사용 컨트롤러 &nbsp; : </span>
+              {shortCutMathchDetail().controller}
+            </li>
+            <li>
+              <span>점유율 &nbsp; :</span> {shortCutMathchDetail().possession}%
+            </li>
+            <li>
+              <span>코너킥 수 &nbsp; :</span> {shortCutMathchDetail().cornerKick}
+            </li>
+            <li>
+              <span>평균 드리블 거리 &nbsp; :</span> {convertYardtoMeter(shortCutMathchDetail().dribble)}m
+            </li>
+            <li>
+              <span>파울 &nbsp; : </span>
+              {shortCutMathchDetail().foul}
+            </li>
+            <li>
+              <span>카드 ( 옐로 / 레드 ) &nbsp; :</span> ( {shortCutMathchDetail().yellowCards} / {shortCutMathchDetail().redCards} )
+            </li>
+            <li>
+              <span>부상 &nbsp; : </span>
+              {shortCutMathchDetail().injury}
+            </li>
+            <li>
+              <span>오프사이드 &nbsp; :</span> {shortCutMathchDetail().offsideCount}
+            </li>
+          </OutlineUl>
+        )}
+      </Fade>
 
       <DetailStatisticsDiv>
         <h2>세부 정보</h2>
