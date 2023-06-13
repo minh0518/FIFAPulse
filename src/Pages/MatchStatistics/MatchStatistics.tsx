@@ -64,7 +64,7 @@ const MatchStatistics = () => {
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 1) {
       return (
         <p>
-          몰수 승 <span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span>
+          몰수승<span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span>
         </p>
       );
     }
@@ -72,7 +72,7 @@ const MatchStatistics = () => {
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 2) {
       return (
         <p>
-          <span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span> 몰수 패{' '}
+          <span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span>몰수패
         </p>
       );
     }

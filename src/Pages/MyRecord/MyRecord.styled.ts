@@ -44,6 +44,10 @@ export const DescriptionDiv = styled.div`
 export const DescriptionParagraph = styled.p`
   color: gray;
   font-size: 1.5rem;
+  span {
+    font-size: 0.8rem;
+    color: gray;
+  }
 `;
 
 export const ContentDiv = styled.div`

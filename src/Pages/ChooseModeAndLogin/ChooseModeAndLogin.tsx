@@ -126,6 +126,11 @@ const ChooseModeAndLogin = () => {
       provider = new GoogleAuthProvider();
     }
 
+    // 재 로그인시 자동 로그인 방지
+    provider?.setCustomParameters({
+      prompt: 'select_account',
+    });
+
     const data = await signInWithPopup(authService, provider as GoogleAuthProvider);
   };
 

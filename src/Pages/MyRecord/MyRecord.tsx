@@ -86,7 +86,11 @@ const MyRecord = () => {
         </UserNameAndTopRankDiv>
 
         <DescriptionDiv>
-          <DescriptionParagraph>매치 타입별 경기 데이터와 이적시장 기록 조회를 해 보세요.</DescriptionParagraph>
+          <DescriptionParagraph>
+            매치 타입별 경기 데이터와 이적시장 기록 조회를 해 보세요.
+            <br />
+            <span>데이터가 반영 되기까지 일정 시간이 소요됩니다</span>
+          </DescriptionParagraph>
         </DescriptionDiv>
 
         <ContentDiv>
