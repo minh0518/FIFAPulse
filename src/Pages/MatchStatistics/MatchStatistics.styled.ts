@@ -62,10 +62,11 @@ export const ScoresAndGoalTime = styled.div`
   display: flex;
   justify-content: space-around; // 이 상태에서 반응형으로 width조절해가며 변경해야 할듯
   align-items: flex-start;
-  margin-top: 40px;
-  padding-bottom: 2.7em;
+
+  margin: 40px 0 2.7em 0;
+
   letter-spacing: 2px;
-  position: relative; // 추가된 부분
+  position: relative;
 `;
 
 export const MyGoalTime = styled.ul`
@@ -86,12 +87,15 @@ export const OtherGoalTime = styled.ul`
   }
 `;
 
+// ScoresAndGoalTime안에서 양쪽에 나타하는 MyGoalTime과 독립적으로
+// ScoresAndGoalTime의 가운데에 위치
 export const Scores = styled.div`
   display: flex;
   align-items: center;
-  position: absolute; // 추가된 부분
-  left: 50%; // 추가된 부분
-  transform: translate(-50%, 0); // 추가된 부분
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-size: 1.5rem;
   font-weight: bolder;
   h2 {
