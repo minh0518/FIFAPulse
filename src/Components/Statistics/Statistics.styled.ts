@@ -1,9 +1,15 @@
+import ApexCharts from 'react-apexcharts';
 import styled from 'styled-components';
 
 export const StatisticsContainerDiv = styled.div``;
 
 export const OutlineHeading = styled.h2`
   margin-top: 2em;
+`;
+
+export const StyledChart = styled(ApexCharts)`
+  max-width: 80%;
+  margin: 0 auto;
 `;
 
 export const OutlineUl = styled.ul`

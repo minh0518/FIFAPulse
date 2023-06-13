@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ApexCharts from 'react-apexcharts';
 import { Fade, Slide } from 'react-awesome-reveal';
 import Defence from './Defence';
 import Pass from './Pass';
@@ -12,6 +13,7 @@ import {
   OutlineUl,
   StatisticsContainerDiv,
   StatisticsContentDiv,
+  StyledChart,
 } from './Statistics.styled';
 import { MatchStatisticsProps } from '../../types/props';
 import { convertYardtoMeter } from '../../utils/MatchStatistics';
@@ -19,8 +21,43 @@ import { convertYardtoMeter } from '../../utils/MatchStatistics';
 const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: MatchStatisticsProps) => {
   const [statisticsMode, setStatisticsMode] = useState('defence');
 
-  console.log(matchDetail.matchInfo[selectedUsertStatistics]);
-  console.log(matchDetail.matchInfo[selectedUsertStatistics].matchDetail.matchEndType);
+  const [myNickName, otherNickName] = [matchDetail.matchInfo[myDataIndex.mine].nickname, matchDetail.matchInfo[myDataIndex.other].nickname];
+  const [myController, otherController] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.controller,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.controller,
+  ];
+  const [myPossession, otherPossession] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.possession,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.possession,
+  ];
+  const [myCornerKick, otherCornerKick] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.cornerKick,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.cornerKick,
+  ];
+  const [myDribble, otherDribble] = [
+    convertYardtoMeter(matchDetail.matchInfo[myDataIndex.mine].matchDetail.dribble),
+    convertYardtoMeter(matchDetail.matchInfo[myDataIndex.other].matchDetail.dribble),
+  ];
+  const [myFoul, otherFoul] = [matchDetail.matchInfo[myDataIndex.mine].matchDetail.foul, matchDetail.matchInfo[myDataIndex.other].matchDetail.foul];
+  const [myYellowCards, otherYellowCards] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.yellowCards,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.yellowCards,
+  ];
+  const [myRedCards, otherRedCards] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.redCards,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.redCards,
+  ];
+  const [myInjury, otherInjury] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.injury,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.injury,
+  ];
+  const [myOffside, otherOffside] = [
+    matchDetail.matchInfo[myDataIndex.mine].matchDetail.offsideCount,
+    matchDetail.matchInfo[myDataIndex.other].matchDetail.offsideCount,
+  ];
+
+  console.log(matchDetail.matchInfo[myDataIndex.mine]);
+  console.log(matchDetail.matchInfo[myDataIndex.other]);
 
   const onModeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.currentTarget;
@@ -57,45 +94,72 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
     return matchDetail.matchInfo[selectedUsertStatistics].shootDetail;
   };
 
+  const chartState = {
+    series: [
+      {
+        name: `${myNickName} ( ${myController} ) `,
+        data: [myPossession, myDribble, myCornerKick, myFoul, myOffside, myYellowCards, myRedCards, myInjury],
+      },
+      {
+        name: `${otherNickName} ( ${otherController} )`,
+        data: [otherPossession, otherDribble, otherCornerKick, otherFoul, otherOffside, otherYellowCards, otherRedCards, otherInjury],
+      },
+    ],
+
+    options: {
+      chart: {
+        type: 'bar',
+        height: 350,
+        stacked: true,
+        stackType: '100%',
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+        },
+      },
+      stroke: {
+        width: 1,
+        colors: ['#fff'],
+      },
+      // title: {
+      //   text: '100% Stacked Bar',
+      // },
+      xaxis: {
+        categories: ['점유율(%)', '평균 드리블 거리(m)', '코너킥', '파울', '오프사이드', '옐로카드', '레드카드', '부상'],
+        labels: {
+          show: false,
+        },
+      },
+      tooltip: {
+        y: {
+          formatter(val: any, { series, seriesIndex, dataPointIndex, w }: any) {
+            if (dataPointIndex === 0) {
+              return `${val}%`;
+            }
+            if (dataPointIndex === 1) {
+              return `${val}m`;
+            }
+            return `${val}회`;
+          },
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'left',
+        offsetX: 40,
+      },
+    },
+  };
+
   return (
     <StatisticsContainerDiv>
       <OutlineHeading>기본 정보</OutlineHeading>
-      {/* key값을 지정해 줘서 이 값이 바뀔 때마다 Slide도 리렌더링(=재동작) */}
-      <Fade duration={700} key={matchDetail.matchInfo[selectedUsertStatistics].accessId}>
-        {matchDetail.matchInfo[selectedUsertStatistics].matchDetail.matchEndType === 2 ? (
-          <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv>
-        ) : (
-          <OutlineUl>
-            <li>
-              <span>사용 컨트롤러 &nbsp; : </span>
-              {shortCutMathchDetail().controller}
-            </li>
-            <li>
-              <span>점유율 &nbsp; :</span> {shortCutMathchDetail().possession}%
-            </li>
-            <li>
-              <span>코너킥 수 &nbsp; :</span> {shortCutMathchDetail().cornerKick}
-            </li>
-            <li>
-              <span>평균 드리블 거리 &nbsp; :</span> {convertYardtoMeter(shortCutMathchDetail().dribble)}m
-            </li>
-            <li>
-              <span>파울 &nbsp; : </span>
-              {shortCutMathchDetail().foul}
-            </li>
-            <li>
-              <span>카드 ( 옐로 / 레드 ) &nbsp; :</span> ( {shortCutMathchDetail().yellowCards} / {shortCutMathchDetail().redCards} )
-            </li>
-            <li>
-              <span>부상 &nbsp; : </span>
-              {shortCutMathchDetail().injury}
-            </li>
-            <li>
-              <span>오프사이드 &nbsp; :</span> {shortCutMathchDetail().offsideCount}
-            </li>
-          </OutlineUl>
-        )}
-      </Fade>
+
+      <StyledChart options={chartState.options} series={chartState.series} type="bar" height={500} />
 
       <DetailStatisticsDiv>
         <h2>세부 정보</h2>

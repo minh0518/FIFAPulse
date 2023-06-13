@@ -126,7 +126,7 @@ const ChooseModeAndLogin = () => {
       provider = new GoogleAuthProvider();
     }
 
-    // 재 로그인시 자동 로그인 방지
+    // prompt 옵션 적용으로 자동 로그인 방지
     provider?.setCustomParameters({
       prompt: 'select_account',
     });
