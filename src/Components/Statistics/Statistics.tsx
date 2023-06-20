@@ -21,43 +21,31 @@ import { convertYardtoMeter } from '../../utils/MatchStatistics';
 const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: MatchStatisticsProps) => {
   const [statisticsMode, setStatisticsMode] = useState('defence');
 
-  const [myNickName, otherNickName] = [matchDetail.matchInfo[myDataIndex.mine].nickname, matchDetail.matchInfo[myDataIndex.other].nickname];
-  const [myController, otherController] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.controller,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.controller,
-  ];
-  const [myPossession, otherPossession] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.possession,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.possession,
-  ];
-  const [myCornerKick, otherCornerKick] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.cornerKick,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.cornerKick,
-  ];
-  const [myDribble, otherDribble] = [
-    convertYardtoMeter(matchDetail.matchInfo[myDataIndex.mine].matchDetail.dribble),
-    convertYardtoMeter(matchDetail.matchInfo[myDataIndex.other].matchDetail.dribble),
-  ];
-  const [myFoul, otherFoul] = [matchDetail.matchInfo[myDataIndex.mine].matchDetail.foul, matchDetail.matchInfo[myDataIndex.other].matchDetail.foul];
-  const [myYellowCards, otherYellowCards] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.yellowCards,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.yellowCards,
-  ];
-  const [myRedCards, otherRedCards] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.redCards,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.redCards,
-  ];
-  const [myInjury, otherInjury] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.injury,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.injury,
-  ];
-  const [myOffside, otherOffside] = [
-    matchDetail.matchInfo[myDataIndex.mine].matchDetail.offsideCount,
-    matchDetail.matchInfo[myDataIndex.other].matchDetail.offsideCount,
+  const [myMatch, otherMatch] = [matchDetail.matchInfo[myDataIndex.mine], matchDetail.matchInfo[myDataIndex.other]];
+  const [myNickName, otherNickName] = [myMatch.nickname, otherMatch.nickname];
+
+  const [myMatchDetail, otherMatchDetail] = [myMatch.matchDetail, otherMatch.matchDetail];
+  const myMatchDetailBasic = [
+    myMatchDetail.possession,
+    convertYardtoMeter(myMatchDetail.dribble),
+    myMatchDetail.cornerKick,
+    myMatchDetail.foul,
+    myMatchDetail.offsideCount,
+    myMatchDetail.yellowCards,
+    myMatchDetail.redCards,
+    myMatchDetail.injury,
   ];
 
-  console.log(matchDetail.matchInfo[myDataIndex.mine]);
-  console.log(matchDetail.matchInfo[myDataIndex.other]);
+  const otherMatchDetailBasic = [
+    otherMatchDetail.possession,
+    convertYardtoMeter(otherMatchDetail.dribble),
+    otherMatchDetail.cornerKick,
+    otherMatchDetail.foul,
+    otherMatchDetail.offsideCount,
+    otherMatchDetail.yellowCards,
+    otherMatchDetail.redCards,
+    otherMatchDetail.injury,
+  ];
 
   const onModeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.currentTarget;
@@ -97,12 +85,12 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
   const chartState = {
     series: [
       {
-        name: `${myNickName} ( ${myController} ) `,
-        data: [myPossession, myDribble, myCornerKick, myFoul, myOffside, myYellowCards, myRedCards, myInjury],
+        name: `${myNickName} ( ${myMatchDetail.controller} ) `,
+        data: myMatchDetailBasic,
       },
       {
-        name: `${otherNickName} ( ${otherController} )`,
-        data: [otherPossession, otherDribble, otherCornerKick, otherFoul, otherOffside, otherYellowCards, otherRedCards, otherInjury],
+        name: `${otherNickName} ( ${otherMatchDetail.controller} )`,
+        data: otherMatchDetailBasic,
       },
     ],
 
