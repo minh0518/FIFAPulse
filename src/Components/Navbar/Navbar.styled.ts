@@ -4,6 +4,7 @@ import { NavBarProps } from '../../types/props';
 
 export const Nav = styled.nav<NavBarProps>`
   width: 100%;
+  height: 90px; // 높이 고정
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -25,7 +26,6 @@ export const NavbarLogo = styled.div`
 `;
 export const LogoButton = styled.button`
   font-size: inherit;
-  padding: 8px 12px;
   text-decoration: none;
   border: none;
   background-color: transparent; /* 직접 지정해 줘야 부모컴포넌트의 NavbarLogo->Nav 색상을 따라감 */
@@ -47,7 +47,7 @@ export const NavMenuList = styled.li`
   }
 
   transition: background-color 0.3s ease, transform 0.3s ease;
-  padding: 0 2em;
+  padding: 0 4em;
 `;
 
 export const LogoutButton = styled.button`
@@ -82,5 +82,11 @@ export const NavIconsUl = styled.ul`
 `;
 
 export const NavIconsList = styled.li`
-  padding: 8px 12px;
+  button {
+    border: none;
+    background-color: transparent;
+  }
+  img {
+    cursor: pointer;
+  }
 `;
