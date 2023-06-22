@@ -55,21 +55,19 @@ export const LogoutButton = styled.button`
   text-decoration: none;
   border: none;
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
 `;
 export const NavMenuLink = styled(Link)`
   display: flex;
   align-items: center;
-  justify-content: center;
-  /* Link컴포넌트 안에 텍스트 중앙정렬 */
 
   padding: 8px 12px;
   text-decoration: none;
   border: none;
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: inherit; /* Nav 컴포넌트의 글씨 색상을 사용 */
   cursor: pointer;
