@@ -27,7 +27,8 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
     <Nav scrollPoint={scrollPoint} page={page}>
       <NavbarLogo>
         <LogoButton type="button">
-          <img src={FIFAPulseLogo} alt="FIFAPulseLogo" width={150} height={120} />
+          {/* <img src={FIFAPulseLogo} alt="FIFAPulseLogo" width={150} height={120} /> */}
+          FIFAPulse
         </LogoButton>
       </NavbarLogo>
 
@@ -60,7 +61,6 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
               width={70}
             />
           </button>
-
           <button type="button" onClick={onFIFAONLINEClick}>
             <img src={FIFAONLINELogo} alt="nexon" width={140} />
           </button>
