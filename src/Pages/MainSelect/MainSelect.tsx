@@ -18,12 +18,15 @@ import {
   RightDescriptionHeading,
   LinkAndDescriptionDiv,
   LeftDescriptionHeading,
+  ScrollNoticeDiv,
+  ScrollNoticeParagraph,
 } from './MainSelect.styled';
+import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import FIFAData from '../../Services/FifaData';
 
 const MainSelect = () => {
-  const ELEMENT_HEIGHT: number = 3500;
+  const ELEMENT_HEIGHT: number = 3000;
 
   const [slideInfo, setSlideInfo] = useState({
     heading: true,
@@ -99,16 +102,19 @@ const MainSelect = () => {
 
   return (
     <>
-      <Navbar scrollPoint={Number(window.pageYOffset / ELEMENT_HEIGHT).toFixed(2)} />
+      <Navbar scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
       <MainSelectContainerDiv>
         <MainMenuDescriptionDiv>
           <Fade delay={100}>
             <Slide direction="down" delay={200}>
               <h1>직접 분석하고 , 변화를 추구해 보세요</h1>
-              <h2>피파온라인에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
+              <h2>피파온라인4 에서 제공하는 다양한 통계를 활용 할 수 있습니다</h2>
             </Slide>
           </Fade>
         </MainMenuDescriptionDiv>
+        <ScrollNoticeDiv scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))}>
+          <ScrollNoticeParagraph>스크롤 해서 확인</ScrollNoticeParagraph>
+        </ScrollNoticeDiv>
 
         <MyRecordDiv myRecord={slideInfo.myRecord}>
           <Fade triggerOnce style={{ height: '100%' }}>
@@ -164,6 +170,7 @@ const MainSelect = () => {
           </Fade>
         </ChallengeDiv>
       </MainSelectContainerDiv>
+      <Footer scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
     </>
   );
 };

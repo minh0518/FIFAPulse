@@ -1,3 +1,5 @@
+import { MatchDetail, matchInfoType } from '../types/api';
+
 export const convertYardtoMeter = (yd: number): number => {
   return Number((yd * 0.9144).toFixed(2));
 };
@@ -66,4 +68,42 @@ export const convertPlayerName = (spid: number) => {
 export const changeSpidToPid = (spid: number): number => {
   const pid = Number(String(spid).split('').slice(3).join(''));
   return pid;
+};
+
+//  matchInfo: [matchInfoType, matchInfoType];
+export const showWinningpercentage = (matchDetail: MatchDetail[], userAccessId: string) => {
+  const totalMatchCount = matchDetail.length;
+  let winCount = 0;
+
+  matchDetail.forEach((i) => {
+    let myData = {} as matchInfoType;
+    i.matchInfo[0].accessId === userAccessId ? (myData = { ...i.matchInfo[0] }) : (myData = { ...i.matchInfo[1] });
+
+    if (myData.matchDetail.matchResult === '승') {
+      winCount += 1;
+    }
+  });
+
+  const result = {
+    winCount,
+    totalMatchCount,
+    winningpercentage: Math.floor((winCount / totalMatchCount) * 100),
+  };
+
+  // return result;
+  return `${result.winningpercentage}% ( ${result.winCount}/${result.totalMatchCount} )`;
+};
+
+export const extractGoalInfo = (shootDetail: MatchDetail['matchInfo'][0]['shootDetail']) => {
+  const goalDetails = shootDetail.filter((i) => {
+    return i.result === 3;
+  });
+
+  return goalDetails
+    .sort((a, b) => {
+      return a.goalTime - b.goalTime;
+    })
+    .map((i) => {
+      return { ...i, goalTime: calculateGoalTime(i.goalTime) };
+    });
 };

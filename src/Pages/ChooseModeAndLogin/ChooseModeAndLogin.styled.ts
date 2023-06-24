@@ -31,13 +31,13 @@ const modalAnimation = keyframes`
     opacity: 1;
   }
 `;
-export const ContainerDiv = styled.div<IsModalOpen>`
+export const ChooseModeAndLoginContainerDiv = styled.div<IsModalOpen>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  min-height: 100vh; // 그냥 height줘도 상관은 없어보임
   flex-direction: column;
-  background-color: ${({ isModalOpen }) => (isModalOpen ? '#a9a9a9' : '#eee')};
+  background-color: ${({ isModalOpen }) => (isModalOpen ? '#a9a9a9' : '#e9ebee')};
 `;
 
 export const SelectModeHeading = styled.h1`

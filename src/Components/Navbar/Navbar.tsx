@@ -3,19 +3,33 @@ import { signOut } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { LogoButton, LogoutButton, Nav, NavIconsList, NavIconsUl, NavMenuLink, NavMenuList, NavMenuUl, NavbarLogo } from './Navbar.styled';
 import { authService } from '../../../firebase';
+import FIFAONLINELogo from '../../images/FIFAONLINELogo.png';
+import FIFAPulseLogo from '../../images/FIFAPulseLogo.png';
+import { NavBarProps } from '../../types/props';
 
-const Navbar = ({ scrollPoint }: any) => {
+const Navbar = ({ scrollPoint, page }: NavBarProps) => {
   const navigate = useNavigate();
 
+  console.log(scrollPoint, page);
   const onLogoutClick = () => {
     signOut(authService);
     navigate('/', { replace: true });
   };
 
+  const onNexonClick = () => {
+    window.location.href = 'https://www.nexon.com/Home/Game';
+  };
+  const onFIFAONLINEClick = () => {
+    window.location.href = 'https://fifaonline4.nexon.com/main/index';
+  };
+
   return (
-    <Nav scrollPoint={scrollPoint}>
+    <Nav scrollPoint={scrollPoint} page={page}>
       <NavbarLogo>
-        <LogoButton type="button">FIFAPulse</LogoButton>
+        <LogoButton type="button">
+          {/* <img src={FIFAPulseLogo} alt="FIFAPulseLogo" width={150} height={120} /> */}
+          FIFAPulse
+        </LogoButton>
       </NavbarLogo>
 
       <NavMenuUl>
@@ -39,7 +53,18 @@ const Navbar = ({ scrollPoint }: any) => {
       </NavMenuUl>
 
       <NavIconsUl>
-        <NavIconsList>SNS</NavIconsList>
+        <NavIconsList>
+          <button type="button" onClick={onNexonClick}>
+            <img
+              src="https://mblogthumb-phinf.pstatic.net/MjAyMDA2MTVfNSAg/MDAxNTkyMTgyNDEyNDY1.6uOcgbBt7uyfJoP7Isu2__PSb63AzYrzDzRUiCBL_tAg.VyrxZ3A5-ZCspiKWq6htiSibInzMNfF8-ws987lUrCEg.PNG.kueric12/NEXON-LOGO.png?type=w800"
+              alt="nexon"
+              width={70}
+            />
+          </button>
+          <button type="button" onClick={onFIFAONLINEClick}>
+            <img src={FIFAONLINELogo} alt="nexon" width={140} />
+          </button>
+        </NavIconsList>
       </NavIconsUl>
     </Nav>
   );

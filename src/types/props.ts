@@ -25,4 +25,35 @@ export interface ShootProps {
 
 export interface PlayerImgProps {
   spId: number;
+  width: number;
+  height: number;
+}
+
+// styled-components
+export interface NavBarProps {
+  scrollPoint?: number;
+  page: string;
+}
+
+export interface FooterProps {
+  scrollPoint?: number;
+  page: string;
+}
+
+export interface GameResultProps {
+  result: string;
+}
+
+export interface tradeTypeProps {
+  tradeType: string;
+}
+
+export interface MatchLengthProps {
+  matchLength: number;
+  variant: number;
+}
+
+export interface NickNameProps {
+  myDataIndex: number;
+  selectedUsertStatistics: number;
 }

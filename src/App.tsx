@@ -7,7 +7,8 @@ import { ModalProvider } from './Context/Modal/ModalContext';
 import { UserObjProvider } from './Context/UserObj/UserObjContext';
 
 const OutLetContainerDiv = styled.div`
-  height: 100vh;
+  background-color: #e9ebee;
+  min-height: 100vh;
 `;
 
 function App() {

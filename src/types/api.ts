@@ -4,6 +4,7 @@ export interface NexonUserInfo {
   level: number;
 }
 
+// 이런 데이터가 여러개 있으므로 ,사용할때 배열로 사용
 // {id: 101000250, name: "데이비드 베컴"}
 export interface MetaDataSpid {
   id: number;
@@ -114,7 +115,8 @@ export type matchInfoType = {
       tackle: number; // 태클 성공 수
       tackleTry: number; // 태글 시도 수
     };
-  }[];
+  }[]; // 위의 MetaDataSpid는 MetaDataSpid자체를 사용할 때 배열로 선언하면 되지만
+  // 이처럼 matchInfoType안의 특정 값들만 배열로 사용되고 있는 것은 여기서 직접 배열로 선언
 
   shoot: {
     // 해당 매치 전체 슛 정보
@@ -165,4 +167,17 @@ export interface MatchDetail {
   matchId: string;
   matchType: number;
   matchInfo: [matchInfoType, matchInfoType]; // 길이가 고정적이므로 튜플 사용
+}
+
+// { "tradeDate": "2023-05-31T01:07:25",
+// "saleSn": "64761f3cad134d6873034f84",
+// "spid": 265204024,
+// "grade": 1,
+// "value": 499000000 }
+export interface TradeLogInfo {
+  tradeDate: string;
+  saleSn: string;
+  spid: number;
+  grade: number;
+  value: number;
 }

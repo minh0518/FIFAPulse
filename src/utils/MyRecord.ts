@@ -33,3 +33,8 @@ export const convertDateAndTime = (dateStr: string) => {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${year}.${month}.${day} ${hours}:${minutes}`;
 };
+
+// 100000 >> 100,000
+export const addCommaonMoney = (money: number) => {
+  return money.toLocaleString('en-US');
+};
