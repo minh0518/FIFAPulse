@@ -7,6 +7,10 @@ export interface MatchStatisticsProps {
   selectedUsertStatistics: selectedUsertStatistics;
 }
 
+export interface MatchInfos {
+  matchInfos: MatchDetail['matchInfo'][0][];
+}
+
 export interface DefenceProps {
   //  MatchDetail['matchInfo'][0]['defence'] 형태의 데이터가 담긴 배열이므로 뒤에 []사용
   shortCutDefence: () => MatchDetail['matchInfo'][0]['defence'][];

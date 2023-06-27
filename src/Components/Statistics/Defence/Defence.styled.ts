@@ -6,4 +6,8 @@ export const DefenceContainerDiv = styled.div`
   justify-content: space-around;
 `;
 
-export const tmp = '';
+export const ForfeitDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

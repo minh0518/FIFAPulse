@@ -6,7 +6,6 @@ import Pass from './Pass';
 import Player from './Player';
 import Shoot from './Shoot';
 import {
-  DataNotExistDiv,
   DetailStatisticsDiv,
   DetailStatisticsUl,
   OutlineHeading,
@@ -62,29 +61,21 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
     }
   };
 
-  const shortCutMathchDetail = () => {
-    return matchDetail.matchInfo[selectedUsertStatistics].matchDetail;
-  };
-  const shortCutDefence = () => {
-    // return matchDetail.matchInfo[selectedUsertStatistics].defence;
-    return [myMatch.defence, otherMatch.defence];
-  };
-  const shortCutPass = () => {
-    // return matchDetail.matchInfo[selectedUsertStatistics].pass;
-    return [myMatch.pass, otherMatch.pass];
-  };
-  const shortCutPlayer = () => {
-    // return matchDetail.matchInfo[selectedUsertStatistics].player;
-    return [myMatch.player, otherMatch.player];
-  };
-  const shortCutShoot = () => {
-    // return matchDetail.matchInfo[selectedUsertStatistics].shoot;
-    return [myMatch.shoot, otherMatch.shoot];
-  };
-  const shortCutShootDetail = () => {
-    // return matchDetail.matchInfo[selectedUsertStatistics].shootDetail;
-    return [myMatch.shootDetail, otherMatch.shootDetail];
-  };
+  // const shortCutDefence = () => {
+  //   return [myMatch.defence, otherMatch.defence];
+  // };
+  // const shortCutPass = () => {
+  //   return [myMatch.pass, otherMatch.pass];
+  // };
+  // const shortCutPlayer = () => {
+  //   return [myMatch.player, otherMatch.player];
+  // };
+  // const shortCutShoot = () => {
+  //   return [myMatch.shoot, otherMatch.shoot];
+  // };
+  // const shortCutShootDetail = () => {
+  //   return [myMatch.shootDetail, otherMatch.shootDetail];
+  // };
 
   const chartState = {
     series: [
@@ -178,16 +169,14 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
           </li>
         </DetailStatisticsUl>
 
-        {matchDetail.matchInfo[selectedUsertStatistics].matchDetail.matchEndType === 2 ? (
-          <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv>
-        ) : (
-          <StatisticsContentDiv>
-            {statisticsMode === 'defence' && <Defence shortCutDefence={shortCutDefence} />}
-            {statisticsMode === 'pass' && <Pass shortCutPass={shortCutPass} />}
-            {statisticsMode === 'shoot' && <Shoot shortCutShoot={shortCutShoot} shortCutShootDetail={shortCutShootDetail} />}
-            {statisticsMode === 'player' && <Player shortCutPlayer={shortCutPlayer} />}
-          </StatisticsContentDiv>
-        )}
+        {/* <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv> */}
+
+        <StatisticsContentDiv>
+          {statisticsMode === 'defence' && <Defence matchInfos={[myMatch, otherMatch]} />}
+          {statisticsMode === 'pass' && <Pass matchInfos={[myMatch, otherMatch]} />}
+          {statisticsMode === 'shoot' && <Shoot matchInfos={[myMatch, otherMatch]} />}
+          {statisticsMode === 'player' && <Player matchInfos={[myMatch, otherMatch]} />}
+        </StatisticsContentDiv>
       </DetailStatisticsDiv>
     </StatisticsContainerDiv>
   );
