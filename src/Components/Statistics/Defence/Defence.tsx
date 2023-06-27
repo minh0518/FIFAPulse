@@ -1,36 +1,50 @@
 import React from 'react';
-import { DefenceContainerDiv } from './Defence.styled';
-import { DefenceProps } from '../../../types/props';
+import { DefenceContainerDiv, ForfeitDiv } from './Defence.styled';
+import { DefenceProps, MatchInfos } from '../../../types/props';
 import { calculatePercent } from '../../../utils/MatchStatistics';
+import Forfeit from '../../Forfeit';
 
-const Defence = ({ shortCutDefence }: DefenceProps) => {
-  const [mine, ohter] = shortCutDefence();
+const Defence = ({ matchInfos }: MatchInfos) => {
+  const [myMatchData, ohterMatchData] = [matchInfos[0], matchInfos[1]];
+  const [myDefenceData, ohterDefenceData] = [matchInfos[0].defence, matchInfos[1].defence];
   return (
     <DefenceContainerDiv>
-      <ul>
-        <li>블록 시도 : {mine.blockTry}</li>
-        <li>블록 성공 : {mine.blockSuccess}</li>
-        <li>
-          블록 성공률 : {calculatePercent(mine.blockTry, mine.blockSuccess)}% ({`${mine.blockSuccess} / ${mine.blockTry}`})
-        </li>
-        <li>태클 시도 : {mine.tackleTry}</li>
-        <li>태클 성공 : {mine.tackleSuccess}</li>
-        <li>
-          태클 성공률 : {calculatePercent(mine.tackleTry, mine.tackleSuccess)}% ({`${mine.tackleSuccess} / ${mine.tackleTry}`})
-        </li>
-      </ul>
-      <ul>
-        <li>블록 시도 : {ohter.blockTry}</li>
-        <li>블록 성공 : {ohter.blockSuccess}</li>
-        <li>
-          블록 성공률 : {calculatePercent(ohter.blockTry, ohter.blockSuccess)}% ({`${ohter.blockSuccess} / ${ohter.blockTry}`})
-        </li>
-        <li>태클 시도 : {ohter.tackleTry}</li>
-        <li>태클 성공 : {ohter.tackleSuccess}</li>
-        <li>
-          태클 성공률 : {calculatePercent(ohter.tackleTry, ohter.tackleSuccess)}% ({`${ohter.tackleSuccess} / ${ohter.tackleTry}`})
-        </li>
-      </ul>
+      {myMatchData.matchDetail.matchEndType === 2 ? (
+        <Forfeit />
+      ) : (
+        <ul>
+          <li>블록 시도 : {myDefenceData.blockTry}</li>
+          <li>블록 성공 : {myDefenceData.blockSuccess}</li>
+          <li>
+            블록 성공률 : {calculatePercent(myDefenceData.blockTry, myDefenceData.blockSuccess)}% (
+            {`${myDefenceData.blockSuccess} / ${myDefenceData.blockTry}`})
+          </li>
+          <li>태클 시도 : {myDefenceData.tackleTry}</li>
+          <li>태클 성공 : {myDefenceData.tackleSuccess}</li>
+          <li>
+            태클 성공률 : {calculatePercent(myDefenceData.tackleTry, myDefenceData.tackleSuccess)}% (
+            {`${myDefenceData.tackleSuccess} / ${myDefenceData.tackleTry}`})
+          </li>
+        </ul>
+      )}
+      {ohterMatchData.matchDetail.matchEndType === 2 ? (
+        <Forfeit />
+      ) : (
+        <ul>
+          <li>블록 시도 : {ohterDefenceData.blockTry}</li>
+          <li>블록 성공 : {ohterDefenceData.blockSuccess}</li>
+          <li>
+            블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% (
+            {`${ohterDefenceData.blockSuccess} / ${ohterDefenceData.blockTry}`})
+          </li>
+          <li>태클 시도 : {ohterDefenceData.tackleTry}</li>
+          <li>태클 성공 : {ohterDefenceData.tackleSuccess}</li>
+          <li>
+            태클 성공률 : {calculatePercent(ohterDefenceData.tackleTry, ohterDefenceData.tackleSuccess)}% (
+            {`${ohterDefenceData.tackleSuccess} / ${ohterDefenceData.tackleTry}`})
+          </li>
+        </ul>
+      )}
     </DefenceContainerDiv>
   );
 };

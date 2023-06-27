@@ -30,6 +30,7 @@ const MatchStatistics = () => {
   const [myDataIndex, setMyDataIndex] = useState<myDataIndex | null>(null); // 로그인 한 유저의 데이터 인덱스 (1대1 이므로 matchDetail.matchInfo[0] 아니면 matchDetail.matchInfo[1])
   const { userObj, setUserObj } = useUserObjAPI()!;
   const [selectedUsertStatistics, setSelectedUsertStatistics] = useState<selectedUsertStatistics>(0); // 유저의 이름을 클릭함에 따라 보여줄 데이터의 인덱스 (1대1 이므로 matchDetail.matchInfo[0] 아니면 matchDetail.matchInfo[1])
+  // const [];
 
   useEffect(() => {
     // 최초에 api를 불러와서 데이터 세팅
