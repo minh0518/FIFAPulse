@@ -26,16 +26,6 @@ export const OutlineUl = styled.ul`
   border-bottom: 1px solid lightgray;
 `;
 
-// export const DataNotExistDiv = styled.div`
-//   height: 19em;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   color: red;
-//   font-size: 1.3rem;
-//   font-weight: bolder;
-// `;
-
 export const DetailStatisticsDiv = styled.div`
   margin-top: 5%;
 `;

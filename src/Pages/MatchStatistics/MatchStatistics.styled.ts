@@ -87,6 +87,12 @@ export const OtherGoalTime = styled.ul`
   }
 `;
 
+export const OwnGoalUl = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  color: tomato;
+`;
+
 // ScoresAndGoalTime안에서 양쪽에 나타하는 MyGoalTime과 독립적으로
 // ScoresAndGoalTime의 가운데에 위치
 export const Scores = styled.div`
