@@ -9,11 +9,10 @@ export const Nav = styled.nav<NavBarProps>`
   justify-content: space-around;
   align-items: center;
 
-  //position: fixed;
-  //z-index: 600;
+  // 조건부 스타일링
   position: ${(props) => (props.page === 'MainSelect' ? 'fixed' : '')};
   z-index: ${(props) => (props.page === 'MainSelect' ? 600 : '')};
-  background-color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? '' : 'white')};
+  background-color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? 'transparent' : 'white')};
   color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? 'white' : 'black')};
   box-shadow: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.25 ? '' : '0px 5px 15px rgba(0,0,0,0.2)')};
   // props.scrollPoint && 으로 해버리면 scrollPoint가 0일때 최상단을 의미하므로 이대로 작동해야 하는데

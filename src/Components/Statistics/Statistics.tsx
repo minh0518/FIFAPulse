@@ -10,7 +10,6 @@ import {
   DetailStatisticsDiv,
   DetailStatisticsUl,
   OutlineHeading,
-  OutlineUl,
   StatisticsContainerDiv,
   StatisticsContentDiv,
   StyledChart,
@@ -67,19 +66,24 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
     return matchDetail.matchInfo[selectedUsertStatistics].matchDetail;
   };
   const shortCutDefence = () => {
-    return matchDetail.matchInfo[selectedUsertStatistics].defence;
+    // return matchDetail.matchInfo[selectedUsertStatistics].defence;
+    return [myMatch.defence, otherMatch.defence];
   };
   const shortCutPass = () => {
-    return matchDetail.matchInfo[selectedUsertStatistics].pass;
+    // return matchDetail.matchInfo[selectedUsertStatistics].pass;
+    return [myMatch.pass, otherMatch.pass];
   };
   const shortCutPlayer = () => {
-    return matchDetail.matchInfo[selectedUsertStatistics].player;
+    // return matchDetail.matchInfo[selectedUsertStatistics].player;
+    return [myMatch.player, otherMatch.player];
   };
   const shortCutShoot = () => {
-    return matchDetail.matchInfo[selectedUsertStatistics].shoot;
+    // return matchDetail.matchInfo[selectedUsertStatistics].shoot;
+    return [myMatch.shoot, otherMatch.shoot];
   };
   const shortCutShootDetail = () => {
-    return matchDetail.matchInfo[selectedUsertStatistics].shootDetail;
+    // return matchDetail.matchInfo[selectedUsertStatistics].shootDetail;
+    return [myMatch.shootDetail, otherMatch.shootDetail];
   };
 
   const chartState = {

@@ -58,7 +58,6 @@ const MatchStatistics = () => {
     }
     setSelectedUsertStatistics(index);
   };
-  console.log(selectedUsertStatistics);
 
   const showResultWithScore = (index: 0 | 1): React.ReactNode => {
     if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 1) {
@@ -88,10 +87,12 @@ const MatchStatistics = () => {
   }
   // console.log(matchDetail);
 
-  console.log(extractGoalInfo(matchDetail.matchInfo[myDataIndex.mine].shootDetail));
+  // console.log(extractGoalInfo(matchDetail.matchInfo[myDataIndex.mine].shootDetail));
   return (
     <>
-      <Navbar page="MatchResultWithMatchStatistics" />
+      {/* matchDetail 과 myDataIndex가 로딩되지 않으면 로딩인디케이터를 띄워주기 때문에
+     여기선 조건부 렌더링을 사용할 필요 없이 바로 matchDetail 와 myDataIndex를 사용 */}
+      <Navbar page="MatchStatistics" />
       <MatchStatisticsContainerDiv>
         <PlayerNickNames>
           <button type="button" onClick={() => onUserNicknameClick('mine')}>
@@ -117,6 +118,7 @@ const MatchStatistics = () => {
                   </li>
                 );
               })}
+              {matchDetail.matchInfo[myDataIndex.mine].shoot.ownGoal !== 0 && <>자살골</>}
             </MyGoalTime>
             <Scores>
               <span>{showResultWithScore(myDataIndex.mine)}</span>
@@ -132,6 +134,7 @@ const MatchStatistics = () => {
                   </li>
                 );
               })}
+              {matchDetail.matchInfo[myDataIndex.other].shoot.ownGoal !== 0 && <>자살골</>}
             </OtherGoalTime>
           </ScoresAndGoalTime>
           <MatchTimeDiv>
@@ -141,7 +144,7 @@ const MatchStatistics = () => {
 
         <Statistics matchDetail={matchDetail} myDataIndex={myDataIndex} selectedUsertStatistics={selectedUsertStatistics} />
       </MatchStatisticsContainerDiv>
-      <Footer page="MatchResultWithMatchStatistics" />
+      <Footer page="MatchStatistics" />
     </>
   );
 };
