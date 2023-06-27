@@ -1,6 +1,6 @@
 import React from 'react';
 import { DefenceContainerDiv, ForfeitDiv } from './Defence.styled';
-import { DefenceProps, MatchInfos } from '../../../types/props';
+import { MatchInfos } from '../../../types/props';
 import { calculatePercent } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 

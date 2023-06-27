@@ -1,6 +1,6 @@
 import React from 'react';
 import { PassContainerDiv } from './Pass.styled';
-import { MatchInfos, PassProps } from '../../../types/props';
+import { MatchInfos } from '../../../types/props';
 import { calculatePercent } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 
