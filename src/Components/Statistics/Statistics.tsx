@@ -16,13 +16,13 @@ import {
 import { MatchStatisticsProps } from '../../types/props';
 import { convertYardtoMeter } from '../../utils/MatchStatistics';
 
-const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: MatchStatisticsProps) => {
+const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
   const [statisticsMode, setStatisticsMode] = useState('defence');
 
-  const [myMatch, otherMatch] = [matchDetail.matchInfo[myDataIndex.mine], matchDetail.matchInfo[myDataIndex.other]];
-  const [myNickName, otherNickName] = [myMatch.nickname, otherMatch.nickname];
+  // const [myMatch, otherMatch] = [matchDetail.matchInfo[myDataIndex.mine], matchDetail.matchInfo[myDataIndex.other]];
+  const [myNickName, otherNickName] = [myMatchInfo.nickname, otherMatchInfo.nickname];
 
-  const [myMatchDetail, otherMatchDetail] = [myMatch.matchDetail, otherMatch.matchDetail];
+  const [myMatchDetail, otherMatchDetail] = [myMatchInfo.matchDetail, otherMatchInfo.matchDetail];
   const myMatchDetailBasic = [
     myMatchDetail.possession,
     convertYardtoMeter(myMatchDetail.dribble),
@@ -172,10 +172,10 @@ const Statistics = ({ matchDetail, myDataIndex, selectedUsertStatistics }: Match
         {/* <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv> */}
 
         <StatisticsContentDiv>
-          {statisticsMode === 'defence' && <Defence matchInfos={[myMatch, otherMatch]} />}
-          {statisticsMode === 'pass' && <Pass matchInfos={[myMatch, otherMatch]} />}
-          {statisticsMode === 'shoot' && <Shoot matchInfos={[myMatch, otherMatch]} />}
-          {statisticsMode === 'player' && <Player matchInfos={[myMatch, otherMatch]} />}
+          {statisticsMode === 'defence' && <Defence matchInfos={[myMatchInfo, otherMatchInfo]} />}
+          {statisticsMode === 'pass' && <Pass matchInfos={[myMatchInfo, otherMatchInfo]} />}
+          {statisticsMode === 'shoot' && <Shoot matchInfos={[myMatchInfo, otherMatchInfo]} />}
+          {statisticsMode === 'player' && <Player matchInfos={[myMatchInfo, otherMatchInfo]} />}
         </StatisticsContentDiv>
       </DetailStatisticsDiv>
     </StatisticsContainerDiv>
