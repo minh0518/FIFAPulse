@@ -107,3 +107,5 @@ export const extractGoalInfo = (shootDetail: MatchDetail['matchInfo'][0]['shootD
       return { ...i, goalTime: calculateGoalTime(i.goalTime) };
     });
 };
+
+export const checkOwnGoal = () => {};
