@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PlayerContainerDiv } from './Player.styled';
 import FIFAData from '../../../Services/FifaData';
-import { MatchInfos, PlayerProps } from '../../../types/props';
+import { MatchInfos } from '../../../types/props';
 import { convertPlayerName, convertPosition, convertYardtoMeter, getSeasonImg } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 import PlayerImg from '../../PlayerImg';

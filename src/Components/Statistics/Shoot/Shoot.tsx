@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShootContainerDiv } from './Shoot.styled';
-import { MatchInfos, ShootProps } from '../../../types/props';
+import { MatchInfos } from '../../../types/props';
 import { calculateGoalTime } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 
