@@ -8,6 +8,7 @@ import {
   MyGoalTime,
   NickNameSpan,
   OtherGoalTime,
+  OwnGoalUl,
   PlayerNickNames,
   Scores,
   ScoresAndGoalTime,
@@ -21,7 +22,7 @@ import FIFAData from '../../Services/FifaData';
 import goalImg from '../../images/goalImg.jpg';
 import { MatchDetail, matchInfoType } from '../../types/api';
 import { myDataIndex, selectedUsertStatistics } from '../../types/states';
-import { convertPlayerName, extractGoalInfo } from '../../utils/MatchStatistics';
+import { checkOwnGoal, convertPlayerName, extractGoalInfo } from '../../utils/MatchStatistics';
 import { convertDateAndTime } from '../../utils/MyRecord';
 
 const MatchStatistics = () => {
@@ -170,7 +171,13 @@ const MatchStatistics = () => {
                   </li>
                 );
               })}
-              {myMatchInfo!.shoot.ownGoal !== 0 && <>자살골</>}
+              {myMatchInfo!.shoot.ownGoal !== 0 && (
+                <OwnGoalUl>
+                  {checkOwnGoal(myMatchInfo!.shoot.ownGoal).map((i) => {
+                    return i;
+                  })}
+                </OwnGoalUl>
+              )}
             </MyGoalTime>
             <Scores>
               {/* <span>{showResultWithScore(myDataIndex.mine)}</span> */}
@@ -188,7 +195,13 @@ const MatchStatistics = () => {
                   </li>
                 );
               })}
-              {otherMatchInfo!.shoot.ownGoal !== 0 && <>자살골</>}
+              {otherMatchInfo!.shoot.ownGoal !== 0 && (
+                <OwnGoalUl>
+                  {checkOwnGoal(otherMatchInfo!.shoot.ownGoal).map((i) => {
+                    return i;
+                  })}
+                </OwnGoalUl>
+              )}
             </OtherGoalTime>
           </ScoresAndGoalTime>
           <MatchTimeDiv>

@@ -169,8 +169,6 @@ const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
           </li>
         </DetailStatisticsUl>
 
-        {/* <DataNotExistDiv>몰수패는 데이터가 집계되지 않습니다</DataNotExistDiv> */}
-
         <StatisticsContentDiv>
           {statisticsMode === 'defence' && <Defence matchInfos={[myMatchInfo, otherMatchInfo]} />}
           {statisticsMode === 'pass' && <Pass matchInfos={[myMatchInfo, otherMatchInfo]} />}
