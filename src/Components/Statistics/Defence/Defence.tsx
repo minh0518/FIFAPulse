@@ -136,19 +136,6 @@ const Defence = ({ matchInfos }: MatchInfos) => {
       {myMatchData.matchDetail.matchEndType === 2 ? (
         <Forfeit />
       ) : (
-        // <ul>
-        //   <li>블록 시도 : {myDefenceData.blockTry}</li>
-        //   <li>블록 성공 : {myDefenceData.blockSuccess}</li>
-        //   <li>
-        //     블록 성공률 : {calculatePercent(myDefenceData.blockTry, myDefenceData.blockSuccess)}% (
-        //     {`${myDefenceData.blockSuccess} / ${myDefenceData.blockTry}`})
-        //   </li>
-        //   <li>태클 시도 : {myDefenceData.tackleTry}</li>
-        //   <li>태클 성공 : {myDefenceData.tackleSuccess}</li>
-        //   <li>
-        //
-        //   </li>
-        // </ul>
         <ChartContainerDiv>
           <StyledChart options={myChartState.options} series={myChartState.series} type="radialBar" height={360} width={670} />
           <b>블록 성공률 : {calculatePercent(myDefenceData.blockTry, myDefenceData.blockSuccess)}% </b>
@@ -158,20 +145,6 @@ const Defence = ({ matchInfos }: MatchInfos) => {
       {ohterMatchData.matchDetail.matchEndType === 2 ? (
         <Forfeit />
       ) : (
-        // <ul>
-        //   <li>블록 시도 : {ohterDefenceData.blockTry}</li>
-        //   <li>블록 성공 : {ohterDefenceData.blockSuccess}</li>
-        //   <li>
-        //     블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% (
-        //     {`${ohterDefenceData.blockSuccess} / ${ohterDefenceData.blockTry}`})
-        //   </li>
-        //   <li>태클 시도 : {ohterDefenceData.tackleTry}</li>
-        //   <li>태클 성공 : {ohterDefenceData.tackleSuccess}</li>
-        //   <li>
-        //     태클 성공률 : {calculatePercent(ohterDefenceData.tackleTry, ohterDefenceData.tackleSuccess)}% (
-        //     {`${ohterDefenceData.tackleSuccess} / ${ohterDefenceData.tackleTry}`})
-        //   </li>
-        // </ul>
         <ChartContainerDiv>
           <StyledChart options={otherChartState.options} series={otherChartState.series} type="radialBar" height={360} width={670} />
           <b>블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% </b>

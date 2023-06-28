@@ -34,7 +34,6 @@ const OutLetContainerDiv = styled.div<pathNameProps>`
 
   background-size: ${(props) => (props.pathName !== '/main-select' ? 'cover' : '')};
   background-attachment: ${(props) => (props.pathName !== '/main-select' ? 'fixed' : '')};
-  background-repeat: no-repeat;
 
   background-color: #e9ebee;
   min-height: 100vh;
