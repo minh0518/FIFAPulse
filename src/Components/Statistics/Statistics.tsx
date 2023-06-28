@@ -102,8 +102,8 @@ const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
         },
       },
       stroke: {
-        width: 1,
-        colors: ['#fff'],
+        // width: 0,
+        // colors: ['#fff'],
       },
       // title: {
       //   text: '100% Stacked Bar',

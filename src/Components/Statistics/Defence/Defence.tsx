@@ -97,7 +97,7 @@ const Defence = ({ matchInfos }: MatchInfos) => {
           },
         },
       },
-      colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+      colors: ['#14db60', '#0db915', '#129965', '#077764c6'],
       labels: ['블록 시도', '태클 시도', '블록 성공', '태클 성공'],
       legend: {
         show: true,
@@ -151,8 +151,8 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         // </ul>
         <ChartContainerDiv>
           <StyledChart options={myChartState.options} series={myChartState.series} type="radialBar" height={360} width={670} />
-          블록 성공률 : {calculatePercent(myDefenceData.blockTry, myDefenceData.blockSuccess)}% <br />
-          태클 성공률 : {calculatePercent(myDefenceData.tackleTry, myDefenceData.tackleSuccess)}%
+          <b>블록 성공률 : {calculatePercent(myDefenceData.blockTry, myDefenceData.blockSuccess)}% </b>
+          <b>태클 성공률 : {calculatePercent(myDefenceData.tackleTry, myDefenceData.tackleSuccess)}%</b>
         </ChartContainerDiv>
       )}
       {ohterMatchData.matchDetail.matchEndType === 2 ? (
@@ -174,8 +174,8 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         // </ul>
         <ChartContainerDiv>
           <StyledChart options={otherChartState.options} series={otherChartState.series} type="radialBar" height={360} width={670} />
-          블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% <br />
-          태클 성공률 : {calculatePercent(ohterDefenceData.tackleTry, ohterDefenceData.tackleSuccess)}%
+          <b>블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% </b>
+          <b>태클 성공률 : {calculatePercent(ohterDefenceData.tackleTry, ohterDefenceData.tackleSuccess)}%</b>
         </ChartContainerDiv>
       )}
     </DefenceContainerDiv>
