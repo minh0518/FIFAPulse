@@ -42,7 +42,7 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
           {/* <NavMenuBuuton type="button">MAIN MENU</NavMenuBuuton> */}
         </NavMenuList>
         <NavMenuList>
-          <NavMenuLink to="/">NOTICE</NavMenuLink>
+          <NavMenuLink to="#">NOTICE</NavMenuLink>
           {/* <NavMenuBuuton type="button">NOTICE</NavMenuBuuton> */}
         </NavMenuList>
         <NavMenuList>

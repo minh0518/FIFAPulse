@@ -1,3 +1,4 @@
+import ApexCharts from 'react-apexcharts';
 import styled from 'styled-components';
 
 export const DefenceContainerDiv = styled.div`
@@ -11,3 +12,10 @@ export const ForfeitDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ChartContainerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const StyledChart = styled(ApexCharts)``;

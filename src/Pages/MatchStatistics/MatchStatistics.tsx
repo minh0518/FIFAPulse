@@ -74,22 +74,6 @@ const MatchStatistics = () => {
   };
 
   const showResultWithScore = (target: string): React.ReactNode => {
-    // if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 1) {
-    //   return (
-    //     <p>
-    //       몰수승<span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span>
-    //     </p>
-    //   );
-    // }
-    // if (matchDetail?.matchInfo[index].matchDetail.matchEndType === 2) {
-    //   return (
-    //     <p>
-    //       <span>({matchDetail?.matchInfo[index].shoot.goalTotal})</span>몰수패
-    //     </p>
-    //   );
-    // }
-    // return <p>{matchDetail?.matchInfo[index].shoot.goalTotalDisplay}</p>;
-
     if (target === 'mine') {
       if (myMatchInfo?.matchDetail.matchEndType === 1) {
         return (
