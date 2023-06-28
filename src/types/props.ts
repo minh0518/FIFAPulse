@@ -38,6 +38,10 @@ export interface PlayerImgProps {
 }
 
 // styled-components
+export interface pathNameProps {
+  pathName: string;
+}
+
 export interface NavBarProps {
   scrollPoint?: number;
   page: string;
