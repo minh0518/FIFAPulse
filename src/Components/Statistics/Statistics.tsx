@@ -109,7 +109,7 @@ const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
       //   text: '100% Stacked Bar',
       // },
       xaxis: {
-        categories: ['점유율(%)', '평균 드리블 거리(m)', '코너킥', '파울', '오프사이드', '옐로카드', '레드카드', '부상'],
+        categories: ['점유율(%)', '평균 드리블 거리', '코너킥', '파울', '오프사이드', '옐로카드', '레드카드', '부상'],
         labels: {
           show: false,
         },

@@ -1,6 +1,20 @@
+![championsLeague](https://github.com/minh0518/FIFAPulse/assets/78631876/816fbff0-4558-4f01-ab72-92ca4fc612bc)
+
 <div align='center'>
     <h1>FIFAPulse</h1>
+
+```
+FIFAOnline4 Open API를 이용한 개인 프로젝트
+(2023년 4월 9일 ~ 개발중)
+```
+
+<br>
+
+[🏆FIFAPulse 홈페이지](https://fifa-pulse.vercel.app/)
+
 </div>
+<br>
+<br>
 <br>
 
 ## 🗒️목차

@@ -37,12 +37,12 @@ const TradeLog = () => {
   // console.log(tradeInfo && tradeInfo[tradeType]);
 
   useEffect(() => {
-    const test = async () => {
+    const getTradeLog = async () => {
       const fifa = new FIFAData();
       const result = await fifa.getTradeLog(userObj!.FIFAOnlineAccessId);
       setTradeInfo(result);
     };
-    test();
+    getTradeLog();
   }, []);
 
   useEffect(() => {
