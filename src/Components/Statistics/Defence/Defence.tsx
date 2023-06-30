@@ -43,8 +43,8 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         floating: true,
         fontSize: '16px',
         position: 'left',
-        offsetX: 160,
-        offsetY: 15,
+        offsetX: 140,
+        offsetY: 7,
         labels: {
           useSeriesColors: true,
         },
@@ -60,10 +60,24 @@ const Defence = ({ matchInfos }: MatchInfos) => {
       },
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 1420,
           options: {
             legend: {
-              show: false,
+              floating: true,
+              position: 'left',
+              offsetX: -20,
+              offsetY: 7,
+            },
+          },
+        },
+        {
+          breakpoint: 1024,
+          options: {
+            legend: {
+              floating: true,
+              position: 'left',
+              offsetX: 150,
+              offsetY: 7,
             },
           },
         },
@@ -104,8 +118,8 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         floating: true,
         fontSize: '16px',
         position: 'left',
-        offsetX: 160,
-        offsetY: 15,
+        offsetX: 140,
+        offsetY: 7,
         labels: {
           useSeriesColors: true,
         },
@@ -121,10 +135,24 @@ const Defence = ({ matchInfos }: MatchInfos) => {
       },
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 1420,
           options: {
             legend: {
-              show: false,
+              floating: true,
+              position: 'left',
+              offsetX: -20,
+              offsetY: 7,
+            },
+          },
+        },
+        {
+          breakpoint: 1024,
+          options: {
+            legend: {
+              floating: true,
+              position: 'left',
+              offsetX: 150,
+              offsetY: 7,
             },
           },
         },
@@ -137,7 +165,7 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         <Forfeit />
       ) : (
         <ChartContainerDiv>
-          <StyledChart options={myChartState.options} series={myChartState.series} type="radialBar" height={360} width={670} />
+          <StyledChart options={myChartState.options} series={myChartState.series} type="radialBar" height={360} />
           <b>블록 성공률 : {calculatePercent(myDefenceData.blockTry, myDefenceData.blockSuccess)}% </b>
           <b>태클 성공률 : {calculatePercent(myDefenceData.tackleTry, myDefenceData.tackleSuccess)}%</b>
         </ChartContainerDiv>
@@ -146,7 +174,7 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         <Forfeit />
       ) : (
         <ChartContainerDiv>
-          <StyledChart options={otherChartState.options} series={otherChartState.series} type="radialBar" height={360} width={670} />
+          <StyledChart options={otherChartState.options} series={otherChartState.series} type="radialBar" height={360} />
           <b>블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% </b>
           <b>태클 성공률 : {calculatePercent(ohterDefenceData.tackleTry, ohterDefenceData.tackleSuccess)}%</b>
         </ChartContainerDiv>
