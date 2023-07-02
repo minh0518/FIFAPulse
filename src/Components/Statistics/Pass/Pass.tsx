@@ -8,41 +8,42 @@ import Forfeit from '../../Forfeit';
 const Pass = ({ matchInfos }: MatchInfos) => {
   const [myMatchData, ohterMatchData] = [matchInfos[0], matchInfos[1]];
   const [myPassData, otherPassData] = [matchInfos[0].pass, matchInfos[1].pass];
+  // '전체', '롱패스', '숏패스', '스루패스', '로빙스루', '드리븐'
   const [myPassTry, myPassSuccess] = [
     [
       myPassData.passTry,
-      myPassData.drivenGroundPassTry,
-      myPassData.lobbedThroughPassTry,
       myPassData.longPassTry,
       myPassData.shortPassTry,
       myPassData.throughPassTry,
+      myPassData.lobbedThroughPassTry,
+      myPassData.drivenGroundPassTry,
     ],
     [
       myPassData.passSuccess,
-      myPassData.drivenGroundPassSuccess,
-      myPassData.lobbedThroughPassSuccess,
       myPassData.longPassSuccess,
       myPassData.shortPassSuccess,
       myPassData.throughPassSuccess,
+      myPassData.lobbedThroughPassSuccess,
+      myPassData.drivenGroundPassSuccess,
     ],
   ];
 
   const [otherPassTry, otherPassSuccess] = [
     [
       otherPassData.passTry,
-      otherPassData.drivenGroundPassTry,
-      otherPassData.lobbedThroughPassTry,
       otherPassData.longPassTry,
       otherPassData.shortPassTry,
       otherPassData.throughPassTry,
+      otherPassData.lobbedThroughPassTry,
+      otherPassData.drivenGroundPassTry,
     ],
     [
       otherPassData.passSuccess,
-      otherPassData.drivenGroundPassSuccess,
-      otherPassData.lobbedThroughPassSuccess,
       otherPassData.longPassSuccess,
       otherPassData.shortPassSuccess,
       otherPassData.throughPassSuccess,
+      otherPassData.lobbedThroughPassSuccess,
+      otherPassData.drivenGroundPassSuccess,
     ],
   ];
 
@@ -65,6 +66,10 @@ const Pass = ({ matchInfos }: MatchInfos) => {
         type: 'line',
         stacked: false,
       },
+      fill: {
+        colors: ['#0A94FB', '#253592'],
+      },
+      colors: ['#0A94FB', '#253592'],
       dataLabels: {
         enabled: true,
       },
@@ -77,7 +82,7 @@ const Pass = ({ matchInfos }: MatchInfos) => {
       //   offsetX: 110,
       // },
       xaxis: {
-        categories: ['전체', '드리븐', '로빙스루', '롱패스', '숏패스', '스루패스'],
+        categories: ['전체', '롱패스', '숏패스', '스루패스', '로빙스루', '드리븐 땅볼'],
       },
       yaxis: [
         {
@@ -86,17 +91,17 @@ const Pass = ({ matchInfos }: MatchInfos) => {
           },
           axisBorder: {
             show: true,
-            color: 'black',
+            color: '#0A94FB',
           },
           labels: {
             style: {
-              colors: 'black',
+              colors: '#0A94FB',
             },
           },
           title: {
             text: 'PASS TRY',
             style: {
-              color: 'black',
+              color: '#0A94FB',
             },
           },
           tooltip: {
@@ -111,17 +116,17 @@ const Pass = ({ matchInfos }: MatchInfos) => {
           },
           axisBorder: {
             show: true,
-            color: 'black',
+            color: '#253592',
           },
           labels: {
             style: {
-              colors: 'black',
+              colors: '#253592',
             },
           },
           title: {
             text: 'PASS SUCCESS',
             style: {
-              color: 'black',
+              color: '#253592',
             },
           },
         },
@@ -159,6 +164,10 @@ const Pass = ({ matchInfos }: MatchInfos) => {
         type: 'line',
         stacked: false,
       },
+      fill: {
+        colors: ['#00E396', '#1f634c'],
+      },
+      colors: ['#00E396', '#1f634c'],
       dataLabels: {
         enabled: true,
       },
@@ -171,7 +180,7 @@ const Pass = ({ matchInfos }: MatchInfos) => {
       //   offsetX: 110,
       // },
       xaxis: {
-        categories: ['전체', '드리븐', '로빙스루', '롱패스', '숏패스', '스루패스'],
+        categories: ['전체', '롱패스', '숏패스', '스루패스', '로빙스루', '드리븐 땅볼'],
       },
       yaxis: [
         {
@@ -180,17 +189,17 @@ const Pass = ({ matchInfos }: MatchInfos) => {
           },
           axisBorder: {
             show: true,
-            color: 'black',
+            color: '#00E396',
           },
           labels: {
             style: {
-              colors: 'black',
+              colors: '#00E396',
             },
           },
           title: {
             text: 'PASS TRY',
             style: {
-              color: 'black',
+              color: '#00E396',
             },
           },
           tooltip: {
@@ -205,17 +214,17 @@ const Pass = ({ matchInfos }: MatchInfos) => {
           },
           axisBorder: {
             show: true,
-            color: 'black',
+            color: '#1f634c',
           },
           labels: {
             style: {
-              colors: 'black',
+              colors: '#1f634c',
             },
           },
           title: {
             text: 'PASS SUCCESS',
             style: {
-              color: 'black',
+              color: '#1f634c',
             },
           },
         },
@@ -242,7 +251,7 @@ const Pass = ({ matchInfos }: MatchInfos) => {
         <PassChartDiv>
           <StyledChart options={myChartState.options} series={myChartState.series} type="line" height={400} />
           <b>
-            전체 성공률 : {calculatePercent(myPassData.passTry, myPassData.passSuccess)}% ({`${myPassData.passSuccess} / ${myPassData.passTry}`})
+            전체 패스 성공률 : {calculatePercent(myPassData.passTry, myPassData.passSuccess)}% ({`${myPassData.passSuccess} / ${myPassData.passTry}`})
           </b>
         </PassChartDiv>
       )}
@@ -253,7 +262,7 @@ const Pass = ({ matchInfos }: MatchInfos) => {
         <PassChartDiv>
           <StyledChart options={otherChartState.options} series={otherChartState.series} type="line" height={400} />
           <b>
-            전체 성공률 : {calculatePercent(otherPassData.passTry, otherPassData.passSuccess)}% (
+            전체 패스 성공률 : {calculatePercent(otherPassData.passTry, otherPassData.passSuccess)}% (
             {`${otherPassData.passSuccess} / ${otherPassData.passTry}`})
           </b>
         </PassChartDiv>

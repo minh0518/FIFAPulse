@@ -129,7 +129,7 @@ export type matchInfoType = {
     goalOutPenalty: number; // 아웃패널티 골 수
     goalPenaltyKick: number; //	패널티킥 골 수
     goalTotal: number; //	총 골 수 (실제 골 수, goalInPenalty+goalOutPenalty+goalPenaltyKick)
-    goalTotalDisplay: number; // 	게임 종료 후 유저에게 노출되는 골 수 (이걸 써야함. 자책골 반영까지 된 결과)
+    goalTotalDisplay: number; // 	게임 종료 후 유저에게 노출되는 골 수 (자책골 반영까지 된 최종 결과)
     ownGoal: number; // 자책골
     shootFreekick: number; // 프리킥 슛 수
     shootHeading: number; // 해딩 슛 수

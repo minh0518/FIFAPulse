@@ -17,7 +17,7 @@ import { MatchStatisticsProps } from '../../types/props';
 import { convertYardtoMeter } from '../../utils/MatchStatistics';
 
 const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
-  const [statisticsMode, setStatisticsMode] = useState('defence');
+  const [statisticsMode, setStatisticsMode] = useState('pass');
 
   // const [myMatch, otherMatch] = [matchDetail.matchInfo[myDataIndex.mine], matchDetail.matchInfo[myDataIndex.other]];
   const [myNickName, otherNickName] = [myMatchInfo.nickname, otherMatchInfo.nickname];
