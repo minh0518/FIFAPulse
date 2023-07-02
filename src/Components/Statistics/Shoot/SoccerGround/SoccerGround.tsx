@@ -1,7 +1,7 @@
-// import React from 'react';
+import React from 'react';
 
-// const SoccerGround = ({}) => {
-//   return <div>sdfsd</div>;
-// };
+const SoccerGround = () => {
+  return <div>SoccerGround</div>;
+};
 
-// export default SoccerGround;
+export default SoccerGround;
