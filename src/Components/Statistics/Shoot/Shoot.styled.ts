@@ -1,3 +1,4 @@
+import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
 
 export const ShootContainerDiv = styled.div`
@@ -6,4 +7,6 @@ export const ShootContainerDiv = styled.div`
   margin: 50px 0;
 `;
 
-export const tmp = '';
+export const StyledChart = styled(ReactApexChart)`
+  width: 470px;
+`;
