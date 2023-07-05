@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import { ShootContainerDiv, StyledChart } from './Shoot.styled';
+import Slider from 'react-slick';
+import {
+  AssistAndScoreDiv,
+  BoxDiv,
+  GoalParagraph,
+  PlayerInfoDiv,
+  ScoreInfoDiv,
+  SeasonAndNameDiv,
+  ShootContainerDiv,
+  StyledChart,
+  StyledSlider,
+} from './Shoot.styled';
 import SoccerField from './SoccerField';
 import { MatchInfos } from '../../../types/props';
 import { calculateGoalTime, convertPlayerName, convertPosition, getSeasonImg } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 import PlayerImg from '../../PlayerImg';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Shoot = ({ matchInfos }: MatchInfos) => {
   const [myGoalIndex, setMyGoalIndex] = useState(0);
@@ -209,12 +222,21 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
 
   const [myGoalData, otherGoalData] = [myShootDetailData.filter((i) => i.result === 3), otherShootDetailData.filter((i) => i.result === 3)];
 
-  const onMyGoalTimeClick = (index: number) => {
-    setMyGoalIndex(index);
+  console.log(myGoalData);
+  const handleOtherGoalIndex = (oldIndex: number, newIndex: number) => {
+    setOtherGoalIndex(newIndex);
   };
-  const onOtherGoalTimeClick = (index: number) => {
-    setOtherGoalIndex(index);
+  const handleMyGoalIndex = (oldIndex: number, newIndex: number) => {
+    setMyGoalIndex(newIndex);
   };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 350,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  console.log(myGoalData);
   return (
     <ShootContainerDiv>
       {myMatchData.matchDetail.matchEndType === 2 ? (
@@ -222,8 +244,56 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
       ) : (
         <div>
           <StyledChart options={myChartState.options} series={myChartState.series} type="bar" height={250} />
-
           {/* {myShootData.ownGoal !== 0 ? <span>자책골{myShootData.ownGoal}</span> : ''} */}
+
+          {myGoalData.length && (
+            <div>
+              <h3>골 정보</h3>
+              <ScoreInfoDiv>
+                <StyledSlider {...settings} beforeChange={handleMyGoalIndex}>
+                  {myGoalData
+                    .sort((a, b) => a.goalTime - b.goalTime)
+                    .map((i, index) => {
+                      return <b key={index}>{calculateGoalTime(i.goalTime)}</b>;
+                    })}
+                </StyledSlider>
+                <SoccerField goalData={myGoalData[myGoalIndex]} />
+                <AssistAndScoreDiv assist={myGoalData[myGoalIndex].assist}>
+                  {myGoalData[myGoalIndex].assist && (
+                    <BoxDiv>
+                      <GoalParagraph>ASSIST</GoalParagraph>
+
+                      <PlayerInfoDiv>
+                        <PlayerImg spId={myGoalData[myGoalIndex].assistSpId} width={100} height={100} />
+                        <SeasonAndNameDiv>
+                          <img
+                            src={getSeasonImg(myPlayerData.filter((i) => i.spId === myGoalData[myGoalIndex].assistSpId)[0].spId)}
+                            alt="시즌 이미지"
+                          />
+                          &nbsp;<b>{convertPlayerName(myGoalData[myGoalIndex].assistSpId)}</b>
+                        </SeasonAndNameDiv>
+                      </PlayerInfoDiv>
+                    </BoxDiv>
+                  )}
+
+                  <BoxDiv>
+                    <GoalParagraph>GOAL</GoalParagraph>
+                    <PlayerInfoDiv>
+                      <PlayerImg spId={myGoalData[myGoalIndex].spId} width={100} height={100} />
+                      <SeasonAndNameDiv>
+                        <img
+                          src={getSeasonImg(myPlayerData.filter((i) => i.spId === myGoalData[myGoalIndex].spId)[0].spId)}
+                          alt="시즌 이미지"
+                          width={30}
+                        />
+                        &nbsp;<b>{convertPlayerName(myGoalData[myGoalIndex].spId)}</b>
+                      </SeasonAndNameDiv>
+                    </PlayerInfoDiv>
+                  </BoxDiv>
+                </AssistAndScoreDiv>
+              </ScoreInfoDiv>
+            </div>
+          )}
         </div>
       )}
 
@@ -232,28 +302,55 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
       ) : (
         <div>
           <StyledChart options={otherChartState.options} series={otherChartState.series} type="bar" height={250} />
-          {/* <ul>
-            <li>
-              골 : {otherShootData.goalTotal} {otherShootData.ownGoal !== 0 ? <span>자책골{otherShootData.ownGoal}</span> : ''}
-              <ul>
-                <li>패널티 안 : {otherShootData.goalInPenalty}</li>
-                <li>중거리슛: {otherShootData.goalOutPenalty}</li>
-                <li>패널티킥 : {otherShootData.goalPenaltyKick}</li>
-                <li>프리킥 : {otherShootData.goalFreekick}</li>
-                <li>헤딩 : {otherShootData.goalHeading}</li>
-              </ul>
-            </li>
-            <li>
-              슈팅 : {otherShootData.shootTotal} (유효 슈팅 : {otherShootData.effectiveShootTotal})
-            </li>
-            <ul>
-              <li>패널티 안 :{otherShootData.shootInPenalty}</li>
-              <li>중거리슛 :{otherShootData.shootOutPenalty}</li>
-              <li>패널티킥 :{otherShootData.shootPenaltyKick}</li>
-              <li>프리킥 : {otherShootData.shootFreekick}</li>
-              <li>헤딩 : {otherShootData.shootHeading}</li>
-            </ul>
-          </ul> */}
+
+          {otherGoalData.length && (
+            <div>
+              <h3>골 정보</h3>
+              <ScoreInfoDiv>
+                <StyledSlider {...settings} beforeChange={handleOtherGoalIndex}>
+                  {otherGoalData
+                    .sort((a, b) => a.goalTime - b.goalTime)
+                    .map((i, index) => {
+                      return <b key={index}>{calculateGoalTime(i.goalTime)}</b>;
+                    })}
+                </StyledSlider>
+                <SoccerField goalData={otherGoalData[otherGoalIndex]} />
+                <AssistAndScoreDiv assist={otherGoalData[otherGoalIndex].assist}>
+                  {otherGoalData[otherGoalIndex].assist && (
+                    <BoxDiv>
+                      <GoalParagraph>ASSIST</GoalParagraph>
+
+                      <PlayerInfoDiv>
+                        <PlayerImg spId={otherGoalData[otherGoalIndex].assistSpId} width={100} height={100} />
+                        <SeasonAndNameDiv>
+                          <img
+                            src={getSeasonImg(otherPlayerData.filter((i) => i.spId === otherGoalData[otherGoalIndex].assistSpId)[0].spId)}
+                            alt="시즌 이미지"
+                          />
+                          &nbsp;<b>{convertPlayerName(otherGoalData[otherGoalIndex].assistSpId)}</b>
+                        </SeasonAndNameDiv>
+                      </PlayerInfoDiv>
+                    </BoxDiv>
+                  )}
+
+                  <BoxDiv>
+                    <GoalParagraph>GOAL</GoalParagraph>
+                    <PlayerInfoDiv>
+                      <PlayerImg spId={otherGoalData[otherGoalIndex].spId} width={100} height={100} />
+                      <SeasonAndNameDiv>
+                        <img
+                          src={getSeasonImg(otherPlayerData.filter((i) => i.spId === otherGoalData[otherGoalIndex].spId)[0].spId)}
+                          alt="시즌 이미지"
+                          width={30}
+                        />
+                        &nbsp;<b>{convertPlayerName(otherGoalData[otherGoalIndex].spId)}</b>
+                      </SeasonAndNameDiv>
+                    </PlayerInfoDiv>
+                  </BoxDiv>
+                </AssistAndScoreDiv>
+              </ScoreInfoDiv>
+            </div>
+          )}
         </div>
       )}
     </ShootContainerDiv>
