@@ -69,3 +69,7 @@ export interface NickNameProps {
   myDataIndex: number;
   selectedUsertStatistics: number;
 }
+
+export interface AssistProps {
+  assist: boolean;
+}

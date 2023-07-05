@@ -2,7 +2,6 @@ import React from 'react';
 import { SoccerFieldSvg } from './SoccerField.styled';
 
 const SoccerGround = ({ goalData }: any) => {
-  console.log(goalData);
   return (
     <div>
       <SoccerFieldSvg viewBox="0 0 1150 780" version="1.1" xmlns="http://www.w3.org/2000/svg">
