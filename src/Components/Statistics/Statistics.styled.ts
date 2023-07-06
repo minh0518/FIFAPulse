@@ -30,18 +30,30 @@ export const DetailStatisticsDiv = styled.div`
   margin-top: 5%;
 `;
 
+interface StatisticsMode {
+  // statisticsMode: 'defence' | 'pass' | 'shoot' | 'player';
+  statisticsMode: string;
+  value: string;
+}
 export const DetailStatisticsUl = styled.ul`
   padding-left: 0;
   margin-top: 5%;
   list-style: none;
   display: flex;
   justify-content: space-around;
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.3rem;
+`;
+
+export const CategoryButton = styled.button<StatisticsMode>`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  padding-bottom: 15px;
+  border-bottom: ${(props) => (props.statisticsMode === props.value ? '1px solid black' : 'none')};
+  &:hover {
+    transform: translateY(-5px);
   }
+  transition: transform 0.3s ease;
 `;
 
 export const StatisticsContentDiv = styled.div``;

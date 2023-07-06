@@ -9,6 +9,8 @@ import {
   BoxDiv,
   Goal,
   GoalParagraph,
+  GoalTypeList,
+  GoalTypeUl,
   PlayerInfoDiv,
   ScoreInfoDiv,
   SeasonAndNameDiv,
@@ -226,7 +228,23 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
   };
 
   const [myGoalData, otherGoalData] = [myShootDetailData.filter((i) => i.result === 3), otherShootDetailData.filter((i) => i.result === 3)];
+  type GoalType = {
+    [key: string]: string;
+  };
+  const goalType: GoalType = {
+    '1': '일반 슛',
+    '2': '감아차기',
+    '3': '헤딩',
+    '4': '로빙 슛',
+    '5': '플레어 슛',
+    '6': '땅볼 슛',
+    '7': '발리 슛',
+    '8': '프리킥',
+    '9': '페널티킥',
+    '10': '무회전 슛',
+  };
 
+  const goalTypeArr = ['일반 슛', '감아차기', '헤딩', '로빙 슛', '플레어 슛', '땅볼 슛', '발리 슛', '프리킥', '페널티킥', '무회전 슛'];
   console.log(myGoalData);
   const handleOtherGoalIndex = (oldIndex: number, newIndex: number) => {
     setOtherGoalIndex(newIndex);
@@ -273,7 +291,6 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                     <div />
                   </Goal>
                 </AssistAndGoalCircleDiv>
-
                 <SoccerField goalData={myGoalData[myGoalIndex]} />
                 <AssistAndScoreDiv assist={myGoalData[myGoalIndex].assist}>
                   {myGoalData[myGoalIndex].assist && (
@@ -309,6 +326,15 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                     </PlayerInfoDiv>
                   </BoxDiv>
                 </AssistAndScoreDiv>
+                <GoalTypeUl>
+                  {goalTypeArr.map((i, index) => {
+                    return (
+                      <GoalTypeList key={index} goalType={goalType[myGoalData[myGoalIndex].type]} variant={i}>
+                        {i}
+                      </GoalTypeList>
+                    );
+                  })}
+                </GoalTypeUl>
               </ScoreInfoDiv>
             </div>
           )}
@@ -377,6 +403,15 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                     </PlayerInfoDiv>
                   </BoxDiv>
                 </AssistAndScoreDiv>
+                <GoalTypeUl>
+                  {goalTypeArr.map((i, index) => {
+                    return (
+                      <GoalTypeList key={index} goalType={goalType[otherGoalData[otherGoalIndex].type]} variant={i}>
+                        {i}
+                      </GoalTypeList>
+                    );
+                  })}
+                </GoalTypeUl>
               </ScoreInfoDiv>
             </div>
           )}
