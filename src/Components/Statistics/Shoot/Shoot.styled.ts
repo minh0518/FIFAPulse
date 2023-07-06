@@ -129,7 +129,7 @@ export const GoalTypeUl = styled.ul`
 `;
 
 export const GoalTypeList = styled.li<GoalType>`
-  flex: 1 0 15%;
+  flex: 1 0 22%;
   border: 1px solid #ccc;
   margin: 5px;
   padding: 6px;
