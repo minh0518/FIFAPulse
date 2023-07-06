@@ -242,9 +242,24 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
     '8': '프리킥',
     '9': '페널티킥',
     '10': '무회전 슛',
+    '11': '바이시클킥',
+    '12': '파워 슛',
   };
 
-  const goalTypeArr = ['일반 슛', '감아차기', '헤딩', '로빙 슛', '플레어 슛', '땅볼 슛', '발리 슛', '프리킥', '페널티킥', '무회전 슛'];
+  const goalTypeArr = [
+    '일반 슛',
+    '감아차기',
+    '헤딩',
+    '로빙 슛',
+    '플레어 슛',
+    '땅볼 슛',
+    '발리 슛',
+    '프리킥',
+    '페널티킥',
+    '무회전 슛',
+    '바이시클킥',
+    '파워 슛',
+  ];
   console.log(myGoalData);
   const handleOtherGoalIndex = (oldIndex: number, newIndex: number) => {
     setOtherGoalIndex(newIndex);

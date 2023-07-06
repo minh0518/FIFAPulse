@@ -156,7 +156,7 @@ export type matchInfoType = {
     type: number; // 	슛 종류 1: normal 2: finesse 3: header 4: lob (로빙슛)
     // 5: flare (플레어슛) 6: low (낮은 슛) 7: volley (발리)
     // 8: free-kick (프리킥) 9: penalty (페널티킥)
-    // 10: KNUCKLE (무회전슛))
+    // 10: KNUCKLE (무회전슛)) 11: BICYCLE(바이시클킥) 12: super(파워샷)
     x: number; //	슛 x좌표 (전체 경기장 기준)
     y: number; // 슛 y좌표 (전체 경기장 기준)
   }[];
