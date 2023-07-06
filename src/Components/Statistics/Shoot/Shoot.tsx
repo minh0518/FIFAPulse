@@ -1,14 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { BiSolidRightArrow } from 'react-icons/bi';
 import Slider from 'react-slick';
 import {
+  Assist,
+  AssistAndGoalCircleDiv,
   AssistAndScoreDiv,
   BoxDiv,
+  Goal,
   GoalParagraph,
   PlayerInfoDiv,
   ScoreInfoDiv,
   SeasonAndNameDiv,
   ShootContainerDiv,
+  StyledBiSolidRightArrow,
   StyledChart,
   StyledSlider,
 } from './Shoot.styled';
@@ -257,6 +262,18 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       return <b key={index}>{calculateGoalTime(i.goalTime)}</b>;
                     })}
                 </StyledSlider>
+                <AssistAndGoalCircleDiv>
+                  <Assist>
+                    <span>어시스트</span> &nbsp;
+                    <div />
+                  </Assist>
+
+                  <Goal>
+                    <span>골</span> &nbsp;
+                    <div />
+                  </Goal>
+                </AssistAndGoalCircleDiv>
+
                 <SoccerField goalData={myGoalData[myGoalIndex]} />
                 <AssistAndScoreDiv assist={myGoalData[myGoalIndex].assist}>
                   {myGoalData[myGoalIndex].assist && (
@@ -275,6 +292,7 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       </PlayerInfoDiv>
                     </BoxDiv>
                   )}
+                  {myGoalData[myGoalIndex].assist && <StyledBiSolidRightArrow />}
 
                   <BoxDiv>
                     <GoalParagraph>GOAL</GoalParagraph>
@@ -314,6 +332,17 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       return <b key={index}>{calculateGoalTime(i.goalTime)}</b>;
                     })}
                 </StyledSlider>
+                <AssistAndGoalCircleDiv>
+                  <Assist>
+                    <span>어시스트</span> &nbsp;
+                    <div />
+                  </Assist>
+
+                  <Goal>
+                    <span>골</span> &nbsp;
+                    <div />
+                  </Goal>
+                </AssistAndGoalCircleDiv>
                 <SoccerField goalData={otherGoalData[otherGoalIndex]} />
                 <AssistAndScoreDiv assist={otherGoalData[otherGoalIndex].assist}>
                   {otherGoalData[otherGoalIndex].assist && (
@@ -332,7 +361,7 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       </PlayerInfoDiv>
                     </BoxDiv>
                   )}
-
+                  {otherGoalData[otherGoalIndex].assist && <StyledBiSolidRightArrow />}
                   <BoxDiv>
                     <GoalParagraph>GOAL</GoalParagraph>
                     <PlayerInfoDiv>

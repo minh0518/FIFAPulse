@@ -1,4 +1,5 @@
 import ReactApexChart from 'react-apexcharts';
+import { BiSolidRightArrow } from 'react-icons/bi';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import { AssistProps } from '../../../types/props';
@@ -61,4 +62,57 @@ export const AssistAndScoreDiv = styled.div<AssistProps>`
   display: flex;
   //justify-content: space-between;
   justify-content: ${(props) => (props.assist ? 'space-between' : 'center')};
+  align-items: center;
+`;
+
+export const DisplayCircle = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* & > div:first-child {
+    height: 10px;
+    width: 10px;
+    background-color: blue;
+    border-radius: 50%;
+  }
+
+  & > div:last-child {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+  } */
+`;
+
+export const AssistAndGoalCircleDiv = styled.div`
+  font-size: 1.1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+`;
+export const Assist = styled.div`
+  display: flex;
+  align-items: center;
+  div {
+    height: 10px;
+    width: 10px;
+    background-color: blue;
+    border-radius: 50%;
+  }
+`;
+
+export const Goal = styled.div`
+  display: flex;
+  align-items: center;
+  div {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+`;
+
+export const StyledBiSolidRightArrow = styled(BiSolidRightArrow)`
+  margin-top: 40px;
 `;
