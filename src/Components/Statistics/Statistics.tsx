@@ -6,6 +6,7 @@ import Pass from './Pass';
 import Player from './Player';
 import Shoot from './Shoot';
 import {
+  CategoryButton,
   DetailStatisticsDiv,
   DetailStatisticsUl,
   OutlineHeading,
@@ -148,24 +149,24 @@ const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
         <h2>세부 정보</h2>
         <DetailStatisticsUl>
           <li>
-            <button type="button" name="defence" onClick={onModeClick} value="defence">
+            <CategoryButton type="button" name="defence" onClick={onModeClick} value="defence" statisticsMode={statisticsMode}>
               수비
-            </button>
+            </CategoryButton>
           </li>
           <li>
-            <button type="button" name="pass" onClick={onModeClick} value="pass">
+            <CategoryButton type="button" name="pass" onClick={onModeClick} value="pass" statisticsMode={statisticsMode}>
               패스
-            </button>
+            </CategoryButton>
           </li>
           <li>
-            <button type="button" name="shoot" onClick={onModeClick} value="shoot">
+            <CategoryButton type="button" name="shoot" onClick={onModeClick} value="shoot" statisticsMode={statisticsMode}>
               슈팅
-            </button>
+            </CategoryButton>
           </li>
           <li>
-            <button type="button" name="player" onClick={onModeClick} value="player">
+            <CategoryButton type="button" name="player" onClick={onModeClick} value="player" statisticsMode={statisticsMode}>
               선수
-            </button>
+            </CategoryButton>
           </li>
         </DetailStatisticsUl>
 

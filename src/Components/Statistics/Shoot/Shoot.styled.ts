@@ -23,11 +23,11 @@ export const StyledChart = styled(ReactApexChart)`
 
 export const StyledSlider = styled(Slider)`
   width: 450px;
-
   margin: 40px 0px;
 `;
 
 export const ScoreInfoDiv = styled.div`
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,4 +115,25 @@ export const Goal = styled.div`
 
 export const StyledBiSolidRightArrow = styled(BiSolidRightArrow)`
   margin-top: 40px;
+`;
+
+interface GoalType {
+  goalType: string;
+  variant: string;
+}
+export const GoalTypeUl = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+`;
+
+export const GoalTypeList = styled.li<GoalType>`
+  flex: 1 0 15%;
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 6px;
+  box-sizing: border-box;
+  text-align: center;
+  color: ${(props) => (props.variant === props.goalType ? 'red' : 'black')};
 `;
