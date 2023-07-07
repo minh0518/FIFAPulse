@@ -9,7 +9,9 @@ import PlayerImg from '../../PlayerImg';
 // 후스코어처럼 선수 포메이션 형태 구현하고 거기에 hover하면 각종 정보들 보여주는 식으로?
 const Player = ({ matchInfos }: MatchInfos) => {
   const [myMatchData, ohterMatchData] = [matchInfos[0], matchInfos[1]];
-  const [myPlayerData, ohterPlayerData] = [matchInfos[0].player, matchInfos[1].player];
+
+  // readonly로 설정되어 있으므로 원본을 변경하는 sort를 사용하기 위해 복사해서 사용
+  const [myPlayerData, ohterPlayerData] = [[...matchInfos[0].player], [...matchInfos[1].player]];
   return (
     <PlayerContainerDiv>
       {myMatchData.matchDetail.matchEndType === 2 ? (

@@ -83,7 +83,7 @@ export type matchInfoType = {
     throughPassSuccess: number; // 스루패스 성공 수
     throughPassTry: number; // 스루패스 시도 수
   };
-  player: {
+  player: readonly {
     // 각 선수들에 대한 정보 (후보선수 포함)
 
     spId: number; // 선수 spid
@@ -115,8 +115,9 @@ export type matchInfoType = {
       tackle: number; // 태클 성공 수
       tackleTry: number; // 태글 시도 수
     };
-  }[]; // 위의 MetaDataSpid는 MetaDataSpid자체를 사용할 때 배열로 선언하면 되지만
-  // 이처럼 matchInfoType안의 특정 값들만 배열로 사용되고 있는 것은 여기서 직접 배열로 선언
+  }[]; // 위의 MetaDataSpid같은 타입들의 경우 , MetaDataSpid자체를 사용할 때 배열로 선언하면 되지만
+  // 이처럼 matchInfoType 안에 있는 일부 값들이 배열로 사용되고 있는 경우, matchInfoType을 사용할때 따로 특정 하위 값들만 배열로 선언할 수 없기에
+  // 여기서 직접 배열로 선언
 
   shoot: {
     // 해당 매치 전체 슛 정보
@@ -138,7 +139,7 @@ export type matchInfoType = {
     shootOutScore: number; // 승부차기 슛 수
     shootPenaltyKick: number; // 패널티킥 슛 수
   };
-  shootDetail: {
+  shootDetail: readonly {
     // 각 슛에 대한 세부 정보(shoot : shootTotal로 찍힌 각 슈팅에 대한 정보)
 
     result: number; // 슛 결과 (1 : ontarget(유효슛) , 2 : offtarget(빗나간 슛) , 3 : goal)
@@ -166,7 +167,7 @@ export interface MatchDetail {
   matchDate: string;
   matchId: string;
   matchType: number;
-  matchInfo: [matchInfoType, matchInfoType]; // 길이가 고정적이므로 튜플 사용
+  matchInfo: readonly [matchInfoType, matchInfoType]; // 길이가 고정적이므로 튜플 사용
 }
 
 // { "tradeDate": "2023-05-31T01:07:25",
@@ -174,6 +175,8 @@ export interface MatchDetail {
 // "spid": 265204024,
 // "grade": 1,
 // "value": 499000000 }
+// TradeLogInfo역시 실제로 객체 배열 형태로 반환되므로 위의 MatchDetail의 하위 타입들처럼 []형태로 사용해도 되는데
+// 우선은 최소 단위로 사용해보고자 객체 형태로 선언하고 사용할때 []를 붙여서 사용
 export interface TradeLogInfo {
   tradeDate: string;
   saleSn: string;
