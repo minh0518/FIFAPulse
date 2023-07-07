@@ -58,6 +58,8 @@ const MatchStatistics = () => {
 
       setMyMatchInfo(matchDetailResult.matchInfo[indexInfo.mine]);
       setOtherMatchInfo(matchDetailResult.matchInfo[indexInfo.other]);
+      // setMyMatchInfo(JSON.parse(JSON.stringify(matchDetailResult.matchInfo[indexInfo.mine])));
+      // setOtherMatchInfo(JSON.parse(JSON.stringify(matchDetailResult.matchInfo[indexInfo.other])));
     };
     getMatchDetail();
   }, []);
