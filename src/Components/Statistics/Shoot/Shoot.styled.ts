@@ -137,3 +137,12 @@ export const GoalTypeList = styled.li<GoalType>`
   text-align: center;
   color: ${(props) => (props.variant === props.goalType ? 'red' : 'black')};
 `;
+
+export const NoGoalRecord = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 300px;
+  font-weight: bolder;
+  font-size: 1.2rem;
+`;

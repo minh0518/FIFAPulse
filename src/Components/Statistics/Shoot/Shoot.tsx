@@ -11,6 +11,7 @@ import {
   GoalParagraph,
   GoalTypeList,
   GoalTypeUl,
+  NoGoalRecord,
   PlayerInfoDiv,
   ScoreInfoDiv,
   SeasonAndNameDiv,
@@ -284,9 +285,9 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
           <StyledChart options={myChartState.options} series={myChartState.series} type="bar" height={250} />
           {/* {myShootData.ownGoal !== 0 ? <span>자책골{myShootData.ownGoal}</span> : ''} */}
 
-          {myGoalData.length && (
-            <div>
-              <h3>골 정보</h3>
+          <div>
+            <h3>골 정보</h3>
+            {myGoalData.length ? (
               <ScoreInfoDiv>
                 <StyledSlider {...settings} beforeChange={handleMyGoalIndex}>
                   {myGoalData
@@ -351,8 +352,10 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                   })}
                 </GoalTypeUl>
               </ScoreInfoDiv>
-            </div>
-          )}
+            ) : (
+              <NoGoalRecord>득점 기록이 존재하지 않습니다</NoGoalRecord>
+            )}
+          </div>
         </div>
       )}
 
@@ -362,9 +365,9 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
         <div>
           <StyledChart options={otherChartState.options} series={otherChartState.series} type="bar" height={250} />
 
-          {otherGoalData.length && (
-            <div>
-              <h3>골 정보</h3>
+          <div>
+            <h3>골 정보</h3>
+            {otherGoalData.length ? (
               <ScoreInfoDiv>
                 <StyledSlider {...settings} beforeChange={handleOtherGoalIndex}>
                   {otherGoalData
@@ -428,8 +431,10 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                   })}
                 </GoalTypeUl>
               </ScoreInfoDiv>
-            </div>
-          )}
+            ) : (
+              <NoGoalRecord>득점 기록이 존재하지 않습니다</NoGoalRecord>
+            )}
+          </div>
         </div>
       )}
     </ShootContainerDiv>
