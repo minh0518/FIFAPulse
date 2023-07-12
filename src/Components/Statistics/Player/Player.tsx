@@ -12,6 +12,7 @@ const Player = ({ matchInfos }: MatchInfos) => {
 
   // readonly로 설정되어 있으므로 원본을 변경하는 sort를 사용하기 위해 복사해서 사용
   const [myPlayerData, ohterPlayerData] = [[...matchInfos[0].player], [...matchInfos[1].player]];
+
   return (
     <PlayerContainerDiv>
       {myMatchData.matchDetail.matchEndType === 2 ? (

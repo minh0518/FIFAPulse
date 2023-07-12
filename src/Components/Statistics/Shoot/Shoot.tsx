@@ -276,6 +276,8 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
     slidesToScroll: 1,
   };
   console.log(myGoalData);
+  console.log(otherGoalData);
+
   return (
     <ShootContainerDiv>
       {myMatchData.matchDetail.matchEndType === 2 ? (
