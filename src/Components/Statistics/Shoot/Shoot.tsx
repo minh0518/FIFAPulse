@@ -277,6 +277,7 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
   };
   console.log(myGoalData);
   console.log(otherGoalData);
+  // console.log(myPlayerData);
 
   return (
     <ShootContainerDiv>
@@ -310,8 +311,8 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                   </Goal>
                 </AssistAndGoalCircleDiv>
                 <SoccerField goalData={myGoalData[myGoalIndex]} />
-                <AssistAndScoreDiv assist={myGoalData[myGoalIndex].assist}>
-                  {myGoalData[myGoalIndex].assist && (
+                <AssistAndScoreDiv assist={myGoalData[myGoalIndex].assist} assistSpId={myGoalData[myGoalIndex].assistSpId}>
+                  {myGoalData[myGoalIndex].assist && myGoalData[myGoalIndex].assistSpId !== -1 && (
                     <BoxDiv>
                       <GoalParagraph>ASSIST</GoalParagraph>
 
@@ -327,7 +328,7 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       </PlayerInfoDiv>
                     </BoxDiv>
                   )}
-                  {myGoalData[myGoalIndex].assist && <StyledBiSolidRightArrow />}
+                  {myGoalData[myGoalIndex].assist && myGoalData[myGoalIndex].assistSpId !== -1 && <StyledBiSolidRightArrow />}
 
                   <BoxDiv>
                     <GoalParagraph>GOAL</GoalParagraph>
@@ -390,8 +391,8 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                   </Goal>
                 </AssistAndGoalCircleDiv>
                 <SoccerField goalData={otherGoalData[otherGoalIndex]} />
-                <AssistAndScoreDiv assist={otherGoalData[otherGoalIndex].assist}>
-                  {otherGoalData[otherGoalIndex].assist && (
+                <AssistAndScoreDiv assist={otherGoalData[otherGoalIndex].assist} assistSpId={otherGoalData[otherGoalIndex].assistSpId}>
+                  {otherGoalData[otherGoalIndex].assist && otherGoalData[otherGoalIndex].assistSpId !== -1 && (
                     <BoxDiv>
                       <GoalParagraph>ASSIST</GoalParagraph>
 
@@ -407,7 +408,7 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       </PlayerInfoDiv>
                     </BoxDiv>
                   )}
-                  {otherGoalData[otherGoalIndex].assist && <StyledBiSolidRightArrow />}
+                  {otherGoalData[otherGoalIndex].assist && otherGoalData[otherGoalIndex].assistSpId !== -1 && <StyledBiSolidRightArrow />}
                   <BoxDiv>
                     <GoalParagraph>GOAL</GoalParagraph>
                     <PlayerInfoDiv>

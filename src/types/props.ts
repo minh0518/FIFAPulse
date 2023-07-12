@@ -72,4 +72,5 @@ export interface NickNameProps {
 
 export interface AssistProps {
   assist: boolean;
+  assistSpId: number;
 }
