@@ -1,7 +1,8 @@
 import React from 'react';
+import { WhoScoredContainerDiv } from './WhoScored.styled';
 
 const WhoScored = () => {
-  return <div>sad</div>;
+  return <WhoScoredContainerDiv>sad</WhoScoredContainerDiv>;
 };
 
 export default WhoScored;
