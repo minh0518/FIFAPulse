@@ -45,21 +45,21 @@ const SoccerGround = ({ goalData }: any) => {
         <polyline points="1100,481.6 1045,481.6 1045,298.4 1100,298.4 1100,591.6 935,591.6 935,188.4 1100,188.4" className="line" />
 
         {/* 축구장 라인 부분부터 좌표가 시작해야 하므로 x와y에 각각 -40을 해줘야 함 */}
-        {goalData.assist && (
+        {/* {goalData.assist && (
           <>
-            <circle cx={goalData.assistX * 1150 - 40} cy={(1 - goalData.assistY) * 780 - 40} r="10" fill="blue" />
+            <circle cx={goalData.assistX * 1070 + 40} cy={goalData.assistY * 700 + 40} r="10" fill="blue" />
             <line
-              x1={goalData.assistX * 1150 - 40}
-              y1={(1 - goalData.assistY) * 780 - 40}
-              x2={goalData.x * 1150 - 40}
-              y2={(1 - goalData.y) * 780 - 40}
+              x1={goalData.assistX * 1070 + 40}
+              y1={goalData.assistY * 700 + 40}
+              x2={goalData.x * 1070 + 40}
+              y2={goalData.y * 700 + 40}
               stroke="black"
               strokeWidth={5}
               markerEnd="url(#arrowhead)"
             />
           </>
         )}
-        <circle cx={goalData.x * 1150 - 40} cy={(1 - goalData.y) * 780 - 40} r="10" fill="red" />
+        <circle cx={goalData.x * 1070 + 40} cy={goalData.y * 700 + 40} r="10" fill="red" /> */}
       </SoccerFieldSvg>
     </div>
   );
