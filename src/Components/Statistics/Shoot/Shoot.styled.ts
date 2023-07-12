@@ -61,7 +61,7 @@ export const AssistAndScoreDiv = styled.div<AssistProps>`
   width: 100%;
   display: flex;
   //justify-content: space-between;
-  justify-content: ${(props) => (props.assist ? 'space-between' : 'center')};
+  justify-content: ${(props) => (props.assist && props.assistSpId !== -1 ? 'space-between' : 'center')};
   align-items: center;
 `;
 

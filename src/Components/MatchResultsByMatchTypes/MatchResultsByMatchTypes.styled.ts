@@ -32,7 +32,7 @@ export const WinningpercentageDiv = styled.div`
     margin-bottom: 0; // h2기본 margin 제거
   }
   span {
-    color: gray;
+    color: black;
     white-space: nowrap;
   }
   ul {

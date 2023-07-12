@@ -44,7 +44,9 @@ const SoccerGround = ({ goalData }: any) => {
         <polyline points="50,481.6 105,481.6 105,298.4 50,298.4 50,591.6 215,591.6 215,188.4 50,188.4" className="line" />
         <polyline points="1100,481.6 1045,481.6 1045,298.4 1100,298.4 1100,591.6 935,591.6 935,188.4 1100,188.4" className="line" />
 
-        {goalData.assist && <circle cx={goalData.assistX * 1070 + 40} cy={goalData.assistY * 700 + 40} r="10" fill="blue" />}
+        {goalData.assist && goalData.assistSpId !== -1 && (
+          <circle cx={goalData.assistX * 1070 + 40} cy={goalData.assistY * 700 + 40} r="10" fill="blue" />
+        )}
         <line
           x1={goalData.x * 1070 + 40}
           y1={goalData.y * 700 + 40}
