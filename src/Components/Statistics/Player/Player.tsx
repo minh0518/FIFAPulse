@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { PlayerContainerDiv } from './Player.styled';
+import WhoScored from './WhoScored';
 import FIFAData from '../../../Services/FifaData';
 import { MatchInfos } from '../../../types/props';
 import { convertPlayerName, convertPosition, convertYardtoMeter, getSeasonImg } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 import PlayerImg from '../../PlayerImg';
 
-// 후스코어처럼 선수 포메이션 형태 구현하고 거기에 hover하면 각종 정보들 보여주는 식으로?
 const Player = ({ matchInfos }: MatchInfos) => {
   const [myMatchData, ohterMatchData] = [matchInfos[0], matchInfos[1]];
 
   // readonly로 설정되어 있으므로 원본을 변경하는 sort를 사용하기 위해 복사해서 사용
   const [myPlayerData, ohterPlayerData] = [[...matchInfos[0].player], [...matchInfos[1].player]];
 
+  // console.log(myMatchData);
+  // console.log(myPlayerData);
+
   return (
     <PlayerContainerDiv>
-      {myMatchData.matchDetail.matchEndType === 2 ? (
+      <WhoScored matchInfos={matchInfos} />
+      {/* {myMatchData.matchDetail.matchEndType === 2 ? (
         <Forfeit />
       ) : (
         <ul>
@@ -162,7 +166,7 @@ const Player = ({ matchInfos }: MatchInfos) => {
               );
             })}
         </ul>
-      )}
+      )} */}
     </PlayerContainerDiv>
   );
 };
