@@ -124,37 +124,37 @@ export const myPositionCord: PositionCordType = {
     nameY: 140,
   },
   LB: {
-    x: 70,
+    x: 60,
     y: 40,
     nameY: 55,
   },
   LWB: {
-    x: 70,
+    x: 60,
     y: 40,
     nameY: 55,
   },
   LCB: {
-    x: 70,
+    x: 60,
     y: 90,
     nameY: 105,
   },
   CB: {
-    x: 70,
+    x: 60,
     y: 125,
     nameY: 140,
   },
   RCB: {
-    x: 70,
+    x: 60,
     y: 160,
     nameY: 175,
   },
   RB: {
-    x: 70,
+    x: 60,
     y: 210,
     nameY: 225,
   },
   RWB: {
-    x: 70,
+    x: 60,
     y: 210,
     nameY: 225,
   },
@@ -165,17 +165,17 @@ export const myPositionCord: PositionCordType = {
   },
 
   LDM: {
-    x: 110,
+    x: 100,
     y: 85,
     nameY: 100,
   },
   CDM: {
-    x: 105,
+    x: 95,
     y: 125,
     nameY: 140,
   },
   RDM: {
-    x: 110,
+    x: 100,
     y: 165,
     nameY: 180,
   },
@@ -186,17 +186,17 @@ export const myPositionCord: PositionCordType = {
     nameY: 50,
   },
   LCM: {
-    x: 140,
+    x: 130,
     y: 75,
     nameY: 90,
   },
   CM: {
-    x: 140,
+    x: 130,
     y: 125,
     nameY: 140,
   },
   RCM: {
-    x: 140,
+    x: 130,
     y: 175,
     nameY: 190,
   },
@@ -207,60 +207,60 @@ export const myPositionCord: PositionCordType = {
   },
 
   LAM: {
-    x: 170,
+    x: 160,
     y: 65,
     nameY: 80,
   },
   CAM: {
-    x: 175,
+    x: 160,
     y: 125,
     nameY: 140,
   },
   RAM: {
-    x: 170,
+    x: 160,
     y: 185,
     nameY: 200,
   },
 
   LW: {
-    x: 215,
+    x: 205,
     y: 35,
     nameY: 50,
   },
   RW: {
-    x: 215,
+    x: 205,
     y: 215,
     nameY: 230,
   },
   LF: {
-    x: 200,
+    x: 190,
     y: 65,
     nameY: 80,
   },
   CF: {
-    x: 200,
+    x: 190,
     y: 125,
     nameY: 140,
   },
   RF: {
-    x: 200,
+    x: 190,
     y: 185,
     nameY: 200,
   },
   LS: {
-    x: 225,
-    y: 65,
-    nameY: 80,
+    x: 215,
+    y: 70,
+    nameY: 85,
   },
   ST: {
-    x: 225,
+    x: 220,
     y: 125,
     nameY: 140,
   },
   RS: {
-    x: 225,
-    y: 185,
-    nameY: 200,
+    x: 215,
+    y: 180,
+    nameY: 195,
   },
 };
 
