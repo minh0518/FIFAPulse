@@ -14,7 +14,6 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
   ];
 
   const bestPlayer = [...myPlayerData, ...ohterPlayerData].sort((a, b) => b.status.spRating - a.status.spRating);
-  console.log(bestPlayer);
 
   const [myStartingPlayerData, otherStartingPlayerData] = [
     myPlayerData.filter((i) => {
@@ -113,7 +112,7 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
                   height="50"
                   fill="transparent"
                 />
-                {i.spId === bestPlayer[0].spId ? (
+                {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
                   <g
                     transform={`translate(${myPositionCord[convertPosition(i.spPosition)].x - 14}, ${
                       myPositionCord[convertPosition(i.spPosition)].y - 17
@@ -171,7 +170,7 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
                   height="50"
                   fill="transparent"
                 />
-                {i.spId === bestPlayer[0].spId ? (
+                {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
                   <g
                     transform={`translate(${otherPositionCord[convertPosition(i.spPosition)].x - 14}, ${
                       otherPositionCord[convertPosition(i.spPosition)].y - 17
