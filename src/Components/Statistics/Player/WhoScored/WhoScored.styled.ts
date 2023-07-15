@@ -27,7 +27,7 @@ export const WhoScoredSvg = styled.svg`
   .player {
     fill: #ffffff;
     font-weight: bolder;
-    font-size: 6px;
+    font-size: 5px;
   }
 
   #hoverDiv {
