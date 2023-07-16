@@ -410,3 +410,17 @@ export const otherPositionCord: PositionCordType = {
     nameY: myPositionCord.LS.nameY,
   },
 };
+
+export const mySubPositionCord = [
+  { x: 20, y: 275, nameY: 290 },
+  { x: 50, y: 275, nameY: 290 },
+  { x: 80, y: 275, nameY: 290 },
+  { x: 110, y: 275, nameY: 290 },
+  { x: 140, y: 275, nameY: 290 },
+  { x: 170, y: 275, nameY: 290 },
+  { x: 200, y: 275, nameY: 290 },
+];
+
+export const otherSubPositionCord = mySubPositionCord.map((i) => {
+  return { ...i, x: 480 - i.x };
+});

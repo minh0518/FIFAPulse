@@ -2,10 +2,40 @@ import React, { useEffect, useRef, useState } from 'react';
 import { WhoScoredContainerDiv, WhoScoredSvg } from './WhoScored.styled';
 
 import { MatchInfos } from '../../../../types/props';
-import { convertPlayerName, convertPosition, myPositionCord, otherPositionCord } from '../../../../utils/MatchStatistics';
+import {
+  convertPlayerName,
+  convertPosition,
+  myPositionCord,
+  mySubPositionCord,
+  otherPositionCord,
+  otherSubPositionCord,
+} from '../../../../utils/MatchStatistics';
 
 const WhoScored = ({ matchInfos }: MatchInfos) => {
   const [hoverDivStyle, setHoverDivStyle] = useState<React.CSSProperties>({ display: 'none' });
+
+  const showHoverDiv = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+
+    // svg를 기반으로 해서 보여줘야 하므로 축구장 전에 svg의 정보를 가져와야 함
+    const svgRect = event.currentTarget.ownerSVGElement?.getBoundingClientRect();
+
+    if (svgRect) {
+      const leftPos = rect.x - svgRect.x + rect.width;
+      const topPos = rect.y - svgRect.y + rect.height;
+
+      setHoverDivStyle({
+        display: 'block',
+        position: 'absolute',
+        left: `${leftPos}px`,
+        top: `${topPos}px`,
+      });
+    }
+  };
+
+  const hideHoverDiv = () => {
+    setHoverDivStyle({ display: 'none' });
+  };
 
   // readonly로 설정되어 있으므로 원본을 변경하는 sort를 사용하기 위해 복사해서 사용
   const [myPlayerData, ohterPlayerData] = [
@@ -14,6 +44,7 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
   ];
 
   const bestPlayer = [...myPlayerData, ...ohterPlayerData].sort((a, b) => b.status.spRating - a.status.spRating);
+  console.log(bestPlayer);
 
   const [myStartingPlayerData, otherStartingPlayerData] = [
     myPlayerData.filter((i) => {
@@ -33,12 +64,14 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
     }),
   ];
 
+  const subPlayerNameLength = 5;
+
   return (
     <WhoScoredContainerDiv>
-      <WhoScoredSvg preserveAspectRatio="none" viewBox="0 0 480 250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <WhoScoredSvg preserveAspectRatio="none" viewBox="0 0 480 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <g id="MC-480x225" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="MC_Pitch_Final">
-            <rect id="Pitch-Background" fill="#376711" fillRule="nonzero" x="0" y="0" width="480" height="250" />
+            <rect id="Pitch-Background" fill="#376711" fillRule="nonzero" x="0" y="0" width="480" height="300" />
             <g id="Stripes" fill="#33620E" fillRule="nonzero">
               <rect id="Rectangle" x="0" y="0" width="40" height="250" />
               <rect id="Rectangle-Copy-4" x="240" y="0" width="40" height="249.324324" />
@@ -97,126 +130,198 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
           </g>
         </g>
 
-        {myPlayerData
-          .sort((a, b) => a.spPosition - b.spPosition)
-          .filter((i) => {
-            return i.spPosition !== 28;
-          })
-          .map((i, index) => {
-            return (
-              <g key={index}>
-                <rect
-                  x={myPositionCord[convertPosition(i.spPosition)].x - 25}
-                  y={myPositionCord[convertPosition(i.spPosition)].y - 25}
-                  width="50"
-                  height="50"
-                  fill="transparent"
-                />
-                {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
-                  <g
-                    transform={`translate(${myPositionCord[convertPosition(i.spPosition)].x - 14}, ${
-                      myPositionCord[convertPosition(i.spPosition)].y - 17
-                    }) scale(0.14)`}
-                  >
-                    <polygon
-                      points="100,10 40,198 190,78 10,78 160,198"
-                      style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
-                      className="mine"
-                    />
-                  </g>
-                ) : (
-                  <circle
-                    cx={myPositionCord[convertPosition(i.spPosition)].x}
-                    cy={myPositionCord[convertPosition(i.spPosition)].y}
-                    r="9"
+        {/* 선발 */}
+        {myStartingPlayerData.map((i, index) => {
+          return (
+            // <g key={index} onMouseOver={showHoverDiv} onMouseOut={hideHoverDiv}>
+            <g key={index}>
+              <rect
+                x={myPositionCord[convertPosition(i.spPosition)].x - 25}
+                y={myPositionCord[convertPosition(i.spPosition)].y - 25}
+                width="50"
+                height="50"
+                fill="transparent"
+              />
+              {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
+                <g
+                  transform={`translate(${myPositionCord[convertPosition(i.spPosition)].x - 14}, ${
+                    myPositionCord[convertPosition(i.spPosition)].y - 17
+                  }) scale(0.14)`}
+                >
+                  <polygon
+                    points="100,10 40,198 190,78 10,78 160,198"
+                    style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
                     className="mine"
                   />
-                )}
-
-                <text
-                  x={myPositionCord[convertPosition(i.spPosition)].x}
-                  y={myPositionCord[convertPosition(i.spPosition)].y}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  className="point"
-                >
-                  {i.status.spRating}
-                </text>
-                <text
-                  x={myPositionCord[convertPosition(i.spPosition)].x}
-                  y={myPositionCord[convertPosition(i.spPosition)].nameY}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  className="player"
-                >
-                  {convertPlayerName(i.spId)}
-                </text>
-              </g>
-            );
-          })}
-
-        {ohterPlayerData
-          .sort((a, b) => a.spPosition - b.spPosition)
-          .filter((i) => {
-            return i.spPosition !== 28;
-          })
-          .map((i, index) => {
-            return (
-              <g key={index}>
-                <rect
-                  x={otherPositionCord[convertPosition(i.spPosition)].x - 25}
-                  y={otherPositionCord[convertPosition(i.spPosition)].y - 25}
-                  width="50"
-                  height="50"
-                  fill="transparent"
+                </g>
+              ) : (
+                <circle
+                  cx={myPositionCord[convertPosition(i.spPosition)].x}
+                  cy={myPositionCord[convertPosition(i.spPosition)].y}
+                  r="10"
+                  className="mine"
                 />
-                {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
-                  <g
-                    transform={`translate(${otherPositionCord[convertPosition(i.spPosition)].x - 14}, ${
-                      otherPositionCord[convertPosition(i.spPosition)].y - 17
-                    }) scale(0.14)`}
-                  >
-                    <polygon
-                      points="100,10 40,198 190,78 10,78 160,198"
-                      style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
-                      className="mine"
-                    />
-                  </g>
-                ) : (
-                  <circle
-                    cx={otherPositionCord[convertPosition(i.spPosition)].x}
-                    cy={otherPositionCord[convertPosition(i.spPosition)].y}
-                    r="9"
-                    className="other"
-                  />
-                )}
+              )}
 
-                <text
-                  x={otherPositionCord[convertPosition(i.spPosition)].x}
-                  y={otherPositionCord[convertPosition(i.spPosition)].y}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  className="point"
+              <text
+                x={myPositionCord[convertPosition(i.spPosition)].x}
+                y={myPositionCord[convertPosition(i.spPosition)].y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="point"
+              >
+                {i.status.spRating}
+              </text>
+              <text
+                x={myPositionCord[convertPosition(i.spPosition)].x}
+                y={myPositionCord[convertPosition(i.spPosition)].nameY}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="player"
+              >
+                {convertPlayerName(i.spId)}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* 후보 */}
+        {mySublayerData.map((i, index) => {
+          return (
+            // <g key={index} onMouseOver={showHoverDiv} onMouseOut={hideHoverDiv}>
+            <g key={index}>
+              <rect x={mySubPositionCord[index].x - 25} y={mySubPositionCord[index].y - 25} width="50" height="50" fill="transparent" />
+              {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
+                <g transform={`translate(${mySubPositionCord[index].x - 14}, ${mySubPositionCord[index].y - 17}) scale(0.14)`}>
+                  <polygon
+                    points="100,10 40,198 190,78 10,78 160,198"
+                    style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
+                    className="mine"
+                  />
+                </g>
+              ) : (
+                <circle cx={mySubPositionCord[index].x} cy={mySubPositionCord[index].y} r="10" className="mine" />
+              )}
+
+              <text x={mySubPositionCord[index].x} y={mySubPositionCord[index].y} textAnchor="middle" dominantBaseline="middle" className="point">
+                {i.status.spRating}
+              </text>
+              <text
+                x={mySubPositionCord[index].x}
+                y={mySubPositionCord[index].nameY}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="player"
+              >
+                {convertPlayerName(i.spId).length > subPlayerNameLength
+                  ? `${convertPlayerName(i.spId).slice(0, subPlayerNameLength)}...`
+                  : convertPlayerName(i.spId)}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* 선발 */}
+        {otherStartingPlayerData.map((i, index) => {
+          return (
+            // <g key={index} onMouseOver={showHoverDiv} onMouseOut={hideHoverDiv}>
+            <g key={index}>
+              <rect
+                x={otherPositionCord[convertPosition(i.spPosition)].x - 25}
+                y={otherPositionCord[convertPosition(i.spPosition)].y - 25}
+                width="50"
+                height="50"
+                fill="transparent"
+              />
+              {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
+                <g
+                  transform={`translate(${otherPositionCord[convertPosition(i.spPosition)].x - 14}, ${
+                    otherPositionCord[convertPosition(i.spPosition)].y - 17
+                  }) scale(0.14)`}
                 >
-                  {i.status.spRating}
-                </text>
-                <text
-                  x={otherPositionCord[convertPosition(i.spPosition)].x}
-                  y={otherPositionCord[convertPosition(i.spPosition)].nameY}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  className="player"
-                >
-                  {convertPlayerName(i.spId)}
-                </text>
-              </g>
-            );
-          })}
+                  <polygon
+                    points="100,10 40,198 190,78 10,78 160,198"
+                    style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
+                    className="mine"
+                  />
+                </g>
+              ) : (
+                <circle
+                  cx={otherPositionCord[convertPosition(i.spPosition)].x}
+                  cy={otherPositionCord[convertPosition(i.spPosition)].y}
+                  r="10"
+                  className="other"
+                />
+              )}
+
+              <text
+                x={otherPositionCord[convertPosition(i.spPosition)].x}
+                y={otherPositionCord[convertPosition(i.spPosition)].y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="point"
+              >
+                {i.status.spRating}
+              </text>
+              <text
+                x={otherPositionCord[convertPosition(i.spPosition)].x}
+                y={otherPositionCord[convertPosition(i.spPosition)].nameY}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="player"
+              >
+                {convertPlayerName(i.spId)}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* 후보 */}
+        {otherSublayerData.map((i, index) => {
+          return (
+            // <g key={index} onMouseOver={showHoverDiv} onMouseOut={hideHoverDiv}>
+            <g key={index}>
+              <rect x={otherSubPositionCord[index].x - 25} y={otherSubPositionCord[index].y - 25} width="50" height="50" fill="transparent" />
+              {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
+                <g transform={`translate(${otherSubPositionCord[index].x - 14}, ${otherSubPositionCord[index].y - 17}) scale(0.14)`}>
+                  <polygon
+                    points="100,10 40,198 190,78 10,78 160,198"
+                    style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
+                    className="mine"
+                  />
+                </g>
+              ) : (
+                <circle cx={otherSubPositionCord[index].x} cy={otherSubPositionCord[index].y} r="10" className="other" />
+              )}
+
+              <text
+                x={otherSubPositionCord[index].x}
+                y={otherSubPositionCord[index].y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="point"
+              >
+                {i.status.spRating}
+              </text>
+              <text
+                x={otherSubPositionCord[index].x}
+                y={otherSubPositionCord[index].nameY}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="player"
+              >
+                {convertPlayerName(i.spId).length > subPlayerNameLength
+                  ? `${convertPlayerName(i.spId).slice(0, subPlayerNameLength)}...`
+                  : convertPlayerName(i.spId)}
+              </text>
+            </g>
+          );
+        })}
       </WhoScoredSvg>
 
-      {/* <div id="hoverDiv" style={hoverDivStyle}>
+      <div id="hoverDiv" style={hoverDivStyle}>
         This is the Hover Div
-      </div> */}
+      </div>
     </WhoScoredContainerDiv>
   );
 };
