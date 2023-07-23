@@ -19,7 +19,7 @@ const Player = ({ matchInfos }: MatchInfos) => {
   return (
     <PlayerContainerDiv>
       <WhoScored matchInfos={matchInfos} />
-      {/* {myMatchData.matchDetail.matchEndType === 2 ? (
+      {myMatchData.matchDetail.matchEndType === 2 ? (
         <Forfeit />
       ) : (
         <ul>
@@ -166,7 +166,7 @@ const Player = ({ matchInfos }: MatchInfos) => {
               );
             })}
         </ul>
-      )} */}
+      )}
     </PlayerContainerDiv>
   );
 };

@@ -177,4 +177,17 @@ export default class FIFAData {
 
     return result.data;
   };
+
+  getTopRankerPlayerInfo = async (matchtype: number, players: any): Promise<any> => {
+    console.log(matchtype, players);
+    const result = await this.instance.get(`/rankers/status`, {
+      params: {
+        matchtype,
+        players,
+      },
+    });
+    console.log(result);
+
+    return result.data;
+  };
 }
