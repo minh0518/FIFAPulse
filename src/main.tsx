@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import Challenge from './Pages/Challenge';
 import ChooseModeAndLogin from './Pages/ChooseModeAndLogin';
 import Guest from './Pages/Guest/Guest';
 import MainSelect from './Pages/MainSelect';
@@ -24,7 +23,6 @@ const router = createBrowserRouter([
       { path: '/main-select/my-record/:matchId', element: <MatchStatistics /> },
       { path: '/main-select/position-guide', element: <PositionGuide /> },
       { path: '/main-select/user-record', element: <UserRecord /> },
-      { path: '/main-select/challenge', element: <Challenge /> },
       { path: '/*', element: <App /> },
     ],
   },

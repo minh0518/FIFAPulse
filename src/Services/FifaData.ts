@@ -179,7 +179,6 @@ export default class FIFAData {
   };
 
   getTopRankerPlayerInfo = async (matchtype: number, players: any): Promise<any> => {
-    console.log(matchtype, players);
     const result = await this.instance.get(`/rankers/status`, {
       params: {
         matchtype,

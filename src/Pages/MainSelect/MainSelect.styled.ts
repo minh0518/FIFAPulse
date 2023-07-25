@@ -6,13 +6,13 @@ import myRecord from '../../images/myRecord.png';
 import positionGuide from '../../images/positionGuide.jpg';
 import userRecord from '../../images/userRecord.jpg';
 
-const ELEMENT_HEIGHT: number = 3000;
+const ELEMENT_HEIGHT: number = 2500;
 
 // 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
   height: ${ELEMENT_HEIGHT}px;
   // background-color: #e9ebee;
-  // App의 높이를 min-height로 지정함으로써 그걸 넘는 3500px이 되면
+  // App의 높이를 min-height로 지정함으로써 그걸 넘는 2500px이 되면
   // 자연스레 App의 높이도 늘어나므로 굳이 배경색을 여기서 추가로 지정할 필요가 없다
 `;
 export const MainMenuDescriptionDiv = styled.div`
@@ -20,7 +20,7 @@ export const MainMenuDescriptionDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 28%;
+  height: 850px;
   color: black; // 추후 폰트 교체 필요
   background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url(${championsLeague});
   background-size: cover;
@@ -62,7 +62,7 @@ type MyRecordSlideProps = {
 export const MyRecordDiv = styled.div<MyRecordSlideProps>`
   display: ${(props) => (props.myRecord ? 'block' : 'none')};
 
-  height: 17.5%;
+  height: 525px;
   box-sizing: border-box;
   width: 80%; // 한 메뉴 전체의 폭을 80%해서 양 옆 여백을 줌
   padding: 3.5% 0% 3.5% 0%; // 나머지 메뉴들과 비율 통일
@@ -159,7 +159,7 @@ type UserRecordSlideProps = {
 };
 export const UserRecordDiv = styled.div<UserRecordSlideProps>`
   display: ${(props) => (props.userRecord ? 'block' : 'none')};
-  height: 17.5%;
+  height: 525px;
   box-sizing: border-box;
   width: 80%;
   padding: 3.5% 0% 3.5% 0%; // 윗 컴포넌트 3.5+ 현재컴포넌트 3.5해서 7%을 맞추기 3.5를 사용
@@ -240,7 +240,7 @@ type PositionGuideSlideProps = {
 };
 export const PositionGuideDiv = styled.div<PositionGuideSlideProps>`
   display: ${(props) => (props.positionGuide ? 'block' : 'none')};
-  height: 17.5%;
+  height: 525px;
   box-sizing: border-box;
   width: 80%;
   margin: 0 auto;
@@ -316,84 +316,84 @@ export const PositionGuideParagraph = styled.p`
 `;
 
 // 챌린지
-type ChallengeSliceProps = {
-  gameChallenge: boolean;
-};
-export const ChallengeDiv = styled.div<ChallengeSliceProps>`
-  display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
-  height: 17.5%;
-  box-sizing: border-box;
-  width: 80%;
-  margin: 0 auto;
-  padding: 3.5% 0% 3.5% 0%;
-`;
-export const ChallengeLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  text-decoration: none;
+// type ChallengeSliceProps = {
+//   gameChallenge: boolean;
+// };
+// export const ChallengeDiv = styled.div<ChallengeSliceProps>`
+//   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
+//   height: 525px;
+//   box-sizing: border-box;
+//   width: 80%;
+//   margin: 0 auto;
+//   padding: 3.5% 0% 3.5% 0%;
+// `;
+// export const ChallengeLink = styled(Link)`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100%;
+//   text-decoration: none;
 
-  @media (min-width: 1025px) {
-    width: 70%;
-    background: linear-gradient(
-        to right,
-        rgba(233, 235, 238, 0) 10%,
-        rgba(233, 235, 238, 0) 25%,
-        rgba(233, 235, 238, 0) 40%,
-        rgba(233, 235, 238, 0.2) 50%,
-        rgba(233, 235, 238, 0.4) 75%,
-        rgba(233, 235, 238, 1) 100%
-      ),
-      linear-gradient(
-        to left,
-        rgba(233, 235, 238, 0) 10%,
-        rgba(233, 235, 238, 0) 25%,
-        rgba(233, 235, 238, 0) 40%,
-        rgba(233, 235, 238, 0.2) 50%,
-        rgba(233, 235, 238, 0.4) 75%,
-        rgba(233, 235, 238, 1) 100%
-      ),
-      url(${challenge});
-    background-size: 70%;
-    background-repeat: no-repeat;
-    background-position: right;
-  }
+//   @media (min-width: 1025px) {
+//     width: 70%;
+//     background: linear-gradient(
+//         to right,
+//         rgba(233, 235, 238, 0) 10%,
+//         rgba(233, 235, 238, 0) 25%,
+//         rgba(233, 235, 238, 0) 40%,
+//         rgba(233, 235, 238, 0.2) 50%,
+//         rgba(233, 235, 238, 0.4) 75%,
+//         rgba(233, 235, 238, 1) 100%
+//       ),
+//       linear-gradient(
+//         to left,
+//         rgba(233, 235, 238, 0) 10%,
+//         rgba(233, 235, 238, 0) 25%,
+//         rgba(233, 235, 238, 0) 40%,
+//         rgba(233, 235, 238, 0.2) 50%,
+//         rgba(233, 235, 238, 0.4) 75%,
+//         rgba(233, 235, 238, 1) 100%
+//       ),
+//       url(${challenge});
+//     background-size: 70%;
+//     background-repeat: no-repeat;
+//     background-position: right;
+//   }
 
-  @media (max-width: 1024px) {
-    width: 100%;
-    background: linear-gradient(
-        to right,
-        rgba(233, 235, 238, 0) 10%,
-        rgba(233, 235, 238, 0) 25%,
-        rgba(233, 235, 238, 0) 40%,
-        rgba(233, 235, 238, 0.2) 50%,
-        rgba(233, 235, 238, 0.4) 75%,
-        rgba(233, 235, 238, 1) 100%
-      ),
-      linear-gradient(
-        to left,
-        rgba(233, 235, 238, 0) 10%,
-        rgba(233, 235, 238, 0) 25%,
-        rgba(233, 235, 238, 0) 40%,
-        rgba(233, 235, 238, 0.2) 50%,
-        rgba(233, 235, 238, 0.4) 75%,
-        rgba(233, 235, 238, 1) 100%
-      ),
-      url(${challenge});
+//   @media (max-width: 1024px) {
+//     width: 100%;
+//     background: linear-gradient(
+//         to right,
+//         rgba(233, 235, 238, 0) 10%,
+//         rgba(233, 235, 238, 0) 25%,
+//         rgba(233, 235, 238, 0) 40%,
+//         rgba(233, 235, 238, 0.2) 50%,
+//         rgba(233, 235, 238, 0.4) 75%,
+//         rgba(233, 235, 238, 1) 100%
+//       ),
+//       linear-gradient(
+//         to left,
+//         rgba(233, 235, 238, 0) 10%,
+//         rgba(233, 235, 238, 0) 25%,
+//         rgba(233, 235, 238, 0) 40%,
+//         rgba(233, 235, 238, 0.2) 50%,
+//         rgba(233, 235, 238, 0.4) 75%,
+//         rgba(233, 235, 238, 1) 100%
+//       ),
+//       url(${challenge});
 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-`;
-export const ChallengeParagraph = styled.p`
-  font-size: 4rem;
-  color: black;
-  font-weight: bolder;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  letter-spacing: 1rem;
-`;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     background-position: center;
+//   }
+// `;
+// export const ChallengeParagraph = styled.p`
+//   font-size: 4rem;
+//   color: black;
+//   font-weight: bolder;
+//   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+//   letter-spacing: 1rem;
+// `;
 
 export const LinkAndDescriptionDiv = styled.div`
   display: flex;
