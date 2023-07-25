@@ -3,22 +3,55 @@ import {
   DescriptionDiv,
   DescriptionParagraph,
   Icon,
-  PlayerSearchSection,
+  PlayerNameAndPostion,
   PositionGuideContainerDiv,
+  SearchSection,
   SeasonList,
   SeasonSelectUl,
 } from './PositionGuide.styled';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import PlayerNameInput from '../../Components/PlayerNameInput';
+import SelectPostition from '../../Components/SelectPostition';
 import SelectSeason from '../../Components/SelectSeason';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 
 const PositionGuide = () => {
-  const [seasonId, setSeasonId] = useState(0);
+  const [rankerInfo, setRankerInfo] = useState<any | null>(null);
+  const { userObj, setUserObj } = useUserObjAPI()!;
+  const [playerListBySeason, setPlayerListBySeason] = useState<string[]>([]);
 
-  console.log(seasonId);
+  const [seasonId, setSeasonId] = useState(0);
+  const [confirmedPlayerNameInput, setConfirmedPlayerNameInput] = useState<{ id: number; name: string } | null>(null);
+  const [confirmedPositionId, setConfirmedPositionId] = useState<number | null>(null);
+
+  console.log(seasonId, confirmedPlayerNameInput, confirmedPositionId);
+
+  useEffect(() => {
+    const getPlayerNameBySeason = () => {
+      const spidList = JSON.parse(localStorage.getItem('MetaData_spid')!);
+      const spidListFilterbySeason = spidList.filter((i: any) => {
+        return Number(String(i.id).split('').slice(0, 3).join('')) === seasonId;
+      });
+      setPlayerListBySeason(spidListFilterbySeason);
+    };
+
+    getPlayerNameBySeason();
+  }, [seasonId]);
+
+  useEffect(() => {
+    const getRankerInfo = async () => {
+      const fifa = new FIFAData();
+      const rankerInfo = await fifa.getTopRankerPlayerInfo(50, `[{"id":${confirmedPlayerNameInput?.id},"po":${confirmedPositionId}}]`);
+      setRankerInfo(rankerInfo);
+    };
+    if (seasonId !== 0 && confirmedPlayerNameInput && confirmedPositionId) {
+      getRankerInfo();
+    }
+  }, [seasonId, confirmedPlayerNameInput, confirmedPositionId]);
+
+  console.log(rankerInfo);
   return (
     <>
       <Navbar page="PositionGuide" />
@@ -33,10 +66,13 @@ const PositionGuide = () => {
 
         {/* 선수 목록을 전부 가져와서 사용하기엔 너무 양이 많으므로 반드시 시즌을 먼저 선택하게 하고
         이 시즌 id기반으로 정해진 선수만 검색하게 해야 함 */}
-        <PlayerSearchSection>
+        <SearchSection>
           <SelectSeason seasonId={seasonId} setSeasonId={setSeasonId} />
-          <PlayerNameInput />
-        </PlayerSearchSection>
+          <PlayerNameAndPostion>
+            <PlayerNameInput seasonId={seasonId} setConfirmedPlayerNameInput={setConfirmedPlayerNameInput} playerListBySeason={playerListBySeason} />
+            <SelectPostition seasonId={seasonId} setConfirmenPositionId={setConfirmedPositionId} />
+          </PlayerNameAndPostion>
+        </SearchSection>
       </PositionGuideContainerDiv>
       <Footer page="PositionGuide" />
     </>

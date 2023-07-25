@@ -23,9 +23,12 @@ export const Input = styled.input`
   background-color: white;
   border: none;
   outline: none;
-  font-size: 20px;
+  font-size: 17px;
 `;
 
+export const DeleteButton = styled.div`
+  cursor: pointer;
+`;
 export const DropDownUl = styled.ul`
   display: block;
   margin: 0 auto;

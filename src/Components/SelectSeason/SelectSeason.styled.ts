@@ -1,30 +1,7 @@
 import styled from 'styled-components';
 
-export const PositionGuideContainerDiv = styled.div`
-  width: 70%;
-  // margin: 0 auto 10% auto;
-  margin: 0 auto;
-`;
-
-export const DescriptionDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5% 0;
-  border-bottom: 1px solid black;
-`;
-
-export const DescriptionParagraph = styled.p`
-  color: gray;
-  font-size: 1.5rem;
-  span {
-    font-size: 0.8rem;
-    color: gray;
-  }
-`;
-
-export const PlayerSearchSection = styled.div`
-  display: flex;
+export const SelectSeasonContainerDiv = styled.div`
+  min-width: 450px;
 `;
 
 export const SeasonSelectUl = styled.ul`
@@ -39,8 +16,9 @@ interface seasonIdProp {
   seasonId: number;
 }
 export const SeasonList = styled.li<seasonIdProp>`
-  flex: 1 1 16%;
-  border: ${(props) => (props.seasonId === props.selectedSeasonId ? '1px solid red' : '1px solid #ccc')};
+  flex: 1 1 10%;
+
+  border: ${(props) => (props.seasonId === props.selectedSeasonId ? '2px solid red' : '1px solid #ccc')};
   margin: 5px;
   padding: 5px;
   box-sizing: border-box;

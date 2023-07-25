@@ -12,6 +12,10 @@ export const DescriptionDiv = styled.div`
   align-items: center;
   padding: 5% 0;
   border-bottom: 1px solid black;
+  /* 
+  @media (min-width: 1024px) {
+    min-width: 940px;
+  } */
 `;
 
 export const DescriptionParagraph = styled.p`
@@ -23,8 +27,18 @@ export const DescriptionParagraph = styled.p`
   }
 `;
 
-export const PlayerSearchSection = styled.div`
+export const SearchSection = styled.div`
   display: flex;
+  margin: 50px;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
+
+export const PlayerNameAndPostion = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 40px 0 80px;
 `;
 
 export const SeasonSelectUl = styled.ul`

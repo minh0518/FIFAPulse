@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Fade, Slide } from 'react-awesome-reveal';
 import {
-  ChallengeDiv,
   MainMenuDescriptionDiv,
   MainSelectContainerDiv,
   MyRecordDiv,
@@ -10,11 +9,9 @@ import {
   MyRecordLink,
   PositionGuideLink,
   UserRecordLink,
-  ChallengeLink,
   MyRecordParagraph,
   UserRecordParagraph,
   PositionGuideParagraph,
-  ChallengeParagraph,
   RightDescriptionHeading,
   LinkAndDescriptionDiv,
   LeftDescriptionHeading,
@@ -26,7 +23,7 @@ import Navbar from '../../Components/Navbar';
 import FIFAData from '../../Services/FifaData';
 
 const MainSelect = () => {
-  const ELEMENT_HEIGHT: number = 3000;
+  const ELEMENT_HEIGHT: number = 2500;
 
   const [slideInfo, setSlideInfo] = useState({
     heading: true,
@@ -56,29 +53,29 @@ const MainSelect = () => {
       });
     }
 
-    if (animationPoint >= 0.01) {
+    if (animationPoint >= 0.03) {
       setSlideInfo((prev) => {
         return { ...prev, myRecord: true };
       });
     }
 
-    if (animationPoint >= 0.23) {
+    if (animationPoint >= 0.21) {
       setSlideInfo((prev) => {
         return { ...prev, userRecord: true };
       });
     }
 
-    if (animationPoint >= 0.41) {
+    if (animationPoint >= 0.44) {
       setSlideInfo((prev) => {
         return { ...prev, positionGuide: true };
       });
     }
 
-    if (animationPoint >= 0.59) {
-      setSlideInfo((prev) => {
-        return { ...prev, gameChallenge: true };
-      });
-    }
+    // if (animationPoint >= 0.59) {
+    //   setSlideInfo((prev) => {
+    //     return { ...prev, gameChallenge: true };
+    //   });
+    // }
   };
 
   useEffect(() => {
@@ -157,7 +154,7 @@ const MainSelect = () => {
             </Slide>
           </Fade>
         </PositionGuideDiv>
-        <ChallengeDiv gameChallenge={slideInfo.gameChallenge}>
+        {/* <ChallengeDiv gameChallenge={slideInfo.gameChallenge}>
           <Fade triggerOnce style={{ height: '100%' }}>
             <Slide triggerOnce direction="right" style={{ height: '100%' }}>
               <LinkAndDescriptionDiv>
@@ -168,7 +165,7 @@ const MainSelect = () => {
               </LinkAndDescriptionDiv>
             </Slide>
           </Fade>
-        </ChallengeDiv>
+        </ChallengeDiv> */}
       </MainSelectContainerDiv>
       <Footer scrollPoint={Number((window.pageYOffset / ELEMENT_HEIGHT).toFixed(2))} page="MainSelect" />
     </>

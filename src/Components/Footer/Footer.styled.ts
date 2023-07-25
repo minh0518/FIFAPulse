@@ -7,7 +7,7 @@ export const FooterContainerDiv = styled.div<FooterProps>`
   // border-top: 1px solid gray;
   box-shadow: inset 0 0.2px 0 0 #000; // 보다 더 얇은 border를 위쪽에만 적용
   // display: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint >= 0.59 ? 'flex' : 'none')};
-  display: ${(props) => (props.page === 'MainSelect' ? (props.scrollPoint !== undefined && props.scrollPoint >= 0.59 ? 'flex' : 'none') : 'flex')};
+  display: ${(props) => (props.page === 'MainSelect' ? (props.scrollPoint !== undefined && props.scrollPoint >= 0.6 ? 'flex' : 'none') : 'flex')};
   justify-content: space-around;
   align-items: center;
 `;
