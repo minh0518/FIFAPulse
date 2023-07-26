@@ -10,6 +10,7 @@ import {
   NexonUserInfo,
   TradeLogInfo,
 } from '../types/api';
+import { getErrorMessage, getErrorName } from '../utils/getErrorMessage';
 
 export default class FIFAData {
   instance;
@@ -179,14 +180,22 @@ export default class FIFAData {
   };
 
   getTopRankerPlayerInfo = async (matchtype: number, players: any): Promise<any> => {
-    const result = await this.instance.get(`/rankers/status`, {
-      params: {
-        matchtype,
-        players,
-      },
-    });
-    console.log(result);
-
-    return result.data;
+    try {
+      const result = await this.instance.get(`/rankers/status`, {
+        params: {
+          matchtype,
+          players,
+        },
+      });
+      return result.data;
+    } catch (error) {
+      return [
+        {
+          type: 'error',
+          createDate: 'Could not found and players of rankers',
+          errorPositionId: JSON.parse(players)[0].po,
+        },
+      ];
+    }
   };
 }
