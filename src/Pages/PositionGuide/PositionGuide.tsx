@@ -12,6 +12,7 @@ import {
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import PlayerNameInput from '../../Components/PlayerNameInput';
+import PositionStatistics from '../../Components/PositionStatistics';
 import SelectPostition from '../../Components/SelectPostition';
 import SelectSeason from '../../Components/SelectSeason';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
@@ -19,7 +20,6 @@ import FIFAData from '../../Services/FifaData';
 
 const PositionGuide = () => {
   const [rankerInfo, setRankerInfo] = useState<any | null>(null);
-  const { userObj, setUserObj } = useUserObjAPI()!;
   const [playerListBySeason, setPlayerListBySeason] = useState<string[]>([]);
 
   const [seasonId, setSeasonId] = useState(0);
@@ -51,7 +51,6 @@ const PositionGuide = () => {
     }
   }, [seasonId, confirmedPlayerNameInput, confirmedPositionId]);
 
-  console.log(rankerInfo);
   return (
     <>
       <Navbar page="PositionGuide" />
@@ -73,6 +72,10 @@ const PositionGuide = () => {
             <SelectPostition seasonId={seasonId} setConfirmenPositionId={setConfirmedPositionId} />
           </PlayerNameAndPostion>
         </SearchSection>
+
+        {seasonId && confirmedPlayerNameInput && confirmedPositionId && rankerInfo && (
+          <PositionStatistics rankerInfo={rankerInfo[0]} confirmedPositionId={confirmedPositionId} />
+        )}
       </PositionGuideContainerDiv>
       <Footer page="PositionGuide" />
     </>
