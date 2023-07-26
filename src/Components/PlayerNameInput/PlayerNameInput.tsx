@@ -55,6 +55,7 @@ const PlayerNameInput = ({ seasonId, setConfirmedPlayerNameInput, playerListBySe
     setIsHaveInputValue(false);
   };
 
+  // 키보드로 선택했을 때
   const handleDropDownKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (isHaveInputValue) {
       if (event.key === 'ArrowDown' && dropDownList.length - 1 > dropDownItemIndex) {
@@ -64,20 +65,23 @@ const PlayerNameInput = ({ seasonId, setConfirmedPlayerNameInput, playerListBySe
         setDropDownItemIndex((prev) => prev - 1);
       }
 
-      // 선택했을 때 (방향키로 이동 후 엔터)
-      if (event.key === 'Enter' && dropDownItemIndex >= 0) {
+      // 엔터키로 선택했을 때 (방향키로 이동 후 엔터)
+      if (event.key === 'Enter' && dropDownItemIndex >= 0 && dropDownList.length) {
         selectDropDownItem(dropDownList[dropDownItemIndex]);
 
         // 음수로 바꿔줘야 드롭다운의 영역을 아예 벗어난 것이 됨
         setDropDownItemIndex(-1);
       }
 
-      // 선택했을 때 (방향키로 드롭다운 선택하는게 아니라 인풋창에 이름만 치고 엔터)
+      // 엔터키로 선택했을 때 (방향키로 드롭다운 선택하는게 아니라 인풋창에 이름만 치고 엔터)
       // '카렘벤제마' 로 입력해도 '카림 벤제마' 가 리스트에서 선택되어야 하므로 띄워쓰기 제거후 비교
-      if (event.key === 'Enter' && dropDownItemIndex === -1 && inputValue.split(' ').join('') === dropDownList[0].name.split(' ').join('')) {
+      if (
+        event.key === 'Enter' &&
+        dropDownItemIndex === -1 &&
+        dropDownList.length &&
+        inputValue.split(' ').join('') === dropDownList[0].name.split(' ').join('')
+      ) {
         selectDropDownItem(dropDownList[0]);
-
-        // 음수로 바꿔줘야 드롭다운의 영역을 아예 벗어난 것이 됨
         setDropDownItemIndex(-1);
       }
     }
@@ -92,6 +96,7 @@ const PlayerNameInput = ({ seasonId, setConfirmedPlayerNameInput, playerListBySe
           onKeyUp={handleDropDownKey}
           disabled={seasonId === 0}
         />
+
         <DeleteButton onClick={onClickDeleteButton}>&times;</DeleteButton>
       </InputSection>
       {isHaveInputValue && (
