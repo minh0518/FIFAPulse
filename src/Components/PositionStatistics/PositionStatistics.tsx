@@ -15,7 +15,7 @@ const PositionStatistics = ({ rankerInfo, confirmedPositionId }: any) => {
   const { createDate } = rankerInfo;
   const status = Object.fromEntries(Object.entries(rankerInfo.status).map((i) => [i[0], Number((i[1] as number).toFixed(1))]));
 
-  console.log(status);
+  console.log(confirmedPositionId);
 
   return (
     <PositionStatisticsContainerDiv>
@@ -39,7 +39,6 @@ const PositionStatistics = ({ rankerInfo, confirmedPositionId }: any) => {
         <DetailDiv>
           <p>드리블</p>
           <DetailUl>
-            <li>드리블 거리 : {(status.dribble * 0.9144).toFixed(1)}M</li>
             <li>드리블 시도 수 : {status.dribbleTry}</li>
             <li>드리블 성공 수 : {status.dribbleSuccess}</li>
           </DetailUl>

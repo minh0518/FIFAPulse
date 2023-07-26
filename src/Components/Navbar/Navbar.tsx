@@ -10,7 +10,6 @@ import { NavBarProps } from '../../types/props';
 const Navbar = ({ scrollPoint, page }: NavBarProps) => {
   const navigate = useNavigate();
 
-  console.log(scrollPoint, page);
   const onLogoutClick = () => {
     signOut(authService);
     navigate('/', { replace: true });

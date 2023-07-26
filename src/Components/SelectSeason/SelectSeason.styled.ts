@@ -9,6 +9,7 @@ export const SeasonSelectUl = styled.ul`
   flex-wrap: wrap;
   padding: 0;
   list-style: none;
+  margin: 0;
 `;
 
 interface seasonIdProp {

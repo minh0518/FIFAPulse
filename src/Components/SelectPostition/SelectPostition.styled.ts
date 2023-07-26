@@ -9,15 +9,20 @@ export const PostitionUl = styled.ul`
   list-style: none;
 `;
 interface PositionIdProp {
-  selectedPositionId: number | null;
-  postionId: number | null;
+  confirmedPositionId: number[];
+  postionId: number;
 }
 export const PostitionList = styled.li<PositionIdProp>`
   flex: 1 1 20%;
-  border: ${(props) => (props.selectedPositionId === props.postionId ? '2px solid red' : '1px solid #ccc')};
+  border: ${(props) => (props.confirmedPositionId.includes(props.postionId) ? '2px solid red' : '1px solid #ccc')};
   margin: 5px;
   padding: 5px;
   box-sizing: border-box;
   text-align: center;
   cursor: pointer;
+`;
+
+export const SelectCountMessageParagraph = styled.p`
+  color: #017859;
+  font-weight: bold;
 `;

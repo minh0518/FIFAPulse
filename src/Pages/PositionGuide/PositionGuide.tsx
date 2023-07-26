@@ -19,12 +19,12 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 
 const PositionGuide = () => {
-  const [rankerInfo, setRankerInfo] = useState<any | null>(null);
+  const [rankerInfo, setRankerInfo] = useState<any[]>([]);
   const [playerListBySeason, setPlayerListBySeason] = useState<string[]>([]);
 
   const [seasonId, setSeasonId] = useState(0);
   const [confirmedPlayerNameInput, setConfirmedPlayerNameInput] = useState<{ id: number; name: string } | null>(null);
-  const [confirmedPositionId, setConfirmedPositionId] = useState<number | null>(null);
+  const [confirmedPositionId, setConfirmedPositionId] = useState<number[]>([]);
 
   console.log(seasonId, confirmedPlayerNameInput, confirmedPositionId);
 
@@ -43,10 +43,16 @@ const PositionGuide = () => {
   useEffect(() => {
     const getRankerInfo = async () => {
       const fifa = new FIFAData();
-      const rankerInfo = await fifa.getTopRankerPlayerInfo(50, `[{"id":${confirmedPlayerNameInput?.id},"po":${confirmedPositionId}}]`);
+      const rankerInfo = await Promise.all(
+        confirmedPositionId.map((i) => {
+          return fifa.getTopRankerPlayerInfo(50, `[{"id":${confirmedPlayerNameInput?.id},"po":${i}}]`);
+        }),
+      );
+
+      // const rankerInfo = await fifa.getTopRankerPlayerInfo(50, `[{"id":${confirmedPlayerNameInput?.id},"po":${confirmedPositionId}}]`);
       setRankerInfo(rankerInfo);
     };
-    if (seasonId !== 0 && confirmedPlayerNameInput && confirmedPositionId) {
+    if (seasonId !== 0 && confirmedPlayerNameInput && confirmedPositionId?.length) {
       getRankerInfo();
     }
   }, [seasonId, confirmedPlayerNameInput, confirmedPositionId]);
@@ -69,13 +75,17 @@ const PositionGuide = () => {
           <SelectSeason seasonId={seasonId} setSeasonId={setSeasonId} />
           <PlayerNameAndPostion>
             <PlayerNameInput seasonId={seasonId} setConfirmedPlayerNameInput={setConfirmedPlayerNameInput} playerListBySeason={playerListBySeason} />
-            <SelectPostition seasonId={seasonId} setConfirmenPositionId={setConfirmedPositionId} />
+            <SelectPostition seasonId={seasonId} confirmedPositionId={confirmedPositionId} setConfirmenPositionId={setConfirmedPositionId} />
           </PlayerNameAndPostion>
         </SearchSection>
 
-        {seasonId && confirmedPlayerNameInput && confirmedPositionId && rankerInfo && (
-          <PositionStatistics rankerInfo={rankerInfo[0]} confirmedPositionId={confirmedPositionId} />
-        )}
+        {seasonId !== 0 &&
+          confirmedPlayerNameInput &&
+          confirmedPositionId.length !== 0 &&
+          rankerInfo.length !== 0 &&
+          rankerInfo.map((i, index) => {
+            return <PositionStatistics key={index} rankerInfo={i[0]} confirmedPositionId={i[0].spPosition} />;
+          })}
       </PositionGuideContainerDiv>
       <Footer page="PositionGuide" />
     </>
