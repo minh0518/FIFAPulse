@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { PostitionList, PostitionUl, SelectPostitionContainerDiv } from './SelectPostition.styled';
+import { PostitionList, PostitionUl, SelectCountMessageParagraph, SelectPostitionContainerDiv } from './SelectPostition.styled';
 
-const SelectPostition = ({ seasonId, setConfirmenPositionId }: any) => {
-  const [selectedPositionId, setSelectedPositionId] = useState<number | null>(null);
-
+const SelectPostition = ({ seasonId, confirmedPositionId, setConfirmenPositionId }: any) => {
   const positionListArr = JSON.parse(localStorage.getItem('MetaData_spPosition')!);
-
-  const onClickPositionList = (postionId: number | null) => {
-    setSelectedPositionId(postionId);
-  };
 
   useEffect(() => {
     const checkChangeSeasonId = () => {
-      setSelectedPositionId(null);
-      setConfirmenPositionId(null);
+      setConfirmenPositionId([]);
     };
 
     checkChangeSeasonId();
   }, [seasonId]);
 
+  console.log(confirmedPositionId);
+
   const onPostitionClick = (positionId: number) => {
     if (seasonId !== 0) {
-      onClickPositionList(positionId);
-      setConfirmenPositionId(positionId);
+      const prevArr = [...confirmedPositionId];
+
+      const alreadyExistIndex = prevArr.indexOf(positionId);
+      if (alreadyExistIndex !== -1) {
+        prevArr.splice(alreadyExistIndex, 1);
+        setConfirmenPositionId([...prevArr]);
+        return;
+      }
+      if (confirmedPositionId.length < 4) {
+        setConfirmenPositionId([...prevArr, positionId]);
+      }
+      if (confirmedPositionId.length >= 4) {
+        setConfirmenPositionId([...prevArr.slice(1), positionId]);
+      }
     }
   };
 
@@ -34,7 +41,7 @@ const SelectPostition = ({ seasonId, setConfirmenPositionId }: any) => {
             <PostitionList
               key={index}
               onClick={() => onPostitionClick(i.spposition)}
-              selectedPositionId={selectedPositionId}
+              confirmedPositionId={confirmedPositionId}
               postionId={i.spposition}
             >
               {i.desc}
@@ -42,6 +49,7 @@ const SelectPostition = ({ seasonId, setConfirmenPositionId }: any) => {
           );
         })}
       </PostitionUl>
+      <SelectCountMessageParagraph>최대 4개까지 선택 가능</SelectCountMessageParagraph>
     </SelectPostitionContainerDiv>
   );
 };
