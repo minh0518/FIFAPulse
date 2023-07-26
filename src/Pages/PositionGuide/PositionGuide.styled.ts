@@ -7,6 +7,7 @@ export const PositionGuideContainerDiv = styled.div`
 `;
 
 export const DescriptionDiv = styled.div`
+  min-width: 520px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,6 +29,7 @@ export const DescriptionParagraph = styled.p`
 `;
 
 export const SearchSection = styled.div`
+  min-width: 450px;
   display: flex;
   margin: 50px;
   @media (max-width: 1024px) {
