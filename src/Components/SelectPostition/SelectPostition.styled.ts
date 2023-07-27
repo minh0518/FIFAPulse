@@ -7,6 +7,7 @@ export const PostitionUl = styled.ul`
   flex-wrap: wrap;
   padding: 0;
   list-style: none;
+  z-index: -1;
 `;
 interface PositionIdProp {
   confirmedPositionId: number[];

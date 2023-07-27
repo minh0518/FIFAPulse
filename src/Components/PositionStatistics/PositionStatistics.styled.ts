@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const PositionStatisticsContainerDiv = styled.div`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 1);
   border-radius: 40px;
-  min-width: 500px;
+  /* min-width: 500px;
+  width: 40%; */
+  width: 500px;
   margin-bottom: 50px;
 `;
 
@@ -21,12 +23,9 @@ export const PositionAndMatchCount = styled.div`
 
 export const StatisticsDiv = styled.div`
   display: flex;
-  justify-content: space-between;
-  @media (max-width: 1024px) {
-    justify-content: space-around;
-    flex-wrap: wrap;
-    flex: 1 1 50%;
-  }
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex: 1 1 50%;
 `;
 
 export const DetailDiv = styled.div`

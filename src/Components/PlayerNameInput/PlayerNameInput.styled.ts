@@ -30,6 +30,10 @@ export const DeleteButton = styled.div`
   cursor: pointer;
 `;
 export const DropDownUl = styled.ul`
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
   display: block;
   margin: 0 auto;
   padding: 8px 0;
@@ -40,6 +44,21 @@ export const DropDownUl = styled.ul`
   box-shadow: 0 10px 10px rgb(0, 0, 0, 0.3);
   list-style-type: none;
   z-index: 3;
+  overflow-y: scroll;
+  max-height: 300px;
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: forestgreen;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 `;
 
 interface MouseOverIndex {

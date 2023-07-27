@@ -68,3 +68,9 @@ export const Icon = styled.div`
   align-items: flex-end;
   justify-content: center;
 `;
+
+export const PositionStatisticsDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;

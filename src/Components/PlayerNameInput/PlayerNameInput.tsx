@@ -88,7 +88,7 @@ const PlayerNameInput = ({ seasonId, setConfirmedPlayerNameInput, playerListBySe
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <InputSection isHaveInputValue={isHaveInputValue}>
         <Input
           value={seasonId === 0 ? '시즌을 먼저 선택 해 주세요' : inputValue}

@@ -126,18 +126,20 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
   <details>
     <summary><b>브랜치 컨벤션 예시</b></summary>
 
-    - 이슈 37을 생성
+  - 이슈 37을 생성
 
-    - 로컬에 dev-#37 브랜치 생성하고 origin에 push해서 dev-#37 생성
+  - 로컬에 dev-#37 브랜치 생성하고 origin에 push해서 dev-#37 생성
 
-    - dev-#37 에서 해당 이슈의 기능 개발
-        - 해당 기능 구현이 완료되면 dev-#37브랜치에서 커밋 ( 커밋메세지에 이슈번호 기입 ex) [#37][FEAT] OO기능 구현 )
-        - origin의 dev-#37에다가 push (origin의 dev-#37에 기능 구현 사항 반영)
+  - dev-#37 에서 해당 이슈의 기능 개발
 
-    - 로컬의 dev 브랜치로 넘어가서 dev-#37와 merge ( 동시에 충돌 확인 )
-        - 별 이상이 없다면 origin dev에도 push
+    - 해당 기능 구현이 완료되면 dev-#37브랜치에서 커밋 ( 커밋메세지에 이슈번호 기입 ex) [#37][FEAT] OO기능 구현 )
+    - origin의 dev-#37에다가 push (origin의 dev-#37에 기능 구현 사항 반영)
 
-    - 최종적으로 dev에서 main으로 PR
+  - 로컬의 dev 브랜치로 넘어가서 dev-#37와 merge ( 동시에 충돌 확인 )
+
+    - 별 이상이 없다면 origin dev에도 push
+
+  - 최종적으로 dev에서 main으로 PR
 
   </details>
 
@@ -341,6 +343,10 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜Navbar.styled.ts
  ┃ ┃ ┗ 📜Navbar.tsx
+ ┃ ┣ 📂NoResultPositionStatistics
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜NoResultPositionStatistics.styled.ts
+ ┃ ┃ ┗ 📜NoResultPositionStatistics.tsx
  ┃ ┣ 📂PlayerImg
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜PlayerImg.styled.ts
@@ -349,6 +355,10 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜PlayerNameInput.styled.ts
  ┃ ┃ ┗ 📜PlayerNameInput.tsx
+ ┃ ┣ 📂PositionStatistics
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜PositionStatistics.styled.ts
+ ┃ ┃ ┗ 📜PositionStatistics.tsx
  ┃ ┣ 📂SelectPostition
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜SelectPostition.styled.ts

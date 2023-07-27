@@ -5,6 +5,7 @@ import {
   Icon,
   PlayerNameAndPostion,
   PositionGuideContainerDiv,
+  PositionStatisticsDiv,
   SearchSection,
   SeasonList,
   SeasonSelectUl,
@@ -81,18 +82,20 @@ const PositionGuide = () => {
           </PlayerNameAndPostion>
         </SearchSection>
 
-        {seasonId !== 0 &&
-          confirmedPlayerNameInput &&
-          confirmedPositionId.length !== 0 &&
-          rankerInfo.length !== 0 &&
-          rankerInfo.map((i, index) => {
-            if (i[0].createDate === 'Could not found and players of rankers') {
-              console.log(i[0].errorPositionId);
-              return <NoResultPositionStatistics errorPositionId={i[0].errorPositionId} key={index} />;
-            }
+        <PositionStatisticsDiv>
+          {seasonId !== 0 &&
+            confirmedPlayerNameInput &&
+            confirmedPositionId.length !== 0 &&
+            rankerInfo.length !== 0 &&
+            rankerInfo.map((i, index) => {
+              if (i[0].createDate === 'Could not found and players of rankers') {
+                console.log(i[0].errorPositionId);
+                return <NoResultPositionStatistics errorPositionId={i[0].errorPositionId} key={index} />;
+              }
 
-            return <PositionStatistics key={index} rankerInfo={i[0]} confirmedPositionId={i[0].spPosition} />;
-          })}
+              return <PositionStatistics key={index} rankerInfo={i[0]} confirmedPositionId={i[0].spPosition} />;
+            })}
+        </PositionStatisticsDiv>
       </PositionGuideContainerDiv>
       <Footer page="PositionGuide" />
     </>
