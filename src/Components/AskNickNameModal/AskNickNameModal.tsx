@@ -3,12 +3,12 @@ import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import {
   DiscriptionHeading,
-  ModalContentDiv,
   FormContainer,
   GoBackButton,
   SubmitInput,
   NickNameInputDiv,
   NickNameInput,
+  ModalContentForm,
 } from './AskNickNameModal.styled';
 import { authService, dbService } from '../../../firebase';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
@@ -33,12 +33,13 @@ const AskNickNameModal = () => {
 
     const getData = async () => {
       try {
-        const dbInfo = await getDocs(collection(dbService, 'userInfo'));
-        dbInfo.forEach((i) => {
-          if (i.data().nickname === nickNameInput) {
-            throw new SyntaxError('이미 존재하는 계정입니다');
-          }
-        });
+        // 잠시 테스트를 위해 계정 중복 기능은 제거합니다
+        // const dbInfo = await getDocs(collection(dbService, 'userInfo'));
+        // dbInfo.forEach((i) => {
+        //   if (i.data().nickname === nickNameInput) {
+        //     throw new SyntaxError('이미 존재하는 계정입니다');
+        //   }
+        // });
 
         const fifa = new FIFAData();
         const result = await fifa.getUserId(nickNameInput);
@@ -80,18 +81,17 @@ const AskNickNameModal = () => {
     closeModal();
   };
   return (
-    <div>
-      <ModalContentDiv onSubmit={closeModalAndGotoHome}>
-        <DiscriptionHeading>계정 연동을 위해 피파온라인 닉네임을 입력 해 주세요!</DiscriptionHeading>
-        <NickNameInput onChange={onChange} value={nickNameInput} />
-        <FormContainer>
-          <GoBackButton type="button" onClick={onClose}>
-            뒤로가기
-          </GoBackButton>
-          <SubmitInput type="submit" value="확인" />
-        </FormContainer>
-      </ModalContentDiv>
-    </div>
+    <ModalContentForm onSubmit={closeModalAndGotoHome}>
+      <DiscriptionHeading>계정 연동을 위해 피파온라인 닉네임을 입력 해 주세요!</DiscriptionHeading>
+      <p>테스트용 계정 : 웰시코기발바닥 </p>
+      <NickNameInput onChange={onChange} value={nickNameInput} />
+      <FormContainer>
+        <GoBackButton type="button" onClick={onClose}>
+          뒤로가기
+        </GoBackButton>
+        <SubmitInput type="submit" value="확인" />
+      </FormContainer>
+    </ModalContentForm>
   );
 };
 

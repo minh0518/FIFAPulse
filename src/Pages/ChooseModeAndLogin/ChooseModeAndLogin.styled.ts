@@ -85,12 +85,13 @@ export const ButtonsDiv = styled.div`
 `;
 
 export const LogoutButton = styled.button`
+  cursor: pointer;
   width: 300px;
   height: 250px;
   margin-left: 100px;
   border-radius: 20px;
   font-size: 2rem;
-  border: 1px solid gray;
+  border: none;
   color: gray;
   background-color: transparent;
 
@@ -117,11 +118,11 @@ export const LogoutButton = styled.button`
 `;
 
 export const LoginModeButton = styled.button<IsLoggedIn>`
+  cursor: pointer;
   min-width: 300px;
   height: 250px;
   font-size: 2rem;
-  border-radius: 20px;
-  border: 1px solid gray;
+  border: none;
   color: gray;
   background-color: transparent;
   span {
@@ -150,11 +151,13 @@ export const LoginModeButton = styled.button<IsLoggedIn>`
 `;
 
 export const ModalDiv = styled.div`
+  background-color: red;
   position: absolute;
-  top: 45%;
-  height: 35%;
+
+  top: 50%;
+  min-width: 455px;
+  min-height: 380px;
   left: 50%;
-  padding: 20px;
   border: 2px solid lightgray;
   border-radius: 15px;
   background-color: #eee;
@@ -163,6 +166,7 @@ export const ModalDiv = styled.div`
 `;
 
 export const LoginButton = styled.button<IsLoggedIn>`
+  cursor: pointer;
   min-width: 300px;
   height: 250px;
   font-size: 2rem;
@@ -177,4 +181,9 @@ export const LoginButton = styled.button<IsLoggedIn>`
   &:hover {
     transform: translateY(-10px);
   }
+`;
+
+export const LoginParagraph = styled.p`
+  font-size: 1.5rem;
+  font-weight: bolder;
 `;

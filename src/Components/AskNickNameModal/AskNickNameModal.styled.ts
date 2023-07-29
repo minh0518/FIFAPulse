@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ModalContentDiv = styled.form`
+export const ModalContentForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
