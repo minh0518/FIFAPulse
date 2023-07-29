@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { ChooseModeAndLoginContainerDiv, GuestModeButton, LoginModeButton, ModalDiv, SelectModeHeading } from './ChooseModeAndLogin.styled';
+import {
+  ButtonsDiv,
+  ChooseModeAndLoginContainerDiv,
+  LoginButton,
+  LoginModeButton,
+  LogoutButton,
+  ModalDiv,
+  SelectModeHeading,
+} from './ChooseModeAndLogin.styled';
 import { authService, dbService } from '../../../firebase';
 import AskNickNameModal from '../../Components/AskNickNameModal';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import GoggleLogo from '../../images/gooleImg.png';
 
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
@@ -135,32 +144,34 @@ const ChooseModeAndLogin = () => {
   };
 
   console.log(isModalOpen);
+
+  const onLogoutClick = () => {
+    signOut(authService);
+    navigate('/', { replace: true });
+  };
   return (
     <ChooseModeAndLoginContainerDiv isModalOpen={isModalOpen}>
-      <SelectModeHeading>모드를 선택하세요</SelectModeHeading>
+      {isLoggedIn ? <SelectModeHeading>로그인 성공!</SelectModeHeading> : <SelectModeHeading>로그인을 해 주세요</SelectModeHeading>}
       {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
         isLoggedIn ? ( // 로그인이 됐을때의 조건부 렌더링
           !isModalOpen && (
-            <div>
-              <GuestModeButton type="button" onClick={() => navigate('/guest')}>
-                게스트 모드
-              </GuestModeButton>
+            <ButtonsDiv>
               <LoginModeButton isLoggedIn={isLoggedIn} type="button" onClick={() => navigate('/main-select')}>
                 {userObj?.nickname} <span>님 안녕하세요!</span>
               </LoginModeButton>
-            </div>
+              <LogoutButton type="button" onClick={onLogoutClick}>
+                로그아웃 <p>(구글 계정 변경)</p>
+              </LogoutButton>
+            </ButtonsDiv>
           )
         ) : (
-          <div>
-            <GuestModeButton type="button" onClick={() => navigate('/guest')}>
-              게스트 모드
-            </GuestModeButton>
+          // <LoginModeButton isLoggedIn={isLoggedIn} type="button" name="google" onClick={onSocialClick}>
+          //   로그인 (Google)
+          // </LoginModeButton>
 
-            {/* 추후 로그인 경로가 다양해지면 로그인 하기 버튼 전체를 컴포넌트로 분리 <LogIn /> */}
-            <LoginModeButton isLoggedIn={isLoggedIn} type="button" name="google" onClick={onSocialClick}>
-              로그인 (Google)
-            </LoginModeButton>
-          </div>
+          <LoginButton isLoggedIn={isLoggedIn} type="button" name="google" onClick={onSocialClick}>
+            <img src={GoggleLogo} alt="googleLogo" width={200} />
+          </LoginButton>
         )
       ) : (
         'Loading...'

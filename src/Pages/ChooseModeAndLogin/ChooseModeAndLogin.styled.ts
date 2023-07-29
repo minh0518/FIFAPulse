@@ -46,10 +46,48 @@ export const SelectModeHeading = styled.h1`
   margin: 60px;
 `;
 
-export const GuestModeButton = styled.button`
+// export const GuestModeButton = styled.button`
+//   width: 300px;
+//   height: 250px;
+//   margin-left: 100px;
+//   border-radius: 20px;
+//   font-size: 2rem;
+//   border: 1px solid gray;
+//   color: gray;
+//   background-color: transparent;
+
+//   transition: transform 0.3s ease;
+
+//   &:hover {
+//     transform: translateY(-10px);
+//   }
+
+//   &:after {
+//     content: '';
+//     position: absolute;
+//     bottom: 40%;
+//     left: 0;
+//     width: 0;
+//     height: 1px;
+//     background: black;
+//     transition: width 0.3s;
+//   }
+
+//   &:hover:after {
+//     animation: ${underline} 0.3s forwards;
+//   }
+// `;
+
+export const ButtonsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+export const LogoutButton = styled.button`
   width: 300px;
   height: 250px;
-  margin-right: 100px;
+  margin-left: 100px;
   border-radius: 20px;
   font-size: 2rem;
   border: 1px solid gray;
@@ -65,7 +103,7 @@ export const GuestModeButton = styled.button`
   &:after {
     content: '';
     position: absolute;
-    bottom: 40%;
+    bottom: 30%;
     left: 0;
     width: 0;
     height: 1px;
@@ -77,6 +115,7 @@ export const GuestModeButton = styled.button`
     animation: ${underline} 0.3s forwards;
   }
 `;
+
 export const LoginModeButton = styled.button<IsLoggedIn>`
   min-width: 300px;
   height: 250px;
@@ -121,4 +160,21 @@ export const ModalDiv = styled.div`
   background-color: #eee;
   transform: translate(-50%, -50%) scale(1);
   animation: ${modalAnimation} 0.2s ease-out;
+`;
+
+export const LoginButton = styled.button<IsLoggedIn>`
+  min-width: 300px;
+  height: 250px;
+  font-size: 2rem;
+  border: none;
+  color: gray;
+  background-color: transparent;
+  span {
+    font-size: 1.1rem;
+  }
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 `;

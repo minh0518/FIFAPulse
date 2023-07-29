@@ -12,9 +12,9 @@ export const Nav = styled.nav<NavBarProps>`
   // 조건부 스타일링
   position: ${(props) => (props.page === 'MainSelect' ? 'fixed' : '')};
   z-index: ${(props) => (props.page === 'MainSelect' ? 600 : '')};
-  background-color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.38 ? 'transparent' : 'white')};
-  color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.38 ? 'white' : 'black')};
-  box-shadow: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.38 ? '' : '0px 5px 15px rgba(0,0,0,0.2)')};
+  background-color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.31 ? 'transparent' : 'white')};
+  color: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.31 ? 'white' : 'black')};
+  box-shadow: ${(props) => (props.scrollPoint !== undefined && props.scrollPoint < 0.31 ? '' : '0px 5px 15px rgba(0,0,0,0.2)')};
   // props.scrollPoint && 으로 해버리면 scrollPoint가 0일때 최상단을 의미하므로 이대로 작동해야 하는데
   // JS에서는 falsy로 작동하므로 적용이 안 돼버림. 그러므로 !==undefined 조건으로 사용
 `;

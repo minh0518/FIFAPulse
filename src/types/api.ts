@@ -184,3 +184,32 @@ export interface TradeLogInfo {
   grade: number;
   value: number;
 }
+
+export interface RankerPlayerInfoStatus {
+  assist: number;
+  block: number;
+  dribble: number;
+  dribbleSuccess: number;
+  dribbleTry: number;
+  effectiveShoot: number;
+  goal: number;
+  matchCount: number;
+  passSuccess: number;
+  passTry: number;
+  shoot: number;
+  tackle: number;
+}
+
+// top 10,000 랭커 플레이 정보
+export interface RankerPlayerInfo {
+  createDate: string;
+  spId: number;
+  spPosition: number;
+  status: RankerPlayerInfoStatus;
+}
+
+export interface ErrorRankerPlayerInfo {
+  type: string;
+  createDate: string;
+  errorPositionId: number;
+}
