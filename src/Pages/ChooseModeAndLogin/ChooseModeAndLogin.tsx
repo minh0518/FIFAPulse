@@ -7,6 +7,7 @@ import {
   ChooseModeAndLoginContainerDiv,
   LoginButton,
   LoginModeButton,
+  LoginParagraph,
   LogoutButton,
   ModalDiv,
   SelectModeHeading,
@@ -151,7 +152,6 @@ const ChooseModeAndLogin = () => {
   };
   return (
     <ChooseModeAndLoginContainerDiv isModalOpen={isModalOpen}>
-      {isLoggedIn ? <SelectModeHeading>로그인 성공!</SelectModeHeading> : <SelectModeHeading>로그인을 해 주세요</SelectModeHeading>}
       {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
         isLoggedIn ? ( // 로그인이 됐을때의 조건부 렌더링
           !isModalOpen && (
@@ -160,7 +160,8 @@ const ChooseModeAndLogin = () => {
                 {userObj?.nickname} <span>님 안녕하세요!</span>
               </LoginModeButton>
               <LogoutButton type="button" onClick={onLogoutClick}>
-                로그아웃 <p>(구글 계정 변경)</p>
+                로그아웃 <br />
+                (구글 계정 변경)
               </LogoutButton>
             </ButtonsDiv>
           )
@@ -168,9 +169,9 @@ const ChooseModeAndLogin = () => {
           // <LoginModeButton isLoggedIn={isLoggedIn} type="button" name="google" onClick={onSocialClick}>
           //   로그인 (Google)
           // </LoginModeButton>
-
           <LoginButton isLoggedIn={isLoggedIn} type="button" name="google" onClick={onSocialClick}>
             <img src={GoggleLogo} alt="googleLogo" width={200} />
+            <LoginParagraph>로그인</LoginParagraph>
           </LoginButton>
         )
       ) : (
