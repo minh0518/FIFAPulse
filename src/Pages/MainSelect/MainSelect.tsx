@@ -65,7 +65,7 @@ const MainSelect = () => {
       });
     }
 
-    if (animationPoint >= 0.44) {
+    if (animationPoint >= 0.42) {
       setSlideInfo((prev) => {
         return { ...prev, positionGuide: true };
       });
@@ -148,7 +148,7 @@ const MainSelect = () => {
                   <PositionGuideParagraph>선수 포지션 추천 가이드</PositionGuideParagraph>
                 </PositionGuideLink>
                 <RightDescriptionHeading>
-                  TOP 1000 랭커들의 데이터를 바탕으로 <br /> 선수들의 최적 포지션을 찾아보세요!
+                  TOP 10,000 랭커들의 데이터를 통해 <br /> 최적 포지션을 찾아보세요!
                 </RightDescriptionHeading>
               </LinkAndDescriptionDiv>
             </Slide>

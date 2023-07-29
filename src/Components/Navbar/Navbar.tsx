@@ -4,7 +4,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { LogoButton, LogoutButton, Nav, NavIconsList, NavIconsUl, NavMenuLink, NavMenuList, NavMenuUl, NavbarLogo } from './Navbar.styled';
 import { authService } from '../../../firebase';
 import FIFAONLINELogo from '../../images/FIFAONLINELogo.png';
-import FIFAPulseLogo from '../../images/FIFAPulseLogo.png';
 import { NavBarProps } from '../../types/props';
 
 const Navbar = ({ scrollPoint, page }: NavBarProps) => {
@@ -40,10 +39,9 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
           <NavMenuLink to="/main-select">MAIN MENU</NavMenuLink>
           {/* <NavMenuBuuton type="button">MAIN MENU</NavMenuBuuton> */}
         </NavMenuList>
-        <NavMenuList>
+        {/* <NavMenuList>
           <NavMenuLink to="#">NOTICE</NavMenuLink>
-          {/* <NavMenuBuuton type="button">NOTICE</NavMenuBuuton> */}
-        </NavMenuList>
+        </NavMenuList> */}
         <NavMenuList>
           <LogoutButton type="button" onClick={onLogoutClick} style={{ color: 'tomato' }}>
             LOGOUT
