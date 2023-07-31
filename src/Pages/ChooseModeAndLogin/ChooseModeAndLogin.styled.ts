@@ -79,16 +79,18 @@ export const SelectModeHeading = styled.h1`
 // `;
 
 export const ButtonsDiv = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 export const LogoutButton = styled.button`
   cursor: pointer;
-  width: 300px;
+  max-width: 500px;
+  min-width: 400px;
   height: 250px;
-  margin-left: 100px;
+  margin-left: 200px;
   border-radius: 20px;
   font-size: 2rem;
   border: none;
@@ -119,7 +121,8 @@ export const LogoutButton = styled.button`
 
 export const LoginModeButton = styled.button<IsLoggedIn>`
   cursor: pointer;
-  min-width: 300px;
+  max-width: 500px;
+  min-width: 370px;
   height: 250px;
   font-size: 2rem;
   border: none;

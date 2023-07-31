@@ -14,6 +14,7 @@ import {
 } from './ChooseModeAndLogin.styled';
 import { authService, dbService } from '../../../firebase';
 import AskNickNameModal from '../../Components/AskNickNameModal';
+import AskUseExistNickNameModal from '../../Components/AskUseExistNickNameModal';
 import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
@@ -24,9 +25,8 @@ const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
 
   // 모달창에서 입력한 닉네임과 연동된 계정 정보가, DB에 존재하는지에 대한 플래그
-  // 새로고침 됐을 때 기본적으로 true값이어야 모달창이 안 뜸
-  // (최초 상태로는 안 뜨는게 맞는것이다)
-  const [isNickNameExist, setIsNickNameExist] = useState(true);
+  const [isNickNameExist, setIsNickNameExist] = useState<boolean | null>(null);
+
   const { isLoggedIn, setIsLoggedIn } = useLoginAPI()!; // context로 관리하는 로그인이 되어 있는지 알려주는 상태
   const { isModalOpen, openModal } = useModalAPI()!; // context로 관리하는 현재 모달이 열렸는지 알려주는 상태
   const { userObj, setUserObj } = useUserObjAPI()!; // context로 관리하는 현재 로그인 중인 유저의 정보
@@ -85,10 +85,14 @@ const ChooseModeAndLogin = () => {
             localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
             // 기존에 존재했으므로 true
+            // 최초 null -> true 로 변경된 것이므로 아래 AskUseExistNickNameModal 모달창이 실행되게 만듦
+            // 사실 AskNickNameModal 같이 true->false로 가게 되는 경우 알아서 해당 useEffect가 실행되는데
+            // true(초깃값)->true(여기서변경) 로 가게 되면 같은 값이므로 해당 useEffect가 실행되지 않음 그래서 초기값을 null로 두고 진행해야 함
             setIsNickNameExist(true);
           }
           if (!existOnDB && authService.currentUser) {
             // 없다면 모달창 띄워서 닉네임 입력받아야 함
+            // 최초 null -> false 로 변경된 것이므로 아래 AskNickNameModal 모달창이 실행되게 만듦
             setIsNickNameExist(false);
           }
         };
@@ -99,10 +103,10 @@ const ChooseModeAndLogin = () => {
         // 로그아웃 됐을 때
 
         console.log('logged out');
-        setIsNickNameExist(true); // 모달 창에서 뒤로가기 선택하고 재 로그인시
+        setIsNickNameExist(null); // 모달 창에서 뒤로가기 선택하고 재 로그인시
         // 모달창 띄우는 useEffect를 실행하기 위해서 의존성 배열을 변경해야 하므로
         // 의도적으로 isNickNameExist를 초기값으로 세팅
-        // (로그아웃 됐을 때true -> 재로그인시 false로 변경돼서 useEffect 실행)
+        // (로그아웃 됐을 때 null -> 재로그인시 false로 변경돼서 useEffect 실행)
 
         setIsLoggedIn(false);
         setUserObj(null);
@@ -115,15 +119,26 @@ const ChooseModeAndLogin = () => {
   }, []);
   console.log(userObj);
 
+  console.log(isNickNameExist);
+  console.log(isLoggedIn);
+
   // isNickNameExist의 여부에 따라 모달창을 띄움
   useEffect(() => {
-    isNickNameExist
-      ? ''
-      : openModal(
-          <ModalDiv>
-            <AskNickNameModal />
-          </ModalDiv>,
-        );
+    console.log(`isNickNameExist ${isNickNameExist}`);
+    if (isNickNameExist === true) {
+      openModal(
+        <ModalDiv>
+          <AskUseExistNickNameModal />
+        </ModalDiv>,
+      );
+    }
+    if (isNickNameExist === false) {
+      openModal(
+        <ModalDiv>
+          <AskNickNameModal />
+        </ModalDiv>,
+      );
+    }
   }, [isNickNameExist]);
 
   // 로그인하기 버튼 시 작동하는 이벤트
@@ -144,7 +159,7 @@ const ChooseModeAndLogin = () => {
     const data = await signInWithPopup(authService, provider as GoogleAuthProvider);
   };
 
-  console.log(isModalOpen);
+  // console.log(isModalOpen);
 
   const onLogoutClick = () => {
     signOut(authService);
@@ -160,8 +175,7 @@ const ChooseModeAndLogin = () => {
                 {userObj?.nickname} <span>님 안녕하세요!</span>
               </LoginModeButton>
               <LogoutButton type="button" onClick={onLogoutClick}>
-                로그아웃 <br />
-                (구글 계정 변경)
+                로그아웃 <br />[ 구글 계정 or 닉네임 변경 ]
               </LogoutButton>
             </ButtonsDiv>
           )

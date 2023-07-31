@@ -25,7 +25,7 @@ const AskNickNameModal = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNickNameInput(value);
+    setNickNameInput(value.split(' ').join(''));
   };
 
   const closeModalAndGotoHome = (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,18 +44,35 @@ const AskNickNameModal = () => {
         const fifa = new FIFAData();
         const result = await fifa.getUserId(nickNameInput);
 
+        const userData = await getDocs(collection(dbService, 'userInfo'));
+        let alreadyExistDocumentId = '';
+        userData.forEach((i) => {
+          if (i.data().googleUID === String(authService.currentUser?.uid)) alreadyExistDocumentId = i.id;
+        });
+
         const obj = {
           googleUID: String(authService.currentUser?.uid),
           FIFAOnlineAccessId: result.accessId,
           level: result.level as unknown as number,
           nickname: result.nickname,
         };
+        if (alreadyExistDocumentId === '') {
+          await addDoc(collection(dbService, 'userInfo'), {
+            ...obj,
+          });
+        }
+        if (alreadyExistDocumentId !== '') {
+          await updateDoc(doc(dbService, 'userInfo', `${alreadyExistDocumentId}`), {
+            level: obj.level,
+            FIFAOnlineAccessId: obj.FIFAOnlineAccessId,
+            nickname: obj.nickname,
+          });
 
-        await addDoc(collection(dbService, 'userInfo'), {
-          ...obj,
-        });
+          localStorage.setItem('userObj', JSON.stringify(obj));
+        }
         setUserObj(obj);
         closeModal();
+
         alert('등록이 완료되었습니다!');
       } catch (error) {
         const message = getErrorMessage(error);
@@ -82,8 +99,10 @@ const AskNickNameModal = () => {
   };
   return (
     <ModalContentForm onSubmit={closeModalAndGotoHome}>
-      <DiscriptionHeading>계정 연동을 위해 피파온라인 닉네임을 입력 해 주세요!</DiscriptionHeading>
-      <p>테스트용 계정 : 웰시코기발바닥 </p>
+      <DiscriptionHeading>피파온라인4에서 사용하는 닉네임을 입력 해 주세요!</DiscriptionHeading>
+      <p>
+        <b>테스트용 계정 : 웰시코기발바닥</b>
+      </p>
       <NickNameInput onChange={onChange} value={nickNameInput} />
       <FormContainer>
         <GoBackButton type="button" onClick={onClose}>
