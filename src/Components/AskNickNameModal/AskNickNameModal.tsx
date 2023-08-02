@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
-import {
-  DiscriptionHeading,
-  FormContainer,
-  GoBackButton,
-  SubmitInput,
-  NickNameInputDiv,
-  NickNameInput,
-  ModalContentForm,
-} from './AskNickNameModal.styled';
+import { DiscriptionHeading, FormContainer, GoBackButton, SubmitInput, NickNameInput, ModalContentForm } from './AskNickNameModal.styled';
 import { authService, dbService } from '../../../firebase';
-import { useLoginAPI } from '../../Context/Firebase/LoginContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
+import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskNickNameModal = () => {
   const [nickNameInput, setNickNameInput] = useState('');
-  const { setIsLoggedIn } = useLoginAPI()!;
   const { closeModal } = useModalAPI()!;
   const { setUserObj } = useUserObjAPI()!;
+  const { isNicknameChanged, setIsNicknameChanged } = useNickNameChangedAPI()!;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -71,6 +63,8 @@ const AskNickNameModal = () => {
           localStorage.setItem('userObj', JSON.stringify(obj));
         }
         setUserObj(obj);
+        setIsNicknameChanged(true);
+        localStorage.setItem('isNicknameChanged', JSON.stringify(true));
         closeModal();
 
         alert('등록이 완료되었습니다!');

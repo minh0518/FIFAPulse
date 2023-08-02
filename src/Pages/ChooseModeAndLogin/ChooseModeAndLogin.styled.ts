@@ -119,7 +119,7 @@ export const LogoutButton = styled.button`
   }
 `;
 
-export const LoginModeButton = styled.button<IsLoggedIn>`
+export const LoginModeButton = styled.button`
   cursor: pointer;
   max-width: 500px;
   min-width: 370px;
@@ -168,7 +168,7 @@ export const ModalDiv = styled.div`
   animation: ${modalAnimation} 0.2s ease-out;
 `;
 
-export const LoginButton = styled.button<IsLoggedIn>`
+export const LoginButton = styled.button`
   cursor: pointer;
   min-width: 300px;
   height: 250px;
