@@ -20,6 +20,7 @@ import {
 } from './MainSelect.styled';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
+
 import FIFAData from '../../Services/FifaData';
 
 const MainSelect = () => {

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from './Components/Navbar';
-import { LoginProvider } from './Context/Firebase/LoginContext';
+
+import { IsNicknameChangedProvider } from './Context/Nickname/NicknameChangedContext';
 import { ModalProvider } from './Context/Modal/ModalContext';
 import { UserObjProvider } from './Context/UserObj/UserObjContext';
 import championsLeagueBackgroundImg from './images/championsLeagueBackgroundImg.webp';
@@ -43,14 +44,14 @@ function App() {
   const location = useLocation();
   return (
     <UserObjProvider>
-      <LoginProvider>
+      <IsNicknameChangedProvider>
         <ModalProvider>
           <OutLetContainerDiv pathName={location.pathname}>
             {/* {location.pathname.startsWith('/main-select') && <Navbar />} */}
             <Outlet />
           </OutLetContainerDiv>
         </ModalProvider>
-      </LoginProvider>
+      </IsNicknameChangedProvider>
     </UserObjProvider>
   );
 }

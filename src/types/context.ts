@@ -1,6 +1,6 @@
-export interface LoginContextValue {
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+export interface IsNickNameChangedContextValue {
+  isNicknameChanged: boolean;
+  setIsNicknameChanged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ModalContextValue {
