@@ -13,7 +13,6 @@ import Footer from '../../Components/Footer';
 import MatchResultsByMatchTypes from '../../Components/MatchResultsByMatchTypes';
 import Navbar from '../../Components/Navbar';
 import TradeLog from '../../Components/TradeLog';
-import { useLoginAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail, Maxdivision } from '../../types/api';
