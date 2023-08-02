@@ -1,8 +1,8 @@
 import React from 'react';
 import { ModalDiv } from './AskUseExistNickNameModal.styled';
 
-import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
+import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import AskNickNameModal from '../AskNickNameModal';
 

@@ -15,9 +15,8 @@ import {
 import { authService, dbService } from '../../../firebase';
 import AskNickNameModal from '../../Components/AskNickNameModal';
 import AskUseExistNickNameModal from '../../Components/AskUseExistNickNameModal';
-
-import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
+import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import GoggleLogo from '../../images/gooleImg.png';
