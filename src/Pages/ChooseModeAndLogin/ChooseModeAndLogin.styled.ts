@@ -1,11 +1,8 @@
+import { BsPersonCheckFill } from 'react-icons/bs';
 import styled, { keyframes } from 'styled-components';
 
 type IsModalOpen = {
   isModalOpen: boolean;
-};
-
-type IsLoggedIn = {
-  isLoggedIn: boolean;
 };
 
 const underline = keyframes`
@@ -40,49 +37,25 @@ export const ChooseModeAndLoginContainerDiv = styled.div<IsModalOpen>`
   background-color: ${({ isModalOpen }) => (isModalOpen ? '#a9a9a9' : '#e9ebee')};
 `;
 
-export const SelectModeHeading = styled.h1`
-  color: black;
-  font-size: 3rem;
-  margin: 60px;
+export const ProjectNameDiv = styled.h1`
+  & > p:nth-child(1) {
+    font-size: 5rem;
+    text-align: center;
+    margin: 0;
+  }
+  & > p:nth-child(2) {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 3rem;
+  }
 `;
 
-// export const GuestModeButton = styled.button`
-//   width: 300px;
-//   height: 250px;
-//   margin-left: 100px;
-//   border-radius: 20px;
-//   font-size: 2rem;
-//   border: 1px solid gray;
-//   color: gray;
-//   background-color: transparent;
-
-//   transition: transform 0.3s ease;
-
-//   &:hover {
-//     transform: translateY(-10px);
-//   }
-
-//   &:after {
-//     content: '';
-//     position: absolute;
-//     bottom: 40%;
-//     left: 0;
-//     width: 0;
-//     height: 1px;
-//     background: black;
-//     transition: width 0.3s;
-//   }
-
-//   &:hover:after {
-//     animation: ${underline} 0.3s forwards;
-//   }
-// `;
-
-export const ButtonsDiv = styled.div`
+export const AfterLoginDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 `;
 
 export const LogoutButton = styled.button`
@@ -119,12 +92,19 @@ export const LogoutButton = styled.button`
   }
 `;
 
-export const LoginModeButton = styled.button`
+export const BeforeLoginDiv = styled.div`
+  display: flex;
+  margin-top: 30px;
+  width: 100%;
+  justify-content: center;
+`;
+
+export const UseLoginModeButton = styled.button`
   cursor: pointer;
   max-width: 500px;
   min-width: 370px;
-  height: 250px;
-  font-size: 2rem;
+  height: 55px;
+  font-size: 2.5rem;
   border: none;
   color: gray;
   background-color: transparent;
@@ -140,7 +120,7 @@ export const LoginModeButton = styled.button`
   &:after {
     content: '';
     position: absolute;
-    bottom: 40%;
+    bottom: 5%;
     left: 0;
     width: 0;
     height: 1px;
@@ -156,7 +136,6 @@ export const LoginModeButton = styled.button`
 export const ModalDiv = styled.div`
   background-color: red;
   position: absolute;
-
   top: 50%;
   min-width: 455px;
   min-height: 380px;
@@ -169,24 +148,52 @@ export const ModalDiv = styled.div`
 `;
 
 export const LoginButton = styled.button`
+  display: flex;
+  align-items: center;
+  height: 55px;
+  justify-content: center;
   cursor: pointer;
-  min-width: 300px;
-  height: 250px;
-  font-size: 2rem;
+  min-width: 200px;
   border: none;
+  border-radius: 20px;
   color: gray;
-  background-color: transparent;
-  span {
-    font-size: 1.1rem;
-  }
+  background-color: #25c7f5;
+  margin-right: 100px;
+
   transition: transform 0.3s ease;
 
   &:hover {
     transform: translateY(-10px);
   }
+  p {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    margin-left: 10px;
+    color: white;
+  }
 `;
 
-export const LoginParagraph = styled.p`
-  font-size: 1.5rem;
-  font-weight: bolder;
+export const GuestModeButton = styled.button`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 55px;
+  justify-content: center;
+  min-width: 200px;
+  border: none;
+  border-radius: 20px;
+  color: gray;
+  background-color: #25c7f5;
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+  p {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    margin-left: 10px;
+    color: white;
+  }
 `;

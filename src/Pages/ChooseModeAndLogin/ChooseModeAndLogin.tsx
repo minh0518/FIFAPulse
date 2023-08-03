@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { BsPersonCheckFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import {
-  ButtonsDiv,
+  BeforeLoginDiv,
+  AfterLoginDiv,
   ChooseModeAndLoginContainerDiv,
+  GuestModeButton,
   LoginButton,
-  LoginModeButton,
-  LoginParagraph,
+  UseLoginModeButton,
   LogoutButton,
   ModalDiv,
-  SelectModeHeading,
+  ProjectNameDiv,
 } from './ChooseModeAndLogin.styled';
 import { authService, dbService } from '../../../firebase';
 import AskNickNameModal from '../../Components/AskNickNameModal';
+import AskNickNameModalForGuest from '../../Components/AskNickNameModalForGuest';
 import AskUseExistNickNameModal from '../../Components/AskUseExistNickNameModal';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
@@ -98,7 +101,7 @@ const ChooseModeAndLogin = () => {
         getDataAndUpdateInfo();
       }
       if (!user) {
-        // 로그아웃 됐을 때
+        // 현재 로그인 되어 있지 않을 때(=게스트모드에서 이 페이지로 이동하면 자동으로 아래 로직 진행) or 로그아웃 됐을 때
 
         console.log('logged out');
         setIsNickNameExist(null); // 모달 창에서 뒤로가기 선택하고 재 로그인시
@@ -106,8 +109,8 @@ const ChooseModeAndLogin = () => {
         // 의도적으로 isNickNameExist를 초기값으로 세팅
         // (로그아웃 됐을 때 null -> 재로그인시 false로 변경돼서 useEffect 실행)
 
+        // 새로고침 시 , context값 유지를 위해 로컬스토리지도 함께 저장
         setUserObj(null);
-        // 새로고침 시 , context값 유지를 위해 로컬스토리지 저장
         localStorage.setItem('userObj', JSON.stringify(null));
 
         setIsNicknameChanged(false);
@@ -117,15 +120,13 @@ const ChooseModeAndLogin = () => {
     });
   }, []);
 
-  // isNickNameExist의 여부에 따라 서로 다른 모달창을 띄움
   useEffect(() => {
     console.log(`isNickNameExist ${isNickNameExist}`);
 
-    // 여기에 추가로 조건을 넣어야 하는데 뭘 넣어야 하지?
-    // 전역 상태관리로 사용하는게 베스트이므로 추후 상태관리 라이브러리로 100% 변경
-    // 다만 그 전에 현재는 어떻게 할까
-    // DB에 로그인 시간 새로 추가하고 이걸 기반해서 ?
-    // 전역으로 관리하는걸 대신해서 임시로 로컬스토리지 사용?
+    // isNickNameExist은 초기값이 null이고 로그인이 되면 boolean값으로 변경 됨
+    // 이를 바탕으로 아래의 모달둘 중 하나를 띄움
+    // ( +닉네임 변경 여부를 묻는 모달창을 로그인 후 최초 1회만 작동하기 위해
+    // isNicknameChanged context를 추가로 사용 )
     if (isNickNameExist === true && !isNicknameChanged) {
       openModal(
         <ModalDiv>
@@ -166,25 +167,43 @@ const ChooseModeAndLogin = () => {
     signOut(authService);
     navigate('/', { replace: true });
   };
+
+  const onGuestModeClick = () => {
+    openModal(
+      <ModalDiv>
+        <AskNickNameModalForGuest />
+      </ModalDiv>,
+    );
+  };
   return (
     <ChooseModeAndLoginContainerDiv isModalOpen={isModalOpen}>
+      <ProjectNameDiv>
+        <p>FIFAPulse</p>
+        <p>피파온라인4 데이터 통계 서비스</p>
+      </ProjectNameDiv>
       {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
-        authService.currentUser !== null ? ( // 로그인이 됐을때의 조건부 렌더링
-          !isModalOpen && (
-            <ButtonsDiv>
-              <LoginModeButton type="button" onClick={() => navigate('/main-select')}>
+        authService.currentUser !== null ? ( // 로그인이 됐을 때의 조건부 렌더링
+          !isModalOpen && ( // 로그인되면 자동으로 모달창이 먼저 발생하므로 모달창이 닫혔을 때 조건부 렌더링
+            <AfterLoginDiv>
+              <UseLoginModeButton type="button" onClick={() => navigate('/main-select')}>
                 {userObj?.nickname} <span>님 안녕하세요!</span>
-              </LoginModeButton>
-              <LogoutButton type="button" onClick={onLogoutClick}>
-                로그아웃 <br />[ 구글 계정 or 닉네임 변경 ]
-              </LogoutButton>
-            </ButtonsDiv>
+              </UseLoginModeButton>
+            </AfterLoginDiv>
           )
         ) : (
-          <LoginButton type="button" name="google" onClick={onSocialClick}>
-            <img src={GoggleLogo} alt="googleLogo" width={200} />
-            <LoginParagraph>로그인</LoginParagraph>
-          </LoginButton>
+          // 여기선 어차피 모달창이 발생하지 않으므로 isModalOpen에 의한 조건부 렌더링
+          // 할 필요가 없음
+          <BeforeLoginDiv>
+            <LoginButton type="button" name="google" onClick={onSocialClick}>
+              <img src={GoggleLogo} alt="googleLogo" width={40} />
+              <p>로그인</p>
+            </LoginButton>
+
+            <GuestModeButton type="button" onClick={onGuestModeClick}>
+              <BsPersonCheckFill size={30} />
+              <p>게스트 모드</p>
+            </GuestModeButton>
+          </BeforeLoginDiv>
         )
       ) : (
         'Loading...'
