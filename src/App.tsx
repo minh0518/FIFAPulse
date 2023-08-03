@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from './Components/Navbar';
-
-import { IsNicknameChangedProvider } from './Context/Nickname/NicknameChangedContext';
 import { ModalProvider } from './Context/Modal/ModalContext';
+import { IsNicknameChangedProvider } from './Context/Nickname/NicknameChangedContext';
 import { UserObjProvider } from './Context/UserObj/UserObjContext';
 import championsLeagueBackgroundImg from './images/championsLeagueBackgroundImg.webp';
 import { pathNameProps } from './types/props';
