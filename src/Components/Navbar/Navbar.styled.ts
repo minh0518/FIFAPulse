@@ -4,10 +4,15 @@ import { NavBarProps } from '../../types/props';
 
 export const Nav = styled.nav<NavBarProps>`
   width: 100%;
+  min-width: 700px;
   height: 80px; // 높이 고정
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    height: auto;
+  }
 
   // 조건부 스타일링
   position: ${(props) => (props.page === 'MainSelect' ? 'fixed' : '')};
@@ -36,6 +41,10 @@ export const NavMenuUl = styled.ul`
   display: flex;
   list-style: none;
   padding-left: 0;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const NavMenuList = styled.li`
@@ -44,28 +53,25 @@ export const NavMenuList = styled.li`
     border-radius: 2px;
     transform: translateY(-5px);
   }
-
+  // 글자 중앙 배치
+  display: flex;
+  align-items: center;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  padding: 0 4em;
 `;
 
-export const LogoutButton = styled.button`
-  padding: 10px 12px; // Link태그와 button태그가 기본적으로 가지는
-  //컨텐트의 높이가 다르므로 어쩔 수 없이 button태그의
-  // padding을 8px 12px;가 아닌 10px 12px로 수정(총 높이가 위아래 2px씩 증가)
-  text-decoration: none;
-  border: none;
-  background-color: transparent;
-  font-size: 1.3rem;
-  // font-weight: 600;
-  cursor: pointer;
-`;
 export const NavMenuLink = styled(Link)`
   //각 메뉴 안의 글자를 버튼의 중앙에 배치
   display: flex;
   align-items: center;
+  padding: 0 60px;
 
-  padding: 8px 12px;
+  @media (max-width: 1240px) {
+    padding: 0px 40px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 10px 60px;
+  }
   text-decoration: none;
   border: none;
   background-color: transparent;
@@ -75,10 +81,31 @@ export const NavMenuLink = styled(Link)`
   cursor: pointer;
 `;
 
+export const LogoutButton = styled.button`
+  // 글자 중앙 배치
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  font-size: 1.3rem;
+  padding: 0 60px;
+  cursor: pointer;
+  @media (max-width: 1240px) {
+    padding: 0px 40px;
+  }
+  @media (max-width: 1024px) {
+    padding: 10px 60px;
+  }
+`;
+
 export const NavIconsUl = styled.ul`
   display: flex;
   list-style: none;
   padding-left: 0;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 export const NavIconsList = styled.li`
@@ -89,4 +116,23 @@ export const NavIconsList = styled.li`
   img {
     cursor: pointer;
   }
+`;
+
+export const UserInfoList = styled.li``;
+
+export const CurrentUserInfoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  & :nth-child(1) {
+  }
+  & :nth-child(2) {
+    font-weight: bolder;
+  }
+`;
+
+export const GoogleLoginStatus = styled.div`
+  display: flex;
+  align-items: center;
 `;
