@@ -22,7 +22,7 @@ export const MatchResultsByMatchTypesContainer = styled.div`
   }
 `;
 
-export const WinningpercentageDiv = styled.div`
+export const WinRateAndSelectMatchCountDiv = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -32,8 +32,9 @@ export const WinningpercentageDiv = styled.div`
     margin-bottom: 0; // h2기본 margin 제거
   }
   span {
-    color: black;
+    color: gray;
     white-space: nowrap;
+    font-weight: bolder;
   }
   ul {
     padding-left: 0; // justify-content: space-between 상태에서 최근 경기 승률 문구를 왼쪽으로 밀어냄

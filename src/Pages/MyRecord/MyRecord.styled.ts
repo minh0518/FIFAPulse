@@ -31,7 +31,8 @@ export const UserNameParagraph = styled.p`
 `;
 
 export const TopRankDiv = styled.div`
-  color: gray;
+  color: darkgreen;
+  font-weight: bold;
 `;
 
 export const DescriptionDiv = styled.div`

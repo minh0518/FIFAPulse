@@ -95,7 +95,8 @@ const AskNickNameModal = () => {
   };
   return (
     <ModalContentForm onSubmit={closeModalAndGotoHome}>
-      <DiscriptionHeading>피파온라인4에서 사용하는 닉네임을 입력 해 주세요!</DiscriptionHeading>
+      <DiscriptionHeading>[구글로그인] 통계를 보고 싶은 피파온라인4 닉네임을 입력 해 주세요!</DiscriptionHeading>
+
       <p>
         <b>테스트용 계정 : 웰시코기발바닥</b>
       </p>

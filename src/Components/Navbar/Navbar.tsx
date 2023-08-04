@@ -27,8 +27,6 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
   const navigate = useNavigate();
   const [isBrowserWidthHalf, setIsBrowserWidthHalf] = useState<boolean>(window.innerWidth < 1024);
 
-  console.log(window.innerWidth < 1024);
-
   // 화면 크기 변경 감지
   useEffect(() => {
     const handleResize = () => {

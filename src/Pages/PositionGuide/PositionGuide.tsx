@@ -19,6 +19,7 @@ import SelectPostition from '../../Components/SelectPostition';
 import SelectSeason from '../../Components/SelectSeason';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import { getMaxInfo } from '../../utils/positionGuide';
 
 const PositionGuide = () => {
   const [rankerInfo, setRankerInfo] = useState<any[]>([]);
@@ -28,7 +29,7 @@ const PositionGuide = () => {
   const [confirmedPlayerNameInput, setConfirmedPlayerNameInput] = useState<{ id: number; name: string } | null>(null);
   const [confirmedPositionId, setConfirmedPositionId] = useState<number[]>([]);
 
-  console.log(seasonId, confirmedPlayerNameInput, confirmedPositionId);
+  const [maxInfo, setMaxInfo] = useState({});
 
   useEffect(() => {
     const getPlayerNameBySeason = () => {
@@ -59,7 +60,13 @@ const PositionGuide = () => {
     }
   }, [seasonId, confirmedPlayerNameInput, confirmedPositionId]);
 
-  console.log(rankerInfo);
+  useEffect(() => {
+    const updateMaxInfo = () => {
+      setMaxInfo(getMaxInfo(rankerInfo));
+    };
+    if (rankerInfo.length) updateMaxInfo();
+  }, [rankerInfo]);
+
   return (
     <>
       <Navbar page="PositionGuide" />
@@ -89,11 +96,10 @@ const PositionGuide = () => {
             rankerInfo.length !== 0 &&
             rankerInfo.map((i, index) => {
               if (i[0].createDate === 'Could not found and players of rankers') {
-                console.log(i[0].errorPositionId);
                 return <NoResultPositionStatistics errorPositionId={i[0].errorPositionId} key={index} />;
               }
 
-              return <PositionStatistics key={index} rankerInfo={i[0]} confirmedPositionId={i[0].spPosition} />;
+              return <PositionStatistics key={index} rankerInfo={i[0]} confirmedPositionId={i[0].spPosition} maxInfo={maxInfo} />;
             })}
         </PositionStatisticsDiv>
       </PositionGuideContainerDiv>
