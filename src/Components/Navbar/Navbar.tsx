@@ -49,6 +49,10 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
     navigate('/', { replace: true });
   };
 
+  const onLogoClick = () => {
+    navigate('/', { replace: true });
+  };
+
   const onNexonClick = () => {
     window.location.href = 'https://www.nexon.com/Home/Game';
   };
@@ -59,7 +63,7 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
   return (
     <Nav scrollPoint={scrollPoint} page={page}>
       <NavbarLogo>
-        <LogoButton type="button">
+        <LogoButton type="button" onClick={onLogoClick}>
           {/* <img src={FIFAPulseLogo} alt="FIFAPulseLogo" width={150} height={120} /> */}
           FIFAPulse
         </LogoButton>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
-import { DiscriptionHeading, FormContainer, GoBackButton, SubmitInput, NickNameInput, ModalContentForm } from './AskNickNameModal.styled';
+import { DiscriptionHeading, FormContainer, GoBackButton, SubmitInput, NickNameInput, ModalContentForm, TestID } from './AskNickNameModal.styled';
 import { authService, dbService } from '../../../firebase';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
@@ -97,9 +97,7 @@ const AskNickNameModal = () => {
     <ModalContentForm onSubmit={closeModalAndGotoHome}>
       <DiscriptionHeading>[구글로그인] 통계를 보고 싶은 피파온라인4 닉네임을 입력 해 주세요!</DiscriptionHeading>
 
-      <p>
-        <b>테스트용 계정 : 웰시코기발바닥</b>
-      </p>
+      <TestID>테스트용 계정 : 웰시코기발바닥</TestID>
       <NickNameInput onChange={onChange} value={nickNameInput} />
       <FormContainer>
         <GoBackButton type="button" onClick={onClose}>

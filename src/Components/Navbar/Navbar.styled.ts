@@ -25,11 +25,11 @@ export const Nav = styled.nav<NavBarProps>`
 `;
 
 export const NavbarLogo = styled.div`
-  font-size: 24px;
   background-color: transparent;
 `;
 export const LogoButton = styled.button`
-  font-size: inherit;
+  font-family: 'Gugi', cursive;
+  font-size: 2rem;
   text-decoration: none;
   border: none;
   background-color: transparent; /* 직접 지정해 줘야 부모컴포넌트의 NavbarLogo->Nav 색상을 따라감 */

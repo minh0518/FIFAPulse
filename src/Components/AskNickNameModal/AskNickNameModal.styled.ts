@@ -10,7 +10,16 @@ export const ModalContentForm = styled.form`
 `;
 
 export const DiscriptionHeading = styled.h2`
-  font-weight: bold;
+  font-family: 'Dongle', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+`;
+
+export const TestID = styled.p`
+  font-family: 'Dongle', sans-serif;
+  font-size: 2.1rem;
+  letter-spacing: 2px;
+  margin: 0;
 `;
 
 export const FormContainer = styled.div`
