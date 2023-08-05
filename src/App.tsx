@@ -10,7 +10,7 @@ import { pathNameProps } from './types/props';
 
 const OutLetContainerDiv = styled.div<pathNameProps>`
   background: ${(props) =>
-    props.pathName !== '/main-select'
+    props.pathName !== '/main-select' && props.pathName !== '/'
       ? `linear-gradient(
       to right,
       rgba(233, 235, 238, 0) 0%,
