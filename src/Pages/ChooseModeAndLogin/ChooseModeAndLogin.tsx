@@ -22,6 +22,7 @@ import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import championsLeagueVideo from '../../images/championsLeagueVideo.mp4';
 import GoggleLogo from '../../images/gooleImg.png';
 
 const ChooseModeAndLogin = () => {
@@ -177,6 +178,9 @@ const ChooseModeAndLogin = () => {
   };
   return (
     <ChooseModeAndLoginContainerDiv isModalOpen={isModalOpen}>
+      <video autoPlay loop muted playsInline preload="auto">
+        <source src={championsLeagueVideo} type="video/mp4" />
+      </video>
       <ProjectNameDiv>
         <p>FIFAPulse</p>
         <p>피파온라인4 데이터 통계 서비스</p>

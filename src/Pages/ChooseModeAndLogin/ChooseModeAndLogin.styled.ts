@@ -28,13 +28,32 @@ const modalAnimation = keyframes`
     opacity: 1;
   }
 `;
+
 export const ChooseModeAndLoginContainerDiv = styled.div<IsModalOpen>`
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh; // 그냥 height줘도 상관은 없어보임
   flex-direction: column;
-  background-color: ${({ isModalOpen }) => (isModalOpen ? '#a9a9a9' : '#e9ebee')};
+  // background-color: ${({ isModalOpen }) => (isModalOpen ? '#a9a9a9' : '#e9ebee')};
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  video {
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: -1;
+  }
 `;
 
 export const ProjectNameDiv = styled.h1`
@@ -47,6 +66,7 @@ export const ProjectNameDiv = styled.h1`
     margin: 0;
     margin-top: 20px;
     font-size: 3rem;
+    margin-bottom: 30px;
   }
 `;
 
@@ -106,7 +126,7 @@ export const UseLoginModeButton = styled.button`
   height: 55px;
   font-size: 2.5rem;
   border: none;
-  color: gray;
+  color: black;
   background-color: transparent;
   span {
     font-size: 1.1rem;
@@ -134,6 +154,7 @@ export const UseLoginModeButton = styled.button`
 `;
 
 export const ModalDiv = styled.div`
+  z-index: 1; // 비디오 위에 보여줘야 하므로
   background-color: red;
   position: absolute;
   top: 50%;

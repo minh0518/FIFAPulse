@@ -16,6 +16,7 @@ const modalAnimation = keyframes`
 `;
 
 export const ModalDiv = styled.div`
+  z-index: 1; // 비디오 위에 보여줘야 하므로
   background-color: red;
   position: absolute;
 

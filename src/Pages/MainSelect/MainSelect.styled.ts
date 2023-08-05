@@ -8,13 +8,14 @@ import userRecord from '../../images/userRecord.jpg';
 
 const ELEMENT_HEIGHT: number = 2500;
 
-// 메인 상단 문구
 export const MainSelectContainerDiv = styled.div`
   height: ${ELEMENT_HEIGHT}px;
   // background-color: #e9ebee;
   // App의 높이를 min-height로 지정함으로써 그걸 넘는 2500px이 되면
   // 자연스레 App의 높이도 늘어나므로 굳이 배경색을 여기서 추가로 지정할 필요가 없다
 `;
+
+// 메인 상단 문구
 export const MainMenuDescriptionDiv = styled.div`
   display: flex;
   justify-content: center;
