@@ -10,7 +10,6 @@ import {
   GuestModeButton,
   LoginButton,
   UseLoginModeButton,
-  LogoutButton,
   ModalDiv,
   ProjectNameDiv,
 } from './ChooseModeAndLogin.styled';

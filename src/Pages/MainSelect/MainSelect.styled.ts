@@ -22,18 +22,21 @@ export const MainMenuDescriptionDiv = styled.div`
   align-items: center;
   width: 100%;
   height: 850px;
-  color: black; // 추후 폰트 교체 필요
+  color: white; // 추후 폰트 교체 필요
+  font-family: 'Nanum Gothic Coding', monospace;
   background: linear-gradient(rgba(6, 15, 56, 0.3), rgba(6, 15, 56, 0.5)), url(${championsLeague});
   background-size: cover;
   background-attachment: fixed;
 
   h1 {
     text-align: center;
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
   h2 {
+    margin-top: 70px;
     text-align: center;
     font-size: 2rem;
+    letter-spacing: 1px;
   }
 `;
 
@@ -400,6 +403,7 @@ export const LinkAndDescriptionDiv = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  align-items: center;
 `;
 
 // 각 메뉴의 오른쪽 설명글
@@ -409,12 +413,12 @@ export const RightDescriptionHeading = styled.h1`
   @media (max-width: 1024px) {
     display: none;
   }
+  font-family: 'Dongle', sans-serif;
+  font-size: 3.5rem;
 
   // 1024px보다 커지면 보여줌
   @media (min-width: 1025px) {
     display: block;
-    padding-top: 10%;
-    padding-left: 5%;
     max-width: 20%;
   }
 `;
@@ -424,11 +428,11 @@ export const LeftDescriptionHeading = styled.h1`
   @media (max-width: 1024px) {
     display: none;
   }
-
+  font-family: 'Dongle', sans-serif;
+  font-size: 3.5rem;
   @media (min-width: 1025px) {
     display: block;
-    padding-top: 10%;
-    padding-right: 5%;
+
     max-width: 20%;
   }
 `;

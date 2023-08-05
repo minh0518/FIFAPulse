@@ -45,7 +45,7 @@ export const ChooseModeAndLoginContainerDiv = styled.div<IsModalOpen>`
   z-index: 1;
 
   video {
-    opacity: 0.5;
+    opacity: 0.6;
     position: absolute;
     top: 0;
     left: 0;
@@ -58,14 +58,16 @@ export const ChooseModeAndLoginContainerDiv = styled.div<IsModalOpen>`
 
 export const ProjectNameDiv = styled.h1`
   & > p:nth-child(1) {
+    font-family: 'Gugi', cursive;
     font-size: 5rem;
     text-align: center;
     margin: 0;
   }
   & > p:nth-child(2) {
+    font-family: 'Cute Font', cursive;
     margin: 0;
     margin-top: 20px;
-    font-size: 3rem;
+    font-size: 5rem;
     margin-bottom: 30px;
   }
 `;
@@ -78,40 +80,6 @@ export const AfterLoginDiv = styled.div`
   margin-top: 30px;
 `;
 
-export const LogoutButton = styled.button`
-  cursor: pointer;
-  max-width: 500px;
-  min-width: 400px;
-  height: 250px;
-  margin-left: 200px;
-  border-radius: 20px;
-  font-size: 2rem;
-  border: none;
-  color: gray;
-  background-color: transparent;
-
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-10px);
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 30%;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: black;
-    transition: width 0.3s;
-  }
-
-  &:hover:after {
-    animation: ${underline} 0.3s forwards;
-  }
-`;
-
 export const BeforeLoginDiv = styled.div`
   display: flex;
   margin-top: 30px;
@@ -120,16 +88,17 @@ export const BeforeLoginDiv = styled.div`
 `;
 
 export const UseLoginModeButton = styled.button`
+  font-family: 'Dongle', sans-serif;
   cursor: pointer;
   max-width: 500px;
   min-width: 370px;
   height: 55px;
-  font-size: 2.5rem;
+  font-size: 5rem;
   border: none;
   color: black;
   background-color: transparent;
   span {
-    font-size: 1.1rem;
+    font-size: 3rem;
   }
   transition: transform 0.3s ease;
 
@@ -140,7 +109,7 @@ export const UseLoginModeButton = styled.button`
   &:after {
     content: '';
     position: absolute;
-    bottom: 5%;
+    bottom: -90%;
     left: 0;
     width: 0;
     height: 1px;
@@ -169,6 +138,7 @@ export const ModalDiv = styled.div`
 `;
 
 export const LoginButton = styled.button`
+  font-family: 'Dongle', sans-serif;
   display: flex;
   align-items: center;
   height: 55px;
@@ -187,7 +157,7 @@ export const LoginButton = styled.button`
     transform: translateY(-10px);
   }
   p {
-    font-size: 1.3rem;
+    font-size: 3rem;
     font-weight: bolder;
     margin-left: 10px;
     color: white;
@@ -195,6 +165,7 @@ export const LoginButton = styled.button`
 `;
 
 export const GuestModeButton = styled.button`
+  font-family: 'Dongle', sans-serif;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -212,7 +183,7 @@ export const GuestModeButton = styled.button`
     transform: translateY(-10px);
   }
   p {
-    font-size: 1.3rem;
+    font-size: 3rem;
     font-weight: bolder;
     margin-left: 10px;
     color: white;

@@ -148,9 +148,7 @@ const MainSelect = () => {
                 <PositionGuideLink to="position-guide">
                   <PositionGuideParagraph>선수 포지션 추천 가이드</PositionGuideParagraph>
                 </PositionGuideLink>
-                <RightDescriptionHeading>
-                  TOP 10,000 랭커들의 데이터를 통해 <br /> 최적 포지션을 찾아보세요!
-                </RightDescriptionHeading>
+                <RightDescriptionHeading>TOP 10,000 랭커들의 데이터로 최적 포지션을 찾아보세요!</RightDescriptionHeading>
               </LinkAndDescriptionDiv>
             </Slide>
           </Fade>
