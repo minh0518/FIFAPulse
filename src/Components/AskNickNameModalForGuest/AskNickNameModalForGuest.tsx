@@ -16,6 +16,7 @@ import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import { NexonUserInfo } from '../../types/api';
 import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskGuestNicknameModal = () => {
@@ -36,7 +37,7 @@ const AskGuestNicknameModal = () => {
     const getData = async () => {
       try {
         const fifa = new FIFAData();
-        const fifaUserData = await fifa.getUserId(nickNameInput);
+        const fifaUserData = await fifa.getUserId<NexonUserInfo>(nickNameInput);
 
         const obj = {
           googleUID: 'guest',

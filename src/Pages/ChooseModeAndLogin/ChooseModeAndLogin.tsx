@@ -23,6 +23,7 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import championsLeagueVideo from '../../images/championsLeagueVideo.mp4';
 import GoggleLogo from '../../images/gooleImg.png';
+import { NexonUserInfo } from '../../types/api';
 
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
@@ -64,7 +65,7 @@ const ChooseModeAndLogin = () => {
           if (existOnDB && authService.currentUser) {
             // 이미 존재하더라도 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
             const fifa = new FIFAData();
-            const result = await fifa.getUserId(existUserDBInfo.nickname);
+            const result = await fifa.getUserId<NexonUserInfo>(existUserDBInfo.nickname);
 
             const updateResult = doc(dbService, 'userInfo', `${documentIDForUpdate}`);
             await updateDoc(updateResult, {
