@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { Axios } from 'axios';
+import { NicknameDoesntExistError } from '../Errors/errors';
 import {
   MatchDetail,
   Maxdivision,
@@ -13,7 +14,7 @@ import {
 import { getErrorMessage, getErrorName } from '../utils/getErrorMessage';
 
 export default class FIFAData {
-  instance;
+  instance: Axios;
 
   constructor() {
     this.instance = axios.create({
@@ -25,12 +26,18 @@ export default class FIFAData {
   }
 
   getUserId = async <T extends NexonUserInfo>(userNickName: string): Promise<T> => {
-    const result = await this.instance.get<T>('users', {
-      params: {
-        nickname: userNickName,
-      },
-    });
-    return result.data;
+    try {
+      const result = await this.instance.get<T>('users', {
+        params: {
+          nickname: userNickName,
+        },
+      });
+
+      return result.data;
+    } catch (error) {
+      if (error instanceof Error) throw error; // 의도치 않은 (네트워크에러, 요청에러) 에러일 경우
+      throw new NicknameDoesntExistError('존재하지 않는 ID입니다.', 400, 'NICKNAME_DOESNTEXIST');
+    }
   };
 
   getInfoMetaData = async () => {

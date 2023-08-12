@@ -7,6 +7,7 @@ import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
+import { NexonUserInfo } from '../../types/api';
 import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskNickNameModal = () => {
@@ -24,17 +25,17 @@ const AskNickNameModal = () => {
     e.preventDefault();
 
     const getData = async () => {
-      try {
-        // 잠시 테스트를 위해 계정 중복 기능은 제거합니다
-        // const dbInfo = await getDocs(collection(dbService, 'userInfo'));
-        // dbInfo.forEach((i) => {
-        //   if (i.data().nickname === nickNameInput) {
-        //     throw new SyntaxError('이미 존재하는 계정입니다');
-        //   }
-        // });
+      // 잠시 테스트를 위해 계정 중복 기능은 제거합니다
+      // const dbInfo = await getDocs(collection(dbService, 'userInfo'));
+      // dbInfo.forEach((i) => {
+      //   if (i.data().nickname === nickNameInput) {
+      //     throw new SyntaxError('이미 존재하는 계정입니다');
+      //   }
+      // });
 
-        const fifa = new FIFAData();
-        const result = await fifa.getUserId(nickNameInput);
+      const fifa = new FIFAData();
+      try {
+        const result = await fifa.getUserId<NexonUserInfo>(nickNameInput);
 
         const userData = await getDocs(collection(dbService, 'userInfo'));
         let alreadyExistDocumentId = '';
