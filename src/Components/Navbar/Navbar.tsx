@@ -50,7 +50,7 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
   };
 
   const onLogoClick = () => {
-    navigate('/', { replace: true });
+    navigate('/main-select', { replace: true });
   };
 
   const onNexonClick = () => {

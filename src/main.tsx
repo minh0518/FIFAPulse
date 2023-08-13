@@ -4,12 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import ChooseModeAndLogin from './Pages/ChooseModeAndLogin';
-import Guest from './Pages/Guest/Guest';
 import MainSelect from './Pages/MainSelect';
 import MatchStatistics from './Pages/MatchStatistics';
 import MyRecord from './Pages/MyRecord';
 import PositionGuide from './Pages/PositionGuide';
-import UserRecord from './Pages/UserRecord';
+import RecordWithOtherUser from './Pages/RecordWithOtherUser';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +21,7 @@ const router = createBrowserRouter([
       { path: '/main-select/my-record', element: <MyRecord /> },
       { path: '/main-select/my-record/:matchId', element: <MatchStatistics /> },
       { path: '/main-select/position-guide', element: <PositionGuide /> },
-      { path: '/main-select/user-record', element: <UserRecord /> },
+      { path: '/main-select/user-record', element: <RecordWithOtherUser /> },
       { path: '/*', element: <App /> },
     ],
   },

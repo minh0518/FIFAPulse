@@ -133,9 +133,9 @@ const MainSelect = () => {
           <Fade triggerOnce style={{ height: '100%' }}>
             <Slide triggerOnce direction="right" style={{ height: '100%' }}>
               <LinkAndDescriptionDiv>
-                <LeftDescriptionHeading>파파온라인4의 유저들을 검색해 보세요!</LeftDescriptionHeading>
+                <LeftDescriptionHeading>다른 유저와 상대 전적을 확인해 보세요!</LeftDescriptionHeading>
                 <UserRecordLink to="user-record">
-                  <UserRecordParagraph>다른 유저 검색</UserRecordParagraph>
+                  <UserRecordParagraph>상대와의 전적 검색</UserRecordParagraph>
                 </UserRecordLink>
               </LinkAndDescriptionDiv>
             </Slide>
