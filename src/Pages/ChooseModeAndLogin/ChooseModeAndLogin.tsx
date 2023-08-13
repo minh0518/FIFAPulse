@@ -99,7 +99,14 @@ const ChooseModeAndLogin = () => {
           }
         };
 
-        getDataAndUpdateInfo();
+        try {
+          getDataAndUpdateInfo();
+        } catch (error) {
+          if (error instanceof Error) {
+            alert(error.message);
+            console.error(error);
+          }
+        }
       }
       if (!user) {
         // 현재 로그인 되어 있지 않을 때(=게스트모드에서 이 페이지로 이동하면 자동으로 아래 로직 진행) or 로그아웃 됐을 때

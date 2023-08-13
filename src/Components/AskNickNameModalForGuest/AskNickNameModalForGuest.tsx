@@ -15,6 +15,7 @@ import { authService, dbService } from '../../../firebase';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
+import { NicknameDoesntExistError } from '../../Errors/errors';
 import FIFAData from '../../Services/FifaData';
 import { NexonUserInfo } from '../../types/api';
 import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
@@ -57,13 +58,11 @@ const AskGuestNicknameModal = () => {
         alert('등록이 완료되었습니다!');
         navigate('/main-select');
       } catch (error) {
-        const message = getErrorMessage(error);
-        const errorName = getErrorName(error);
-
-        if (errorName === 'AxiosError') {
-          alert('해당 계정이 존재하지 않습니다. 다시 한번 입력 해 주세요!');
-        } else {
-          alert(message);
+        if (error instanceof NicknameDoesntExistError) {
+          alert(error.message);
+        } else if (error instanceof Error) {
+          console.error(error);
+          alert(error.message);
         }
 
         setNickNameInput('');

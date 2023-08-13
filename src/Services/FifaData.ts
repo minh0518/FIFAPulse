@@ -1,4 +1,4 @@
-import axios, { Axios } from 'axios';
+import axios, { Axios, AxiosError } from 'axios';
 import { NicknameDoesntExistError } from '../Errors/errors';
 import {
   MatchDetail,
@@ -35,8 +35,11 @@ export default class FIFAData {
 
       return result.data;
     } catch (error) {
-      if (error instanceof Error) throw error; // 의도치 않은 (네트워크에러, 요청에러) 에러일 경우
-      throw new NicknameDoesntExistError('존재하지 않는 ID입니다.', 400, 'NICKNAME_DOESNTEXIST');
+      if (error instanceof AxiosError && error.response?.status === 404) {
+        throw new NicknameDoesntExistError('존재하지 않는 ID입니다.', 404, 'NICKNAME_DOESNTEXIST');
+      }
+
+      throw error; // 그 외의 의도치 않은 (네트워크에러, 요청에러) 에러일 경우
     }
   };
 
