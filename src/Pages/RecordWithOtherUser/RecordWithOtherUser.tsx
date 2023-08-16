@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
-import { ContentDiv, RecordWithOtherUserContainerDiv } from './RecordWithOtherUser.styled';
+import { useNavigate } from 'react-router-dom';
+import {
+  ContentDiv,
+  RecordWithOtherUserContainerDiv,
+  GameResultForfeitLose,
+  GameResultForfeitWin,
+  GameResultSpan,
+  Table,
+  TableContentDiv,
+  TableTd,
+  TableTr,
+} from './RecordWithOtherUser.styled';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
+import RecordWithOtherUserContent from '../../Components/RecordWithOtherUserContent/RecordWithOtherUserContent';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import { NicknameDoesntExistError, NicknameDuplicationError } from '../../Errors/errors';
 import FIFAData from '../../Services/FifaData';
-import { NexonUserInfo } from '../../types/api';
+import { MatchDetail, NexonUserInfo } from '../../types/api';
+import { calcTotalMatchCounts, calcWinngRate } from '../../utils/MatchResultsByMatchTypes';
+import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
 import { getErrorMessage } from '../../utils/getErrorMessage';
 
 const RecordWithOtherUser = () => {
   const [inputValue, setInputValue] = useState('');
   const [otherUserInfo, setOtherUserInfo] = useState<NexonUserInfo | null>(null);
+  const [recordWithOtherUser, setRecordWithOtherUser] = useState<MatchDetail[] | null>(null);
+  const [calcResult, setCalcResult] = useState<{ totalMatchLength: number; win: number; drawOrLose: number } | null>(null);
   const { userObj, setUserObj } = useUserObjAPI()!;
+  const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,21 +52,51 @@ const RecordWithOtherUser = () => {
       setInputValue('');
     }
   };
+  console.log(recordWithOtherUser);
 
-  console.log(otherUserInfo);
+  useEffect(() => {
+    const getMatchId = async () => {
+      const fifa = new FIFAData();
+      const response = await fifa.getMatchId(userObj!.FIFAOnlineAccessId, 40, 0, 100);
+      if (response.length) {
+        const matchDetails: MatchDetail[] = await Promise.all(
+          response.map((i) => {
+            return fifa.getMatchDetail(i);
+          }),
+        );
+
+        const filterWithOtherUser = matchDetails.filter(
+          (i) => i.matchInfo[0].nickname === otherUserInfo?.nickname || i.matchInfo[1].nickname === otherUserInfo?.nickname,
+        );
+        setRecordWithOtherUser(filterWithOtherUser);
+      }
+    };
+
+    if (otherUserInfo) getMatchId();
+  }, [otherUserInfo]);
+
+  useEffect(() => {
+    const calcMatchResult = () => {
+      let calcReult;
+      if (recordWithOtherUser) {
+        calcReult = calcTotalMatchCounts(recordWithOtherUser, userObj!.nickname);
+        setCalcResult(calcReult);
+      }
+    };
+    if (recordWithOtherUser) calcMatchResult();
+  }, [recordWithOtherUser]);
+
+  const onListClick = (matchId: any) => {
+    navigate(`/main-select/my-record/${matchId}`);
+  };
+
   return (
     <>
       <Navbar page="RecordWithOtherUser" />
       <RecordWithOtherUserContainerDiv>
+        <p>상대방의 전적을...</p>
         <ContentDiv>
-          <div>
-            <p>전적을 비교하고 싶은 상대 닉네임을 입력해 주세요!</p>
-            <form onSubmit={onSubmit}>
-              <input value={inputValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} />
-              <input type="submit" />
-            </form>
-          </div>
-          <div>결과 창</div>
+          <RecordWithOtherUserContent />
         </ContentDiv>
       </RecordWithOtherUserContainerDiv>
       <Footer page="RecordWithOtherUser" />
