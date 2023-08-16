@@ -167,15 +167,8 @@ const MatchResultsByMatchTypes = () => {
               {matchDetail.map((i, index) => {
                 return (
                   <TableTr key={index} onClick={(e) => onListClick(i.matchId)}>
-                    {/* <Link to={`/main-select/my-record/${i.matchId}`}> */}
                     <TableTd>
-                      <span>
-                        {/* 스타일 적용시 요소를 분리해서 적용할 시 대비 */}
-                        {/* {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[0]} VS
-                 {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]} */}
-                        {/* {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname).join(' vs ')} */}
-                        VS {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]}
-                      </span>
+                      <span>VS {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]}</span>
                     </TableTd>
                     <TableTd>
                       <span>

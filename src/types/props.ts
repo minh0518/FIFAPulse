@@ -1,4 +1,4 @@
-import { MatchDetail, matchInfoType } from './api';
+import { MatchDetail, NexonUserInfo, matchInfoType } from './api';
 import { myDataIndex, selectedUsertStatistics } from './states';
 
 export interface MatchStatisticsProps {
@@ -73,4 +73,12 @@ export interface NickNameProps {
 export interface AssistProps {
   assist: boolean;
   assistSpId: number;
+}
+
+export interface OtherUserNicknameInputProps {
+  setOtherUserInfo: React.Dispatch<React.SetStateAction<NexonUserInfo | null>>;
+}
+
+export interface CalcResultProps {
+  otherUserInfo: NexonUserInfo | null;
 }
