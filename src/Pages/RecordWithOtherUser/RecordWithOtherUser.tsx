@@ -12,6 +12,7 @@ import {
   TableTd,
   TableTr,
 } from './RecordWithOtherUser.styled';
+import { DescriptionDiv, DescriptionParagraph } from '../../Common/styles/styles';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import RecordWithOtherUserContent from '../../Components/RecordWithOtherUserContent/RecordWithOtherUserContent';
@@ -94,7 +95,13 @@ const RecordWithOtherUser = () => {
     <>
       <Navbar page="RecordWithOtherUser" />
       <RecordWithOtherUserContainerDiv>
-        <p>상대방의 전적을...</p>
+        <DescriptionDiv>
+          <DescriptionParagraph>
+            다른 유저와의 상대 전적을 검색해 보세요!
+            <br />
+            <span />
+          </DescriptionParagraph>
+        </DescriptionDiv>
         <ContentDiv>
           <RecordWithOtherUserContent />
         </ContentDiv>

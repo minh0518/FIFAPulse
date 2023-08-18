@@ -6,28 +6,6 @@ export const PositionGuideContainerDiv = styled.div`
   margin: 0 auto;
 `;
 
-export const DescriptionDiv = styled.div`
-  min-width: 520px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5% 0;
-  border-bottom: 1px solid black;
-  /* 
-  @media (min-width: 1024px) {
-    min-width: 940px;
-  } */
-`;
-
-export const DescriptionParagraph = styled.p`
-  color: gray;
-  font-size: 1.5rem;
-  span {
-    font-size: 0.8rem;
-    color: gray;
-  }
-`;
-
 export const SearchSection = styled.div`
   min-width: 450px;
   display: flex;
