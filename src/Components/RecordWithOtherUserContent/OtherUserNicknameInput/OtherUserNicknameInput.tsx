@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { InputParagraph, OtherUserNicknameInputContainerDiv } from './OtherUserNicknameInput.styled';
 import { useUserObjAPI } from '../../../Context/UserObj/UserObjContext';
 import { NicknameDoesntExistError, NicknameDuplicationError } from '../../../Errors/errors';
 import FIFAData from '../../../Services/FifaData';
@@ -30,13 +31,13 @@ const OtherUserNicknameInput = ({ setOtherUserInfo }: OtherUserNicknameInputProp
     }
   };
   return (
-    <div>
-      <p>전적을 비교하고 싶은 상대 닉네임을 입력해 주세요!</p>
+    <OtherUserNicknameInputContainerDiv>
+      <InputParagraph>상대 닉네임을 입력해 주세요!</InputParagraph>
       <form onSubmit={onSubmit}>
         <input value={inputValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} />
         <input type="submit" />
       </form>
-    </div>
+    </OtherUserNicknameInputContainerDiv>
   );
 };
 

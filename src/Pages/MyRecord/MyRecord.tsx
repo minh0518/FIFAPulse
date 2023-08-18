@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ContentDiv,
-  DescriptionDiv,
-  DescriptionParagraph,
-  MyRecordContainerDiv,
-  TopRankDiv,
-  UserNameAndTopRankDiv,
-  UserNameParagraph,
-} from './MyRecord.styled';
+import { ContentDiv, MyRecordContainerDiv, TopRankDiv, UserNameAndTopRankDiv, UserNameParagraph } from './MyRecord.styled';
+import { DescriptionDiv, DescriptionParagraph } from '../../Common/styles/styles';
 import Footer from '../../Components/Footer';
 import MatchResultsByMatchTypes from '../../Components/MatchResultsByMatchTypes';
 import Navbar from '../../Components/Navbar';

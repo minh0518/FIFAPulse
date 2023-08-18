@@ -64,11 +64,8 @@ export const ProjectNameDiv = styled.h1`
     margin: 0;
   }
   & > p:nth-child(2) {
-    font-family: 'Cute Font', cursive;
-    margin: 0;
-    margin-top: 20px;
-    font-size: 5rem;
-    margin-bottom: 30px;
+    margin: 50px 0;
+    font-size: 4rem;
   }
 `;
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  DescriptionDiv,
-  DescriptionParagraph,
   Icon,
   PlayerNameAndPostion,
   PositionGuideContainerDiv,
@@ -10,6 +8,7 @@ import {
   SeasonList,
   SeasonSelectUl,
 } from './PositionGuide.styled';
+import { DescriptionDiv, DescriptionParagraph } from '../../Common/styles/styles';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import NoResultPositionStatistics from '../../Components/NoResultPositionStatistics';

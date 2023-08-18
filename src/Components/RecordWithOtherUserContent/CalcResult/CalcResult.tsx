@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GameResultForfeitLose, GameResultForfeitWin, GameResultSpan, Table, TableContentDiv, TableTd, TableTr } from './CalcResult.styled';
+import {
+  CalcResultContainerDiv,
+  GameResultForfeitLose,
+  GameResultForfeitWin,
+  GameResultSpan,
+  NoResultDiv,
+  Table,
+  TableContentDiv,
+  TableTd,
+  TableTr,
+} from './CalcResult.styled';
 import { useUserObjAPI } from '../../../Context/UserObj/UserObjContext';
 import FIFAData from '../../../Services/FifaData';
 import { MatchDetail } from '../../../types/api';
@@ -53,7 +63,7 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
   };
 
   return (
-    <div>
+    <CalcResultContainerDiv>
       {otherUserInfo && recordWithOtherUser?.length && calcResult ? (
         <>
           <div>
@@ -106,9 +116,11 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
           </TableContentDiv>
         </>
       ) : (
-        <p>해당 유저와의 기록이 없습니다</p>
+        <NoResultDiv>
+          <p>해당 유저와의 기록이 없습니다</p>
+        </NoResultDiv>
       )}
-    </div>
+    </CalcResultContainerDiv>
   );
 };
 

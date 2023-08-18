@@ -35,22 +35,6 @@ export const TopRankDiv = styled.div`
   font-weight: bold;
 `;
 
-export const DescriptionDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 3.5% 0;
-`;
-
-export const DescriptionParagraph = styled.p`
-  color: gray;
-  font-size: 1.5rem;
-  span {
-    font-size: 0.8rem;
-    color: gray;
-  }
-`;
-
 export const ContentDiv = styled.div`
   display: flex;
   // 1400px 이하일때는 970px로 고정
