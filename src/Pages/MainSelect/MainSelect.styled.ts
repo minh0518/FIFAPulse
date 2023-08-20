@@ -104,13 +104,9 @@ export const MyRecordLink = styled(Link)`
       ),
       url(${myRecord});
 
-    // background-size: 70% 100%; >> 원래는 높이값을 100%로 고정했는데
-    // 이렇게 되면 화면이 줄어들때 사진이 가로만 줄어들어서 이상함
     background-size: 70%;
     background-repeat: no-repeat;
     background-position: left; // MyRecordLink 영역에서 살짝 왼쪽에 배치
-    /* background-size: cover;
-  background-position: center; */
   }
 
   // 1024px 보다 작아지면 사진을 가운데에 배치하며
@@ -319,88 +315,10 @@ export const PositionGuideParagraph = styled.p`
   letter-spacing: 0.4rem;
 `;
 
-// 챌린지
-// type ChallengeSliceProps = {
-//   gameChallenge: boolean;
-// };
-// export const ChallengeDiv = styled.div<ChallengeSliceProps>`
-//   display: ${(props) => (props.gameChallenge ? 'block' : 'none')};
-//   height: 525px;
-//   box-sizing: border-box;
-//   width: 80%;
-//   margin: 0 auto;
-//   padding: 3.5% 0% 3.5% 0%;
-// `;
-// export const ChallengeLink = styled(Link)`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 100%;
-//   text-decoration: none;
-
-//   @media (min-width: 1025px) {
-//     width: 70%;
-//     background: linear-gradient(
-//         to right,
-//         rgba(233, 235, 238, 0) 10%,
-//         rgba(233, 235, 238, 0) 25%,
-//         rgba(233, 235, 238, 0) 40%,
-//         rgba(233, 235, 238, 0.2) 50%,
-//         rgba(233, 235, 238, 0.4) 75%,
-//         rgba(233, 235, 238, 1) 100%
-//       ),
-//       linear-gradient(
-//         to left,
-//         rgba(233, 235, 238, 0) 10%,
-//         rgba(233, 235, 238, 0) 25%,
-//         rgba(233, 235, 238, 0) 40%,
-//         rgba(233, 235, 238, 0.2) 50%,
-//         rgba(233, 235, 238, 0.4) 75%,
-//         rgba(233, 235, 238, 1) 100%
-//       ),
-//       url(${challenge});
-//     background-size: 70%;
-//     background-repeat: no-repeat;
-//     background-position: right;
-//   }
-
-//   @media (max-width: 1024px) {
-//     width: 100%;
-//     background: linear-gradient(
-//         to right,
-//         rgba(233, 235, 238, 0) 10%,
-//         rgba(233, 235, 238, 0) 25%,
-//         rgba(233, 235, 238, 0) 40%,
-//         rgba(233, 235, 238, 0.2) 50%,
-//         rgba(233, 235, 238, 0.4) 75%,
-//         rgba(233, 235, 238, 1) 100%
-//       ),
-//       linear-gradient(
-//         to left,
-//         rgba(233, 235, 238, 0) 10%,
-//         rgba(233, 235, 238, 0) 25%,
-//         rgba(233, 235, 238, 0) 40%,
-//         rgba(233, 235, 238, 0.2) 50%,
-//         rgba(233, 235, 238, 0.4) 75%,
-//         rgba(233, 235, 238, 1) 100%
-//       ),
-//       url(${challenge});
-
-//     background-size: cover;
-//     background-repeat: no-repeat;
-//     background-position: center;
-//   }
-// `;
-// export const ChallengeParagraph = styled.p`
-//   font-size: 4rem;
-//   color: black;
-//   font-weight: bolder;
-//   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-//   letter-spacing: 1rem;
-// `;
-
 export const LinkAndDescriptionDiv = styled.div`
   display: flex;
+  justify-content: space-between; // 각 Link태그의 너비가 70%가 됐을 때 남은 30% 여백을 가운데로 옮기기 위함
+
   width: 100%;
   height: 100%;
   align-items: center;
