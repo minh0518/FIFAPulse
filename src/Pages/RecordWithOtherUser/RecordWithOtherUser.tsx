@@ -87,10 +87,6 @@ const RecordWithOtherUser = () => {
     if (recordWithOtherUser) calcMatchResult();
   }, [recordWithOtherUser]);
 
-  const onListClick = (matchId: any) => {
-    navigate(`/main-select/my-record/${matchId}`);
-  };
-
   return (
     <>
       <Navbar page="RecordWithOtherUser" />

@@ -59,7 +59,8 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
   }, [recordWithOtherUser]);
 
   const onListClick = (matchId: any) => {
-    navigate(`/main-select/my-record/${matchId}`);
+    navigate(`/main-select/my-record/match-statistics?matchId=${matchId}`);
+    // navigate(`/main-select/my-record/${matchId}`);
   };
 
   return (
