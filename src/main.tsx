@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       { index: true, element: <ChooseModeAndLogin /> },
       { path: '/main-select', element: <MainSelect /> },
       { path: '/main-select/my-record', element: <MyRecord /> },
-      { path: '/main-select/my-record/:matchId', element: <MatchStatistics /> },
+      { path: '/main-select/my-record/match-statistics', element: <MatchStatistics /> },
       { path: '/main-select/position-guide', element: <PositionGuide /> },
       { path: '/main-select/user-record', element: <RecordWithOtherUser /> },
       { path: '/*', element: <App /> },

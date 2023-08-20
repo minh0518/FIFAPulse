@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import {
   LoadingDiv,
   MatchScoreAndTimes,
@@ -26,10 +26,12 @@ import { checkOwnGoal, convertPlayerName, extractGoalInfo } from '../../utils/Ma
 import { convertDateAndTime } from '../../utils/MyRecord';
 
 const MatchStatistics = () => {
-  const { matchId } = useParams();
+  // const { matchId } = useParams();
   const [matchDetail, setMatchDetail] = useState<MatchDetail | null>(null); // 한 매치의 전체 데이터
   const [myDataIndex, setMyDataIndex] = useState<myDataIndex | null>(null); // 로그인 한 유저의 데이터 인덱스 (1대1 이므로 matchDetail.matchInfo[0] 아니면 matchDetail.matchInfo[1])
   const { userObj, setUserObj } = useUserObjAPI()!;
+  const location = useLocation();
+  const matchId = new URLSearchParams(location.search).get(`matchId`);
 
   // 추가적인 기능은 없으나 , 추후 코드가 길어지는 것을 방지하기 위해
   // 변수형태로 간결하게 사용할 목적으로 선언
