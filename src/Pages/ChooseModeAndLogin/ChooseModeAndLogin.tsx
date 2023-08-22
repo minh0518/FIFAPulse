@@ -24,6 +24,7 @@ import FIFAData from '../../Services/FifaData';
 import championsLeagueVideo from '../../images/championsLeagueVideo.mp4';
 import GoggleLogo from '../../images/gooleImg.png';
 import { NexonUserInfo } from '../../types/api';
+import { onLoginClick } from '../../utils/login';
 
 const ChooseModeAndLogin = () => {
   const [init, setInit] = useState(false);
@@ -40,74 +41,6 @@ const ChooseModeAndLogin = () => {
 
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
-      console.log(user);
-      if (user) {
-        // 로그인 됐을 때
-
-        console.log('logged in');
-
-        // DB에 입력한 닉네임으로 저장된 정보가 있는지 확인
-
-        let existOnDB = false;
-        let documentIDForUpdate: string;
-        let existUserDBInfo: any;
-
-        const getDataAndUpdateInfo = async () => {
-          const dbInfo = await getDocs(collection(dbService, 'userInfo'));
-          dbInfo.forEach((i) => {
-            if (i.data().googleUID === user.uid) {
-              existOnDB = true; // 존재한다면 true
-              documentIDForUpdate = i.id; // 해당 firestore의 documentId를 가져옴
-              existUserDBInfo = i.data();
-            }
-          });
-
-          if (existOnDB && authService.currentUser) {
-            // 이미 존재하더라도 , 레벨 정보 같은게 바뀔 수도 있으므로 업데이트
-            const fifa = new FIFAData();
-            const result = await fifa.getUserId<NexonUserInfo>(existUserDBInfo.nickname);
-
-            const updateResult = doc(dbService, 'userInfo', `${documentIDForUpdate}`);
-            await updateDoc(updateResult, {
-              // googleUID와 nickname은 굳이 업데이트 x
-              FIFAOnlineAccessId: result.accessId,
-              level: result.level,
-            });
-
-            const obj = {
-              googleUID: user.uid,
-              FIFAOnlineAccessId: result.accessId,
-              level: result.level as unknown as number,
-              nickname: result.nickname,
-            };
-
-            // 유저 객체 업데이트
-            setUserObj(obj);
-            // 새로고침 시 , context값 유지를 위해 로컬스토리지 저장
-            localStorage.setItem('userObj', JSON.stringify(obj));
-
-            // 기존에 존재했으므로 true
-            // 최초 null -> true 로 변경된 것이므로 아래 AskUseExistNickNameModal 모달창이 실행되게 만듦
-            // 사실 AskNickNameModal 같이 true->false로 가게 되는 경우 알아서 해당 useEffect가 실행되는데
-            // true(초깃값)->true(여기서변경) 로 가게 되면 같은 값이므로 해당 useEffect가 실행되지 않음 그래서 초기값을 null로 두고 진행해야 함
-            setIsNickNameExist(true);
-          }
-          if (!existOnDB && authService.currentUser) {
-            // 없다면 모달창 띄워서 닉네임 입력받아야 함
-            // 최초 null -> false 로 변경된 것이므로 아래 AskNickNameModal 모달창이 실행되게 만듦
-            setIsNickNameExist(false);
-          }
-        };
-
-        try {
-          getDataAndUpdateInfo();
-        } catch (error) {
-          if (error instanceof Error) {
-            alert(error.message);
-            console.error(error);
-          }
-        }
-      }
       if (!user) {
         // 현재 로그인 되어 있지 않을 때(=게스트모드에서 이 페이지로 이동하면 자동으로 아래 로직 진행) or 로그아웃 됐을 때
 
@@ -153,28 +86,10 @@ const ChooseModeAndLogin = () => {
 
   // 로그인하기 버튼 시 작동하는 이벤트
   const onSocialClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = e.currentTarget;
-
-    let provider;
-
-    if (name === 'google') {
-      provider = new GoogleAuthProvider();
-    }
-
-    // prompt 옵션 적용으로 자동 로그인 방지
-    provider?.setCustomParameters({
-      prompt: 'select_account',
-    });
-
-    const data = await signInWithPopup(authService, provider as GoogleAuthProvider);
+    onLoginClick(setUserObj, setIsNickNameExist);
   };
 
   // console.log(isModalOpen);
-
-  const onLogoutClick = () => {
-    signOut(authService);
-    navigate('/', { replace: true });
-  };
 
   const onGuestModeClick = () => {
     openModal(
@@ -192,32 +107,29 @@ const ChooseModeAndLogin = () => {
         <p>FIFAPulse</p>
         <p>피파온라인4 데이터 통계 서비스</p>
       </ProjectNameDiv>
-      {init ? ( // 화면이 띄워지고 로그인 정보가 불러지기 전 후에 대한 조건부 렌더링
-        authService.currentUser !== null ? ( // 로그인이 됐을 때의 조건부 렌더링
-          !isModalOpen && ( // 로그인되면 자동으로 모달창이 먼저 발생하므로 모달창이 닫혔을 때 조건부 렌더링
-            <AfterLoginDiv>
-              <UseLoginModeButton type="button" onClick={() => navigate('/main-select')}>
-                {userObj?.nickname} <span>님 안녕하세요!</span>
-              </UseLoginModeButton>
-            </AfterLoginDiv>
-          )
-        ) : (
-          // 여기선 어차피 모달창이 발생하지 않으므로 isModalOpen에 의한 조건부 렌더링
-          // 할 필요가 없음
-          <BeforeLoginDiv>
-            <LoginButton type="button" name="google" onClick={onSocialClick}>
-              <img src={GoggleLogo} alt="googleLogo" width={40} />
-              <p>로그인</p>
-            </LoginButton>
 
-            <GuestModeButton type="button" onClick={onGuestModeClick}>
-              <BsPersonCheckFill size={30} />
-              <p>게스트 모드</p>
-            </GuestModeButton>
-          </BeforeLoginDiv>
+      {authService.currentUser !== null ? ( // 로그인이 됐을 때의 조건부 렌더링
+        !isModalOpen && ( // 로그인되면 자동으로 모달창이 먼저 발생하므로 모달창이 닫혔을 때 조건부 렌더링
+          <AfterLoginDiv>
+            <UseLoginModeButton type="button" onClick={() => navigate('/main-select')}>
+              {userObj?.nickname} <span>님 안녕하세요!</span>
+            </UseLoginModeButton>
+          </AfterLoginDiv>
         )
       ) : (
-        'Loading...'
+        // 여기선 어차피 모달창이 발생하지 않으므로 isModalOpen에 의한 조건부 렌더링
+        // 할 필요가 없음
+        <BeforeLoginDiv>
+          <LoginButton type="button" name="google" onClick={onSocialClick}>
+            <img src={GoggleLogo} alt="googleLogo" width={40} />
+            <p>로그인</p>
+          </LoginButton>
+
+          <GuestModeButton type="button" onClick={onGuestModeClick}>
+            <BsPersonCheckFill size={30} />
+            <p>게스트 모드</p>
+          </GuestModeButton>
+        </BeforeLoginDiv>
       )}
     </ChooseModeAndLoginContainerDiv>
   );

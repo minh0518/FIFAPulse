@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from './Components/Navbar';
@@ -41,17 +42,20 @@ const OutLetContainerDiv = styled.div<pathNameProps>`
 
 function App() {
   const location = useLocation();
+  const queryClient = new QueryClient();
   return (
-    <UserObjProvider>
-      <IsNicknameChangedProvider>
-        <ModalProvider>
-          <OutLetContainerDiv pathName={location.pathname}>
-            {/* {location.pathname.startsWith('/main-select') && <Navbar />} */}
-            <Outlet />
-          </OutLetContainerDiv>
-        </ModalProvider>
-      </IsNicknameChangedProvider>
-    </UserObjProvider>
+    <QueryClientProvider client={queryClient}>
+      <UserObjProvider>
+        <IsNicknameChangedProvider>
+          <ModalProvider>
+            <OutLetContainerDiv pathName={location.pathname}>
+              {/* {location.pathname.startsWith('/main-select') && <Navbar />} */}
+              <Outlet />
+            </OutLetContainerDiv>
+          </ModalProvider>
+        </IsNicknameChangedProvider>
+      </UserObjProvider>
+    </QueryClientProvider>
   );
 }
 

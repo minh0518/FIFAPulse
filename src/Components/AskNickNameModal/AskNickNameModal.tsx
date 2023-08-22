@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
-import { DiscriptionHeading, FormContainer, GoBackButton, SubmitInput, NickNameInput, ModalContentForm, TestID } from './AskNickNameModal.styled';
+import {
+  DiscriptionHeading,
+  FormContainer,
+  GoBackButton,
+  SubmitInput,
+  NickNameInput,
+  ModalContentForm,
+  TestID,
+} from './AskNickNameModal.styled';
 import { authService, dbService } from '../../../firebase';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
