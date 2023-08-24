@@ -62,6 +62,7 @@ export const updateDB = async (uid: string, chekDBObj: searchDBResultType, setUs
 export const onLoginClick = async (setUserObj: any, setIsNickNameExist: any) => {
   await loginWithGoogle();
   const chekDBObj = await checkDB(authService.currentUser!.uid);
+
   if (chekDBObj.existOnDB) {
     updateDB(authService.currentUser!.uid, chekDBObj, setUserObj);
     setIsNickNameExist(true);
