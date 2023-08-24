@@ -46,6 +46,7 @@ const Navbar = ({ scrollPoint, page }: NavBarProps) => {
     // 로그아웃 로직은 여기서 진행하는 것이 아니라 ,
     // Firebase의 onAuthStateChanged가 사용되고 있는 곳에서 진행이 된다 (= 로그인/로그아웃 로직은 한 곳에서만 진행)
     signOut(authService);
+    setUserObj(null);
     navigate('/', { replace: true });
   };
 

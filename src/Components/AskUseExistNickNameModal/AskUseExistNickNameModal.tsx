@@ -27,7 +27,7 @@ const AskUseExistNickNameModal = () => {
   };
   return (
     <div>
-      <h1>기존 닉네임 &quot;{userObj?.nickname}&quot; 을 그대로 사용 하시나요?</h1>
+      <h1>기존 닉네임 &quot;{userObj?.nickname}&quot; 을(를) 그대로 사용 하시나요?</h1>
       <button type="button" onClick={() => onClick(true)}>
         네!
       </button>

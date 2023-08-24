@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import {
   DiscriptionHeading,
   FormContainer,
@@ -24,6 +25,7 @@ const AskNickNameModal = () => {
   const { closeModal } = useModalAPI()!;
   const { setUserObj } = useUserObjAPI()!;
   const { isNicknameChanged, setIsNicknameChanged } = useNickNameChangedAPI()!;
+  const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -69,10 +71,9 @@ const AskNickNameModal = () => {
             FIFAOnlineAccessId: obj.FIFAOnlineAccessId,
             nickname: obj.nickname,
           });
-
-          localStorage.setItem('userObj', JSON.stringify(obj));
         }
         setUserObj(obj);
+        localStorage.setItem('userObj', JSON.stringify(obj));
         setIsNicknameChanged(true);
         localStorage.setItem('isNicknameChanged', JSON.stringify(true));
         closeModal();
@@ -95,6 +96,8 @@ const AskNickNameModal = () => {
 
   const onClose = () => {
     signOut(authService);
+    setUserObj(null);
+    navigate('/', { replace: true });
     closeModal();
   };
   return (

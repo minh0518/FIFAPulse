@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { signOut } from 'firebase/auth';
-import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import {
   DiscriptionHeading,
