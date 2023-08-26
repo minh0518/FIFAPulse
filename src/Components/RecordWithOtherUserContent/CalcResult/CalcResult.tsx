@@ -6,6 +6,7 @@ import {
   GameResultForfeitWin,
   GameResultSpan,
   NoResultDiv,
+  ResultSectionDiv,
   Table,
   TableContentDiv,
   TableTd,
@@ -19,7 +20,9 @@ import { calcTotalMatchCounts, calcWinngRate } from '../../../utils/MatchResults
 import { convertDateAndTime, showMyNickNameFirst } from '../../../utils/MyRecord';
 
 const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
-  const [calcResult, setCalcResult] = useState<{ totalMatchLength: number; win: number; drawOrLose: number } | null>(null);
+  const [calcResult, setCalcResult] = useState<{ totalMatchLength: number; win: number; drawOrLose: number } | null>(
+    null,
+  );
   const [recordWithOtherUser, setRecordWithOtherUser] = useState<MatchDetail[] | null>(null);
   const { userObj, setUserObj } = useUserObjAPI()!;
   const navigate = useNavigate();
@@ -37,7 +40,9 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
         );
 
         const filterWithOtherUser = matchDetails.filter((i) => {
-          return i.matchInfo[0].nickname === otherUserInfo?.nickname || i.matchInfo[1].nickname === otherUserInfo?.nickname;
+          return (
+            i.matchInfo[0].nickname === otherUserInfo?.nickname || i.matchInfo[1].nickname === otherUserInfo?.nickname
+          );
         });
 
         setRecordWithOtherUser(filterWithOtherUser);
@@ -67,13 +72,20 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
     <CalcResultContainerDiv>
       {otherUserInfo && recordWithOtherUser?.length && calcResult ? (
         <>
-          <div>
-            <p>{otherUserInfo?.nickname}님 과의 상대 전적</p>
-            <p>승률 : {calcWinngRate(calcResult!.totalMatchLength, calcResult!.win)}%</p>
+          <ResultSectionDiv>
             <p>
-              {calcResult!.totalMatchLength}전 {calcResult!.win}승
+              <span>{otherUserInfo?.nickname}</span>님 과의 상대 전적
             </p>
-          </div>
+            <div>
+              <p>
+                승률 : <span>{calcWinngRate(calcResult!.totalMatchLength, calcResult!.win)}%</span>
+              </p>
+              /
+              <p>
+                {calcResult!.totalMatchLength}전 {calcResult!.win}승
+              </p>
+            </div>
+          </ResultSectionDiv>
           <TableContentDiv>
             <Table cellPadding="0" cellSpacing="0">
               <tbody>
@@ -81,7 +93,15 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
                   return (
                     <TableTr key={index} onClick={(e) => onListClick(i.matchId)}>
                       <TableTd>
-                        <span>VS {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]}</span>
+                        <span>
+                          VS
+                          {
+                            showMyNickNameFirst(
+                              [i.matchInfo[0].nickname, i.matchInfo[1].nickname],
+                              userObj!.nickname,
+                            )[1]
+                          }
+                        </span>
                       </TableTd>
                       <TableTd>
                         <span>
@@ -97,7 +117,9 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
                             )
                           ) : // 내 기록이 i.matchInfo[1]에 있다면
                           i.matchInfo[1].matchDetail.matchEndType === 0 ? (
-                            <GameResultSpan result={i.matchInfo[1].matchDetail.matchResult}>{i.matchInfo[1].matchDetail.matchResult}</GameResultSpan>
+                            <GameResultSpan result={i.matchInfo[1].matchDetail.matchResult}>
+                              {i.matchInfo[1].matchDetail.matchResult}
+                            </GameResultSpan>
                           ) : i.matchInfo[1].matchDetail.matchEndType === 1 ? (
                             <GameResultForfeitWin>몰수 승</GameResultForfeitWin>
                           ) : (

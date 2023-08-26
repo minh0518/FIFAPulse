@@ -28,7 +28,9 @@ const RecordWithOtherUser = () => {
   const [inputValue, setInputValue] = useState('');
   const [otherUserInfo, setOtherUserInfo] = useState<NexonUserInfo | null>(null);
   const [recordWithOtherUser, setRecordWithOtherUser] = useState<MatchDetail[] | null>(null);
-  const [calcResult, setCalcResult] = useState<{ totalMatchLength: number; win: number; drawOrLose: number } | null>(null);
+  const [calcResult, setCalcResult] = useState<{ totalMatchLength: number; win: number; drawOrLose: number } | null>(
+    null,
+  );
   const { userObj, setUserObj } = useUserObjAPI()!;
   const navigate = useNavigate();
 
@@ -37,7 +39,8 @@ const RecordWithOtherUser = () => {
 
     const fifa = new FIFAData();
     try {
-      if (inputValue === userObj?.nickname) throw new NicknameDuplicationError('자기 자신은 입력할 수 없습니다', 400, 'NICKNAME_DUPLICATION');
+      if (inputValue === userObj?.nickname)
+        throw new NicknameDuplicationError('자기 자신은 입력할 수 없습니다', 400, 'NICKNAME_DUPLICATION');
       const response = await fifa.getUserId<NexonUserInfo>(inputValue);
       setOtherUserInfo(response);
     } catch (error) {
@@ -67,7 +70,8 @@ const RecordWithOtherUser = () => {
         );
 
         const filterWithOtherUser = matchDetails.filter(
-          (i) => i.matchInfo[0].nickname === otherUserInfo?.nickname || i.matchInfo[1].nickname === otherUserInfo?.nickname,
+          (i) =>
+            i.matchInfo[0].nickname === otherUserInfo?.nickname || i.matchInfo[1].nickname === otherUserInfo?.nickname,
         );
         setRecordWithOtherUser(filterWithOtherUser);
       }

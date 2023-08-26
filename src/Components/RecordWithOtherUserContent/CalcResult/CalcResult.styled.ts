@@ -11,15 +11,43 @@ const paintTr = keyframes`
 `;
 
 export const CalcResultContainerDiv = styled.div`
-  padding-left: 100px;
+  width: 700px;
+  min-width: 50%;
+  padding-left: 150px;
   border-left: 1px solid black;
+  @media (max-width: 1024px) {
+    padding-left: 0px;
+    border: none;
+  }
+`;
+
+export const ResultSectionDiv = styled.div`
+  p:nth-child(1) {
+    font-size: 1.1rem;
+    span {
+      margin-right: 10px;
+      font-size: 2rem;
+    }
+  }
+  div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      padding: 0 15px;
+      font-size: 1.5rem;
+      span {
+        font-size: inherit;
+        color: green;
+      }
+    }
+  }
 `;
 
 export const TableContentDiv = styled.div`
-  width: 700px;
   height: 380px;
   overflow-x: auto;
-  margin: 50px 0;
+  margin: 15px 0;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 10px 0 5px -2px rgba(0, 0, 0, 0.2), -10px 0 5px -2px rgba(0, 0, 0, 0.2);
   ::-webkit-scrollbar {
@@ -105,7 +133,7 @@ export const GameResultForfeitLose = styled.span`
 `;
 
 export const NoResultDiv = styled.div`
-  width: 700px;
+  // width: 700px;
   height: 380px;
   display: flex;
   justify-content: center;

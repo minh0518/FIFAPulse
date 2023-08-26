@@ -74,7 +74,7 @@ const PlayerNameInput = ({ seasonId, setConfirmedPlayerNameInput, playerListBySe
       }
 
       // 엔터키로 선택했을 때 (방향키로 드롭다운 선택하는게 아니라 인풋창에 이름만 치고 엔터)
-      // '카렘벤제마' 로 입력해도 '카림 벤제마' 가 리스트에서 선택되어야 하므로 띄워쓰기 제거후 비교
+      // '카림벤제마' 로 입력해도 '카림 벤제마' 가 리스트에서 선택되어야 하므로 띄워쓰기 제거후 비교
       if (
         event.key === 'Enter' &&
         dropDownItemIndex === -1 &&

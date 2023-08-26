@@ -5,6 +5,10 @@ export const RecordWithOtherUserContentContainerDiv = styled.div`
   width: 100%;
   justify-content: center;
   margin-bottom: 100px;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const tmp = '';
