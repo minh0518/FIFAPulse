@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputParagraph, OtherUserNicknameInputContainerDiv } from './OtherUserNicknameInput.styled';
+import { InputForm, InputParagraph, OtherUserNicknameInputContainerDiv } from './OtherUserNicknameInput.styled';
 import { useUserObjAPI } from '../../../Context/UserObj/UserObjContext';
 import { NicknameDoesntExistError, NicknameDuplicationError } from '../../../Errors/errors';
 import FIFAData from '../../../Services/FifaData';
@@ -14,7 +14,8 @@ const OtherUserNicknameInput = ({ setOtherUserInfo }: OtherUserNicknameInputProp
 
     const fifa = new FIFAData();
     try {
-      if (inputValue === userObj?.nickname) throw new NicknameDuplicationError('자기 자신은 입력할 수 없습니다', 400, 'NICKNAME_DUPLICATION');
+      if (inputValue === userObj?.nickname)
+        throw new NicknameDuplicationError('자기 자신은 입력할 수 없습니다', 400, 'NICKNAME_DUPLICATION');
       const response = await fifa.getUserId<NexonUserInfo>(inputValue);
       setOtherUserInfo(response);
     } catch (error) {
@@ -33,10 +34,13 @@ const OtherUserNicknameInput = ({ setOtherUserInfo }: OtherUserNicknameInputProp
   return (
     <OtherUserNicknameInputContainerDiv>
       <InputParagraph>상대 닉네임을 입력해 주세요!</InputParagraph>
-      <form onSubmit={onSubmit}>
-        <input value={inputValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)} />
-        <input type="submit" />
-      </form>
+      <InputForm onSubmit={onSubmit}>
+        <input
+          value={inputValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value.split(' ').join(''))}
+        />
+        <input type="submit" value="확인" />
+      </InputForm>
     </OtherUserNicknameInputContainerDiv>
   );
 };
