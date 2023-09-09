@@ -40,6 +40,9 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
         );
 
         const filterWithOtherUser = matchDetails.filter((i) => {
+          if (i.matchInfo.length < 2) {
+            return i.matchInfo[0].nickname === otherUserInfo?.nickname;
+          }
           return (
             i.matchInfo[0].nickname === otherUserInfo?.nickname || i.matchInfo[1].nickname === otherUserInfo?.nickname
           );
