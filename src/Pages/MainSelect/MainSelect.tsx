@@ -37,8 +37,8 @@ const MainSelect = () => {
   const checkScroll = () => {
     const scrollPosition = window.pageYOffset;
     const animationPoint = Number((scrollPosition / ELEMENT_HEIGHT).toFixed(2));
-    console.log(animationPoint);
-    console.log(window.pageYOffset);
+    // console.log(animationPoint);
+    // console.log(window.pageYOffset);
 
     // 스크롤을 내릴때만 애니메이션을 적용하기 위해
     // triggerOnce을 적용하고(=1회성 slide), 상위로 올라왔을 때 상태값을 false로 초기화
@@ -148,7 +148,9 @@ const MainSelect = () => {
                 <PositionGuideLink to="position-guide">
                   <PositionGuideParagraph>선수 포지션 추천 가이드</PositionGuideParagraph>
                 </PositionGuideLink>
-                <RightDescriptionHeading>TOP 10,000 랭커들의 데이터로 최적 포지션을 찾아보세요!</RightDescriptionHeading>
+                <RightDescriptionHeading>
+                  TOP 10,000 랭커들의 데이터로 최적 포지션을 찾아보세요!
+                </RightDescriptionHeading>
               </LinkAndDescriptionDiv>
             </Slide>
           </Fade>

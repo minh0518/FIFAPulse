@@ -1,9 +1,12 @@
 import React from 'react';
-import { NoResultMessage, NoResultPositionStatisticsContainerDiv, PositionAndMatchCount } from './NoResultPositionStatistics.styled';
+import {
+  NoResultMessage,
+  NoResultPositionStatisticsContainerDiv,
+  PositionAndMatchCount,
+} from './NoResultPositionStatistics.styled';
 import { convertPosition } from '../../utils/MatchStatistics';
 
 const NoResultPositionStatistics = ({ errorPositionId }: any) => {
-  console.log(errorPositionId);
   return (
     <NoResultPositionStatisticsContainerDiv>
       <PositionAndMatchCount>

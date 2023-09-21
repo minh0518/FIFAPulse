@@ -98,7 +98,10 @@ const MatchResultsByMatchTypes = () => {
           {matchDetail.length ? (
             <span>
               &nbsp; 최근 {matchLength}경기 승률 :{' '}
-              <span style={{ color: 'darkgreen' }}> {showWinningpercentage(matchDetail, userObj!.FIFAOnlineAccessId)}</span>
+              <span style={{ color: 'darkgreen' }}>
+                {' '}
+                {showWinningpercentage(matchDetail, userObj!.FIFAOnlineAccessId)}
+              </span>
             </span>
           ) : (
             ''
@@ -107,17 +110,35 @@ const MatchResultsByMatchTypes = () => {
 
         <ul>
           <li>
-            <MatchLengthBuuton type="button" value={20} onClick={onMatchLengthClick} variant={20} matchLength={matchLength}>
+            <MatchLengthBuuton
+              type="button"
+              value={20}
+              onClick={onMatchLengthClick}
+              variant={20}
+              matchLength={matchLength}
+            >
               20
             </MatchLengthBuuton>
           </li>
           <li>
-            <MatchLengthBuuton type="button" value={30} onClick={onMatchLengthClick} variant={30} matchLength={matchLength}>
+            <MatchLengthBuuton
+              type="button"
+              value={30}
+              onClick={onMatchLengthClick}
+              variant={30}
+              matchLength={matchLength}
+            >
               30
             </MatchLengthBuuton>
           </li>
           <li>
-            <MatchLengthBuuton type="button" value={40} onClick={onMatchLengthClick} variant={40} matchLength={matchLength}>
+            <MatchLengthBuuton
+              type="button"
+              value={40}
+              onClick={onMatchLengthClick}
+              variant={40}
+              matchLength={matchLength}
+            >
               40
             </MatchLengthBuuton>
           </li>
@@ -169,13 +190,18 @@ const MatchResultsByMatchTypes = () => {
                 return (
                   <TableTr key={index} onClick={(e) => onListClick(i.matchId)}>
                     <TableTd>
-                      <span>VS {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]}</span>
+                      <span>
+                        VS{' '}
+                        {showMyNickNameFirst([i.matchInfo[0].nickname, i.matchInfo[1].nickname], userObj!.nickname)[1]}
+                      </span>
                     </TableTd>
                     <TableTd>
                       <span>
                         {i.matchInfo[0].nickname === userObj!.nickname ? ( // 내 기록이 i.matchInfo[0]에 있다면
                           i.matchInfo[0].matchDetail.matchEndType === 0 ? ( // 정상 종료라면
-                            <GameResultSpan result={i.matchInfo[0].matchDetail.matchResult}>{i.matchInfo[0].matchDetail.matchResult}</GameResultSpan> // 그대로 출력
+                            <GameResultSpan result={i.matchInfo[0].matchDetail.matchResult}>
+                              {i.matchInfo[0].matchDetail.matchResult}
+                            </GameResultSpan> // 그대로 출력
                           ) : i.matchInfo[0].matchDetail.matchEndType === 1 ? ( // 몰수승이라면
                             <GameResultForfeitWin>몰수 승</GameResultForfeitWin>
                           ) : (
@@ -183,7 +209,9 @@ const MatchResultsByMatchTypes = () => {
                           )
                         ) : // 내 기록이 i.matchInfo[1]에 있다면
                         i.matchInfo[1].matchDetail.matchEndType === 0 ? (
-                          <GameResultSpan result={i.matchInfo[1].matchDetail.matchResult}>{i.matchInfo[1].matchDetail.matchResult}</GameResultSpan>
+                          <GameResultSpan result={i.matchInfo[1].matchDetail.matchResult}>
+                            {i.matchInfo[1].matchDetail.matchResult}
+                          </GameResultSpan>
                         ) : i.matchInfo[1].matchDetail.matchEndType === 1 ? (
                           <GameResultForfeitWin>몰수 승</GameResultForfeitWin>
                         ) : (

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ContentDiv, MyRecordContainerDiv, TopRankDiv, UserNameAndTopRankDiv, UserNameParagraph } from './MyRecord.styled';
+import {
+  ContentDiv,
+  MyRecordContainerDiv,
+  TopRankDiv,
+  UserNameAndTopRankDiv,
+  UserNameParagraph,
+} from './MyRecord.styled';
 import { DescriptionDiv, DescriptionParagraph } from '../../Common/styles/styles';
 import Footer from '../../Components/Footer';
 import MatchResultsByMatchTypes from '../../Components/MatchResultsByMatchTypes';
@@ -9,7 +15,12 @@ import TradeLog from '../../Components/TradeLog';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail, Maxdivision } from '../../types/api';
-import { convertDate, convertDivisionNumberToDivisionName, showMyNickNameFirst, convertDateAndTime } from '../../utils/MyRecord';
+import {
+  convertDate,
+  convertDivisionNumberToDivisionName,
+  showMyNickNameFirst,
+  convertDateAndTime,
+} from '../../utils/MyRecord';
 
 const MyRecord = () => {
   const { userObj, setUserObj } = useUserObjAPI()!;
@@ -54,8 +65,6 @@ const MyRecord = () => {
     };
     getMatchDetail();
   }, [matchId]);
-
-  console.log(matchDetail);
 
   return (
     <>

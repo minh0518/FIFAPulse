@@ -44,7 +44,13 @@ export default class FIFAData {
   };
 
   getInfoMetaData = async () => {
-    return Promise.all([this.#getMatchtype(), this.#getSeasonId(), this.#getSpid(), this.#getDivision(), this.#getSpposition()]);
+    return Promise.all([
+      this.#getMatchtype(),
+      this.#getSeasonId(),
+      this.#getSpid(),
+      this.#getDivision(),
+      this.#getSpposition(),
+    ]);
   };
 
   // <이미지 관련한 api는 필요할 때 직접 호출해서 사용합니다>

@@ -56,7 +56,6 @@ const RecordWithOtherUser = () => {
       setInputValue('');
     }
   };
-  console.log(recordWithOtherUser);
 
   useEffect(() => {
     const getMatchId = async () => {

@@ -149,22 +149,46 @@ const Statistics = ({ myMatchInfo, otherMatchInfo }: MatchStatisticsProps) => {
         <h2>세부 정보</h2>
         <DetailStatisticsUl>
           <li>
-            <CategoryButton type="button" name="defence" onClick={onModeClick} value="defence" statisticsMode={statisticsMode}>
+            <CategoryButton
+              type="button"
+              name="defence"
+              onClick={onModeClick}
+              value="defence"
+              statisticsMode={statisticsMode}
+            >
               수비
             </CategoryButton>
           </li>
           <li>
-            <CategoryButton type="button" name="pass" onClick={onModeClick} value="pass" statisticsMode={statisticsMode}>
+            <CategoryButton
+              type="button"
+              name="pass"
+              onClick={onModeClick}
+              value="pass"
+              statisticsMode={statisticsMode}
+            >
               패스
             </CategoryButton>
           </li>
           <li>
-            <CategoryButton type="button" name="shoot" onClick={onModeClick} value="shoot" statisticsMode={statisticsMode}>
+            <CategoryButton
+              type="button"
+              name="shoot"
+              onClick={onModeClick}
+              value="shoot"
+              statisticsMode={statisticsMode}
+            >
               슈팅
             </CategoryButton>
           </li>
           <li>
-            <CategoryButton type="button" name="player" onClick={onModeClick} value="player" statisticsMode={statisticsMode}>
+            <CategoryButton
+              type="button"
+              name="player"
+              onClick={onModeClick}
+              value="player"
+              statisticsMode={statisticsMode}
+            >
               선수
             </CategoryButton>
           </li>

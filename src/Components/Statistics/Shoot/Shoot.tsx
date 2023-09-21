@@ -228,7 +228,10 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
     },
   };
 
-  const [myGoalData, otherGoalData] = [myShootDetailData.filter((i) => i.result === 3), otherShootDetailData.filter((i) => i.result === 3)];
+  const [myGoalData, otherGoalData] = [
+    myShootDetailData.filter((i) => i.result === 3),
+    otherShootDetailData.filter((i) => i.result === 3),
+  ];
   type GoalType = {
     [key: string]: string;
   };
@@ -261,7 +264,7 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
     '바이시클킥',
     '파워 슛',
   ];
-  console.log(myGoalData);
+
   const handleOtherGoalIndex = (oldIndex: number, newIndex: number) => {
     setOtherGoalIndex(newIndex);
   };
@@ -275,9 +278,6 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  console.log(myGoalData);
-  console.log(otherGoalData);
-  // console.log(myPlayerData);
 
   return (
     <ShootContainerDiv>
@@ -311,7 +311,10 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                   </Goal>
                 </AssistAndGoalCircleDiv>
                 <SoccerField goalData={myGoalData[myGoalIndex]} />
-                <AssistAndScoreDiv assist={myGoalData[myGoalIndex].assist} assistSpId={myGoalData[myGoalIndex].assistSpId}>
+                <AssistAndScoreDiv
+                  assist={myGoalData[myGoalIndex].assist}
+                  assistSpId={myGoalData[myGoalIndex].assistSpId}
+                >
                   {myGoalData[myGoalIndex].assist && myGoalData[myGoalIndex].assistSpId !== -1 && (
                     <BoxDiv>
                       <GoalParagraph>ASSIST</GoalParagraph>
@@ -320,7 +323,9 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                         <PlayerImg spId={myGoalData[myGoalIndex].assistSpId} width={100} height={100} />
                         <SeasonAndNameDiv>
                           <img
-                            src={getSeasonImg(myPlayerData.filter((i) => i.spId === myGoalData[myGoalIndex].assistSpId)[0].spId)}
+                            src={getSeasonImg(
+                              myPlayerData.filter((i) => i.spId === myGoalData[myGoalIndex].assistSpId)[0].spId,
+                            )}
                             alt="시즌 이미지"
                           />
                           &nbsp;<b>{convertPlayerName(myGoalData[myGoalIndex].assistSpId)}</b>
@@ -328,7 +333,9 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       </PlayerInfoDiv>
                     </BoxDiv>
                   )}
-                  {myGoalData[myGoalIndex].assist && myGoalData[myGoalIndex].assistSpId !== -1 && <StyledBiSolidRightArrow />}
+                  {myGoalData[myGoalIndex].assist && myGoalData[myGoalIndex].assistSpId !== -1 && (
+                    <StyledBiSolidRightArrow />
+                  )}
 
                   <BoxDiv>
                     <GoalParagraph>GOAL</GoalParagraph>
@@ -336,7 +343,9 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       <PlayerImg spId={myGoalData[myGoalIndex].spId} width={100} height={100} />
                       <SeasonAndNameDiv>
                         <img
-                          src={getSeasonImg(myPlayerData.filter((i) => i.spId === myGoalData[myGoalIndex].spId)[0].spId)}
+                          src={getSeasonImg(
+                            myPlayerData.filter((i) => i.spId === myGoalData[myGoalIndex].spId)[0].spId,
+                          )}
                           alt="시즌 이미지"
                           width={30}
                         />
@@ -391,7 +400,10 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                   </Goal>
                 </AssistAndGoalCircleDiv>
                 <SoccerField goalData={otherGoalData[otherGoalIndex]} />
-                <AssistAndScoreDiv assist={otherGoalData[otherGoalIndex].assist} assistSpId={otherGoalData[otherGoalIndex].assistSpId}>
+                <AssistAndScoreDiv
+                  assist={otherGoalData[otherGoalIndex].assist}
+                  assistSpId={otherGoalData[otherGoalIndex].assistSpId}
+                >
                   {otherGoalData[otherGoalIndex].assist && otherGoalData[otherGoalIndex].assistSpId !== -1 && (
                     <BoxDiv>
                       <GoalParagraph>ASSIST</GoalParagraph>
@@ -400,7 +412,10 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                         <PlayerImg spId={otherGoalData[otherGoalIndex].assistSpId} width={100} height={100} />
                         <SeasonAndNameDiv>
                           <img
-                            src={getSeasonImg(otherPlayerData.filter((i) => i.spId === otherGoalData[otherGoalIndex].assistSpId)[0].spId)}
+                            src={getSeasonImg(
+                              otherPlayerData.filter((i) => i.spId === otherGoalData[otherGoalIndex].assistSpId)[0]
+                                .spId,
+                            )}
                             alt="시즌 이미지"
                           />
                           &nbsp;<b>{convertPlayerName(otherGoalData[otherGoalIndex].assistSpId)}</b>
@@ -408,14 +423,18 @@ const Shoot = ({ matchInfos }: MatchInfos) => {
                       </PlayerInfoDiv>
                     </BoxDiv>
                   )}
-                  {otherGoalData[otherGoalIndex].assist && otherGoalData[otherGoalIndex].assistSpId !== -1 && <StyledBiSolidRightArrow />}
+                  {otherGoalData[otherGoalIndex].assist && otherGoalData[otherGoalIndex].assistSpId !== -1 && (
+                    <StyledBiSolidRightArrow />
+                  )}
                   <BoxDiv>
                     <GoalParagraph>GOAL</GoalParagraph>
                     <PlayerInfoDiv>
                       <PlayerImg spId={otherGoalData[otherGoalIndex].spId} width={100} height={100} />
                       <SeasonAndNameDiv>
                         <img
-                          src={getSeasonImg(otherPlayerData.filter((i) => i.spId === otherGoalData[otherGoalIndex].spId)[0].spId)}
+                          src={getSeasonImg(
+                            otherPlayerData.filter((i) => i.spId === otherGoalData[otherGoalIndex].spId)[0].spId,
+                          )}
                           alt="시즌 이미지"
                           width={30}
                         />

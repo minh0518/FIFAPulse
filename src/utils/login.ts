@@ -13,7 +13,6 @@ export const loginWithGoogle = async () => {
     prompt: 'select_account',
   });
 
-  console.log(authService);
   await signInWithPopup(authService, provider as GoogleAuthProvider);
 };
 
@@ -39,35 +38,59 @@ export const checkDB = async (uid: string) => {
 
 export const updateDB = async (uid: string, chekDBObj: searchDBResultType, setUserObj: any) => {
   const fifa = new FIFAData();
-  const fifaUserInfoResult = await fifa.getUserId<NexonUserInfo>(chekDBObj.existUserDBInfo.nickname);
-  const updateResult = doc(dbService, 'userInfo', `${chekDBObj.documentIDForUpdate}`);
-  await updateDoc(updateResult, {
-    // googleUID와 nickname은 굳이 업데이트 x
-    FIFAOnlineAccessId: fifaUserInfoResult.accessId,
-    level: fifaUserInfoResult.level,
-  });
 
-  const obj = {
-    googleUID: uid,
-    FIFAOnlineAccessId: fifaUserInfoResult.accessId,
-    level: fifaUserInfoResult.level as unknown as number,
-    nickname: fifaUserInfoResult.nickname,
-  };
-  setUserObj(obj);
-  localStorage.setItem('userObj', JSON.stringify(obj));
+  let fifaUserInfoResult;
+  let updateResult;
+  try {
+    fifaUserInfoResult = await fifa.getUserId<NexonUserInfo>(chekDBObj.existUserDBInfo.nickname);
+    updateResult = doc(dbService, 'userInfo', `${chekDBObj.documentIDForUpdate}`);
+  } catch (e) {
+    console.error(e);
+  }
+
+  if (updateResult && fifaUserInfoResult) {
+    try {
+      await updateDoc(updateResult, {
+        // googleUID와 nickname은 굳이 업데이트 x
+        FIFAOnlineAccessId: fifaUserInfoResult.accessId,
+        level: fifaUserInfoResult.level,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    const obj = {
+      googleUID: uid,
+      FIFAOnlineAccessId: fifaUserInfoResult.accessId,
+      level: fifaUserInfoResult.level as unknown as number,
+      nickname: fifaUserInfoResult.nickname,
+    };
+    setUserObj(obj);
+    localStorage.setItem('userObj', JSON.stringify(obj));
+  }
 };
 
-// 닉네임은 변경 가능성이 있으므로 사용자가 입력한 값으로 받아와야 함
-// 어차피 uid는 고정이므로 이걸 기반으로 DB를 찾고 업뎃
+// 닉네임은 변경 가능성이 있으므로 항상 사용자가 입력한 닉네임으로 받아와야 함
+// 그리고 Google uid는 고정이므로 이걸 기반으로 DB를 찾고 업뎃
 export const onLoginClick = async (setUserObj: any, setIsNickNameExist: any) => {
-  await loginWithGoogle();
-  const chekDBObj = await checkDB(authService.currentUser!.uid);
+  try {
+    await loginWithGoogle();
+  } catch (e) {
+    console.error(e);
+  }
 
-  if (chekDBObj.existOnDB) {
+  let chekDBObj;
+  try {
+    chekDBObj = await checkDB(authService.currentUser!.uid);
+  } catch (e) {
+    console.error(e);
+  }
+
+  if (chekDBObj && chekDBObj.existOnDB) {
     updateDB(authService.currentUser!.uid, chekDBObj, setUserObj);
     setIsNickNameExist(true);
   }
-  if (!chekDBObj.existOnDB) {
+  if (chekDBObj && !chekDBObj.existOnDB) {
     setIsNickNameExist(false);
   }
 };
