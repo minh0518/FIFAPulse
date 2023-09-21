@@ -27,7 +27,7 @@ import Loading from '../Loading';
 import PlayerImg from '../PlayerImg';
 
 const TradeLog = () => {
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { userObj } = useUserObjAPI()!;
   const [selectedValue, setSelectedValue] = useState<string | null>('latest');
   const [tradeInfo, setTradeInfo] = useState<{ buy: TradeLogInfo[]; sell: TradeLogInfo[] } | null>(null);
   const [tradeType, setTradeType] = useState<'buy' | 'sell'>('buy');
@@ -79,12 +79,12 @@ const TradeLog = () => {
         <TradeLogHeading>이적 시장 목록</TradeLogHeading>
         <ChooseBuyOrSellUl>
           <li>
-            <BuyButton type="button" onClick={(e) => onBuySellClick('buy')} tradeType={tradeType}>
+            <BuyButton type="button" onClick={() => onBuySellClick('buy')} tradeType={tradeType}>
               BUY
             </BuyButton>
           </li>
           <li>
-            <SellButton type="button" onClick={(e) => onBuySellClick('sell')} tradeType={tradeType}>
+            <SellButton type="button" onClick={() => onBuySellClick('sell')} tradeType={tradeType}>
               SELL
             </SellButton>
           </li>

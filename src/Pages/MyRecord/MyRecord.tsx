@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   ContentDiv,
   MyRecordContainerDiv,
@@ -15,15 +14,10 @@ import TradeLog from '../../Components/TradeLog';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail, Maxdivision } from '../../types/api';
-import {
-  convertDate,
-  convertDivisionNumberToDivisionName,
-  showMyNickNameFirst,
-  convertDateAndTime,
-} from '../../utils/MyRecord';
+import { convertDate, convertDivisionNumberToDivisionName } from '../../utils/MyRecord';
 
 const MyRecord = () => {
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { userObj } = useUserObjAPI()!;
   const [selectedValue, setSelectedValue] = useState(50);
   const [matchId, setMatchId] = useState<string[]>([]);
   const [matchDetail, setMatchDetail] = useState<MatchDetail[]>([]);

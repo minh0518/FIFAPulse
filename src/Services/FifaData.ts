@@ -11,7 +11,6 @@ import {
   NexonUserInfo,
   TradeLogInfo,
 } from '../types/api';
-import { getErrorMessage, getErrorName } from '../utils/getErrorMessage';
 
 export default class FIFAData {
   instance: Axios;

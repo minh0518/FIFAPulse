@@ -15,7 +15,15 @@ const SoccerGround = ({ goalData }: any) => {
             <line x1="0" y1="0" x2="1" y2="0" className="goal-stripe" />
             <line x1="1" y1="0" x2="1" y2="1" className="goal-stripe" />
           </pattern>
-          <marker id="arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <marker
+            id="arrowhead"
+            viewBox="0 0 10 10"
+            refX="5"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
             <polygon points="0 0, 10 5, 0 10" />
           </marker>
         </defs>
@@ -36,13 +44,22 @@ const SoccerGround = ({ goalData }: any) => {
           className="line"
         />
 
-        <path d="M 50 60 Q 60 60 60 50 M 1090 50 Q 1090 60 1100 60 M 50 720 Q 60 720 60 730 M 1090 730 Q 1090 720 1100 720" className="line" />
+        <path
+          d="M 50 60 Q 60 60 60 50 M 1090 50 Q 1090 60 1100 60 M 50 720 Q 60 720 60 730 M 1090 730 Q 1090 720 1100 720"
+          className="line"
+        />
 
         <polyline points="50,426.6 35,426.6 35,353.4 50,353.4" className="goal" />
         <polyline points="1100,426.6 1115,426.6 1115,353.4 1100,353.4" className="goal" />
 
-        <polyline points="50,481.6 105,481.6 105,298.4 50,298.4 50,591.6 215,591.6 215,188.4 50,188.4" className="line" />
-        <polyline points="1100,481.6 1045,481.6 1045,298.4 1100,298.4 1100,591.6 935,591.6 935,188.4 1100,188.4" className="line" />
+        <polyline
+          points="50,481.6 105,481.6 105,298.4 50,298.4 50,591.6 215,591.6 215,188.4 50,188.4"
+          className="line"
+        />
+        <polyline
+          points="1100,481.6 1045,481.6 1045,298.4 1100,298.4 1100,591.6 935,591.6 935,188.4 1100,188.4"
+          className="line"
+        />
 
         {goalData.assist && goalData.assistSpId !== -1 && (
           <circle cx={goalData.assistX * 1070 + 40} cy={goalData.assistY * 700 + 40} r="10" fill="blue" />

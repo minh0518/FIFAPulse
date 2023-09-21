@@ -38,7 +38,7 @@ const PlayerNameInput = ({ seasonId, setConfirmedPlayerNameInput, playerListBySe
   }, [seasonId]);
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setInputValue(value);
     setIsHaveInputValue(true);
   };

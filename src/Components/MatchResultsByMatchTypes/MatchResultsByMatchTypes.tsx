@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Select } from '@mantine/core';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   GameResultForfeitLose,
   GameResultForfeitWin,
@@ -20,18 +20,18 @@ import {
 } from './MatchResultsByMatchTypes.styled';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
-import { MatchDetail, Maxdivision } from '../../types/api';
+import { MatchDetail } from '../../types/api';
 import { showWinningpercentage } from '../../utils/MatchStatistics';
 import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
 import Loading from '../Loading';
 
 const MatchResultsByMatchTypes = () => {
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { userObj } = useUserObjAPI()!;
   const [selectedValue, setSelectedValue] = useState<string | null>('50');
   // @mantine 은 value를 string으로만 받으므로 문자열로 사용하고 api호출할때 캐스팅해서 사용
   const [matchId, setMatchId] = useState<string[]>([]);
   const [matchDetail, setMatchDetail] = useState<MatchDetail[]>([]);
-  const [maxdivision, setMaxdivision] = useState<Maxdivision[] | null>(null);
+
   const [matchLength, setMatchLength] = useState(20);
 
   const navigate = useNavigate();

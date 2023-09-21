@@ -1,7 +1,3 @@
-import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import { authService } from '../../firebase';
-
 export const onLogoutClick = async (setIsNickNameExist: any, setUserObj: any, setIsNicknameChanged: any) => {
   setIsNickNameExist(null); // 모달 창에서 뒤로가기 선택하고 재 로그인시
   // 모달창 띄우는 useEffect를 실행하기 위해서 의존성 배열을 변경해야 하므로

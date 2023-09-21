@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import ApexCharts from 'react-apexcharts';
-import { Fade, Slide } from 'react-awesome-reveal';
 import Defence from './Defence';
 import Pass from './Pass';
 import Player from './Player';

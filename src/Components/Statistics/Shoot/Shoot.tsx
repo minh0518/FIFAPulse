@@ -1,7 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
-import { BiSolidRightArrow } from 'react-icons/bi';
-import Slider from 'react-slick';
+import React, { useState } from 'react';
 import {
   Assist,
   AssistAndGoalCircleDiv,
@@ -22,7 +19,7 @@ import {
 } from './Shoot.styled';
 import SoccerField from './SoccerField';
 import { MatchInfos } from '../../../types/props';
-import { calculateGoalTime, convertPlayerName, convertPosition, getSeasonImg } from '../../../utils/MatchStatistics';
+import { calculateGoalTime, convertPlayerName, getSeasonImg } from '../../../utils/MatchStatistics';
 import Forfeit from '../../Forfeit';
 import PlayerImg from '../../PlayerImg';
 import 'slick-carousel/slick/slick.css';

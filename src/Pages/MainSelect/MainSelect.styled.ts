@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
-import challenge from '../../images/challenge.png';
+import styled from 'styled-components';
 import championsLeague from '../../images/championsLeague.jpg';
 import myRecord from '../../images/myRecord.png';
 import positionGuide from '../../images/positionGuide.jpg';

@@ -9,24 +9,22 @@ import {
   ModalContentForm,
   TestID,
 } from './AskNickNameModalForGuest.styled';
-import { authService, dbService } from '../../../firebase';
 import { useModalAPI } from '../../Context/Modal/ModalContext';
 import { useNickNameChangedAPI } from '../../Context/Nickname/NicknameChangedContext';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import { NicknameDoesntExistError } from '../../Errors/errors';
 import FIFAData from '../../Services/FifaData';
 import { NexonUserInfo } from '../../types/api';
-import { getErrorMessage, getErrorName } from '../../utils/getErrorMessage';
 
 const AskGuestNicknameModal = () => {
   const [nickNameInput, setNickNameInput] = useState('');
   const { closeModal } = useModalAPI()!;
   const { setUserObj } = useUserObjAPI()!;
-  const { isNicknameChanged, setIsNicknameChanged } = useNickNameChangedAPI()!;
+  const { setIsNicknameChanged } = useNickNameChangedAPI()!;
   const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setNickNameInput(value.split(' ').join(''));
   };
 
