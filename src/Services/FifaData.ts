@@ -11,14 +11,13 @@ import {
   NexonUserInfo,
   TradeLogInfo,
 } from '../types/api';
-import { getErrorMessage, getErrorName } from '../utils/getErrorMessage';
 
 export default class FIFAData {
   instance: Axios;
 
   constructor() {
     this.instance = axios.create({
-      baseURL: 'https://api.nexon.co.kr/fifaonline4/v1.0',
+      baseURL: 'https://public.api.nexon.com/openapi/fconline/v1.0/',
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
@@ -44,7 +43,13 @@ export default class FIFAData {
   };
 
   getInfoMetaData = async () => {
-    return Promise.all([this.#getMatchtype(), this.#getSeasonId(), this.#getSpid(), this.#getDivision(), this.#getSpposition()]);
+    return Promise.all([
+      this.#getMatchtype(),
+      this.#getSeasonId(),
+      this.#getSpid(),
+      this.#getDivision(),
+      this.#getSpposition(),
+    ]);
   };
 
   // <이미지 관련한 api는 필요할 때 직접 호출해서 사용합니다>
@@ -113,7 +118,7 @@ export default class FIFAData {
 
   // 선수 spid
   #getSpid = async <T extends MetaDataSpid>(): Promise<T[]> => {
-    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/spid.json', {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fconline/latest/spid.json', {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
@@ -124,7 +129,7 @@ export default class FIFAData {
 
   // 시즌아이디
   #getSeasonId = async <T extends MetaDataSeasonId>(): Promise<T[]> => {
-    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/seasonid.json', {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fconline/latest/seasonid.json', {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
@@ -135,7 +140,7 @@ export default class FIFAData {
 
   // 선수 포지션
   #getSpposition = async <T extends MetaDataSpposition>(): Promise<T[]> => {
-    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/spposition.json', {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fconline/latest/spposition.json', {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
@@ -146,7 +151,7 @@ export default class FIFAData {
 
   // 공식경기 등급 식별자
   #getDivision = async <T extends MetaDataDivision>(): Promise<T[]> => {
-    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/division.json', {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fconline/latest/division.json', {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },
@@ -157,7 +162,7 @@ export default class FIFAData {
 
   // 매치 종류
   #getMatchtype = async <T extends MetaDataMatchtype>(): Promise<T[]> => {
-    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fifaonline4/latest/matchtype.json', {
+    const result = await axios.get<T[]>('https://static.api.nexon.co.kr/fconline/latest/matchtype.json', {
       headers: {
         Authorization: import.meta.env.REACT_APP_API_KEY_FIFA,
       },

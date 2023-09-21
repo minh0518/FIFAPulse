@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { BsPersonCheckFill } from 'react-icons/bs';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   CurrentUserInfoDiv,
   GoogleLoginStatus,

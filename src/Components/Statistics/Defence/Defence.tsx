@@ -1,5 +1,4 @@
 import React from 'react';
-import ApexCharts from 'react-apexcharts';
 import { ChartContainerDiv, DefenceContainerDiv, ForfeitDiv, StyledChart } from './Defence.styled';
 import { MatchInfos } from '../../../types/props';
 import { calculatePercent } from '../../../utils/MatchStatistics';
@@ -10,7 +9,12 @@ const Defence = ({ matchInfos }: MatchInfos) => {
   const [myDefenceData, ohterDefenceData] = [matchInfos[0].defence, matchInfos[1].defence];
 
   const myChartState = {
-    series: [myDefenceData.blockTry * 4, myDefenceData.tackleTry * 4, myDefenceData.blockSuccess * 4, myDefenceData.tackleSuccess * 4],
+    series: [
+      myDefenceData.blockTry * 4,
+      myDefenceData.tackleTry * 4,
+      myDefenceData.blockSuccess * 4,
+      myDefenceData.tackleSuccess * 4,
+    ],
     options: {
       chart: {
         type: 'radialBar',
@@ -85,7 +89,12 @@ const Defence = ({ matchInfos }: MatchInfos) => {
     },
   };
   const otherChartState = {
-    series: [ohterDefenceData.blockTry * 4, ohterDefenceData.tackleTry * 4, ohterDefenceData.blockSuccess * 4, ohterDefenceData.tackleSuccess * 4],
+    series: [
+      ohterDefenceData.blockTry * 4,
+      ohterDefenceData.tackleTry * 4,
+      ohterDefenceData.blockSuccess * 4,
+      ohterDefenceData.tackleSuccess * 4,
+    ],
     options: {
       chart: {
         type: 'radialBar',
@@ -174,7 +183,12 @@ const Defence = ({ matchInfos }: MatchInfos) => {
         <Forfeit />
       ) : (
         <ChartContainerDiv>
-          <StyledChart options={otherChartState.options} series={otherChartState.series} type="radialBar" height={360} />
+          <StyledChart
+            options={otherChartState.options}
+            series={otherChartState.series}
+            type="radialBar"
+            height={360}
+          />
           <b>블록 성공률 : {calculatePercent(ohterDefenceData.blockTry, ohterDefenceData.blockSuccess)}% </b>
           <b>태클 성공률 : {calculatePercent(ohterDefenceData.tackleTry, ohterDefenceData.tackleSuccess)}%</b>
         </ChartContainerDiv>

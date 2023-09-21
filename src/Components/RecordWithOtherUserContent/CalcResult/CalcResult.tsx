@@ -24,7 +24,7 @@ const CalcResult = ({ otherUserInfo }: CalcResultProps) => {
     null,
   );
   const [recordWithOtherUser, setRecordWithOtherUser] = useState<MatchDetail[] | null>(null);
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { userObj } = useUserObjAPI()!;
   const navigate = useNavigate();
 
   useEffect(() => {

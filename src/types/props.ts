@@ -1,5 +1,4 @@
-import { MatchDetail, NexonUserInfo, matchInfoType } from './api';
-import { myDataIndex, selectedUsertStatistics } from './states';
+import { NexonUserInfo, matchInfoType } from './api';
 
 export interface MatchStatisticsProps {
   // matchDetail: MatchDetail;

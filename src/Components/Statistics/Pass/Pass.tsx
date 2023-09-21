@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactApexChart from 'react-apexcharts';
 import { PassChartDiv, PassContainerDiv, StyledChart } from './Pass.styled';
 import { MatchInfos } from '../../../types/props';
 import { calculatePercent } from '../../../utils/MatchStatistics';
@@ -251,7 +250,8 @@ const Pass = ({ matchInfos }: MatchInfos) => {
         <PassChartDiv>
           <StyledChart options={myChartState.options} series={myChartState.series} type="line" height={400} />
           <b>
-            전체 패스 성공률 : {calculatePercent(myPassData.passTry, myPassData.passSuccess)}% ({`${myPassData.passSuccess} / ${myPassData.passTry}`})
+            전체 패스 성공률 : {calculatePercent(myPassData.passTry, myPassData.passSuccess)}% (
+            {`${myPassData.passSuccess} / ${myPassData.passTry}`})
           </b>
         </PassChartDiv>
       )}

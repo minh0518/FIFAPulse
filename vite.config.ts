@@ -12,7 +12,7 @@ export default defineConfig({
     // 프록시 서버 설정
     proxy: {
       '/live': {
-        target: 'https://fo4.dn.nexoncdn.co.kr/',
+        target: 'https://fco.dn.nexoncdn.co.kr/',
         changeOrigin: true,
         secure: false,
       },

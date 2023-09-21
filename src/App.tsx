@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Navbar from './Components/Navbar';
 import { ModalProvider } from './Context/Modal/ModalContext';
 import { IsNicknameChangedProvider } from './Context/Nickname/NicknameChangedContext';
 import { UserObjProvider } from './Context/UserObj/UserObjContext';

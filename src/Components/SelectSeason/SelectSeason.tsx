@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Icon, SeasonList, SeasonSelectUl, SelectSeasonContainerDiv } from './SelectSeason.styled';
-import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
-import FIFAData from '../../Services/FifaData';
 
 const SelectSeason = ({ seasonId, setSeasonId }: any) => {
   const seasonImges = JSON.parse(localStorage.getItem('MetaData_seasonId')!);
@@ -15,7 +13,12 @@ const SelectSeason = ({ seasonId, setSeasonId }: any) => {
       <SeasonSelectUl>
         {seasonImges?.map((i: any) => {
           return (
-            <SeasonList key={i.className} selectedSeasonId={seasonId} seasonId={i.seasonId} onClick={() => onSeasonImgClick(i.seasonId)}>
+            <SeasonList
+              key={i.className}
+              selectedSeasonId={seasonId}
+              seasonId={i.seasonId}
+              onClick={() => onSeasonImgClick(i.seasonId)}
+            >
               {i.className.split('(')[0].trim() === 'ICONTM' ? (
                 <Icon>
                   ICONTM

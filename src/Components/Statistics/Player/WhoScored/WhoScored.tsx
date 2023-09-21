@@ -44,7 +44,6 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
   ];
 
   const bestPlayer = [...myPlayerData, ...ohterPlayerData].sort((a, b) => b.status.spRating - a.status.spRating);
-  console.log(bestPlayer);
 
   const [myStartingPlayerData, otherStartingPlayerData] = [
     myPlayerData.filter((i) => {
@@ -91,9 +90,23 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
               rx="30"
               ry="30.4054054"
             />
-            <ellipse id="Oval" fill="#687D58" fillRule="nonzero" cx="240.333333" cy="125.337838" rx="2.33333333" ry="2.36486486" />
+            <ellipse
+              id="Oval"
+              fill="#687D58"
+              fillRule="nonzero"
+              cx="240.333333"
+              cy="125.337838"
+              rx="2.33333333"
+              ry="2.36486486"
+            />
             <g id="Home-Goal-Lines" transform="translate(0.000000, 70.945946)" stroke="#687D58">
-              <g id="Group" transform="translate(40.000000, 36.486486)" fill="#2C4815" fillOpacity="0" fillRule="nonzero">
+              <g
+                id="Group"
+                transform="translate(40.000000, 36.486486)"
+                fill="#2C4815"
+                fillOpacity="0"
+                fillRule="nonzero"
+              >
                 <path
                   d="M0.22010202,0.0272296486 L0.263713173,35.1033154 C4.16417671,34.8356874 7.666974,32.8962874 10.2389051,29.9147176 C12.9804461,26.7365236 14.6666667,22.3755076 14.6666667,17.5667322 C14.6666667,12.7489575 12.9741287,8.3806102 10.2234999,5.20091322 C7.64341027,2.21835766 4.1302596,0.282846243 0.22010202,0.0272296486 Z"
                   id="Combined-Shape"
@@ -126,7 +139,15 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
                 transform="translate(7.331248, 54.048868) rotate(-180.000000) translate(-7.331248, -54.048868) "
               />
             </g>
-            <line x1="240.333333" y1="0.675675676" x2="240.333333" y2="249.324324" id="Line-10" stroke="#687D58" strokeLinecap="square" />
+            <line
+              x1="240.333333"
+              y1="0.675675676"
+              x2="240.333333"
+              y2="249.324324"
+              id="Line-10"
+              stroke="#687D58"
+              strokeLinecap="square"
+            />
           </g>
         </g>
 
@@ -190,9 +211,19 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
           return (
             // <g key={index} onMouseOver={showHoverDiv} onMouseOut={hideHoverDiv}>
             <g key={index}>
-              <rect x={mySubPositionCord[index].x - 25} y={mySubPositionCord[index].y - 25} width="50" height="50" fill="transparent" />
+              <rect
+                x={mySubPositionCord[index].x - 25}
+                y={mySubPositionCord[index].y - 25}
+                width="50"
+                height="50"
+                fill="transparent"
+              />
               {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
-                <g transform={`translate(${mySubPositionCord[index].x - 14}, ${mySubPositionCord[index].y - 17}) scale(0.14)`}>
+                <g
+                  transform={`translate(${mySubPositionCord[index].x - 14}, ${
+                    mySubPositionCord[index].y - 17
+                  }) scale(0.14)`}
+                >
                   <polygon
                     points="100,10 40,198 190,78 10,78 160,198"
                     style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
@@ -203,7 +234,13 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
                 <circle cx={mySubPositionCord[index].x} cy={mySubPositionCord[index].y} r="10" className="mine" />
               )}
 
-              <text x={mySubPositionCord[index].x} y={mySubPositionCord[index].y} textAnchor="middle" dominantBaseline="middle" className="point">
+              <text
+                x={mySubPositionCord[index].x}
+                y={mySubPositionCord[index].y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="point"
+              >
                 {i.status.spRating}
               </text>
               <text
@@ -281,9 +318,19 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
           return (
             // <g key={index} onMouseOver={showHoverDiv} onMouseOut={hideHoverDiv}>
             <g key={index}>
-              <rect x={otherSubPositionCord[index].x - 25} y={otherSubPositionCord[index].y - 25} width="50" height="50" fill="transparent" />
+              <rect
+                x={otherSubPositionCord[index].x - 25}
+                y={otherSubPositionCord[index].y - 25}
+                width="50"
+                height="50"
+                fill="transparent"
+              />
               {i.spId === bestPlayer[0].spId && i.status.spRating === bestPlayer[0].status.spRating ? (
-                <g transform={`translate(${otherSubPositionCord[index].x - 14}, ${otherSubPositionCord[index].y - 17}) scale(0.14)`}>
+                <g
+                  transform={`translate(${otherSubPositionCord[index].x - 14}, ${
+                    otherSubPositionCord[index].y - 17
+                  }) scale(0.14)`}
+                >
                   <polygon
                     points="100,10 40,198 190,78 10,78 160,198"
                     style={{ fill: '#7CC700', stroke: '#331B3F', strokeWidth: '0', fillRule: 'nonzero' }}
@@ -291,7 +338,12 @@ const WhoScored = ({ matchInfos }: MatchInfos) => {
                   />
                 </g>
               ) : (
-                <circle cx={otherSubPositionCord[index].x} cy={otherSubPositionCord[index].y} r="10" className="other" />
+                <circle
+                  cx={otherSubPositionCord[index].x}
+                  cy={otherSubPositionCord[index].y}
+                  r="10"
+                  className="other"
+                />
               )}
 
               <text

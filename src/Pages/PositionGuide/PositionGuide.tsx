@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Icon,
   PlayerNameAndPostion,
   PositionGuideContainerDiv,
   PositionStatisticsDiv,
   SearchSection,
-  SeasonList,
-  SeasonSelectUl,
 } from './PositionGuide.styled';
 import { DescriptionDiv, DescriptionParagraph } from '../../Common/styles/styles';
 import Footer from '../../Components/Footer';
@@ -16,7 +13,6 @@ import PlayerNameInput from '../../Components/PlayerNameInput';
 import PositionStatistics from '../../Components/PositionStatistics';
 import SelectPostition from '../../Components/SelectPostition';
 import SelectSeason from '../../Components/SelectSeason';
-import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { getMaxInfo } from '../../utils/positionGuide';
 
@@ -83,8 +79,16 @@ const PositionGuide = () => {
         <SearchSection>
           <SelectSeason seasonId={seasonId} setSeasonId={setSeasonId} />
           <PlayerNameAndPostion>
-            <PlayerNameInput seasonId={seasonId} setConfirmedPlayerNameInput={setConfirmedPlayerNameInput} playerListBySeason={playerListBySeason} />
-            <SelectPostition seasonId={seasonId} confirmedPositionId={confirmedPositionId} setConfirmenPositionId={setConfirmedPositionId} />
+            <PlayerNameInput
+              seasonId={seasonId}
+              setConfirmedPlayerNameInput={setConfirmedPlayerNameInput}
+              playerListBySeason={playerListBySeason}
+            />
+            <SelectPostition
+              seasonId={seasonId}
+              confirmedPositionId={confirmedPositionId}
+              setConfirmenPositionId={setConfirmedPositionId}
+            />
           </PlayerNameAndPostion>
         </SearchSection>
 
@@ -98,7 +102,14 @@ const PositionGuide = () => {
                 return <NoResultPositionStatistics errorPositionId={i[0].errorPositionId} key={index} />;
               }
 
-              return <PositionStatistics key={index} rankerInfo={i[0]} confirmedPositionId={i[0].spPosition} maxInfo={maxInfo} />;
+              return (
+                <PositionStatistics
+                  key={index}
+                  rankerInfo={i[0]}
+                  confirmedPositionId={i[0].spPosition}
+                  maxInfo={maxInfo}
+                />
+              );
             })}
         </PositionStatisticsDiv>
       </PositionGuideContainerDiv>

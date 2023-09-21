@@ -8,9 +8,9 @@ import AskNickNameModal from '../AskNickNameModal';
 
 const AskUseExistNickNameModal = () => {
   const { closeModal } = useModalAPI()!;
-  const { isModalOpen, openModal } = useModalAPI()!; // context로 관리하는 현재 모달이 열렸는지 알려주는 상태
-  const { userObj, setUserObj } = useUserObjAPI()!; // context로 관리하는 현재 로그인 중인 유저의 정보
-  const { isNicknameChanged, setIsNicknameChanged } = useNickNameChangedAPI()!;
+  const { openModal } = useModalAPI()!; // context로 관리하는 현재 모달이 열렸는지 알려주는 상태
+  const { userObj } = useUserObjAPI()!; // context로 관리하는 현재 로그인 중인 유저의 정보
+  const { setIsNicknameChanged } = useNickNameChangedAPI()!;
   const onClick = (value: boolean) => {
     closeModal(); // 먼저 닫고 새로운 모달을 열어야 함
     if (value) {

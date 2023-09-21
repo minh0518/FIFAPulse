@@ -1,62 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {
-  ContentDiv,
-  RecordWithOtherUserContainerDiv,
-  GameResultForfeitLose,
-  GameResultForfeitWin,
-  GameResultSpan,
-  Table,
-  TableContentDiv,
-  TableTd,
-  TableTr,
-} from './RecordWithOtherUser.styled';
+import { ContentDiv, RecordWithOtherUserContainerDiv } from './RecordWithOtherUser.styled';
 import { DescriptionDiv, DescriptionParagraph } from '../../Common/styles/styles';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import RecordWithOtherUserContent from '../../Components/RecordWithOtherUserContent/RecordWithOtherUserContent';
 import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
-import { NicknameDoesntExistError, NicknameDuplicationError } from '../../Errors/errors';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail, NexonUserInfo } from '../../types/api';
-import { calcTotalMatchCounts, calcWinngRate } from '../../utils/MatchResultsByMatchTypes';
-import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
-import { getErrorMessage } from '../../utils/getErrorMessage';
+import { calcTotalMatchCounts } from '../../utils/MatchResultsByMatchTypes';
 
 const RecordWithOtherUser = () => {
-  const [inputValue, setInputValue] = useState('');
   const [otherUserInfo, setOtherUserInfo] = useState<NexonUserInfo | null>(null);
   const [recordWithOtherUser, setRecordWithOtherUser] = useState<MatchDetail[] | null>(null);
   const [calcResult, setCalcResult] = useState<{ totalMatchLength: number; win: number; drawOrLose: number } | null>(
     null,
   );
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { userObj } = useUserObjAPI()!;
   const navigate = useNavigate();
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const fifa = new FIFAData();
-    try {
-      if (inputValue === userObj?.nickname)
-        throw new NicknameDuplicationError('자기 자신은 입력할 수 없습니다', 400, 'NICKNAME_DUPLICATION');
-      const response = await fifa.getUserId<NexonUserInfo>(inputValue);
-      setOtherUserInfo(response);
-    } catch (error) {
-      if (error instanceof NicknameDuplicationError) {
-        alert(error.message);
-      } else if (error instanceof NicknameDoesntExistError) {
-        alert(error.message);
-      } else if (error instanceof Error) {
-        console.error(error);
-        alert(error.message);
-      }
-
-      setInputValue('');
-    }
-  };
-  console.log(recordWithOtherUser);
 
   useEffect(() => {
     const getMatchId = async () => {

@@ -8,7 +8,7 @@ import { OtherUserNicknameInputProps } from '../../../types/props';
 
 const OtherUserNicknameInput = ({ setOtherUserInfo }: OtherUserNicknameInputProps) => {
   const [inputValue, setInputValue] = useState('');
-  const { userObj, setUserObj } = useUserObjAPI()!;
+  const { userObj } = useUserObjAPI()!;
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
