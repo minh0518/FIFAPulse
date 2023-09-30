@@ -195,7 +195,7 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
 <img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
 
 ### ✅API
-**nexon open api**
+**[nexon open api](https://developers.nexon.com/fconline)** <br>
 [<img src="https://github.com/minh0518/FIFAPulse/assets/78631876/fb0f4bb4-22bf-4c4c-80e3-cfd891f4544a" alt="nexon open api" width="300" height="100"/>](https://developers.nexon.com/fconline)
 
 
