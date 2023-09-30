@@ -72,7 +72,6 @@ const TradeLog = () => {
     setTradeType(tradeType);
   };
 
-  console.log(tradeInfo);
   return (
     <TradeLogContainerDiv>
       <HeadingAndButtonDiv>

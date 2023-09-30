@@ -85,17 +85,16 @@ export const BeforeLoginDiv = styled.div`
 `;
 
 export const UseLoginModeButton = styled.button`
-  font-family: 'Dongle', sans-serif;
   cursor: pointer;
   max-width: 500px;
   min-width: 370px;
   height: 55px;
-  font-size: 5rem;
+  font-size: 2rem;
   border: none;
   color: black;
   background-color: transparent;
   span {
-    font-size: 3rem;
+    font-size: 1rem;
   }
   transition: transform 0.3s ease;
 
@@ -106,7 +105,7 @@ export const UseLoginModeButton = styled.button`
   &:after {
     content: '';
     position: absolute;
-    bottom: -90%;
+    bottom: -20%;
     left: 0;
     width: 0;
     height: 1px;
