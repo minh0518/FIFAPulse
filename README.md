@@ -127,17 +127,13 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
      - 공식경기 (일반, 감독모드, 친선)
        
   - **이적시장 로그 (최대 갯수 선택 가능)**
-    - **판매기록**
-       - 가격 내림차순
-       - 가격 오름차순
-       - 오래된 순
-       - 최신 순
-         
-    - **구입기록**
-       - 가격 내림차순
-       - 가격 오름차순
-       - 오래된 순
-       - 최신 순
+    - **판매기록 과 구입기록을 보여주며 , 아래의 필터링 옵션을 적용할 수 있습니다**
+    - 가격 내림차순
+    - 가격 오름차순
+    - 오래된 순
+    - 최신 순
+    
+    
 
 <br><br>
 
@@ -184,6 +180,29 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
 <br><br><br>
 
 # 🛠️ 기술 스택
+
+### ✅Front-end
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+
+### ✅Back-end
+<img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+
+### ✅Build
+<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+
+### ✅Deploy
+<img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
+
+### ✅API
+**nexon open api**
+[<img src="https://github.com/minh0518/FIFAPulse/assets/78631876/fb0f4bb4-22bf-4c4c-80e3-cfd891f4544a" alt="nexon open api" width="300" height="100"/>](https://developers.nexon.com/fconline)
+
+
+
+
+
+
 
 <br><br><br>
 
