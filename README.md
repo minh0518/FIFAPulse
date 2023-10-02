@@ -153,7 +153,7 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
 
 <br><br>
 
-![경기 상세 정보 - 선수](https://github.com/minh0518/FIFAPulse/assets/78631876/e95638a7-c614-4ce8-b016-8ca8155bf97e)
+![경기 상세 정보 - 선수](https://github.com/minh0518/FIFAPulse/assets/78631876/1329473b-24ad-4322-89a8-18391a6f6dbd)
 - **SVG를 통해 직접 구현한 전체 선수 평점 시각화**
 - **각 선수가 가용된 포지션 데이터를 기반으로 svg를 통해 포지션 별 위치를 지정해서 실제 플레이 했던 포메이션대로 보여줍니다**
 - 전 세계적으로 유명한 축구 평점 사이트 [whoscored](https://1xbet.whoscored.com/) 의 실제 평점 시작화 이미지를 따라서 구현 했습니다
