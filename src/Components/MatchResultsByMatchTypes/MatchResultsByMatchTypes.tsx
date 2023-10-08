@@ -22,7 +22,7 @@ import { useUserObjAPI } from '../../Context/UserObj/UserObjContext';
 import FIFAData from '../../Services/FifaData';
 import { MatchDetail } from '../../types/api';
 import { showWinningpercentage } from '../../utils/MatchStatistics';
-import { convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
+import { checkMatchDetailValidate, convertDateAndTime, showMyNickNameFirst } from '../../utils/MyRecord';
 import Loading from '../Loading';
 
 const MatchResultsByMatchTypes = () => {
@@ -35,17 +35,6 @@ const MatchResultsByMatchTypes = () => {
   const [matchLength, setMatchLength] = useState(20);
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const updateMaxdivision = async () => {
-  //     const fifa = new FIFAData();
-  //     const maxdivisionResult = await fifa.getMaxdivision(userObj!.FIFAOnlineAccessId);
-
-  //     setMaxdivision(maxdivisionResult);
-  //   };
-
-  //   updateMaxdivision();
-  // }, []);
 
   useEffect(() => {
     const getMatchId = async () => {
@@ -64,7 +53,8 @@ const MatchResultsByMatchTypes = () => {
           return fifa.getMatchDetail(i);
         });
         const matchDetailsPromises: MatchDetail[] = await Promise.all(matchDetailArr);
-        setMatchDetail(matchDetailsPromises);
+        const filteredMatchDetails = checkMatchDetailValidate(matchDetailsPromises);
+        setMatchDetail(filteredMatchDetails);
       }
       if (!matchId.length) {
         setMatchDetail([]);

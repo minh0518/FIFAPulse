@@ -14,7 +14,7 @@ import PositionStatistics from '../../Components/PositionStatistics';
 import SelectPostition from '../../Components/SelectPostition';
 import SelectSeason from '../../Components/SelectSeason';
 import FIFAData from '../../Services/FifaData';
-import { getMaxInfo } from '../../utils/positionGuide';
+import { filterNoRecords, getMaxInfo } from '../../utils/positionGuide';
 
 const PositionGuide = () => {
   const [rankerInfo, setRankerInfo] = useState<any[]>([]);
@@ -57,7 +57,8 @@ const PositionGuide = () => {
 
   useEffect(() => {
     const updateMaxInfo = () => {
-      setMaxInfo(getMaxInfo(rankerInfo));
+      const filteredRankerInfo = filterNoRecords(rankerInfo);
+      if (filteredRankerInfo.length) setMaxInfo(getMaxInfo(filteredRankerInfo));
     };
     if (rankerInfo.length) updateMaxInfo();
   }, [rankerInfo]);

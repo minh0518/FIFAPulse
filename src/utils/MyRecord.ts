@@ -1,3 +1,5 @@
+import { MatchDetail } from '../types/api';
+
 export const convertDivisionNumberToDivisionName = (input: number) => {
   const result = JSON.parse(localStorage.getItem('MetaData_division')!);
 
@@ -37,4 +39,10 @@ export const convertDateAndTime = (dateStr: string) => {
 // 100000 >> 100,000
 export const addCommaonMoney = (money: number) => {
   return money.toLocaleString('en-US');
+};
+
+export const checkMatchDetailValidate = (matchDetailsArr: MatchDetail[]) => {
+  return matchDetailsArr.filter((detail: MatchDetail) => {
+    return detail.matchInfo.length === 2;
+  });
 };

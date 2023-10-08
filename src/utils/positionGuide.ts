@@ -6,9 +6,16 @@ export const getStringMatchResults = (inputValue: string, dropDownList: any) => 
 
   return result;
 };
-export const tmp = '';
+
+export const filterNoRecords = (rankerInfo: any) => {
+  return rankerInfo.filter((info: any) => {
+    return info[0].createDate !== 'Could not found and players of rankers';
+  });
+};
 
 export const getMaxInfo = (rankerInfo: any) => {
+  // createDate"Could not found and players of rankers"
+
   const maxInfo = {
     shoot: Number(
       [...rankerInfo].sort((a, b) => {
