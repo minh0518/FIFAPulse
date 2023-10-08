@@ -125,9 +125,7 @@ const MatchStatistics = () => {
       </LoadingDiv>
     );
   }
-  // console.log(matchDetail);
 
-  // console.log(extractGoalInfo(matchDetail.matchInfo[myDataIndex.mine].shootDetail));
   return (
     <>
       {/* matchDetail 과 myDataIndex가 로딩되지 않으면 로딩인디케이터를 띄워주기 때문에

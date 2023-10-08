@@ -14,8 +14,6 @@ export const MatchResultsByMatchTypesContainer = styled.div`
   width: 50%;
   margin-right: 2%;
 
-  // 1024px이하가 되면 MyRecord 너비가 1024px의 70%가 되는데
-  // 이땐 MyRecord 너비의 50%는 너무 좁으므로 80%정도로 사용
   @media (max-width: 1024px) {
     margin-right: 0%;
     width: 80%;
@@ -58,9 +56,6 @@ export const Table = styled.table`
   border: 0;
   padding: 0;
   border-spacing: 0;
-
-  /* cellpadding : "0"; 
-  cellspacing : "0" ; */
 `;
 
 export const TableHeaderDiv = styled.div`
@@ -70,7 +65,6 @@ export const TableHeaderDiv = styled.div`
 `;
 
 export const TableContentDiv = styled.div`
-  // height: 500px;
   height: 35em;
   overflow-x: auto;
   margin-top: 0px;
@@ -141,12 +135,11 @@ export const TableTd = styled.td`
   font-weight: 300;
   font-size: 1rem;
   color: black;
-  /* border-bottom: solid 1px rgba(255, 255, 255, 1); */
+
   border-bottom: 1px solid white;
 `;
 
 export const GameResultSpan = styled.span<GameResultProps>`
-  // color: ${(props) => (props.result === '승' ? 'blue' : props.result === '패' ? 'red' : 'black')};
   color: ${(props) => ({ 승: 'blue', 무: 'black', 패: 'red' }[props.result])};
 `;
 

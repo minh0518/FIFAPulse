@@ -37,8 +37,6 @@ const MainSelect = () => {
   const checkScroll = () => {
     const scrollPosition = window.pageYOffset;
     const animationPoint = Number((scrollPosition / ELEMENT_HEIGHT).toFixed(2));
-    // console.log(animationPoint);
-    // console.log(window.pageYOffset);
 
     // 스크롤을 내릴때만 애니메이션을 적용하기 위해
     // triggerOnce을 적용하고(=1회성 slide), 상위로 올라왔을 때 상태값을 false로 초기화
@@ -71,12 +69,6 @@ const MainSelect = () => {
         return { ...prev, positionGuide: true };
       });
     }
-
-    // if (animationPoint >= 0.59) {
-    //   setSlideInfo((prev) => {
-    //     return { ...prev, gameChallenge: true };
-    //   });
-    // }
   };
 
   useEffect(() => {

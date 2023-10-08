@@ -32,10 +32,6 @@ const TradeLog = () => {
   const [tradeInfo, setTradeInfo] = useState<{ buy: TradeLogInfo[]; sell: TradeLogInfo[] } | null>(null);
   const [tradeType, setTradeType] = useState<'buy' | 'sell'>('buy');
 
-  // 1. 타입은 최소한 작은 단위로 TradeLogInfo >> useState의 객체배열 ,  아래 sortFunctions의 a,b의 타입
-
-  // console.log(tradeInfo && tradeInfo[tradeType]);
-
   useEffect(() => {
     const getTradeLog = async () => {
       const fifa = new FIFAData();

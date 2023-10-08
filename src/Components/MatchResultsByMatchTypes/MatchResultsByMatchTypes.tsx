@@ -73,15 +73,8 @@ const MatchResultsByMatchTypes = () => {
     getMatchDetail();
   }, [matchId]);
 
-  // const onSelectChange = (e: any): void => {
-  //   const { name, value } = e.target;
-  //   console.log(e);
-  //   setSelectedValue(value);
-  // };
-
   const onListClick = (matchId: any) => {
     navigate(`/main-select/my-record/match-statistics?matchId=${matchId}`);
-    // navigate(`/main-select/my-record/${matchId}`);
   };
 
   const onMatchLengthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
