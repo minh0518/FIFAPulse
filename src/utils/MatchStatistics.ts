@@ -113,7 +113,9 @@ export const extractGoalInfo = (shootDetail: MatchDetail['matchInfo'][0]['shootD
 
 export const checkOwnGoal = (ownGoal: number): React.ReactNode[] => {
   const imgElement = React.createElement('img', { src: goalImg, width: 18 });
-  const listItems = Array.from({ length: ownGoal }, (_, i) => React.createElement('li', { key: i }, imgElement, '자책골'));
+  const listItems = Array.from({ length: ownGoal }, (_, i) =>
+    React.createElement('li', { key: i }, imgElement, '자책골'),
+  );
   return listItems;
 };
 
