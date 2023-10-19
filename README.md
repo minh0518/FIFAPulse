@@ -180,11 +180,11 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
 
 # 🛠️ 기술 스택
 
-### ✅Front-end
+### ✅Client
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
 
-### ✅Back-end
+### ✅Server/DB
 <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
 
 ### ✅Build
@@ -432,10 +432,21 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
 📦src
  ┣ 📂assets
  ┃ ┗ 📜react.svg
+ ┣ 📂Common
+ ┃ ┗ 📂styles
+ ┃ ┃ ┗ 📜styles.ts
  ┣ 📂Components
  ┃ ┣ 📂AskNickNameModal
  ┃ ┃ ┣ 📜AskNickNameModal.styled.ts
  ┃ ┃ ┣ 📜AskNickNameModal.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂AskNickNameModalForGuest
+ ┃ ┃ ┣ 📜AskNickNameModalForGuest.styled.ts
+ ┃ ┃ ┣ 📜AskNickNameModalForGuest.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂AskUseExistNickNameModal
+ ┃ ┃ ┣ 📜AskUseExistNickNameModal.styled.ts
+ ┃ ┃ ┣ 📜AskUseExistNickNameModal.tsx
  ┃ ┃ ┗ 📜index.ts
  ┃ ┣ 📂Footer
  ┃ ┃ ┣ 📜Footer.styled.ts
@@ -473,6 +484,18 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜PositionStatistics.styled.ts
  ┃ ┃ ┗ 📜PositionStatistics.tsx
+ ┃ ┣ 📂RecordWithOtherUserContent
+ ┃ ┃ ┣ 📂CalcResult
+ ┃ ┃ ┃ ┣ 📜CalcResult.styled.ts
+ ┃ ┃ ┃ ┣ 📜CalcResult.tsx
+ ┃ ┃ ┃ ┗ 📜index.ts
+ ┃ ┃ ┣ 📂OtherUserNicknameInput
+ ┃ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜OtherUserNicknameInput.styled.ts
+ ┃ ┃ ┃ ┗ 📜OtherUserNicknameInput.tsx
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜RecordWithOtherUserContent.styled.ts
+ ┃ ┃ ┗ 📜RecordWithOtherUserContent.tsx
  ┃ ┣ 📂SelectPostition
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜SelectPostition.styled.ts
@@ -514,12 +537,14 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┃ ┣ 📜TradeLog.styled.ts
  ┃ ┃ ┗ 📜TradeLog.tsx
  ┣ 📂Context
- ┃ ┣ 📂Firebase
- ┃ ┃ ┗ 📜LoginContext.tsx
  ┃ ┣ 📂Modal
  ┃ ┃ ┗ 📜ModalContext.tsx
+ ┃ ┣ 📂Nickname
+ ┃ ┃ ┗ 📜NicknameChangedContext.tsx
  ┃ ┗ 📂UserObj
  ┃ ┃ ┗ 📜UserObjContext.tsx
+ ┣ 📂Errors
+ ┃ ┗ 📜errors.ts
  ┣ 📂images
  ┃ ┣ 📂EnforceImg
  ┃ ┃ ┗ 📂BronzeCard
@@ -529,10 +554,12 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┣ 📜challenge.png
  ┃ ┣ 📜championsLeague.jpg
  ┃ ┣ 📜championsLeagueBackgroundImg.webp
+ ┃ ┣ 📜championsLeagueVideo.mp4
  ┃ ┣ 📜dummyProfile.jpg
  ┃ ┣ 📜FIFAONLINELogo.png
  ┃ ┣ 📜FIFAPulseLogo.png
  ┃ ┣ 📜goalImg.jpg
+ ┃ ┣ 📜gooleImg.png
  ┃ ┣ 📜LoadingSpinner.gif
  ┃ ┣ 📜myRecord.png
  ┃ ┣ 📜positionGuide.jpg
@@ -561,9 +588,11 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜PositionGuide.styled.ts
  ┃ ┃ ┗ 📜PositionGuide.tsx
- ┃ ┗ 📂UserRecord
+ ┃ ┣ 📂RecordWithOtherUser
  ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┗ 📜UserRecord.tsx
+ ┃ ┃ ┣ 📜RecordWithOtherUser.styled.ts
+ ┃ ┃ ┗ 📜RecordWithOtherUser.tsx
+ ┃ ┗ 📂SelectNickname
  ┣ 📂Services
  ┃ ┗ 📜FifaData.ts
  ┣ 📂types
@@ -574,6 +603,9 @@ FIFAOnline4 Open API를 이용한 개인 프로젝트
  ┃ ┗ 📜states.ts
  ┣ 📂utils
  ┃ ┣ 📜getErrorMessage.ts
+ ┃ ┣ 📜login.ts
+ ┃ ┣ 📜logout.ts
+ ┃ ┣ 📜MatchResultsByMatchTypes.ts
  ┃ ┣ 📜MatchStatistics.ts
  ┃ ┣ 📜MyRecord.ts
  ┃ ┗ 📜positionGuide.ts
