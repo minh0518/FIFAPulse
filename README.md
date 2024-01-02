@@ -1,3 +1,8 @@
+## ⚠️23년 12월초, NEXON OPEN API 명세의 전반적인 변경으로 인해 현재 사용이 불가능합니다. <br> (3월중으로 리뉴얼을 할 예정입니다.)
+
+<br>
+<br>
+
 ![championsLeague](https://github.com/minh0518/FIFAPulse/assets/78631876/816fbff0-4558-4f01-ab72-92ca4fc612bc)
 
 <div align='center'>
@@ -5,7 +10,9 @@
 
 ```
 FIFAOnline4 Open API를 이용한 개인 프로젝트
-(2023년 4월 9일 ~ 개발중)
+- 2023년 4월 9일 ~ 2023년 9월
+- 변경된 OPEN API로 리뉴얼 적용 예정(24년 3월)
+
 ```
 
 <br>
