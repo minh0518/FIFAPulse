@@ -1,12 +1,27 @@
+<br>
+<br>
+
 ## ⚠️ NEXON OPEN API 명세의 전반적인 개편으로 인해 현재 사용이 불가능합니다. 
 
 <br>
 <br>
 
-![championsLeague](https://github.com/minh0518/FIFAPulse/assets/78631876/816fbff0-4558-4f01-ab72-92ca4fc612bc)
+<p>
+    
+</p>
+
+
+
 
 <div align='center'>
     <h1>FIFAPulse</h1>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/84fc0b05-de81-4131-bcf2-ac7a7234807d" width="450px"  height="350px"/>	
+<img src="https://github.com/minh0518/FIFAPulse/assets/78631876/1329473b-24ad-4322-89a8-18391a6f6dbd" width="450px" height="350px"/>	
+</p>
+
+
+
 
 ```
 FIFAOnline4 Open API를 이용한 개인 프로젝트
